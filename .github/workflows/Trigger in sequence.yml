@@ -3,7 +3,7 @@ name: Trigger in sequence
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/20 * * * *'  # 每20分钟触发一次
+    - cron: '*/50 * * * *'  # 每20分钟触发一次
 
 jobs:
   trigger_adblock_rule_generator_yaml:
