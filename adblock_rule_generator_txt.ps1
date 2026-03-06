@@ -15,7 +15,8 @@ $urlList = @(
 "https://easylist-downloads.adblockplus.org/easylistchina.txt",  
 "https://secure.fanboy.co.nz/fanboy-annoyance.txt",  
 "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt",  
-"https://cdn.jsdelivr.net/gh/xinggsf/Adblock-Plus-Rule@master/rule.txt"
+"https://cdn.jsdelivr.net/gh/xinggsf/Adblock-Plus-Rule@master/rule.txt",  
+"https://anti-ad.net/adguard.txt"
 )
 
 # 日志文件路径
@@ -157,6 +158,7 @@ $textContent | Out-File -FilePath $outputPath -Encoding utf8
 # 输出生成的有效规则总数
 Write-Host "生成的有效规则总数: $ruleCount"
 Add-Content -Path $logFilePath -Value "Total entries: $ruleCount"
+
 
 
 
