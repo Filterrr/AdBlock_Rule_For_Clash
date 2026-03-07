@@ -13,9 +13,18 @@ $outputFile = "adblock_reject.yaml"
 
 # 规则源
 $ruleSources = @(
-"https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-domains.txt",
-"https://raw.githubusercontent.com/AdguardTeam/AdGuardSDNSFilter/master/Filters/filter.txt",
-"https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/adblock.txt"
+"https://hblock.molinero.dev/hosts_adblock.txt",
+"https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",  
+"https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_14_Annoyances/filter.txt",  
+"https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_10_Useful/filter.txt",  
+"https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt",  
+"https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt",  
+"https://easylist-downloads.adblockplus.org/easylist.txt",  
+"https://easylist-downloads.adblockplus.org/easylistchina.txt",  
+"https://secure.fanboy.co.nz/fanboy-annoyance.txt",  
+"https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt",  
+"https://cdn.jsdelivr.net/gh/xinggsf/Adblock-Plus-Rule@master/rule.txt",  
+"https://anti-ad.net/adguard.txt"
 )
 
 # 白名单
@@ -175,3 +184,4 @@ Write-Host "--------------------------------------"
 Write-Host "Output file: $outputFile"
 Write-Host "Total rules: $($finalRules.Count)"
 Write-Host "--------------------------------------"
+
