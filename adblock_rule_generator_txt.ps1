@@ -1,8 +1,15 @@
-# Title: AdBlock_Rule_For_Clash
-# Description: 适用于Clash的域名拦截规则集，每20分钟更新一次，确保即时同步上游减少误杀
-# Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
-# LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
-# LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
+# ==========================================
+# Adblock Rule Generator (Optimized Version)
+# ==========================================
+
+$ErrorActionPreference = "SilentlyContinue"
+
+Write-Host "--------------------------------------"
+Write-Host " Adblock Rule Generator (Optimized)"
+Write-Host "--------------------------------------"
+
+# 输出文件
+$outputFile = "adblock_reject.txt"
 
 # 定义广告过滤器URL列表
 $urlList = @(
@@ -129,6 +136,34 @@ foreach ($domain in $excludedDomains) {
 # 排除所有白名单规则中的域名
 $finalRules = $validRules | Where-Object { -not $validExcludedDomains.Contains($_) }
 
+# -------------------------
+# 新增：父域去重逻辑
+# -------------------------
+
+$rootDedup = [System.Collections.Generic.HashSet[string]]::new()
+
+foreach ($domain in ($finalRules | Sort-Object)) {
+
+    $parts = $domain.Split('.')
+
+    $skip = $false
+
+    for ($i = 1; $i -lt $parts.Length - 1; $i++) {
+        $parent = ($parts[$i..($parts.Length-1)] -join '.')
+
+        if ($rootDedup.Contains($parent)) {
+            $skip = $true
+            break
+        }
+    }
+
+    if (-not $skip) {
+        $rootDedup.Add($domain) | Out-Null
+    }
+}
+
+$finalRules = $rootDedup
+
 # 对规则进行排序并格式化
 $formattedRules = $finalRules | Sort-Object | ForEach-Object {"- '$_'"}
 
@@ -160,6 +195,7 @@ $textContent | Out-File -FilePath $outputPath -Encoding utf8
 # 输出生成的有效规则总数
 Write-Host "生成的有效规则总数: $ruleCount"
 Add-Content -Path $logFilePath -Value "Total entries: $ruleCount"
+
 
 
 
