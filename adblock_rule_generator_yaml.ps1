@@ -6,6 +6,7 @@
 
 # 定义广告过滤器URL列表
 $urlList = @(
+"https://raw.githubusercontent.com/Filterrr/RFM/refs/heads/basic/yaml/reject.yaml",
 "https://bitbucket.org/hacamer/adrules/raw/main/adblock.txt",
 "https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-domains.txt",
 "https://hblock.molinero.dev/hosts_adblock.txt",
@@ -189,6 +190,7 @@ $textContent | Out-File -FilePath $outputPath -Encoding utf8
 # 输出生成的有效规则总数
 Write-Host "生成的有效规则总数: $ruleCount"
 Add-Content -Path $logFilePath -Value "Total entries: $ruleCount"
+
 
 
 
