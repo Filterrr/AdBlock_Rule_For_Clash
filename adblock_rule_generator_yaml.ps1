@@ -13,7 +13,7 @@ $outputFile = "adblock_reject.yaml"
 
 # 规则源
 $ruleSources = @(
-"https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-domains.txt",
+# "https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-domains.txt",
 "https://hblock.molinero.dev/hosts_adblock.txt",
 "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",  
 "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_14_Annoyances/filter.txt",  
@@ -185,5 +185,6 @@ Write-Host "--------------------------------------"
 Write-Host "Output file: $outputFile"
 Write-Host "Total rules: $($finalRules.Count)"
 Write-Host "--------------------------------------"
+
 
 
