@@ -1,15 +1,8 @@
-# ==========================================
-# Adblock Rule Generator (Optimized Version)
-# ==========================================
-
-$ErrorActionPreference = "SilentlyContinue"
-
-Write-Host "--------------------------------------"
-Write-Host " Adblock Rule Generator (Optimized)"
-Write-Host "--------------------------------------"
-
-# 输出文件
-$outputFile = "adblock_reject.txt"
+# Title: AdBlock_Rule_For_Clash
+# Description: 适用于Clash的域名拦截规则集，每20分钟更新一次，确保即时同步上游减少误杀
+# Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
+# LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
+# LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
 
 # 定义广告过滤器URL列表
 $urlList = @(
@@ -195,6 +188,7 @@ $textContent | Out-File -FilePath $outputPath -Encoding utf8
 # 输出生成的有效规则总数
 Write-Host "生成的有效规则总数: $ruleCount"
 Add-Content -Path $logFilePath -Value "Total entries: $ruleCount"
+
 
 
 
