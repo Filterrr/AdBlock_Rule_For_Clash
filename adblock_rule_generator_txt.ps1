@@ -6,18 +6,11 @@
 
 # 定义广告过滤器URL列表
 $urlList = @(
-"https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",  
-"https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_14_Annoyances/filter.txt",  
-"https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_10_Useful/filter.txt",  
-"https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt",  
-"https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt",  
-"https://easylist-downloads.adblockplus.org/easylist.txt",  
-"https://easylist-downloads.adblockplus.org/easylistchina.txt",  
-"https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt",  
-"https://cdn.jsdelivr.net/gh/xinggsf/Adblock-Plus-Rule@master/rule.txt",  
-"https://raw.githubusercontent.com/uniartisan/adblock_list/master/adblock_plus.txt",  
-"https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanEasyListChina.list",  
-"https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanEasyList.list"
+"https://raw.githubusercontent.com/damengzhu/abpmerge/refs/heads/main/abpmerge.txt",  
+"https://raw.githubusercontent.com/Filterrr/RFM/refs/heads/basic/yaml/reject.yaml",  
+"https://raw.githubusercontent.com/lingeringsound/adblock_auto/main/Rules/adblock_auto.txt",  
+"https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list",  
+"https://ad.kirychan.com/KR_DNS_Filter.txt"
 )
 
 # 日志文件路径
@@ -161,6 +154,7 @@ $textContent | Out-File -FilePath $outputPath -Encoding utf8
 # 输出生成的有效规则总数
 Write-Host "生成的有效规则总数: $ruleCount"
 Add-Content -Path $logFilePath -Value "Total entries: $ruleCount"
+
 
 
 
