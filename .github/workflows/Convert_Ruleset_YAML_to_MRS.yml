@@ -4,7 +4,7 @@ name: Convert_Ruleset_YAML_to_MRS
 # 触发条件
 on:
   schedule:
-    - cron: '0 3 * * *'   # 每天运行一次 (UTC时间03:00)  # 每20分钟运行一次
+    - cron: '10 3 * * *'   # 每天运行一次 (UTC时间03:00)  # 每20分钟运行一次
   workflow_dispatch:  # 允许手动触发
 
 # 定义作业
