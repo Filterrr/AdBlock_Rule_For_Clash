@@ -6,8 +6,6 @@
 
 # 定义广告过滤器URL列表
 $urlList = @(
-"https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-domains.txt",
-"https://hblock.molinero.dev/hosts_adblock.txt",
 "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",  
 "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_14_Annoyances/filter.txt",  
 "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_10_Useful/filter.txt",  
@@ -15,10 +13,11 @@ $urlList = @(
 "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt",  
 "https://easylist-downloads.adblockplus.org/easylist.txt",  
 "https://easylist-downloads.adblockplus.org/easylistchina.txt",  
-"https://secure.fanboy.co.nz/fanboy-annoyance.txt",  
 "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt",  
 "https://cdn.jsdelivr.net/gh/xinggsf/Adblock-Plus-Rule@master/rule.txt",  
-"https://anti-ad.net/adguard.txt"
+"https://raw.githubusercontent.com/uniartisan/adblock_list/master/adblock_plus.txt",  
+"https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanEasyListChina.list",  
+"https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/BanEasyList.list"
 )
 
 # 日志文件路径
@@ -129,32 +128,6 @@ foreach ($domain in $excludedDomains) {
 # 排除所有白名单规则中的域名
 $finalRules = $validRules | Where-Object { -not $validExcludedDomains.Contains($_) }
 
-# -------------------------
-# 新增：父域去重逻辑
-# -------------------------
-
-$rootDedup = [System.Collections.Generic.HashSet[string]]::new()
-
-foreach ($domain in ($finalRules | Sort-Object)) {
-
-    $parts = $domain.Split('.')
-
-    $skip = $false
-
-    for ($i = 1; $i -lt $parts.Length - 1; $i++) {
-        $parent = ($parts[$i..($parts.Length-1)] -join '.')
-
-        if ($rootDedup.Contains($parent)) {
-            $skip = $true
-            break
-        }
-    }
-
-    if (-not $skip) {
-        $rootDedup.Add($domain) | Out-Null
-    }
-}
-
 $finalRules = $rootDedup
 
 # 对规则进行排序并格式化
@@ -188,6 +161,7 @@ $textContent | Out-File -FilePath $outputPath -Encoding utf8
 # 输出生成的有效规则总数
 Write-Host "生成的有效规则总数: $ruleCount"
 Add-Content -Path $logFilePath -Value "Total entries: $ruleCount"
+
 
 
 
