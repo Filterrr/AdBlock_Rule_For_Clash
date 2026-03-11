@@ -119,7 +119,7 @@ foreach ($domain in $excludedDomains) {
 $finalRules = $validRules | Where-Object { -not $validExcludedDomains.Contains($_) }
 
 # 对规则进行排序并格式化
-$formattedRules = $finalRules | Sort-Object | ForEach-Object {"- '$_'"}
+$formattedRules = $finalRules | Sort-Object | ForEach-Object {"- '+.$_'"}
 
 # 统计生成的规则条目数量
 $ruleCount = $finalRules.Count
@@ -149,6 +149,7 @@ $textContent | Out-File -FilePath $outputPath -Encoding utf8
 # 输出生成的有效规则总数
 Write-Host "生成的有效规则总数: $ruleCount"
 Add-Content -Path $logFilePath -Value "Total entries: $ruleCount"
+
 
 
 
