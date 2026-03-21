@@ -54,12 +54,22 @@ jobs:
   # 作业 2：在 Windows 环境下将 YAML 转换为 MRS
   # ==========================================
   convert-mrs:
-    needs: generate-rules  # 确保先生成了规则文件，再进行转换
+    needs: generate-rules  # 确保先生成了规则文件
     runs-on: windows-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3 # 统一升级至 v3 以保持工作流内版本一致
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }} # 强制检出当前分支的最新状态
+
+      - name: Pull latest YAML from Job 1
+        shell: powershell
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          # 在执行任何操作前，先拉取作业1刚刚 push 的最新文件
+          git pull https://${env:TOKEN}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }} --rebase
 
       - name: Check, compare and download latest mihomo
         shell: powershell
