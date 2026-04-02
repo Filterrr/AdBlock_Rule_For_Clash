@@ -2,7 +2,7 @@ name: Release_ADblock_File
 
 on: 
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '0/30 * * * *'
   workflow_dispatch: # 允许手动触发工作流
 
 jobs:
