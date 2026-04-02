@@ -61,14 +61,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.ref }} # 强制检出当前分支的最新状态
+          ref: ${{ github.ref }} 
 
       - name: Pull latest YAML from Job 1
         shell: powershell
         env:
           TOKEN: ${{ secrets.TOKEN }}
         run: |
-          # 在执行任何操作前，先拉取作业1刚刚 push 的最新文件
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
           git pull https://${env:TOKEN}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }} --rebase
 
       - name: Check, compare and download latest mihomo
@@ -76,6 +77,7 @@ jobs:
         run: |
           $exePath = "./mihomo.exe"
           $downloadMarker = "./.mihomo_downloaded"
+          $tempZipDir = "./temp_mihomo_extract"
           
           Write-Host "Fetching latest release info from GitHub API..."
           $apiUrl = "https://api.github.com/repos/MetaCubeX/mihomo/releases/latest"
@@ -94,90 +96,74 @@ jobs:
           }
           
           $latestVersion = $releaseInfo.tag_name
-          Write-Host "Latest remote version: $latestVersion"
-          
           $localVersion = ""
           if (Test-Path $downloadMarker) {
             $localVersion = Get-Content -Path $downloadMarker -ErrorAction SilentlyContinue
           }
-          Write-Host "Local version: $localVersion"
           
           if (($latestVersion -ne $localVersion) -or -not (Test-Path $exePath)) {
-            Write-Host "Version mismatch or executable missing. Updating to $latestVersion..."
+            Write-Host "Update required. Remote: $latestVersion, Local: $localVersion"
             
             $asset = $releaseInfo.assets | Where-Object { $_.name -match "mihomo-windows-amd64-compatible-.*\.zip" }
-            if (-not $asset) {
-              throw "Compatible Windows zip asset not found in release $latestVersion."
-            }
+            if (-not $asset) { throw "Compatible Windows zip asset not found." }
             
             $url = $asset.browser_download_url
-            $zipFile = "mihomo.zip"
+            $zipFile = "mihomo_download.zip"
             
             for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
               try {
+                # --- 清理旧的残留文件 ---
+                if (Test-Path $zipFile) { Remove-Item $zipFile -Force }
+                if (Test-Path $tempZipDir) { Remove-Item $tempZipDir -Recurse -Force }
+                
                 Write-Host "Downloading $url (Attempt $attempt)..."
                 Invoke-WebRequest -Uri $url -OutFile $zipFile -TimeoutSec 300
                 
-                Expand-Archive -Path $zipFile -DestinationPath . -Force
-                Remove-Item -Path $zipFile
+                Write-Host "Extracting..."
+                Expand-Archive -Path $zipFile -DestinationPath $tempZipDir -Force
                 
-                $exeFile = Get-ChildItem -Recurse -Filter "*mihomo*.exe" | Select-Object -First 1
-                if ($exeFile) {
-                  Rename-Item -Path $exeFile.FullName -NewName $exePath -Force
+                # 在解压目录中查找 exe
+                $extractedExe = Get-ChildItem -Path $tempZipDir -Recurse -Filter "*.exe" | Select-Object -First 1
+                if ($extractedExe) {
+                  if (Test-Path $exePath) { Remove-Item $exePath -Force }
+                  Move-Item -Path $extractedExe.FullName -Destination $exePath -Force
                   Set-Content -Path $downloadMarker -Value $latestVersion -Force 
-                  Write-Host "Successfully updated local executable and marker to $latestVersion!"
+                  Write-Host "Successfully updated to $latestVersion!"
+                  
+                  # 清理临时文件
+                  Remove-Item $zipFile -Force
+                  Remove-Item $tempZipDir -Recurse -Force
                   break
                 } else {
-                  throw "Executable file not found in the extracted contents."
+                  throw "Executable not found in zip."
                 }
               } catch {
-                Write-Host "Download or extraction failed. Error: $_"
-                if ($attempt -eq $maxAttempts) {
-                  Write-Host "Max attempts reached. Update process failed."
-                  exit 1
-                }
+                Write-Host "Attempt $attempt failed: $_"
+                if ($attempt -eq $maxAttempts) { exit 1 }
                 Start-Sleep -Seconds 10
               }
             }
           } else {
-            Write-Host "Local mihomo.exe is already up-to-date ($localVersion). Skipping download."
+            Write-Host "Already up-to-date ($localVersion)."
           }
 
       - name: Convert ruleset
         shell: powershell
         run: |
           $exePath = "./mihomo.exe"
-          
           if (Test-Path $exePath) {
-            Write-Host "Mihomo version:"
-            & $exePath -v
-            Write-Host "Mihomo help:"
-            & $exePath convert-ruleset --help
-
-            $maxAttempts = 5
-            
-            for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
-              try {
-                Write-Host "Attempting conversion (Attempt $attempt)..."
-                & $exePath convert-ruleset domain yaml adblock_reject.yaml adblock_reject.mrs
-                if ($LASTEXITCODE -eq 0) {
-                  Write-Host "Conversion successful!"
-                  break
-                } else {
-                  throw "Conversion failed with exit code $LASTEXITCODE"
-                }
-              } catch {
-                Write-Host "Attempt $attempt failed. Error: $_"
-                if ($attempt -eq $maxAttempts) {
-                  Write-Host "Max attempts reached. Exiting."
-                  exit 1
-                }
-                Start-Sleep -Seconds 5
-              }
+            Write-Host "Starting conversion..."
+            # 增加重试逻辑确保转换成功
+            $success = $false
+            for ($i=1; $i -le 3; $i++) {
+              & $exePath convert-ruleset domain yaml adblock_reject.yaml adblock_reject.mrs
+              if ($LASTEXITCODE -eq 0) { $success = $true; break }
+              Write-Host "Conversion attempt $i failed, retrying..."
+              Start-Sleep -Seconds 3
             }
+            if (-not $success) { exit 1 }
           } else {
-            Write-Host "mihomo.exe not found, skipping conversion step."
-            exit 1
+            Write-Host "mihomo.exe missing!"; exit 1
           }
 
       - name: Push changes
@@ -186,44 +172,29 @@ jobs:
           TOKEN: ${{ secrets.TOKEN }}
         run: |
           $maxAttempts = 5
+          $repoUrl = "https://${env:TOKEN}@github.com/${{ github.repository }}.git"
+          
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
           
           for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
             try {
-              git config user.email "action@github.com"
-              git config user.name "GitHub Action"
+              Write-Host "Final sync and push (Attempt $attempt)..."
+              git add adblock_reject.mrs mihomo.exe .mihomo_downloaded
               
-              git pull https://${{ secrets.TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }} --rebase
+              if (-not (git status --porcelain)) {
+                Write-Host "No changes to commit."
+                break
+              }
+
+              git commit -m "Auto-update ruleset and mihomo [skip ci]"
+              git pull $repoUrl HEAD:${{ github.ref }} --rebase
+              git push $repoUrl HEAD:${{ github.ref }} --force
+              Write-Host "Push successful."
               break
             } catch {
-              Write-Host "git pull attempt $attempt failed. Error: $_"
-              if ($attempt -eq $maxAttempts) {
-                Write-Host "Failed to pull changes after $maxAttempts attempts. Exiting."
-                exit 1
-              }
-              Start-Sleep -Seconds 30
+              Write-Host "Push error: $_"
+              if ($attempt -eq $maxAttempts) { exit 1 }
+              Start-Sleep -Seconds 20
             }
-          }
-          
-          git add adblock_reject.mrs mihomo.exe .mihomo_downloaded
-          
-          if (git status --porcelain) {
-            git commit -m "Auto-update ruleset and maintain mihomo version"
-            
-            for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
-              try {
-                Write-Host "Attempting to push changes (Attempt $attempt of $maxAttempts)..."
-                git push https://${{ secrets.TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }} --force
-                Write-Host "Changes successfully pushed."
-                break
-              } catch {
-                Write-Host "Push attempt $attempt failed. Error: $_"
-                if ($attempt -eq $maxAttempts) {
-                  Write-Host "Failed to push changes after $maxAttempts attempts. Exiting."
-                  exit 1
-                }
-                Start-Sleep -Seconds 30
-              }
-            }
-          } else {
-            Write-Host "No changes to commit."
           }
