@@ -105,7 +105,7 @@ jobs:
           if (($latestVersion -ne $localVersion) -or -not (Test-Path $exePath)) {
             Write-Host "Version mismatch or executable missing. Updating to $latestVersion..."
             
-            $asset = $releaseInfo.assets | Where-Object { $_.name -match "mihomo-windows-amd64-.*\.zip" }
+            $asset = $releaseInfo.assets | Where-Object { $_.name -match "mihomo-windows-amd64-v1.*\.zip" }
             if (-not $asset) {
               throw "Compatible Windows zip asset not found in release $latestVersion."
             }
