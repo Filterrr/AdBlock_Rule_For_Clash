@@ -3,7 +3,7 @@ name: AdBlock_Rules_Generator_and_Converter
 
 on:
   schedule:
-    - cron: '0/30 * * * *'
+    - cron: 0 1 * * *
   workflow_dispatch:  # 允许手动触发工作流
 
 jobs:
