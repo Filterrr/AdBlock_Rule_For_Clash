@@ -74,7 +74,7 @@ $finalRules = [System.Collections.Generic.List[string]]::new()
 foreach ($d in $uniqueRules) {
     if (-not $excludedDomains.Contains($d)) {
         if ($d -match '\*') { $finalRules.Add("- '$d'") }
-        else { $finalRules.Add("- '+$d'") }
+        else { $finalRules.Add("- '＋.$d'") }
     }
 }
 
@@ -83,7 +83,7 @@ $generationTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 $ruleCount = $finalRules.Count
 
 $header = @"
-# Title: AdBlock_Rule_For_Clash (深度优化版)
+# Title: AdBlock_Rule_For_Clash
 # Generated: $generationTime
 # Total Rules: $ruleCount
 # Info: 已剔除一级主域名，保护基础连通性。
