@@ -1,5 +1,5 @@
 # Title: AdBlock_Rule_For_Clash (mihomo 优化版)
-# Generated: 2026-04-09 12:20:48
+# Generated: 2026-04-09 13:53:39
 # Total Rules: 17294 (原始规则 17429 条，已精简移除冗余子域名 135 条)
 # Info: 已剔除一级主域名，保护基础连通性。
 payload:
@@ -4631,6 +4631,7 @@ payload:
   - "+.static.tbllad.com"
   - "+.go.tbllad.com"
   - "+.gos.tbllad.com"
+  - "+.ftuapps.farlad.com"
   - "+.cdn.y2mad.com"
   - "+.opt.ximad.com"
   - "+.cdn.bestadload.com"
@@ -5086,7 +5087,6 @@ payload:
   - "+.b8ms7gkwq7g.crocotube.com"
   - "+.a.suptube.com"
   - "+.r.archertube.com"
-  - "+.m.youtube.com"
   - "+.cdn.sphinxtube.com"
   - "+.ww.sphinxtube.com"
   - "+.y.sphinxtube.com"
