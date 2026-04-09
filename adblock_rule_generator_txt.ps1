@@ -7,12 +7,14 @@
 # 定义广告过滤器URL列表
 $urlList = @(
     "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt",
-    "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/AdGuard_Mobile_Ads_filter.txt",
-    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/EasyList_China.txt",
-    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/jiekouAD.txt",
-    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/AdGuard_Base_filter.txt",
-    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/AdGuard_Chinese_filter.txt",
-    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/AWAvenue_Ads_Rule.txt"
+    "https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/allowlist.txt",
+    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",
+    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt",
+    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt",
+    "https://easylist-downloads.adblockplus.org/easylistchina.txt",
+    "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
+    "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
+    "https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt"
 )
 # 日志文件路径
 $logFilePath = "$PSScriptRoot/adblock_log.txt"
