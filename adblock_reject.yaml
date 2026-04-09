@@ -1,6 +1,6 @@
 # Title: AdBlock_Rule_For_Clash (mihomo 优化版)
-# Generated: 2026-04-09 14:26:00
-# Total Rules: 17294 (原始规则 17425 条，已精简移除冗余子域名 131 条)
+# Generated: 2026-04-09 14:28:44
+# Total Rules: 17293 (原始规则 17424 条，已精简移除冗余子域名 131 条)
 # Info: 已剔除一级主域名，保护基础连通性。
 payload:
   - "+.203.195.121."
@@ -12394,7 +12394,6 @@ payload:
   - "+.adm2.autoimg.cn"
   - "+.adm3.autoimg.cn"
   - "+.qzonestyle.gtimg.cn"
-  - "+.vfiles.gtimg.cn"
   - "+.pgdt.gtimg.cn"
   - "+.cmshow.gtimg.cn"
   - "+.discuz.gtimg.cn"
