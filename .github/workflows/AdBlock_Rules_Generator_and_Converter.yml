@@ -6,6 +6,8 @@ on:
     branches: [ main ]
     paths-ignore:
       - '**.md'
+      - 'timestamp.txt'
+      - '.mihomo_downloaded'
       - '**.exe'
       - 'adblock_reject.*'
       - '.gitignore'
