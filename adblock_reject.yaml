@@ -1,6 +1,6 @@
 # Title: AdBlock_Rule_For_Clash (mihomo 优化版)
-# Generated: 2026-04-09 13:53:39
-# Total Rules: 17294 (原始规则 17429 条，已精简移除冗余子域名 135 条)
+# Generated: 2026-04-09 14:05:51
+# Total Rules: 17293 (原始规则 17428 条，已精简移除冗余子域名 135 条)
 # Info: 已剔除一级主域名，保护基础连通性。
 payload:
   - "+.203.195.121."
@@ -5649,7 +5649,6 @@ payload:
   - "+.outlookads.live.com"
   - "+.creative.141live.com"
   - "+.httpdns.bcelive.com"
-  - "+.static.olelive.com"
   - "+.creative.nangilive.com"
   - "+.pcash.imlive.com"
   - "+.media.eurolive.com"
