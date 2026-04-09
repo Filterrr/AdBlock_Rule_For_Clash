@@ -74,7 +74,7 @@ $finalRules = [System.Collections.Generic.List[string]]::new()
 foreach ($d in $uniqueRules) {
     if (-not $excludedDomains.Contains($d)) {
         if ($d -match '\*') { $finalRules.Add("- '$d'") }
-        else { $finalRules.Add("- '+.$d'") }
+        else { $finalRules.Add("- '+$d'") }
     }
 }
 
