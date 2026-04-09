@@ -11,7 +11,8 @@ $urlList = @(
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt",
     "https://easylist-downloads.adblockplus.org/easylistchina.txt",
     "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
-    "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt"
+    "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
+    "https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt"
 )
 
 $logFilePath = "$PSScriptRoot/adblock_log.txt"
