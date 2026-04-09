@@ -1,8 +1,5 @@
-# Title: AdBlock_Rule_For_Clash
-# Description: 适用于Clash的域名拦截规则集，每20分钟更新一次，确保即时同步上游减少误杀
-# Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
-# LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
-# LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
+# Title: AdBlock_Rule_For_Clash (最终极致优化抗杀保网版)
+# Description: 自动采集、极限去重（过滤多余子域名）、防误杀（排除一级主域名）的 mihomo 规则生成器
 
 # 定义广告过滤器URL列表
 $urlList = @(
@@ -136,10 +133,8 @@ $generationTime = (Get-Date).ToUniversalTime().AddHours(8).ToString("yyyy-MM-dd 
 # 创建文本格式的字符串
 $textContent = @"
 # Title: AdBlock_Rule_For_Clash
-# Description: 适用于Clash的域名拦截规则集，每20分钟更新一次，确保即时同步上游减少误杀
+# Description: 适用于Clash的域名拦截规则集
 # Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
-# LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
-# LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
 # Generated on: $generationTime
 # Generated AdBlock rules
 # Total entries: $ruleCount
