@@ -1,25 +1,17 @@
-# Title: AdBlock_Rule_For_Clash (Optimized & Self-Exempt Logic Enhanced Payload mode Edition)
-# Description: 适用于 Clash / Mihomo / Meta 标准版，拥有用户根底层级防护免防直白域名的独立屏蔽机制，大幅降低直接业务根误封风险能力的安全特快处理版本。 
+# Title: AdBlock_Rule_For_Clash (Optimized with Mihomo standard handling payload logic)
+# Description: 完美适用于Clash / Mihomo 的纯净高速版防冲规则, 原生兼容支持 Adblock 修饰筛选。支持野生抗雷与假域除垢净化处理优化加速引擎支持效验网络降报错阻力版。
 # Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
-# Generate time zone (+8.Beijing Area Synchronized Clocking Time Zone) Record Mark : 2026-04-09 13:00:50
-# Payload List Contains Overall Ad Tracking Domains Elements: 83627 Entities Injected Successfully! 
+# Generated on: 2026-04-09 13:15:46
+# Generated valid domains Payload block outputs safely!
+# Total efficient filter matching items payload nodes: 83608
 
 payload:
-- '+.-300x250.gif'
-- '+..3.n.2.1.l50.js'
-- '+..3.n.2.2.l30.js'
-- '+..ads.controller.js'
 - '.jkn0*loi.com'
-- '+..prebid-bundle.js'
 - '+..prtrackings.com'
 - '+..z.dkt-ib.com'
-- '*.'
 - '*.bp.blogspot.com'
 - '*.exaapi.com'
-- '*.gif'
 - '*.libaishuo.com'
-- '*.mp4'
-- '*bet*.jpg'
 - '*two-gun-volley.pages.dev'
 - '+.0.www.0ul1wlo58s-vu69us-r1u.xyz'
 - '+.0.www.2wu0m0ms098w7148.xyz'
@@ -392,8 +384,6 @@ payload:
 - '+.103092804.com'
 - '+.104i5bbzs.com'
 - '+.10614305.xyz'
-- '107.167.16.*.gif'
-- '107.167.22.*.gif'
 - '+.10753990.xyz'
 - '+.107a0d5d90.fb33be3463.com'
 - '+.1080872514.rsc.cdn77.org'
@@ -452,7 +442,6 @@ payload:
 - '+.1205qitiao2022.xyz'
 - '+.1208344341.rsc.cdn77.org'
 - '+.12090cd892.com'
-- '121.204.246.*.gif'
 - '+.121.43.235.135'
 - '+.12112336.pix-cdn.org'
 - '+.12114200.pix-cdn.org'
@@ -1959,7 +1948,6 @@ payload:
 - '+.37l387.net5gj5lrxmm3whhmkp6keihqun8o6vbow.cfd'
 - '+.37lwjdaua.com'
 - '+.37wan.com'
-- '38.33.15.*.gif'
 - '+.380.tw'
 - '+.3815573.notify6.com'
 - '+.38167473.xyz'
@@ -3065,7 +3053,6 @@ payload:
 - '+.666kuailian.com.cn'
 - '+.66f5dd9691.com'
 - '+.66l11y82dn.com'
-- '67.21.92.*.gif'
 - '+.670t5x.cn'
 - '+.671ca2a150.2997fa5a20.com'
 - '+.6726lmym.top'
@@ -6181,6 +6168,7 @@ payload:
 - '+.ads.yahoo.com'
 - '+.ads.yap.yahoo.com'
 - '+.ads.yeeyi.com'
+- '+.ads.youtube.com'
 - '+.ads.zhinengxiyifang.cn'
 - 'ads*-normal-*.zijieapi.com'
 - 'ads*-normal-lq.zijieapi.com'
@@ -7037,6 +7025,7 @@ payload:
 - '+.afrlodurf.com'
 - '+.afront.io'
 - '+.afrontkiester.cyou'
+- '+.afs.googlesyndication.com'
 - '+.afsohptiq.in'
 - '+.afterdownload.com'
 - '+.afterdownloads.com'
@@ -9887,7 +9876,6 @@ payload:
 - '+.b.hubhubhub.name'
 - '+.b.januarytubs.store'
 - '+.b.kouke5.com'
-- '+.b.link'
 - '+.b.octoberads.space'
 - '+.b.seksohub.com'
 - '+.b.smartvideo.youku.com'
@@ -35459,7 +35447,6 @@ payload:
 - '+.jqtqoknktzy.space'
 - '+.jqtqwczfccngi.online'
 - '+.jqttlnzaudopg.website'
-- '+.jquery-1.8.3.min.js'
 - '+.jquery.envi-met.com.cn'
 - '+.jqueryoi.com'
 - '+.jqueryserve.org'
@@ -53768,7 +53755,6 @@ payload:
 - '+.promissexedra.cyou'
 - '+.promo-bc.com'
 - '+.promo-images.ttpsdk.info'
-- '+.promo-pc.jpg'
 - '+.promo-reklama.ru'
 - '+.promo.blackdatehookup.com'
 - '+.promo.cams.com'
@@ -66658,8 +66644,6 @@ payload:
 - '+.t.babelmedia.global'
 - '+.t.clearmaptrck.store'
 - '+.t.clickscope.fun'
-- '+.t.cn'
-- '+.t.co'
 - '+.t.dangdang.com'
 - '+.t.dynatrck.site'
 - '+.t.easywebland.my'
@@ -66674,7 +66658,6 @@ payload:
 - '+.t.leadtrck.space'
 - '+.t.loantrck.com'
 - '+.t.lobun7jglch8l3.cyou'
-- '+.t.ly'
 - '+.t.maxtrck.shop'
 - '+.t.mjlgml5fqloibq.cfd'
 - '+.t.nettrck.store'
@@ -72858,7 +72841,6 @@ payload:
 - '+.v.110route.cn'
 - '+.v.adintl.cn'
 - '+.v.adx.hubcloud.com.cn'
-- '+.v.center'
 - '+.v.kidoz.net'
 - '+.v.miguvideo.com'
 - '+.v.tampermonkey.net'
