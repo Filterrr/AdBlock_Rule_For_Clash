@@ -2,6 +2,11 @@
 name: AdBlock_Rules_Generator_and_Converter
 
 on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
   schedule:
     - cron: 0 */8 * * *
   workflow_dispatch:  # 允许手动触发工作流
