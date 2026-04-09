@@ -6,6 +6,7 @@ on:
     branches: [ main ]
     paths-ignore:
       - '**.md'
+      - '**.exe'
       - 'adblock_reject.*'
       - '.gitignore'
   schedule:
