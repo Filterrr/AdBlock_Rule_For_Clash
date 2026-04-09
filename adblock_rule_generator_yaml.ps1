@@ -1,157 +1,97 @@
-# Title: AdBlock_Rule_For_Clash
-# Description: 适用于Clash的域名拦截规则集，每20分钟更新一次，确保即时同步上游减少误杀
-# Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
-# LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
-# LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
+# Title: AdBlock_Rule_For_Clash (最终优化抗杀保网版)
+# Description: 自动采集、去重、防误杀（排除一级主域名）的 Clash 规则生成器
 
-# 定义广告过滤器URL列表
+$EnableRootDomainDrops = $true
+
+# === 配置采集源 ===
 $urlList = @(
-"https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt",
-"https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/AdGuard_Mobile_Ads_filter.txt",
-"https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/EasyList_China.txt",
-"https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/jiekouAD.txt",
-"https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/AdGuard_Base_filter.txt",
-"https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/AdGuard_Chinese_filter.txt",
-"https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/AWAvenue_Ads_Rule.txt"
+    "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt",
+    "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/AdGuard_Mobile_Ads_filter.txt",
+    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/EasyList_China.txt",
+    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/jiekouAD.txt",
+    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/AdGuard_Base_filter.txt",
+    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/AdGuard_Chinese_filter.txt",
+    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/AWAvenue_Ads_Rule.txt"
 )
 
-# 日志文件路径
 $logFilePath = "$PSScriptRoot/adblock_log.txt"
+$outputPath = "$PSScriptRoot/adblock_reject.yaml"
 
-# 创建两个HashSet来存储唯一的规则和排除的域名
+$webClient = New-Object System.Net.WebClient
+$webClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+
 $uniqueRules = [System.Collections.Generic.HashSet[string]]::new()
 $excludedDomains = [System.Collections.Generic.HashSet[string]]::new()
 
-# 创建WebClient对象用于下载规则
-$webClient = New-Object System.Net.WebClient
-$webClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
-
-# DNS规范验证函数
-function Is-ValidDNSDomain($domain) {
-    if ($domain.Length -gt 253) { return $false }
-    $labels = $domain -split "\."
-    foreach ($label in $labels) {
-        if ($label.Length -eq 0 -or $label.Length -gt 63) { return $false }
-        if ($label -notmatch "^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$") {
-            return $false
-        }
-    }
-    $tld = $labels[-1]
-    if ($tld -notmatch "^[a-zA-Z]{2,}$") { return $false }
-    return $true
+# --- 核心判定：是否为一级主域名 ---
+function Is-FirstLevelCoreDomain($domain) {
+    # 移除通配符
+    $d = $domain -replace '^\*?\.?', ''
+    # 匹配模式：非复合后缀的二级域名 (如 baidu.com) 或 复合后缀的二级域名 (如 baidu.com.cn)
+    # 逻辑：如果域名分段 <= 2，或者分段为3且后缀为常见复合类型，则判定为一级域名
+    $parts = $d -split '\.'
+    if ($parts.Count -le 2) { return $true }
+    if ($parts.Count -eq 3 -and $d -match '\.(com|co|net|org|edu|gov|ac|mil)\.(cn|jp|hk|uk|tw|au)$') { return $true }
+    return $false
 }
 
+# --- 抓取与处理 ---
 foreach ($url in $urlList) {
-    Write-Host "正在处理: $url"
-    Add-Content -Path $logFilePath -Value "正在处理: $url"
+    Write-Host ">>> 正在处理: $url"
     try {
-        # 读取并拆分内容为行
         $content = $webClient.DownloadString($url)
         $lines = $content -split "`n"
-
         foreach ($line in $lines) {
-            # 直接处理以 @@ 开头的规则，提取域名并加入白名单
-            if ($line.StartsWith('@@')) {
-                $domains = $line -replace '^@@', '' -split '[^\w.-]+'
-                foreach ($domain in $domains) {
-                    if (-not [string]::IsNullOrWhiteSpace($domain) -and $domain -match '[\w-]+(\.[[\w-]+)+') {
-                        $excludedDomains.Add($domain.Trim()) | Out-Null
-                    }
-                }
-            }
-            else {
-                # 匹配 Adblock/Easylist 格式的规则
-                if ($line -match '^\|\|([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\^$') {
-                    $domain = $Matches[1]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 匹配 Hosts 文件格式的 IPv4 规则
-                elseif ($line -match '^(0\.0\.0\.0|127\.0\.0\.1)\s+([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$') {
-                    $domain = $Matches[2]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 匹配 Hosts 文件格式的 IPv6 规则（以 ::1 或 :: 开头）
-                elseif ($line -match '^::(1)?\s+([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$') {
-                    $domain = $Matches[2]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 匹配 Dnsmasq address=/域名/格式的规则
-                elseif ($line -match '^address=/([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/$') {
-                    $domain = $Matches[1]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 匹配 Dnsmasq server=/域名/的规则
-                elseif ($line -match '^server=/([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/$') {
-                    $domain = $Matches[1]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 匹配通配符规则
-                elseif ($line -match '^\|\|([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\^$') {
-                    $domain = $Matches[1]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 处理纯域名行
-                elseif ($line -match '^([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$') {
-                    $domain = $Matches[1]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
+            $line = $line.Trim()
+            if ([string]::IsNullOrWhiteSpace($line) -or $line.StartsWith('!') -or $line.StartsWith('[')) { continue }
+            
+            # 处理白名单 @@
+            $isWhitelist = $line.StartsWith('@@')
+            if ($isWhitelist) { $line = $line.Substring(2) }
+            if ($line.Contains('$')) { $line = ($line -split '\$')[0] }
+
+            # 提取域名
+            $domain = $null
+            if ($line -match '^\|\|([a-zA-Z0-9*.-]+)\^?$') { $domain = $Matches[1] }
+            elseif ($line -match '^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$') { $domain = $Matches[1] }
+            elseif ($line -match '^([a-zA-Z0-9*.-]+\.[a-zA-Z]{2,})$') { $domain = $Matches[1] }
+
+            if ($domain) {
+                $domain = ($domain -replace '^\*?\.?', '').Trim().ToLower()
+                
+                # 核心过滤：如果判定为一级域名且开启了保护，则直接跳过
+                if ($EnableRootDomainDrops -and (Is-FirstLevelCoreDomain $domain)) { continue }
+
+                if ($isWhitelist) { [void]$excludedDomains.Add($domain) }
+                else { [void]$uniqueRules.Add($domain) }
             }
         }
-    }
-    catch {
-        Write-Host "处理 $url 时出错: $_"
-        Add-Content -Path $logFilePath -Value "处理 $url 时出错: $_"
+    } catch { Write-Host "[ERROR] 获取失败: $url" -ForegroundColor Red }
+}
+
+# --- 过滤白名单并生成最终格式 ---
+$finalRules = [System.Collections.Generic.List[string]]::new()
+foreach ($d in $uniqueRules) {
+    if (-not $excludedDomains.Contains($d)) {
+        if ($d -match '\*') { $finalRules.Add("- '$d'") }
+        else { $finalRules.Add("- '.$d'") }
     }
 }
 
-# 在写入文件之前进行DNS规范验证
-$validRules = [System.Collections.Generic.HashSet[string]]::new()
-$validExcludedDomains = [System.Collections.Generic.HashSet[string]]::new()
-
-foreach ($domain in $uniqueRules) {
-    if (Is-ValidDNSDomain($domain)) {
-        $validRules.Add($domain) | Out-Null
-    }
-}
-
-foreach ($domain in $excludedDomains) {
-    if (Is-ValidDNSDomain($domain)) {
-        $validExcludedDomains.Add($domain) | Out-Null
-    }
-}
-
-# 排除所有白名单规则中的域名
-$finalRules = $validRules | Where-Object { -not $validExcludedDomains.Contains($_) }
-
-# 对规则进行排序并格式化
-$formattedRules = $finalRules | Sort-Object | ForEach-Object {"- '+.$_'"}
-
-# 统计生成的规则条目数量
+# --- 输出文件 ---
+$generationTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 $ruleCount = $finalRules.Count
 
-# 获取当前时间并转换为东八区时间
-$generationTime = (Get-Date).ToUniversalTime().AddHours(8).ToString("yyyy-MM-dd HH:mm:ss")
-
-# 创建文本格式的字符串
-$textContent = @"
-# Title: AdBlock_Rule_For_Clash
-# Description: 适用于Clash的域名拦截规则集，每20分钟更新一次，确保即时同步上游减少误杀
-# Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
-# LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
-# LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
-# Generated on: $generationTime
-# Generated AdBlock rules
-# Total entries: $ruleCount
-
+$header = @"
+# Title: AdBlock_Rule_For_Clash (深度优化版)
+# Generated: $generationTime
+# Total Rules: $ruleCount
+# Info: 已剔除一级主域名，保护基础连通性。
 payload:
-$($formattedRules -join "`n")
 "@
 
-# 定义输出文件路径
-$outputPath = "$PSScriptRoot/adblock_reject.yaml"
-$textContent | Out-File -FilePath $outputPath -Encoding utf8
+$header | Out-File -FilePath $outputPath -Encoding utf8
+$finalRules | Sort-Object | Out-File -FilePath $outputPath -Append -Encoding utf8
 
-# 输出生成的有效规则总数
-Write-Host "生成的有效规则总数: $ruleCount"
-Add-Content -Path $logFilePath -Value "Total entries: $ruleCount"
-
+Write-Host "--------------------------------------------------------" -ForegroundColor Green
+Write-Host "处理完成！成功生成 $ruleCount 条规则，已存至: $outputPath" -ForegroundColor Cyan
