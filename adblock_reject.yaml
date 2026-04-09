@@ -1,6 +1,6 @@
 # Title: AdBlock_Rule_For_Clash (mihomo 优化版)
-# Generated: 2026-04-09 14:10:14
-# Total Rules: 17293 (原始规则 17428 条，已精简移除冗余子域名 135 条)
+# Generated: 2026-04-09 14:20:16
+# Total Rules: 17295 (原始规则 17426 条，已精简移除冗余子域名 131 条)
 # Info: 已剔除一级主域名，保护基础连通性。
 payload:
   - "+.203.195.121."
@@ -6738,7 +6738,6 @@ payload:
   - "+.ssports.iqiyi.com"
   - "+.cm.passport.iqiyi.com"
   - "+.yuedu.iqiyi.com"
-  - "+.www.iqiyi.com"
   - "+.ads-monitoring.shziyi.com"
   - "+.aaa.tumanyi.com"
   - "+.resdata.nftbaoyi.com"
@@ -8785,7 +8784,10 @@ payload:
   - "+.report.imtt.qq.com"
   - "+.xmaterial.tu.qq.com"
   - "+.uu.qq.com"
-  - "+.v.qq.com"
+  - "+.commdata.v.qq.com"
+  - "+.appcfg.v.qq.com"
+  - "+.mcgi.v.qq.com"
+  - "+.soup.v.qq.com"
   - "+.bsrv.qq.com"
   - "+.adsview.qq.com"
   - "+.adstextview.qq.com"
