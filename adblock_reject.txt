@@ -1,9 +1,9 @@
 # Title: AdBlock_Rule_For_Clash
 # Description: 适用于Clash的域名拦截规则集
 # Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
-# Generated on: 2026-04-10 09:57:48
+# Generated on: 2026-04-10 12:35:59
 # Generated AdBlock rules
-# Total entries: 15512
+# Total entries: 15513
 
 payload:
 - '+.0001-metrics1-drcn-dt-dbankcloud-cn.geac.dbankedge.cn'
@@ -8935,6 +8935,7 @@ payload:
 - '+.msg.iqiyi.com'
 - '+.msg.mobile.kugou.com'
 - '+.msg.ptqy.gitv.tv'
+- '+.msg.qy.net'
 - '+.msg.video.qiyi.com'
 - '+.msg.youku.com'
 - '+.msg2.video.qiyi.com'
