@@ -126,7 +126,7 @@ foreach ($domain in $excludedDomains) {
 $finalRules = $validRules | Where-Object { -not $validExcludedDomains.Contains($_) }
 
 # 对规则进行排序并格式化
-$formattedRules = $finalRules | Sort-Object | ForEach-Object {"- '+$_'"}
+$formattedRules = $finalRules | Sort-Object | ForEach-Object {"- '+.$_'"}
 
 # 统计生成的规则条目数量
 $ruleCount = $finalRules.Count
