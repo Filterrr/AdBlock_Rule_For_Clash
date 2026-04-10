@@ -1,6 +1,6 @@
 # Title: AdBlock_Rule_For_Clash (mihomo 优化版)
-# Generated: 2026-04-09 17:01:18
-# Total Rules: 17456 (原始规则 17607 条，已精简移除冗余子域名 151 条)
+# Generated: 2026-04-10 01:57:44
+# Total Rules: 17455 (原始规则 17606 条，已精简移除冗余子域名 151 条)
 # Info: 已剔除一级主域名，保护基础连通性。
 payload:
   - "+.203.195.121."
@@ -16497,7 +16497,6 @@ payload:
   - "+.ad.citynews.it"
   - "+.forum.tomshw.it"
   - "+.a.breka.fit"
-  - "+.ad.ari.lt"
   - "+.serveris.lnk.lt"
   - "+.static.vz.lt"
   - "+.as.lenkino.adult"
