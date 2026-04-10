@@ -80,6 +80,10 @@ foreach ($url in $urlList) {
             elseif ($line -match '^([a-zA-Z0-9.-]+)$') {
                 $domain = $Matches[1]
             }
+            # 5. Surge/Clash规则: DOMAIN-SUFFIX,example.com
+            elseif ($line -match '^DOMAIN(?:-SUFFIX)?,\s*([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})') {
+                $domain = $Matches[1]
+            }
 
             # 验证域名合法性并加入对应集合
             if ($domain -and $domain -match $domainRegex) {
