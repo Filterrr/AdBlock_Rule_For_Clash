@@ -1,5 +1,8 @@
-# Title: AdBlock_Rule_For_Clash (最终极致优化抗杀保网版)
-# Description: 自动采集、极限去重（过滤多余子域名）、防误杀（排除一级主域名）的 mihomo 规则生成器
+# Title: AdBlock_Rule_For_Clash
+# Description: 适用于Clash的域名拦截规则集，每20分钟更新一次，确保即时同步上游减少误杀
+# Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
+# LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
+# LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
 
 # 定义广告过滤器URL列表
 $urlList = @(
@@ -8,134 +11,138 @@ $urlList = @(
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt",
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt",
-    "https://easylist-downloads.adblockplus.org/easylistchina.txt",
+    "https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt",
     "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
     "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
-    "https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt"
+    "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.txt"
 )
+
 # 日志文件路径
 $logFilePath = "$PSScriptRoot/adblock_log.txt"
+Clear-Content -Path $logFilePath -ErrorAction SilentlyContinue
 
-# 创建两个HashSet来存储唯一的规则和排除的域名
-$uniqueRules = [System.Collections.Generic.HashSet[string]]::new()
-$excludedDomains = [System.Collections.Generic.HashSet[string]]::new()
-
-# 创建WebClient对象用于下载规则
-$webClient = New-Object System.Net.WebClient
-$webClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
-
-# DNS规范验证函数
-function Is-ValidDNSDomain($domain) {
-    if ($domain.Length -gt 253) { return $false }
-    $labels = $domain -split "\."
-    foreach ($label in $labels) {
-        if ($label.Length -eq 0 -or $label.Length -gt 63) { return $false }
-        if ($label -notmatch "^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$") {
-            return $false
-        }
-    }
-    $tld = $labels[-1]
-    if ($tld -notmatch "^[a-zA-Z]{2,}$") { return $false }
-    return $true
+# 日志输出函数
+function Write-Log($message) {
+    Write-Host $message
+    Add-Content -Path $logFilePath -Value "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') - $message"
 }
 
+Write-Log "开始更新并转换广告拦截规则..."
+
+# 创建 HashSet 来存储唯一的规则和排除的域名，使用 OrdinalIgnoreCase 忽略大小写，极大提高查找效率
+$uniqueRules = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+$excludedDomains = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+
+# 创建 WebClient 对象用于下载规则
+$webClient = New-Object System.Net.WebClient
+$webClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+$webClient.Encoding = [System.Text.Encoding]::UTF8
+
+# 预编译正则表达式以提升性能
+# 匹配标准域名的正则 (符合 RFC 规范)
+$domainRegex = '^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$'
+
 foreach ($url in $urlList) {
-    Write-Host "正在处理: $url"
-    Add-Content -Path $logFilePath -Value "正在处理: $url"
+    Write-Log "正在拉取并处理: $url"
     try {
-        # 读取并拆分内容为行
         $content = $webClient.DownloadString($url)
         $lines = $content -split "`n"
 
         foreach ($line in $lines) {
-            # 直接处理以 @@ 开头的规则，提取域名并加入白名单
-            if ($line.StartsWith('@@')) {
-                $domains = $line -replace '^@@', '' -split '[^\w.-]+'
-                foreach ($domain in $domains) {
-                    if (-not [string]::IsNullOrWhiteSpace($domain) -and $domain -match '[\w-]+(\.[[\w-]+)+') {
-                        $excludedDomains.Add($domain.Trim()) | Out-Null
-                    }
-                }
+            $line = $line.Trim()
+
+            # 快速跳过空行和各类注释行
+            if ([string]::IsNullOrWhiteSpace($line) -or $line.StartsWith("!") -or $line.StartsWith("#") -or $line.StartsWith("[")) {
+                continue
             }
-            else {
-                # 匹配 Adblock/Easylist 格式的规则
-                if ($line -match '^\|\|([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\^$') {
-                    $domain = $Matches[1]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 匹配 Hosts 文件格式的 IPv4 规则
-                elseif ($line -match '^(0\.0\.0\.0|127\.0\.0\.1)\s+([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$') {
-                    $domain = $Matches[2]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 匹配 Hosts 文件格式的 IPv6 规则（以 ::1 或 :: 开头）
-                elseif ($line -match '^::(1)?\s+([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$') {
-                    $domain = $Matches[2]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 匹配 Dnsmasq address=/域名/格式的规则
-                elseif ($line -match '^address=/([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/$') {
-                    $domain = $Matches[1]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 匹配 Dnsmasq server=/域名/的规则
-                elseif ($line -match '^server=/([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/$') {
-                    $domain = $Matches[1]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 匹配通配符规则
-                elseif ($line -match '^\|\|([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\^$') {
-                    $domain = $Matches[1]
-                    $uniqueRules.Add($domain) | Out-Null
-                }
-                # 处理纯域名行
-                elseif ($line -match '^([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$') {
-                    $domain = $Matches[1]
+
+            $domain = $null
+            $isWhitelist = $line.StartsWith("@@")
+
+            if ($isWhitelist) {
+                $line = $line.Substring(2)
+            }
+
+            # 1. 匹配 Adblock/Easylist 格式 (例如: ||example.com^ 或 ||example.com^$third-party)
+            if ($line -match '^\|\|([a-zA-Z0-9.-]+)(?:\^|$)') {
+                $domain = $Matches[1]
+            }
+            # 2. 匹配 Hosts 格式 (例如: 0.0.0.0 example.com 或 127.0.0.1 example.com 或 ::1 example.com)
+            elseif ($line -match '^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.-]+)') {
+                $domain = $Matches[1]
+            }
+            # 3. 匹配 Dnsmasq 格式 (例如: address=/example.com/ 或 server=/example.com/)
+            elseif ($line -match '^(?:address|server)=/([a-zA-Z0-9.-]+)/') {
+                $domain = $Matches[1]
+            }
+            # 4. 匹配纯域名格式
+            elseif ($line -match '^([a-zA-Z0-9.-]+)$') {
+                $domain = $Matches[1]
+            }
+
+            # 验证域名合法性并加入对应集合
+            if ($domain -and $domain -match $domainRegex) {
+                if ($isWhitelist) {
+                    $excludedDomains.Add($domain) | Out-Null
+                } else {
                     $uniqueRules.Add($domain) | Out-Null
                 }
             }
         }
     }
     catch {
-        Write-Host "处理 $url 时出错: $_"
-        Add-Content -Path $logFilePath -Value "处理 $url 时出错: $_"
+        Write-Log "处理 $url 时出错: $_"
     }
 }
 
-# 在写入文件之前进行DNS规范验证
-$validRules = [System.Collections.Generic.HashSet[string]]::new()
-$validExcludedDomains = [System.Collections.Generic.HashSet[string]]::new()
+Write-Log "规则拉取完成。总计提取域名: $($uniqueRules.Count) 个，白名单域名: $($excludedDomains.Count) 个。"
+Write-Log "正在进行冗余子域名清理优化 (提升 Clash 解析性能)..."
+
+# 过滤白名单并清理冗余子域名
+$optimizedRules = [System.Collections.Generic.List[string]]::new()
 
 foreach ($domain in $uniqueRules) {
-    if (Is-ValidDNSDomain($domain)) {
-        $validRules.Add($domain) | Out-Null
+    # 排除白名单域名
+    if ($excludedDomains.Contains($domain)) {
+        continue
+    }
+
+    $parts = $domain -split '\.'
+    $isRedundant = $false
+
+    # 检查是否存在父级域名被拦截。
+    # 例如：当前为 ads.example.com，检查 example.com 是否已在拦截规则中。
+    # 如果 example.com 在规则中，则 ads.example.com 是冗余的，因为 Clash 的 '+.example.com' 会自动拦截所有子域名。
+    if ($parts.Length -gt 2) {
+        for ($i = 1; $i -lt ($parts.Length - 1); $i++) {
+            $parentDomain = ($parts[$i..($parts.Length-1)]) -join '.'
+            if ($uniqueRules.Contains($parentDomain) -and -not $excludedDomains.Contains($parentDomain)) {
+                $isRedundant = $true
+                break
+            }
+        }
+    }
+
+    # 只有非冗余的域名才会被加入最终列表
+    if (-not $isRedundant) {
+        $optimizedRules.Add($domain)
     }
 }
 
-foreach ($domain in $excludedDomains) {
-    if (Is-ValidDNSDomain($domain)) {
-        $validExcludedDomains.Add($domain) | Out-Null
-    }
-}
+# 对最终规则进行排序并格式化为 Clash payload 格式
+$formattedRules = $optimizedRules | Sort-Object | ForEach-Object { "- '+.$_'" }
 
-# 排除所有白名单规则中的域名
-$finalRules = $validRules | Where-Object { -not $validExcludedDomains.Contains($_) }
-
-# 对规则进行排序并格式化
-$formattedRules = $finalRules | Sort-Object | ForEach-Object {"- '+.$_'"}
-
-# 统计生成的规则条目数量
-$ruleCount = $finalRules.Count
-
-# 获取当前时间并转换为东八区时间
+$ruleCount = $optimizedRules.Count
 $generationTime = (Get-Date).ToUniversalTime().AddHours(8).ToString("yyyy-MM-dd HH:mm:ss")
 
-# 创建文本格式的字符串
+# 创建 YAML 内容
 $textContent = @"
 # Title: AdBlock_Rule_For_Clash
-# Description: 适用于Clash的域名拦截规则集
+# Description: 适用于Clash的域名拦截规则集，每20分钟更新一次，确保即时同步上游减少误杀
 # Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
-# Generated on: $generationTime
+# LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
+# LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
+# Generated on: $generationTime (UTC+8)
 # Generated AdBlock rules
 # Total entries: $ruleCount
 
@@ -143,26 +150,9 @@ payload:
 $($formattedRules -join "`n")
 "@
 
-# 定义输出文件路径
+# 定义输出文件路径并写入
 $outputPath = "$PSScriptRoot/adblock_reject.txt"
 $textContent | Out-File -FilePath $outputPath -Encoding utf8
 
-# 输出生成的有效规则总数
-Write-Host "生成的有效规则总数: $ruleCount"
-Add-Content -Path $logFilePath -Value "Total entries: $ruleCount"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Write-Log "优化完成！最终生成有效规则总数: $ruleCount"
+Write-Log "规则已保存至: $outputPath"
