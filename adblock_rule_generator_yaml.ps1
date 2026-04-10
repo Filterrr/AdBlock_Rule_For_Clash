@@ -14,7 +14,8 @@ $urlList = @(
     "https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt",
     "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
     "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
-    "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.txt"
+    "https://raw.githubusercontent.com/d3ward/toolz/master/src/d3host.txt",
+    "https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/Adblock4limbo.list"
 )
 
 # 日志文件路径
