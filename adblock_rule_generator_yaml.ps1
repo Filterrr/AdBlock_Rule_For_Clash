@@ -13,8 +13,7 @@ $urlList = @(
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt",
     "https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt",
     "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
-    "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
-    "https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt"
+    "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt"
 )
 
 # 日志文件路径
