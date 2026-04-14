@@ -68,13 +68,13 @@ foreach ($url in $urlList) {
                 $domain = $Matches[1]
             }
             # 3. 匹配 Dnsmasq 格式 (例如: address=/example.com/ 或 server=/example.com/)
-            elseif ($line -match '^(?:address|server)=/([a-zA-Z0-9.-]+)/') {
-                $domain = $Matches[1]
-            }
+            # elseif ($line -match '^(?:address|server)=/([a-zA-Z0-9.-]+)/') {
+            #     $domain = $Matches[1]
+            # }
             # 4. 匹配纯域名格式
-            elseif ($line -match '^([a-zA-Z0-9.-]+)$') {
-                $domain = $Matches[1]
-            }
+            # elseif ($line -match '^([a-zA-Z0-9.-]+)$') {
+            #     $domain = $Matches[1]
+            # }
             # 5. Surge/Clash规则: DOMAIN-SUFFIX,example.com
             elseif ($line -match '^DOMAIN(?:-SUFFIX)?,\s*([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})') {
                 $domain = $Matches[1]
