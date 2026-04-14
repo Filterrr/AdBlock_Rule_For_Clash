@@ -11,7 +11,8 @@ $urlList = @(
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt",
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt",
-    "https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt",
+    "https://easylist-downloads.adblockplus.org/easylistchina.txt",
+    "https://easylist-downloads.adblockplus.org/easylist.txt",
     "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
     "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt"
 )
