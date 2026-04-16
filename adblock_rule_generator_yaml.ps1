@@ -1,18 +1,12 @@
-# Title: AdBlock_Rule_For_Clash (Tier-Oriented Refactoring Version)
-# Description: 适用于Clash的分级校验纯净去重版，具备强力的泛域名掩盖抑制和分发引入核心架构
+# Title: AdBlock_Rule_For_Clash (Tier-Oriented Refactoring Version with TOP Protection)
+# Description: 高分型双校验与顶配重级核锁定版规则生成架构
+# 强防御与分挡纯净化模式：自动屏蔽冗杂穿透干扰保障主力基网稳定畅通
 
 # === 自定义需要强制放行拦截的全局强制白名单 ===
 $customExcludedDomains = @(
     # "example.com",
     # "taobao.com"
 )
-
-# 强制白名单：加载 Top 高权重/常青树域名，防止激进规则误杀
-$topWhitelist = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
-if (Test-Path "$PSScriptRoot/top_whitelist.txt") {
-    Get-Content "$PSScriptRoot/top_whitelist.txt" | ForEach-Object { $topWhitelist.Add($_.Trim()) | Out-Null }
-    Write-Host "已加载 Top 高权重域名保护白名单，共 $($topWhitelist.Count) 个受保护域名。" -ForegroundColor Cyan
-}
 
 # ====== 按域资源精信等级预定义池分布 ======
 $allowUrls = @(
@@ -50,10 +44,8 @@ function Write-Log($message) {
 function Extract-Rules {
     param(
         [string[]]$Urls,
-        [System.Collections.Generic.HashSet[string]]$RulesSet,
-        [System.Collections.Generic.HashSet[string]]$GlobalWhitelist
+        [System.Collections.Generic.HashSet[string]]$RulesSet,[System.Collections.Generic.HashSet[string]]$GlobalWhitelist
     )
-    # 强制正则表达式向上寻找可用级（全局生效避让穿透）
     $domainRegex = '^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$'
     foreach ($url in $Urls) {
         Write-Log "正请求并获取源解析: $url"
@@ -94,15 +86,37 @@ function Extract-Rules {
     }
 }
 
-Write-Log "==== 开始拉网加载基调架构策略池 ... ===="
+Write-Log "==== 开始装载架构初始化与本地核心强制豁免策略库 ... ===="
 
-$WhiteSet = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+# === 初始化各类集合容器 ===
+$WhiteSet =[System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 $CoreSet_Raw =[System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 $Tier3Set_Raw = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 
+# 导入用户定义的脚本自带防拦截变量配置
 foreach ($cd in $customExcludedDomains) { $WhiteSet.Add($cd) | Out-Null }
 
-Write-Log "【流程节点: 基础锚和极静白名单处理区】"
+# ======[核心扩展接入区：开始接入] ======
+# 强制白名单：加载 Top 高权重/常青树域名，防止激进规则误杀
+$topWhitelist = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+if (Test-Path "$PSScriptRoot/top_whitelist.txt") {
+    Get-Content "$PSScriptRoot/top_whitelist.txt" | ForEach-Object { 
+        $domain = $_.Trim()
+        # 排空 txt 内可能的空行或者#打头注释防止错误读录
+        if (-not [string]::IsNullOrWhiteSpace($domain) -and -not $domain.StartsWith("#")) {
+            $topWhitelist.Add($domain) | Out-Null
+            
+            # 【重点】同步写入脚本最终总架构级的白名单中($WhiteSet)确保彻底阻绝所有底层误杀!
+            $WhiteSet.Add($domain) | Out-Null 
+        }
+    }
+    $successMsg = "已加载本地 Top 高权重域名常青树保护白名单文件，并向内环打下 [$($topWhitelist.Count)] 根金钢神锁阵钉！"
+    Write-Host $successMsg -ForegroundColor Cyan
+    Write-Log $successMsg
+}
+# ====== [核心扩展接入区：结语] ======
+
+Write-Log "【流程节点: 全局白名单预设处理组装获取】"
 Extract-Rules -Urls $allowUrls -RulesSet $CoreSet_Raw -GlobalWhitelist $WhiteSet
 
 Write-Log "【流程节点: 主体中流核心防泄漏架构区 T1/T2处理池】"
@@ -112,13 +126,11 @@ Extract-Rules -Urls $allCoreUrls -RulesSet $CoreSet_Raw -GlobalWhitelist $WhiteS
 Write-Log "【流程节点: 低授信外援广幅源防干扰拓展区 T3处理池】"
 Extract-Rules -Urls $tier3Urls -RulesSet $Tier3Set_Raw -GlobalWhitelist $WhiteSet
 
-
 # =======  Phase 1：首先合成绝对可信的主力结构 (对核合集自我修剪清沉去重) =========
 Write-Log ">> 第一顺次执行运算排空主力核中内生累赘冗余，保障主网架构防干扰建立稳定高精黑库."
 $OptimizedCoreSet = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 
 foreach ($domain in $CoreSet_Raw) {
-    # 快速自核准与全级反噬扫描拦截掉与顶设排位强撞的车
     if ($WhiteSet.Contains($domain)) { continue }
 
     $isWhitelisted = $false
@@ -132,7 +144,7 @@ foreach ($domain in $CoreSet_Raw) {
     }
     if ($isWhitelisted) { continue }
 
-    # 核内上大位子层归口吞纳（子级域依附剔除，保留最大的基数）
+    # 核内上大位子层归口吞纳（子级域依附剔除）
     $isRedundant = $false
     $dotIndex = $domain.IndexOf('.')
     while ($dotIndex -ge 0 -and $dotIndex -lt ($domain.Length - 1)) {
@@ -145,11 +157,10 @@ foreach ($domain in $CoreSet_Raw) {
     if (-not $isRedundant) { $OptimizedCoreSet.Add($domain) | Out-Null }
 }
 
-
-# =======  Phase 2：构造深海反干涉防护锚机制屏障 (为抵御Tier3大位穿透作阵盘部署) =========
-Write-Log ">> 执行主脑高危映射回传运算防溢墙，强制防御防干涉机制组起……"
+# =======  Phase 2：构造深海反干涉防护锚机制屏障 (保障 Top 文件永不可逆向掩蔽) =========
+Write-Log ">> 强制启用双向白名单（Top 常青库参与构建安全屋节点...）执行防御倒传禁锢"
 $ProtectedAncestors =[System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
-# 全方位将所有精准保留及操作微操向上传导禁止权链锁
+# 全方位将所有精准保留与你的本地常青高权顶位结构链统通列出安全神仙打锁禁表区
 foreach ($setList in @($WhiteSet, $OptimizedCoreSet)) {
     foreach ($item in $setList) {
         $cDom = $item
@@ -163,19 +174,16 @@ foreach ($setList in @($WhiteSet, $OptimizedCoreSet)) {
     }
 }
 
-
 # =======  Phase 3：清运合并有隐患的外挂外链规则Tier 3池 =========
-Write-Log ">> 在确保屏墙隔离下提取Tier3扩充，执行剔宽存特精切过滤…"
+Write-Log ">> 对边缘扩张 Tier 3 执行禁表核检过滤 (Top 源已生成最硬抗击护板以迎战测试！)......"
 $ValidTier3Set = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 
 foreach ($domain in $Tier3Set_Raw) {
-    # ① 致命打捞干涉法检错法拦截：若是妄图去试图盖掉任意一条防爆层父根源以强压覆盖面将因过广宽幅遭强制击毙流配。
-    # 解释: T3源不稳经常发宽项涵盖过广（它想封com盖下属结构等）；这一块通过比对核预保护阵将完美规避误报杀核心树木及容忍列表问题.
+    # 你的高权限白单如果在 Tier 3 中以过大父根的越权妄图抹过时——即遭彻底踢配处理拦截以阻击崩溃点触发：
     if ($ProtectedAncestors.Contains($domain)) {
         continue
     }
 
-    # ② 子树往上验证：检查如果它本属的小域被全局黑/或受控主源内网全域兜过了或者早就处于高权受限白单中
     $shouldDiscard = $false
     $dotIndex = $domain.IndexOf('.')
     while ($dotIndex -ge 0 -and $dotIndex -lt ($domain.Length - 1)) {
@@ -190,7 +198,7 @@ foreach ($domain in $Tier3Set_Raw) {
     if (-not $shouldDiscard) { $ValidTier3Set.Add($domain) | Out-Null }
 }
 
-# 最后针对已被滤芯放出来的T3同层规则相互去冗余排压化
+# 再执行外联同排并排减废运算优化运算池层叠堆集冗灾减缩
 $OptimizedTier3Set = [System.Collections.Generic.List[string]]::new()
 foreach ($domain in $ValidTier3Set) {
     $isRedundant = $false
@@ -205,7 +213,6 @@ foreach ($domain in $ValidTier3Set) {
     if (-not $isRedundant) { $OptimizedTier3Set.Add($domain) }
 }
 
-
 # ==== Phase 4：合成与规范化导出组输出构建 ====
 $FinalCombinedRules =[System.Collections.Generic.List[string]]::new()
 foreach ($cd in $OptimizedCoreSet) { $FinalCombinedRules.Add($cd) }
@@ -214,23 +221,22 @@ foreach ($td in $OptimizedTier3Set) { $FinalCombinedRules.Add($td) }
 $ruleCount = $FinalCombinedRules.Count
 $formattedRules = $FinalCombinedRules | Sort-Object | ForEach-Object { "- '+.$_'" }
 
-Write-Log "-----------------------[合成简要统计核验结束流结结账报告] --------------------------"
-Write-Log "[保障坚如磐石源汇] ：提纯筛选的核心稳固流集池量级（T1/T2）    -> 录余: $($OptimizedCoreSet.Count) 条级效度网格策略配置"
-Write-Log "[阻燃与剔伪过滤比] ：受纯粹屏墙防御隔离被挡死阻击的大域冗漏   -> 全靠强制级锁抛挂屏蔽宽溢风险项免予穿透泛起误斩狂击事件。"
-Write-Log "[引补纯真补偿特战] ：真正被筛过无痛接入为核心扩展边缘漏洞补源 -> 引扩: $($OptimizedTier3Set.Count) 颗极高安全性单散域狙位子弹装列"
-Write-Log "[无误斩收刀闭仓总流输出配载节点量值统计总揽]            -> : 累计融合规则配置条目 $ruleCount 条全净空策略"
+Write-Log "-----------------------[全库统计及最终防暴源结算终查明列] --------------------------"
+Write-Log "[保障坚如磐石源汇] ：提纯精防筛选全域受限防爆量级 (T1/T2)       -> 合录 : $($OptimizedCoreSet.Count) 个条配置效格区格"
+Write-Log "[受持顶级架构常青盾]: 被 Top源完全笼护与保护未爆高受波及项级漏斗    -> Top权阵生效抗压防护源点护体."
+Write-Log "[引补外环偏偏辅助缘]: 在无威胁状态真正补充接融防守偏向缘散型网池区      -> 吸纳 : $($OptimizedTier3Set.Count) 个点项外链游项配单子网网兜落库。 "
+Write-Log "[结算落合高信抗核总域规则配流汇接清账终载量值配定全揽概测]:    => 合聚出结  : $ruleCount 全集策略包！！"
 
 $generationTime = (Get-Date).ToUniversalTime().AddHours(8).ToString("yyyy-MM-dd HH:mm:ss")
 $textContent = @"
 # Title: AdBlock_Rule_For_Clash
-# Description: 高分型双校验护航规则级池融合优化，精准锁放层防御防止冗乱第三方强吞精定位架构！保护网络高存活性！
+# Description: 防误触常青树保护加持核心规则级分控，完全无损接引无敌排压结构强抑制第三级域乱封越轨版!
 # Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
 # LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
 # LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
 # Generated on: $generationTime (UTC+8)
-# Base Protected Level Total (Tier1+Tier2 Base rules pool entries): $($OptimizedCoreSet.Count) 
-# Tier 3 Complementary additions effectively shielded included: $($OptimizedTier3Set.Count)
-# Cumulative filtered rule capacity scale payload load level items entries total: $ruleCount
+# Protected Constant Safe Tree Local-Binds Items Applied ($($topWhitelist.Count)) 
+# Total Payload Load Items List Count Generation Export : $ruleCount
 
 payload:
 $($formattedRules -join "`n")
@@ -240,4 +246,4 @@ $outputPath = "$PSScriptRoot/adblock_reject.yaml"
 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 [System.IO.File]::WriteAllText($outputPath, $textContent, $utf8NoBom)
 
-Write-Log ">> 本级精洗核爆抗容与分档逻辑提配规则最终输出成功！完美存储在 : $outputPath 。"
+Write-Log ">> 本系统运行级核防、广控无损分层机制最终无Bom抗灾策略生成落地存储已完成 -> 输出定于在位置 ： $outputPath ！"
