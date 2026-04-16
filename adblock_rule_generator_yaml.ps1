@@ -8,6 +8,13 @@ $customExcludedDomains = @(
     # "taobao.com"
 )
 
+# 强制白名单：加载 Top 高权重/常青树域名，防止激进规则误杀
+$topWhitelist = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+if (Test-Path "$PSScriptRoot/top_whitelist.txt") {
+    Get-Content "$PSScriptRoot/top_whitelist.txt" | ForEach-Object { $topWhitelist.Add($_.Trim()) | Out-Null }
+    Write-Host "已加载 Top 高权重域名保护白名单，共 $($topWhitelist.Count) 个受保护域名。" -ForegroundColor Cyan
+}
+
 # 2. 【黄金源 Tier 1】顶级信誉基线列表（具有严格核审规则避免随意诛杀）
 $tier1Urls = @(
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",
