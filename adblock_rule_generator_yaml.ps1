@@ -230,7 +230,7 @@ Write-Log "[结算落合高信抗核总域规则配流汇接清账终载量值�
 $generationTime = (Get-Date).ToUniversalTime().AddHours(8).ToString("yyyy-MM-dd HH:mm:ss")
 $textContent = @"
 # Title: AdBlock_Rule_For_Clash
-# Description: 防误触常青树保护加持核心规则级分控，完全无损接引无敌排压结构强抑制第三级域乱封越轨版!
+# Description: 适用于Clash（premium核心与mihomo核心）的广告域名拦截RULE-SET规则集，每天更新一次
 # Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
 # LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
 # LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
