@@ -17,10 +17,10 @@ on:
 
 jobs:
   # ==========================================
-  # 作业 1：在 Ubuntu 环境下生成 YAML 和 TXT 规则文件
+  # 作业 1：在 Windows 环境下生成 YAML 和 TXT 规则文件
   # ==========================================
   generate-rules:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest   # ✅ 修改这里，从 ubuntu-latest 改为了 windows-latest
 
     steps:
     - name: Setup Node.js 24
@@ -31,33 +31,42 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Install PowerShell 7
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget apt-transport-https software-properties-common
-        wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
-        sudo dpkg -i packages-microsoft-prod.deb
-        sudo apt-get update
-        sudo apt-get install -y powershell
-        rm packages-microsoft-prod.deb
+    # ✅ 注意：已将安装 PowerShell 7 的步骤删除，因为 windows-latest 本身自带 PowerShell (pwsh) 
 
     - name: Run Rule Generators (YAML & TXT)
+      shell: pwsh
       run: |
         pwsh -File ./adblock_rule_generator_yaml.ps1
         pwsh -File ./adblock_rule_generator_txt.ps1
 
     - name: Force Add, Commit and Push YAML & TXT files
+      shell: pwsh  # ✅ 把推送循环转换为适用于 Windows 的 PowerShell 语法
       env:
         TOKEN: ${{ secrets.TOKEN }}
       run: |
+        $repoUrl = "https://${env:TOKEN}@github.com/${{ github.repository }}.git"
+        
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
         git add -f adblock_reject.yaml adblock_reject.txt
-        git commit -m 'Update adblock_reject.yaml and adblock_reject.txt' || git commit --allow-empty -m 'Empty commit to force push'
         
-        for i in {1..5}; do
-          git push --force origin HEAD && exit 0 || (echo "Push failed, retrying in 10 seconds..." && sleep 10)
-        done
+        # 捕获如果未改动抛出的 commit 异常，自动进行 Empty commit 以完成空推
+        git commit -m "Update adblock_reject.yaml and adblock_reject.txt"
+        if ($LASTEXITCODE -ne 0) {
+          git commit --allow-empty -m "Empty commit to force push"
+        }
+        
+        # 带有重试机制的强制推送
+        for ($i=1; $i -le 5; $i++) {
+          git push $repoUrl HEAD:${{ github.ref }} --force
+          if ($LASTEXITCODE -eq 0) { 
+             Write-Host "Push YAML & TXT successful."
+             exit 0 
+          }
+          Write-Host "Push failed, retrying in 10 seconds... (Attempt $i)"
+          Start-Sleep -Seconds 10
+        }
+        exit 1
 
   # ==========================================
   # 作业 2：在 Windows 环境下将 YAML 转换为 MRS
