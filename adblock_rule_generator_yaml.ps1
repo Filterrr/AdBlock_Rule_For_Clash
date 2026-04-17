@@ -10,7 +10,7 @@ $customExcludedDomains = @(
 
 # === 按规则质量分级的订阅源 ===
 $allowUrls = @(
-    "https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/allowlist.txt"
+    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
 )
 
 $tier1Urls = @(
