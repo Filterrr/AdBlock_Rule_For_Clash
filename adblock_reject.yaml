@@ -3,7 +3,7 @@
 # Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
 # LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
 # LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
-# Generated on: 2026-04-19 07:53:05 (UTC+8)
+# Generated on: 2026-04-19 07:56:05 (UTC+8)
 # Protected Whitelist domains Count: 4 
 # Total Payload Items Count: 77161
 
@@ -4194,7 +4194,6 @@ payload:
 - '+.admob-cn.com'
 - '+.admob.com'
 - '+.admobe.com'
-- '+.admobile.top'
 - '+.admonishconcentrate.com'
 - '+.admonishdecisiveyetnow.com'
 - '+.admonishfistgipsy.com'
@@ -5886,6 +5885,7 @@ payload:
 - '+.aliwjo.com'
 - '+.aliyun.cdn.chengzilte.top'
 - '+.aliyunapi.org'
+- '+.aliyuncs.com'
 - '+.aljadiyjnjxuq.online'
 - '+.aljaqhahs.in'
 - '+.aljmhztthtchf.icu'
