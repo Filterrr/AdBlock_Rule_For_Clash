@@ -28,7 +28,8 @@ $tier2Urls = @(
 $tier3Urls = @(
     "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
     "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt",
-    "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt"
+    "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
+    "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt"
 )
 
 # 日志输出流
