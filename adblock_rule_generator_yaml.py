@@ -156,14 +156,12 @@ def main():
 
     # ======= 阶段 1：处理基础规则 (清理去重) =========
     write_log(">> 正在清理基础规则中的冲突和冗余内容...")
-    optimized_core_set = set()
-
+    
+    # [逻辑重构] 白名单核准检测 - 对源数组去伪预排获取基础有效条目
+    valid_core_domains = set()
     for domain in core_set_raw:
-        # 首先检查它自身有没有包含在全局白名单。如果是便不需要再计算直接抛除
         if domain in white_set:
             continue
-
-        # 父级子域名关联冲突去除检测 - 检测子集关联如果直接与根白名单符合就进行筛除规避：
         is_whitelisted = False
         dot_index = domain.find('.')
         while dot_index >= 0 and dot_index < len(domain) - 1:
@@ -171,20 +169,23 @@ def main():
                 is_whitelisted = True
                 break
             dot_index = domain.find('.', dot_index + 1)
-        if is_whitelisted:
-            continue
+        if not is_whitelisted:
+            valid_core_domains.add(domain)
 
-        # 父集判定冗余过滤检测去冗：子域归并大块拦截核心域名 - 只保存核心最大区域规则节点即可。
-        is_redundant = False
+    # [规则修改核心] 遍历统计并缓存“处于别人主域名段（充当基础父级环境）的主域名节点记录防一拍切所有防过错！”。如果发下存在自己也同拥包含具体细节域名则舍自己短项取最准度深子规则防阻塞所有
+    core_sub_detect_cache = set()
+    for domain in valid_core_domains:
         dot_index = domain.find('.')
         while dot_index >= 0 and dot_index < len(domain) - 1:
-            if domain[dot_index + 1:] in core_set_raw:
-                is_redundant = True
-                break
+            core_sub_detect_cache.add(domain[dot_index + 1:])
             dot_index = domain.find('.', dot_index + 1)
-        
-        if not is_redundant:
-            optimized_core_set.add(domain)
+
+    optimized_core_set = set()
+    for domain in valid_core_domains:
+        # 当检查自己具备且映射进被附属的主域包含池子缓存内（此长节点已被登记为属于某种长级项前项或祖籍根环境） -> 表示其内拥有属于自己具体且指定的衍生级深段。依照精确保配取舍制即时防混舍去避免过线泛滥断点遮流直接不采用该顶！(保留较精更明确节点)。
+        if domain in core_sub_detect_cache:
+            continue
+        optimized_core_set.add(domain)
 
     # ======= 阶段 2：构建防误杀保护机制 =========
     write_log(">> 正在生成重点防护名单，防止重要域名被意外拦截...")
@@ -203,8 +204,8 @@ def main():
 
     # ======= 阶段 3：过滤并合并扩展规则 (Tier 3) =========
     write_log(">> 正在检测扩展规则，排除与保护名单冲突的内容...")
-    valid_tier3_set = set()
-
+    
+    temp_tier3_valid_domains = set()
     for domain in tier3_set_raw:
         # 检测是否跟已经设定为免越界死角的根父拦截防护区一致
         if domain in protected_ancestors:
@@ -214,30 +215,43 @@ def main():
         dot_index = domain.find('.')
         while dot_index >= 0 and dot_index < len(domain) - 1:
             parent = domain[dot_index + 1:]
-            if parent in white_set or parent in optimized_core_set:
+            # 放行包含跨界子结构拦截匹配请求：这里原逻辑跟 Core 级别判错直接拦截不同！要遵循有详细优先策略。
+            # 这里只需且完全保证不受主界全环境下的 白名单 安全覆盖即可安全流入子级别。如果被下辖保护死顶也应当排除出避免防同影响防漏遮截。
+            if parent in white_set:
                 should_discard = True
                 break
             dot_index = domain.find('.', dot_index + 1)
 
         if not should_discard:
-            valid_tier3_set.add(domain)
+            temp_tier3_valid_domains.add(domain)
 
-    # 在内部对第三层扩展的规则域做子附关联收拢提纯并列机制防范！：
-    optimized_tier3_set = []
-    for domain in valid_tier3_set:
-        is_redundant = False
+    # 在内部对第三层扩展的规则域做子附同前部防查归根精化取去丢横粗段等项：
+    tier3_sub_detect_cache = set()
+    for domain in temp_tier3_valid_domains:
         dot_index = domain.find('.')
         while dot_index >= 0 and dot_index < len(domain) - 1:
-            if domain[dot_index + 1:] in valid_tier3_set:
-                is_redundant = True
-                break
+            tier3_sub_detect_cache.add(domain[dot_index + 1:])
             dot_index = domain.find('.', dot_index + 1)
-        if not is_redundant:
-            optimized_tier3_set.append(domain)
+            
+    optimized_tier3_set = []
+    for domain in temp_tier3_valid_domains:
+        if domain in tier3_sub_detect_cache:
+            continue
+        optimized_tier3_set.append(domain)
 
-    # ==== 阶段 4：合并规则并生成文件 ====
-    # 将规则合并并且在内存以常规基础（按照a-z字典表字词进行递升对等排序方便维护观察对比版本）形式打列处理组合项列表
-    final_combined_rules = list(optimized_core_set) + optimized_tier3_set
+    # ==== 阶段 4：执行两库模块联全合及统一跨维级最后抛粗子留主存检测去配整合项 ====
+    write_log(">> 执行两极互配互防验证抛丢拦截合并操作组并列整合完成库级数据...")
+    pre_combined = list(set(list(optimized_core_set) + optimized_tier3_set))
+    
+    # 彻底执行“具有任何存在具体防下端指则去大级抛祖级别节点”，若两极组合存在此段干连情况也完美触发此抛切机制确保纯级具体留定策略。
+    global_subs_detector = set()
+    for domain in pre_combined:
+        dot_index = domain.find('.')
+        while dot_index >= 0 and dot_index < len(domain) - 1:
+            global_subs_detector.add(domain[dot_index + 1:])
+            dot_index = domain.find('.', dot_index + 1)
+            
+    final_combined_rules = [domain for domain in pre_combined if domain not in global_subs_detector]
     final_combined_rules.sort()
     
     # 拼接并重叠YAML对应要求格式的预处理机制化载体表（即 "- '+.$_'" 在 Python 的逻辑表态处理项组）
@@ -245,10 +259,10 @@ def main():
     rule_count = len(formatted_rules)
 
     write_log("-----------------------[最终统计结果] --------------------------")
-    write_log(f"[基础规则] : 提纯并保留的基础拦截规则   -> 共计 : {len(optimized_core_set)} 条")
+    write_log(f"[基础规则] : 初步去重后的基础拦截规则   -> 共计 : {len(optimized_core_set)} 条")
     write_log("[保护机制] : 本地白名单防误杀保护       -> 已成功生效")
-    write_log(f"[扩展规则] : 补充未冲突的附加扩展规则   -> 共计 : {len(optimized_tier3_set)} 条")
-    write_log(f"[最终统计] : 规则库合并完毕             -> 总计生成 : {rule_count} 条规则配置")
+    write_log(f"[扩展规则] : 初步去重后的补充扩展规则   -> 共计 : {len(optimized_tier3_set)} 条")
+    write_log(f"[最终统计] : 全局防泛滥精切机制优先验并 -> 总计生成 : {rule_count} 条精准拦截源配规则段！")
 
     # 对等换算为 (UTC+8) 的执行操作当地日期时间戳构建标签声明区文本标。
     utc_time = datetime.datetime.utcnow() + datetime.timedelta(hours=8)
