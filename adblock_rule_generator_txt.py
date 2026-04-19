@@ -281,7 +281,7 @@ def main():
 payload:
 """ + "\n".join(formatted_rules)
 
-    output_path = os.path.join(SCRIPT_DIR, "adblock_reject.x")
+    output_path = os.path.join(SCRIPT_DIR, "adblock_reject.txt")
     
     # 存出写操作 (Python 在 utf-8 参数标准写入时默认本身为无 Bom 生成器, 此设计无需引用外界封装流配置, 简洁有效 )
     with open(output_path, "w", encoding="utf-8") as f:
