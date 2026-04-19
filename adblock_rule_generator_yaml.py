@@ -9,6 +9,10 @@ import os
 import re
 import urllib.request
 import datetime
+import sys
+
+if sys.stdout.encoding.lower() != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
 
 # === 自定义全局白名单 ===
 custom_excluded_domains = [
