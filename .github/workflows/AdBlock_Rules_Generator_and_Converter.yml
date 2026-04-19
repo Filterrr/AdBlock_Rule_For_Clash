@@ -44,7 +44,7 @@ jobs:
         python ./adblock_rule_generator_yaml.py
         
         # 保留生成 txt 的 ps1 脚本执行（如果您未来也改为py，同理更改下方指令即可）
-        pwsh -File ./adblock_rule_generator_txt.ps1
+        python ./adblock_rule_generator_txt.py
 
     - name: Force Add, Commit and Push YAML & TXT files
       shell: pwsh  
