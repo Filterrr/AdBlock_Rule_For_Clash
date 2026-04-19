@@ -271,9 +271,9 @@ def main():
     # Yaml 文件构建声明主体。保持了完全一致的无BOM生成协议以实现完美的 clash 加载防崩溃验证方案格式内容支持
     text_content = f"""# Title: AdBlock_Rule_For_Clash
 # Description: 适用于 Clash（premium 与 mihomo）的广告域名拦截 RULE-SET 规则集，每天更新一次
-# Homepage: https://github.com/REIJI007/AdBlock_Rule_For_Clash
-# LICENSE1: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
-# LICENSE2: https://github.com/REIJI007/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
+# Homepage: https://github.com/Filterrr/AdBlock_Rule_For_Clash
+# LICENSE1: https://github.com/Filterrr/AdBlock_Rule_For_Clash/blob/main/LICENSE-GPL 3.0
+# LICENSE2: https://github.com/Filterrr/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA 4.0
 # Generated on: {generation_time} (UTC+8)
 # Protected Whitelist domains Count: {len(top_whitelist)} 
 # Total Payload Items Count: {rule_count}
