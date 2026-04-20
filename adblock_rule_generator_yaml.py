@@ -22,7 +22,7 @@ custom_excluded_domains = [
 
 # === 按规则质量分级的订阅源 ===
 allow_urls = [
-  #  "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
+    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
 ]
 
 tier1_urls = [
@@ -105,7 +105,7 @@ def extract_rules(urls, rules_set, global_whitelist):
             elif m := regex2.match(line): domain = m.group(1)
             elif m := regex3.match(line): domain = m.group(1)
             elif m := regex4.match(line): domain = m.group(1)
-            elif m := regex5.match(line): domain = m.group(1)
+           # elif m := regex5.match(line): domain = m.group(1)
 
             if domain and domain_regex.match(domain):
                 # 以规避大小写带来混用风险将其统一强制小写转化插入
