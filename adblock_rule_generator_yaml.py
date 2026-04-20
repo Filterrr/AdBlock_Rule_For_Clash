@@ -22,7 +22,7 @@ custom_excluded_domains = [
 
 # === 按规则质量分级的订阅源 ===
 allow_urls = [
-    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
+  #  "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
 ]
 
 tier1_urls = [
