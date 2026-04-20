@@ -69,7 +69,7 @@ regex1 = re.compile(r'^\|\|([a-zA-Z0-9.-]+)(?:\^.*)?$')
 regex2 = re.compile(r'^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.-]+)')
 regex3 = re.compile(r'^(?:address|server)=/([a-zA-Z0-9.-]+)/')
 regex4 = re.compile(r'^DOMAIN(?:-SUFFIX)?,\s*([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})')
-regex5 = re.compile(r'^([a-zA-Z0-9.-]+)$')
+# regex5 = re.compile(r'^([a-zA-Z0-9.-]+)$')
 
 def extract_rules(urls, rules_set, global_whitelist):
     """提取 URL 文件信息内有效域名至目标集合内的模块工具（支持内置拦截模式去重并提取规则）"""
