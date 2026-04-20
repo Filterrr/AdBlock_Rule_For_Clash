@@ -22,7 +22,7 @@ custom_excluded_domains = [
 
 # === 按规则质量分级的订阅源 ===
 allow_urls = [
-    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
+ #   "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
 ]
 
 tier1_urls = [
@@ -69,7 +69,7 @@ regex1 = re.compile(r'^\|\|([a-zA-Z0-9.-]+)(?:\^.*)?$')
 regex2 = re.compile(r'^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.-]+)')
 regex3 = re.compile(r'^(?:address|server)=/([a-zA-Z0-9.-]+)/')
 regex4 = re.compile(r'^DOMAIN(?:-SUFFIX)?,\s*([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})')
-# regex5 = re.compile(r'^([a-zA-Z0-9.-]+)$')
+regex5 = re.compile(r'^([a-zA-Z0-9.-]+)$')
 
 def extract_rules(urls, rules_set, global_whitelist):
     """提取 URL 文件信息内有效域名至目标集合内的模块工具（支持内置拦截模式去重并提取规则）"""
@@ -105,7 +105,7 @@ def extract_rules(urls, rules_set, global_whitelist):
             elif m := regex2.match(line): domain = m.group(1)
             elif m := regex3.match(line): domain = m.group(1)
             elif m := regex4.match(line): domain = m.group(1)
-           # elif m := regex5.match(line): domain = m.group(1)
+            elif m := regex5.match(line): domain = m.group(1)
 
             if domain and domain_regex.match(domain):
                 # 以规避大小写带来混用风险将其统一强制小写转化插入
