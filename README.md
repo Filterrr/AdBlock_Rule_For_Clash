@@ -165,6 +165,9 @@ rules:
 
 1. [mihomo](https://github.com/MetaCubeX/mihomo)
 2. [Adguard](https://github.com/AdguardTeam/AdGuardFilters)
+3. [REIJI007](https://github.com/REIJI007/AdBlock_Rule_For_Clash)
+4. [217heidai](https://github.com/217heidai/adblockfilters)
+
 
 ## LICENSE
 - [CC-BY-SA-4.0 License](https://github.com/Filterrr/AdBlock_Rule_For_Clash/blob/main/LICENSE-CC-BY-NC-SA%204.0)
