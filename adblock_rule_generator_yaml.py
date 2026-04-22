@@ -70,7 +70,7 @@ domain_regex = re.compile(r'^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a
 regex1 = re.compile(r'^\|\|([a-zA-Z0-9.-]+)(?:\^.*)?$')
 regex2 = re.compile(r'^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.-]+)')
 regex3 = re.compile(r'^(?:address|server)=/([a-zA-Z0-9.-]+)/')
-regex4 = re.compile(r'^DOMAIN(?:-SUFFIX)?,\s*([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})')
+regex4 = re.compile(r'^DOMAIN(?:-SUFFIX)?\s*,\s*([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(?:\s*,.*)?$', re.IGNORECASE)
 regex5 = re.compile(r'^([a-zA-Z0-9.-]+)$')
 
 def extract_rules(urls, rules_set, global_whitelist):
