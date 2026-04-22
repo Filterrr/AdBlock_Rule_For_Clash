@@ -70,7 +70,7 @@ domain_regex = re.compile(r'^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a
 regex1 = re.compile(r'^\|\|([a-zA-Z0-9.-]+)(?:\^.*)?$')
 regex2 = re.compile(r'^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.-]+)')
 regex3 = re.compile(r'^(?:address|server)=/([a-zA-Z0-9.-]+)/')
-regex4 = re.compile(r'^DOMAIN(?:-SUFFIX)?\s*,\s*([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(?:\s*,.*)?$', re.IGNORECASE)
+regex4 = re.compile(r'^(?:DOMAIN|HOST)(?:-SUFFIX)?\s*,\s*([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(?:\s*,.*)?$', re.IGNORECASE)
 regex5 = re.compile(r'^([a-zA-Z0-9.-]+)$')
 
 def extract_rules(urls, rules_set, global_whitelist):
@@ -92,7 +92,7 @@ def extract_rules(urls, rules_set, global_whitelist):
         for line in content.splitlines():
             line = line.strip()
             # 跳过空行及各种类型的特殊头部行及纯注释符
-            if not line or line.startswith(("!", "#", "[")):
+            if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
 
             # 处理白名单判断标识：是否具有双@符
