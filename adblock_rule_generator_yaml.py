@@ -33,8 +33,8 @@ tier1_urls = [
 ]
 
 tier2_urls = [
-    "https://easylist-downloads.adblockplus.org/easylistchina.txt",
-    "https://easylist-downloads.adblockplus.org/easylist.txt"
+#    "https://easylist-downloads.adblockplus.org/easylistchina.txt",
+#    "https://easylist-downloads.adblockplus.org/easylist.txt"
 ]
 
 tier3_urls = [
