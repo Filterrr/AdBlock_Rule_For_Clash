@@ -6,7 +6,26 @@ import re
 import urllib.request
 import datetime
 import sys
-import dns.resolver  # 必须安装: pip install dnspython
+import subprocess  # 用于自动安装依赖
+
+# ==========================================
+# [新增] 自动依赖检查与安装机制
+# ==========================================
+try:
+    import dns.resolver
+except ImportError:
+    print("检测到缺失 dnspython 库，正在自动为您安装...")
+    try:
+        # 使用当前 Python 解释器执行 pip install
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "dnspython"])
+        import dns.resolver
+        print("dnspython 安装成功！")
+    except Exception as e:
+        print(f"自动安装依赖失败: {e}")
+        print("请手动执行: pip install dnspython")
+        sys.exit(1)
+# ==========================================
+
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 if sys.stdout.encoding.lower() != 'utf-8':
@@ -14,7 +33,7 @@ if sys.stdout.encoding.lower() != 'utf-8':
 
 # === 配置区域 ===
 DNS_SERVER = '8.8.8.8'  # 指定使用 Google DNS
-MAX_WORKERS = 20        # DNS 并发查询线程数，建议 10-30 之间
+MAX_WORKERS = 20        # DNS 并发查询线程数
 
 custom_excluded_domains = []
 
@@ -77,31 +96,27 @@ def extract_rules(urls, rules_set, global_whitelist):
         except Exception as e:
             write_log(f"获取失败 {url}: {e}")
 
-# --- [关键修改] 指定 8.8.8.8 解析 ---
 def verify_dns_effective(domain):
     """使用指定的 DNS 服务器验证域名是否有效"""
     resolver = dns.resolver.Resolver()
     resolver.nameservers = [DNS_SERVER] 
-    resolver.lifetime = 2.0  # 总超时时间
-    resolver.timeout = 1.0   # 单次查询超时时间
+    resolver.lifetime = 2.0  
+    resolver.timeout = 1.0   
     try:
-        # 尝试查询 A 记录
         resolver.resolve(domain, 'A')
-        return domain # 返回域名表示有效
+        return domain 
     except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.exception.Timeout, dns.exception.NoNameservers):
-        return None # 无法解析则视为无效
+        return None 
 
 def main():
     write_log(f"==== 开始执行 [DNS {DNS_SERVER} 验证 + 精准过滤] 模式 ====")
     white_set = set(d.lower() for d in custom_excluded_domains)
     raw_rules = set()
 
-    # 1. 收集所有规则
     all_urls = tier1_urls + tier2_urls + tier3_urls + junk_urls
     extract_rules(all_urls, raw_rules, white_set)
     write_log(f"初步收集到原始域名: {len(raw_rules)} 条")
 
-    # 2. 排除白名单及其子域
     valid_set = set()
     for domain in raw_rules:
         is_whitelisted = False
@@ -116,7 +131,6 @@ def main():
         if not is_whitelisted:
             valid_set.add(domain)
 
-    # 3. 【核心：精准度过滤】- 只保留最深层的子域 (剔除宽泛根域)
     write_log(">> 正在执行精准度筛选 (剔除根域 $\rightarrow$ 保留具体子域)...")
     sorted_domains = sorted(list(valid_set), key=len, reverse=True)
     final_precise_set = set()
@@ -125,41 +139,34 @@ def main():
     for domain in sorted_domains:
         if domain in broad_parents:
             continue
-        
         temp_dom = domain
         while True:
             idx = temp_dom.find('.')
             if idx < 0: break
             temp_dom = temp_dom[idx+1:]
             broad_parents.add(temp_dom)
-            
         final_precise_set.add(domain)
 
     write_log(f"精准度筛选完成，进入 DNS 验证队列: {len(final_precise_set)} 条")
 
-    # 4. 【核心：多线程 DNS 有效性验证】
     write_log(f">> 正在通过 {DNS_SERVER} 验证有效性 (多线程并发模式)...")
     dns_verified_rules = []
     check_list = list(final_precise_set)
     total = len(check_list)
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        # 提交所有查询任务
         future_to_domain = {executor.submit(verify_dns_effective, dom): dom for dom in check_list}
-        
         count = 0
         for future in as_completed(future_to_domain):
             result = future.result()
             if result:
                 dns_verified_rules.append(result)
-            
             count += 1
             if count % 200 == 0:
                 write_log(f"验证进度: {count}/{total} ...")
 
     write_log(f"DNS 验证完成，有效域名共: {len(dns_verified_rules)} 条")
 
-    # 5. 导出文件
     dns_verified_rules.sort()
     formatted_rules = [f"- '+.{domain}'" for domain in dns_verified_rules]
     
