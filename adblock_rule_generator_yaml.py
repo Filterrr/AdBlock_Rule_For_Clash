@@ -29,12 +29,13 @@ tier1_urls = [
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt",
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt",
-    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt"
+    "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt",
+    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_3_Spyware/filter.txt"
 ]
 
 tier2_urls = [
-    "https://easylist-downloads.adblockplus.org/easylistchina.txt",
-    "https://easylist-downloads.adblockplus.org/easylist.txt"
+  #  "https://easylist-downloads.adblockplus.org/easylistchina.txt",
+  #  "https://easylist-downloads.adblockplus.org/easylist.txt"
 ]
 
 tier3_urls = [
