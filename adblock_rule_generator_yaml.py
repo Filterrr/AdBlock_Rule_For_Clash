@@ -65,7 +65,7 @@ def write_log(message):
 # 定义和预编译处理格式数据和正则引擎，提高效率
 domain_regex = re.compile(r'^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$')
 
-regex1 = re.compile(r'^\|\|([a-zA-Z0-9.-]+)(?:\^.*)?$')
+regex1 = re.compile(r'^\|\|((?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})(?:\^.*)?$')
 regex2 = re.compile(r'^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.-]+)')
 regex3 = re.compile(r'^(?:address|server)=/([a-zA-Z0-9.-]+)/')
 regex4 = re.compile(r'^(?:DOMAIN|HOST)(?:-SUFFIX)?\s*,\s*([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(?:\s*,.*)?$', re.IGNORECASE)
