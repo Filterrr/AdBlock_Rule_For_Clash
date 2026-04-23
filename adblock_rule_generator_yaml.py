@@ -6,16 +6,18 @@ import re
 import urllib.request
 import datetime
 import sys
-import socket  # 用于 DNS 验证
+import dns.resolver  # 必须安装: pip install dnspython
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 if sys.stdout.encoding.lower() != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
 
-# === 自定义全局白名单 ===
+# === 配置区域 ===
+DNS_SERVER = '8.8.8.8'  # 指定使用 Google DNS
+MAX_WORKERS = 20        # DNS 并发查询线程数，建议 10-30 之间
+
 custom_excluded_domains = []
 
-# === 订阅源 ===
-allow_urls = []
 tier1_urls = [
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt",
@@ -75,18 +77,22 @@ def extract_rules(urls, rules_set, global_whitelist):
         except Exception as e:
             write_log(f"获取失败 {url}: {e}")
 
+# --- [关键修改] 指定 8.8.8.8 解析 ---
 def verify_dns_effective(domain):
-    """验证域名是否在 DNS 中真实有效 (可解析)"""
+    """使用指定的 DNS 服务器验证域名是否有效"""
+    resolver = dns.resolver.Resolver()
+    resolver.nameservers = [DNS_SERVER] 
+    resolver.lifetime = 2.0  # 总超时时间
+    resolver.timeout = 1.0   # 单次查询超时时间
     try:
-        # 设置全局 DNS 超时，防止卡死
-        socket.setdefaulttimeout(1) 
-        socket.gethostbyname(domain)
-        return True
-    except (socket.gaierror, socket.timeout):
-        return False
+        # 尝试查询 A 记录
+        resolver.resolve(domain, 'A')
+        return domain # 返回域名表示有效
+    except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.exception.Timeout, dns.exception.NoNameservers):
+        return None # 无法解析则视为无效
 
 def main():
-    write_log("==== 开始执行 [DNS 验证 + 精准过滤] 模式 ====")
+    write_log(f"==== 开始执行 [DNS {DNS_SERVER} 验证 + 精准过滤] 模式 ====")
     white_set = set(d.lower() for d in custom_excluded_domains)
     raw_rules = set()
 
@@ -99,7 +105,6 @@ def main():
     valid_set = set()
     for domain in raw_rules:
         is_whitelisted = False
-        # 检查该域名或其任何父级是否在白名单中
         temp_dom = domain
         while True:
             if temp_dom in white_set:
@@ -111,19 +116,16 @@ def main():
         if not is_whitelisted:
             valid_set.add(domain)
 
-    # 3. 【核心：精准度过滤】- 只保留最深层的子域
-    write_log(">> 正在执行精准度筛选 (剔除宽泛根域，保留具体子域)...")
-    # 将所有域名按长度降序排列（长域名优先处理，即最精准的优先）
+    # 3. 【核心：精准度过滤】- 只保留最深层的子域 (剔除宽泛根域)
+    write_log(">> 正在执行精准度筛选 (剔除根域 $\rightarrow$ 保留具体子域)...")
     sorted_domains = sorted(list(valid_set), key=len, reverse=True)
     final_precise_set = set()
     broad_parents = set()
 
     for domain in sorted_domains:
-        # 如果该域名已经是某个已保留精准域名的父级，则剔除该域名
-        if any(domain == p for p in broad_parents):
+        if domain in broad_parents:
             continue
         
-        # 记录该域名的所有父级，防止后续处理到父级时将其加入
         temp_dom = domain
         while True:
             idx = temp_dom.find('.')
@@ -133,21 +135,27 @@ def main():
             
         final_precise_set.add(domain)
 
-    write_log(f"精准度筛选完成，剩余 {len(final_precise_set)} 条")
+    write_log(f"精准度筛选完成，进入 DNS 验证队列: {len(final_precise_set)} 条")
 
-    # 4. 【核心：DNS 有效性验证】
-    write_log(">> 正在通过 DNS 验证域名有效性 (此步骤较慢，请耐心等待)...")
+    # 4. 【核心：多线程 DNS 有效性验证】
+    write_log(f">> 正在通过 {DNS_SERVER} 验证有效性 (多线程并发模式)...")
     dns_verified_rules = []
-    total = len(final_precise_set)
-    
-    # 将集合转为列表以便跟踪进度
     check_list = list(final_precise_set)
-    for i, domain in enumerate(check_list):
-        if i % 100 == 0:
-            write_log(f"进度: {i}/{total} ...")
+    total = len(check_list)
+
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        # 提交所有查询任务
+        future_to_domain = {executor.submit(verify_dns_effective, dom): dom for dom in check_list}
         
-        if verify_dns_effective(domain):
-            dns_verified_rules.append(domain)
+        count = 0
+        for future in as_completed(future_to_domain):
+            result = future.result()
+            if result:
+                dns_verified_rules.append(result)
+            
+            count += 1
+            if count % 200 == 0:
+                write_log(f"验证进度: {count}/{total} ...")
 
     write_log(f"DNS 验证完成，有效域名共: {len(dns_verified_rules)} 条")
 
@@ -159,7 +167,7 @@ def main():
     generation_time = utc_time.strftime("%Y-%m-%d %H:%M:%S")
 
     text_content = f"""# Title: AdBlock_Rule_For_Clash_DNS_Verified
-# Description: 仅保留 [DNS有效] 且 [最精准] 的拦截规则
+# Description: 仅保留 [DNS {DNS_SERVER} 有效] 且 [最精准] 的拦截规则
 # Generated on: {generation_time} (UTC+8)
 # Total Payload Items Count: {len(dns_verified_rules)}
 
