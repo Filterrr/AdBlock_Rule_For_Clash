@@ -6,8 +6,8 @@ import re
 import urllib.request
 import datetime
 import sys
-import dns.resolver  # 必须安装: pip install dnspython
 import subprocess  # 用于自动安装依赖
+import dns.resolver  # 必须安装: pip install dnspython
 
 # ==========================================
 # [新增] 自动依赖检查与安装机制
