@@ -3,7 +3,7 @@
 
 # Title: AdBlock_Rule_For_Mihomo
 # Description: 专为 Mihomo 内核优化的广告拦截规则生成脚本
-# 功能：自动识别域名特征，智能分配 Exact、Wildcard 与 Suffix 匹配格式，最大程度平衡拦截率与误杀率。
+# 功能：主域名使用 '.' 后缀匹配，子域名及深层域名使用 '+' 匹配，平衡拦截覆盖面与精准度。
 
 import os
 import re
@@ -22,7 +22,7 @@ custom_excluded_domains = [
 
 # === 订阅源配置 ===
 allow_urls = [
- #   "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
+    # "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
 ]
 
 tier1_urls = [
@@ -49,7 +49,7 @@ tier3_urls = [
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_FILE_PATH = os.path.join(SCRIPT_DIR, "adblock_log.txt")
 
-# --- 增强型正则引擎：支持通配符 (*) 提取 ---
+# --- 增强型正则引擎 ---
 domain_regex = re.compile(r'^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9.*-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$')
 regex1 = re.compile(r'^\|\|([a-zA-Z0-9.*-]+)(?:\^.*)?$')
 regex2 = re.compile(r'^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.*-]+)')
@@ -118,7 +118,7 @@ def main():
     white_set = set(d.lower() for d in custom_excluded_domains)
     core_set_raw, tier3_set_raw = set(), set()
 
-    # 加载本地高权重白名单
+    # 加载本地白名单
     top_whitelist_file = os.path.join(SCRIPT_DIR, "top_whitelist.txt")
     if os.path.exists(top_whitelist_file):
         for line in safe_read_file(top_whitelist_file):
@@ -130,11 +130,10 @@ def main():
     extract_rules(tier1_urls + tier2_urls, core_set_raw, white_set)
     extract_rules(tier3_urls, tier3_set_raw, white_set)
 
-    # 阶段 1 & 2：预处理与冲突检测
     write_log(">> 正在执行冲突清洗与保护机制校验...")
     valid_core = {d for d in core_set_raw if d not in white_set}
     
-    # 构建父级保护伞（防止 Tier 3 误杀）
+    # 构建父级保护伞
     protected_ancestors = set()
     for s in (white_set, valid_core):
         for item in s:
@@ -145,19 +144,19 @@ def main():
                 curr = curr[curr.find('.')+1:]
                 protected_ancestors.add(curr)
 
-    # 阶段 3：过滤 Tier 3
+    # 过滤 Tier 3
     valid_tier3 = set()
     for d in tier3_set_raw:
         if d in protected_ancestors or '*' in d: 
-            if '*' in d: valid_tier3.add(d) # 通配符直接放行，不参与保护校验
+            if '*' in d: valid_tier3.add(d)
             continue
         valid_tier3.add(d)
 
     # 阶段 4：Mihomo 格式智能转换
-    write_log(">> 正在执行 Mihomo 域名匹配类型自动分类...")
+    write_log(">> 正在按照主域名 (.) 与 子域名 (+) 格式进行自动分类...")
     all_domains = valid_core.union(valid_tier3)
     
-    # 全局后缀去重计算
+    # 后缀去重逻辑
     suffix_candidates = {d for d in all_domains if '*' not in d}
     global_subs_detector = set()
     for d in suffix_candidates:
@@ -166,25 +165,22 @@ def main():
             temp = temp[temp.find('.')+1:]
             global_subs_detector.add(temp)
     
-    # 剔除已被父域名覆盖的子域名（仅针对非通配符）
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
     
     formatted_rules = []
     for domain in sorted(optimized_domains):
-        # 情况 1: 通配符匹配 (Wildcard)
+        # 情况 1: 通配符匹配 (如 *.ads.com)
         if '*' in domain:
             formatted_rules.append(f"- '{domain}'")
             continue
         
-        # 情况 2: 精确匹配 (Exact)
-        # 逻辑：层级过深 (点数 >= 3，如 a.b.c.d) 的域名通常是特定接口，使用精确匹配防误杀
-        if domain.count('.') >= 3:
-            formatted_rules.append(f"- '{domain}'")
-            continue
+        # 情况 2: 主域名识别 (逻辑：仅含 1 个 '.'，如 baidu.com)
+        if domain.count('.') == 1:
+            formatted_rules.append(f"- '.{domain}'")
         
-        # 情况 3: 后缀匹配 (Suffix)
-        # 逻辑：对于常规二级、三级域名，使用 '.' 前缀进行泛域名拦截
-        formatted_rules.append(f"- '.{domain}'")
+        # 情况 3: 剩余域名（多级子域名，如 sub.ads.baidu.com）
+        else:
+            formatted_rules.append(f"- '+.{domain}'")
 
     # 输出文件
     rule_count = len(formatted_rules)
@@ -193,7 +189,7 @@ def main():
     header = f"""# Title: AdBlock_Rule_For_Mihomo
 # Generated: {generation_time} (UTC+8)
 # Total Items: {rule_count}
-# Formats: Suffix (.domain), Wildcard ('*.domain'), Exact ('domain')
+# Formats: Main Domain ('.domain'), Subdomain ('+.domain'), Wildcard ('*.domain')
 
 payload:
 """
