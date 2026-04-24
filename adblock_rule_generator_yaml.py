@@ -170,36 +170,21 @@ def main():
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
     
     formatted_rules = []
-    count_wildcard = 0
-    count_exact = 0
-    count_plus = 0
-    count_suffix = 0
-
     for domain in sorted(optimized_domains):
         # 情况 1: 通配符匹配 (Wildcard)
         if '*' in domain:
             formatted_rules.append(f"- '{domain}'")
-            count_wildcard += 1
             continue
         
         # 情况 2: 精确匹配 (Exact)
         # 逻辑：层级过深 (点数 >= 3，如 a.b.c.d) 的域名通常是特定接口，使用精确匹配防误杀
         if domain.count('.') >= 3:
             formatted_rules.append(f"- '{domain}'")
-            count_exact += 1
-            continue
-            
-        # 情况 3: Plus 匹配 (+.)
-        # 逻辑：点数为 2 (如 a.domain.com)，使用 '+.' 格式
-        if domain.count('.') == 2:
-            formatted_rules.append(f"- '+.{domain}'")
-            count_plus += 1
             continue
         
-        # 情况 4: 后缀匹配 (Suffix)
-        # 逻辑：对于常规二级域名，使用 '.' 前缀进行泛域名拦截
+        # 情况 3: 后缀匹配 (Suffix)
+        # 逻辑：对于常规二级、三级域名，使用 '.' 前缀进行泛域名拦截
         formatted_rules.append(f"- '.{domain}'")
-        count_suffix += 1
 
     # 输出文件
     rule_count = len(formatted_rules)
@@ -208,11 +193,7 @@ def main():
     header = f"""# Title: AdBlock_Rule_For_Mihomo
 # Generated: {generation_time} (UTC+8)
 # Total Items: {rule_count}
-# Formats & Counts: 
-#   - Wildcard ('*'): {count_wildcard}
-#   - Exact ('domain'): {count_exact}
-#   - Plus ('+.domain'): {count_plus}
-#   - Suffix ('.domain'): {count_suffix}
+# Formats: Suffix (.domain), Wildcard ('*.domain'), Exact ('domain')
 
 payload:
 """
