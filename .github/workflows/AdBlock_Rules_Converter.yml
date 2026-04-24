@@ -24,13 +24,13 @@ jobs:
 
     steps:
     - name: Setup Node.js 24
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@V6
       with:
         node-version: '24'
 
     # ✅ 新增配置 Python 环境，以保证新的 python 版脚本高效无缝运行
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
