@@ -204,9 +204,9 @@ def main():
 # Total Items: {rule_count}
 # -----------------------------------------------
 # 统计信息:
-# - 通配匹配规则 (Wildcard 如'*a.b.c.d'):  {count_wildcard}
-# - 精确匹配规则 (Exact    如 'a.b.c.d'):  {count_exact}
-# - 后缀匹配规则 (Suffix   如'.a.b.c.d'):  {count_suffix}
+# - 通配匹配规则 (Wildcard):  {count_wildcard}
+# - 精确匹配规则 (Exact   ):  {count_exact}
+# - 后缀匹配规则 (Suffix  ):  {count_suffix}
 # -----------------------------------------------
 
 payload:
