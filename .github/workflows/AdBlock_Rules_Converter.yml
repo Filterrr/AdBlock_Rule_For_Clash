@@ -24,7 +24,7 @@ jobs:
 
     steps:
     - name: Setup Node.js 24
-      uses: actions/setup-node@V6
+      uses: actions/setup-node@V5
       with:
         node-version: '24'
 
