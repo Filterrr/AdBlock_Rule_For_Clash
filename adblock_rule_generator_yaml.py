@@ -16,28 +16,28 @@ if sys.stdout.encoding.lower() != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
 
 # === 自定义全局白名单 ===
-custom_excluded_domains = [
+custom_excluded_domains =[
     # "example.com",
 ]
 
 # === 订阅源配置 ===
-allow_urls = [
+allow_urls =[
  #   "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
 ]
 
-tier1_urls = [
+tier1_urls =[
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt",
     "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt",
     "https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt"
 ]
 
-tier2_urls = [
+tier2_urls =[
     "https://easylist-downloads.adblockplus.org/easylistchina.txt",
     "https://easylist-downloads.adblockplus.org/easylist.txt"
 ]
 
-tier3_urls = [
+tier3_urls =[
     "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
     "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt",
     "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
@@ -64,7 +64,7 @@ def write_log(message):
         f.write(f"{time_str} - {message}\n")
 
 def smart_decode(data):
-    for encoding in ['utf-8', 'gbk', 'latin-1']:
+    for encoding in['utf-8', 'gbk', 'latin-1']:
         try:
             return data.decode(encoding)
         except UnicodeDecodeError:
@@ -72,14 +72,14 @@ def smart_decode(data):
     return data.decode('utf-8', errors='ignore')
 
 def safe_read_file(file_path):
-    encodings = ['utf-8-sig', 'utf-8', 'gbk', 'latin-1']
+    encodings =['utf-8-sig', 'utf-8', 'gbk', 'latin-1']
     for enc in encodings:
         try:
             with open(file_path, 'r', encoding=enc) as f:
                 return f.readlines()
         except Exception:
             continue
-    return []
+    return[]
 
 def extract_rules(urls, rules_set, global_whitelist):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
@@ -167,41 +167,6 @@ def main():
             global_subs_detector.add(temp)
     
     # 剔除已被父域名覆盖的子域名（仅针对非通配符）
-    optimized_domains = [d for d in all_domains if d not in global_subs_detector]
+    optimized_domains =[d for d in all_domains if d not in global_subs_detector]
     
-    formatted_rules = []
-    for domain in sorted(optimized_domains):
-        # 情况 1: 通配符匹配 (Wildcard)
-        if '*' in domain:
-            formatted_rules.append(f"- '{domain}'")
-            continue
-        
-        # 情况 2: 精确匹配 (Exact)
-        # 逻辑：层级过深 (点数 >= 3，如 a.b.c.d) 的域名通常是特定接口，使用精确匹配防误杀
-        if domain.count('.') >= 3:
-            formatted_rules.append(f"- '{domain}'")
-            continue
-        
-        # 情况 3: 后缀匹配 (Suffix)
-        # 逻辑：对于常规二级、三级域名，使用 '.' 前缀进行泛域名拦截
-        formatted_rules.append(f"- '.{domain}'")
-
-    # 输出文件
-    rule_count = len(formatted_rules)
-    generation_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
-    
-    header = f"""# Title: AdBlock_Rule_For_Mihomo
-# Generated: {generation_time} (UTC+8)
-# Total Items: {rule_count}
-# Formats: Suffix (.domain), Wildcard ('*.domain'), Exact ('domain')
-
-payload:
-"""
-    output_path = os.path.join(SCRIPT_DIR, "adblock_reject.yaml")
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(header + "\n".join(formatted_rules))
-
-    write_log(f"成功导出 {rule_count} 条规则至: {output_path}")
-
-if __name__ == "__main__":
-    main()
+    formatted_rules =
