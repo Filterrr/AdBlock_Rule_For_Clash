@@ -3,7 +3,6 @@
 
 # Title: AdBlock_Rule_For_Mihomo
 # Description: 专为 Mihomo 内核优化的广告拦截规则生成脚本
-# 功能：主域名使用 '.' 后缀匹配，子域名及深层域名使用 '+' 匹配，平衡拦截覆盖面与精准度。
 
 import os
 import re
@@ -50,7 +49,8 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_FILE_PATH = os.path.join(SCRIPT_DIR, "adblock_log.txt")
 
 # --- 增强型正则引擎 ---
-domain_regex = re.compile(r'^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9.*-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$')
+# 注意：正则不再强制要求开头是非点字符，改由代码逻辑 lstrip 处理
+domain_regex = re.compile(r'^(?=.{1,253}$)(?:[a-zA-Z0-9.*-]{1,63}\.)+[a-zA-Z]{2,63}$')
 regex1 = re.compile(r'^\|\|([a-zA-Z0-9.*-]+)(?:\^.*)?$')
 regex2 = re.compile(r'^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.*-]+)')
 regex3 = re.compile(r'^(?:address|server)=/([a-zA-Z0-9.*-]+)/')
@@ -108,21 +108,23 @@ def extract_rules(urls, rules_set, global_whitelist):
             elif m := regex4.match(line): domain = m.group(1)
             elif m := regex5.match(line): domain = m.group(1)
 
-            if domain and domain_regex.match(domain):
-                domain = domain.lower()
-                if is_whitelist: global_whitelist.add(domain)
-                else: rules_set.add(domain)
+            if domain:
+                # 关键修复：先去掉可能存在的开头的点，防止正则失败和双重前缀
+                domain = domain.lstrip('.').lower()
+                if domain_regex.match(domain):
+                    if is_whitelist: global_whitelist.add(domain)
+                    else: rules_set.add(domain)
 
 def main():
     write_log("==== 开始初始化设置 ====")
-    white_set = set(d.lower() for d in custom_excluded_domains)
+    white_set = set(d.lower().lstrip('.') for d in custom_excluded_domains)
     core_set_raw, tier3_set_raw = set(), set()
 
     # 加载本地白名单
     top_whitelist_file = os.path.join(SCRIPT_DIR, "top_whitelist.txt")
     if os.path.exists(top_whitelist_file):
         for line in safe_read_file(top_whitelist_file):
-            d = line.strip()
+            d = line.strip().lstrip('.')
             if d and not d.startswith("#"): white_set.add(d.lower())
 
     # 获取规则
@@ -178,7 +180,8 @@ def main():
         if domain.count('.') == 1:
             formatted_rules.append(f"- '.{domain}'")
         
-        # 情况 3: 剩余域名（多级子域名，如 sub.ads.baidu.com）
+        # 情况 3: 剩余域名（多级子域名或带点的特殊规则）
+        # 这里统一添加 '+.'，因为 domain 变量已经被 lstrip('.') 清理过了
         else:
             formatted_rules.append(f"- '+.{domain}'")
 
