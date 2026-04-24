@@ -201,12 +201,12 @@ def main():
     # 在 Header 中添加详细统计信息
     header = f"""# Title: AdBlock_Rule_For_Mihomo
 # Generated: {generation_time} (UTC+8)
-# Total Items: {rule_count}
+# Total Items: {rule_count}条规则
 # -----------------------------------------------
 # 统计信息:
-# - 通配匹配规则 (Wildcard):  {count_wildcard}
-# - 精确匹配规则 (Exact   ):  {count_exact}
-# - 后缀匹配规则 (Suffix  ):  {count_suffix}
+# - 通配匹配规则 (Wildcard):  {count_wildcard}条规则
+# - 精确匹配规则 (Exact   ):  {count_exact}条规则
+# - 后缀匹配规则 (Suffix  ):  {count_suffix}条规则
 # -----------------------------------------------
 
 payload:
