@@ -24,22 +24,19 @@
   <tr>
     <td style="padding: 8px;">YAML</td>
     <td style="padding: 8px;">
-      <strong><a href="https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.yaml" style="color: #0066cc;">Github原始链接</a></strong> | 
-      <strong><a href="https://www.adblock-clash-yaml.reiji007.org" style="color: #0066cc;">Cloudflare加速链接</a></strong>
+      <strong><a href="https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.yaml" style="color: #0066cc;">Github原始链接</a></strong>
     </td>
   </tr>
   <tr>
     <td style="padding: 8px;">MRS</td>
     <td style="padding: 8px;">
-      <strong><a href="https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.mrs" style="color: #0066cc;">Github原始链接</a></strong> | 
-      <strong><a href="https://www.adblock-clash-mrs.reiji007.org" style="color: #0066cc;">Cloudflare加速链接</a></strong>
+      <strong><a href="https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.mrs" style="color: #0066cc;">Github原始链接</a></strong>
     </td>
   </tr>
   <tr>
     <td style="padding: 8px;">TXT</td>
     <td style="padding: 8px;">
-      <strong><a href="https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.txt" style="color: #0066cc;">Github原始链接</a></strong> | 
-      <strong><a href="https://www.adblock-clash-txt.reiji007.org" style="color: #0066cc;">Cloudflare加速链接</a></strong>
+      <strong><a href="https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.txt" style="color: #0066cc;">Github原始链接</a></strong>
     </td>
   </tr>
 </table>
@@ -53,51 +50,7 @@
 
 **关于本仓库使用方式：**
 
-  *使用方式一：下载releases中的文件，修改clash的yaml配置中的rules字段引用本地规则集作为域名拦截规则（需要手动下载更新）*
-
-<hr>
-
-
-```conf
-#YAML格式外部本地拦截域名规则集
-rule-providers:
-  adblock:
-    type: file
-    behavior: domain
-    format: yaml
-    path: C:\Users\YourUsername\Documents\file.yaml   #你的YAML格式外部本地拦截域名rule-providers规则集文件保存路径
-    
-rules:
-  - RULE-SET,adblock,REJECT
-```
-```conf
-#MRS格式外部本地拦截域名规则集,适用于mihomo核心
-rule-providers:
-  adblock:
-    type: file
-    behavior: domain
-    format: mrs
-    path: C:\Users\YourUsername\Documents\file.mrs   #你的MRS格式外部本地拦截域名rule-providers规则集文件保存路径
-    
-rules:
-  - RULE-SET,adblock,REJECT
-```
-```conf
-#TEXT格式外部本地拦截域名规则集,适用于mihomo核心
-rule-providers:
-  adblock:
-    type: file
-    behavior: domain
-    format: text
-    path: C:\Users\YourUsername\Documents\file.txt   #你的TEXT格式外部本地拦截域名rule-providers规则集文件保存路径
-    
-rules:
-  - RULE-SET,adblock,REJECT
-```
-
-<hr>
-
-  *使用方式二：将下面对应格式的配置文件中rule-providers字段和rules字段内容添加到你的配置文件充当远程规则集，需要特别注意配置文件的缩进和对齐（同步本仓库的云端部署的远程规则集配置)*
+  **# 使用方式：*将下面对应格式的配置文件中rule-providers字段和rules字段内容添加到你的配置文件充当远程规则集，需要特别注意配置文件的缩进和对齐（同步本仓库的云端部署的远程规则集配置)*
 <hr>
 
 
