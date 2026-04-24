@@ -1,6 +1,6 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-25 00:11:43 (UTC+8)
-# Total Items: 84032
+# Generated: 2026-04-25 00:22:31 (UTC+8)
+# Total Items: 84037
 # Formats: Main Domain ('.domain'), Subdomain ('+.domain'), Wildcard ('*.domain')
 
 payload:
@@ -8,9 +8,6 @@ payload:
 - '*.exaapi.com'
 - '*.libaishuo.com'
 - '*two-gun-volley.pages.dev'
-- '+..3.n.2.1.l50.js'
-- '+..3.n.2.2.l30.js'
-- '+..z.dkt-ib.com'
 - '+.0.www.0ul1wlo58s-vu69us-r1u.xyz'
 - '+.0.www.2wu0m0ms098w7148.xyz'
 - '+.0.www.3l521lt85429q1kn6-r770.xyz'
@@ -1097,6 +1094,8 @@ payload:
 - '.2ztav5r7r.com'
 - '+.3.5646.cn'
 - '+.3.cjcp.cn'
+- '+.3.n.2.1.l50.js'
+- '+.3.n.2.2.l30.js'
 - '+.3.ssqzj.com'
 - '+.3.www.0ul1wlo58s-vu69us-r1u.xyz'
 - '+.3.www.2wu0m0ms098w7148.xyz'
@@ -27992,6 +27991,7 @@ payload:
 - '.fzavvanz.com'
 - '.fzaybjewoyyrz.store'
 - '.fzczw7.site'
+- '.fzdimble.com'
 - '.fzdwntsrbrodu.space'
 - '.fzev75-rtbix.top'
 - '.fzforgoescargos.cfd'
@@ -47155,6 +47155,7 @@ payload:
 - '.ooplastspirlie.cfd'
 - '+.ooproxy.azurewebsites.net'
 - '.oopt.fr'
+- '.oopxyvhtlufmp.website'
 - '.ooqtjsubfcppe.life'
 - '.ooqvye17t.com'
 - '.ooqwc.xyz'
@@ -55212,6 +55213,7 @@ payload:
 - '.ratnryonjqig.in'
 - '.ratpmvosvwfra.space'
 - '.ratteenhurler.cfd'
+- '.rattenslekane.com'
 - '.ratterynubs.qpon'
 - '.rattitripos.cyou'
 - '.rattledcareenssired.qpon'
@@ -60010,6 +60012,7 @@ payload:
 - '.schemastsuga.cyou'
 - '.schemeamuse.com'
 - '.schemecontinuingwinning.com'
+- '.schemesplights.com'
 - '.schemylard.qpon'
 - '+.schenkkade.leftmany.pro'
 - '.schermjewed.qpon'
@@ -72491,6 +72494,7 @@ payload:
 - '.uxlqwra.cn'
 - '.uxmwh0f.xyz'
 - '.uxncqfiilwfkw.site'
+- '.uxosmajycfj.com'
 - '.uxpbh7m7459eku7ziu49.cfd'
 - '.uxpjzndoedoha.website'
 - '.uxpocajkdfqyc.online'
@@ -82303,6 +82307,7 @@ payload:
 - '+.z.73i9ik6p997n8o6.cfd'
 - '+.z.cdn.adpool.bet'
 - '+.z.cdn.braun634.com'
+- '+.z.dkt-ib.com'
 - '+.z.grfyw.com'
 - '+.z.nowscore.com'
 - '+.z.oviss.space'
