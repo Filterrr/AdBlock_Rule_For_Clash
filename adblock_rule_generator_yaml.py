@@ -169,7 +169,7 @@ def main():
     # 剔除已被父域名覆盖的子域名（仅针对非通配符）
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
     
-    # --- 初始化统计计数器 ---
+    # --- 新增计数器 ---
     count_wildcard = 0
     count_exact = 0
     count_suffix = 0
@@ -198,15 +198,16 @@ def main():
     rule_count = len(formatted_rules)
     generation_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
     
-    # 构建包含详细统计信息的 Header
+    # 在 Header 中添加详细统计信息
     header = f"""# Title: AdBlock_Rule_For_Mihomo
 # Generated: {generation_time} (UTC+8)
 # Total Items: {rule_count}
-# ----------------------------------------
-# Stats - Wildcard ('*'): {count_wildcard}
-# Stats - Exact (domain): {count_exact}
-# Stats - Suffix (.dom):  {count_suffix}
-# ----------------------------------------
+# -----------------------------------------------
+# 统计信息:
+# - 通配符规则 (Wildcard '*'): {count_wildcard}
+# - 精确匹配规则 (Exact):       {count_exact}
+# - 后缀匹配规则 (Suffix '.'):  {count_suffix}
+# -----------------------------------------------
 
 payload:
 """
