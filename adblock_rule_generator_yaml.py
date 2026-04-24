@@ -81,7 +81,24 @@ def safe_read_file(file_path):
             continue
     return []
 
-def extract_rules(urls, rules_set, global_whitelist):
+# --- 新增：通用域名提取器 ---
+def parse_line_to_domain(line):
+    """统一使用正则提取域名，兼容各种规则格式"""
+    if line.startswith("@@"): 
+        line = line[2:]
+    
+    if m := regex1.match(line): return m.group(1)
+    if m := regex2.match(line): return m.group(1)
+    if m := regex3.match(line): return m.group(1)
+    if m := regex4.match(line): return m.group(1)
+    if m := regex5.match(line): return m.group(1)
+    return None
+
+def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
+    """
+    提取规则
+    :param force_whitelist: 如果为 True，无论规则有无 @@ 前缀，均强制视为白名单
+    """
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     for url in urls:
         write_log(f"正在获取: {url}")
@@ -98,35 +115,39 @@ def extract_rules(urls, rules_set, global_whitelist):
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
             
-            is_whitelist = line.startswith("@@")
-            if is_whitelist: line = line[2:]
-
-            domain = None
-            if m := regex1.match(line): domain = m.group(1)
-            elif m := regex2.match(line): domain = m.group(1)
-            elif m := regex3.match(line): domain = m.group(1)
-            elif m := regex4.match(line): domain = m.group(1)
-            elif m := regex5.match(line): domain = m.group(1)
+            # 判断是否为白名单（强制模式 or 自带 @@ 前缀）
+            is_whitelist = force_whitelist or line.startswith("@@")
+            
+            # 使用通用解析器提取域名
+            domain = parse_line_to_domain(line)
 
             if domain and domain_regex.match(domain):
                 domain = domain.lower()
-                if is_whitelist: global_whitelist.add(domain)
-                else: rules_set.add(domain)
+                if is_whitelist: 
+                    global_whitelist.add(domain)
+                else: 
+                    rules_set.add(domain)
 
 def main():
     write_log("==== 开始初始化设置 ====")
     white_set = set(d.lower() for d in custom_excluded_domains)
     core_set_raw, tier3_set_raw = set(), set()
 
-    # 加载本地高权重白名单
+    # 优化：加载本地高权重白名单 (支持纯域名及各种复杂规则格式)
     top_whitelist_file = os.path.join(SCRIPT_DIR, "top_whitelist.txt")
     if os.path.exists(top_whitelist_file):
         for line in safe_read_file(top_whitelist_file):
-            d = line.strip()
-            if d and not d.startswith("#"): white_set.add(d.lower())
+            line = line.strip()
+            if not line or line.startswith(("!", "#", "[", ";", "//")):
+                continue
+            
+            domain = parse_line_to_domain(line)
+            if domain and domain_regex.match(domain):
+                white_set.add(domain.lower())
+        write_log(f"已加载本地白名单，当前白名单库共 {len(white_set)} 条。")
 
-    # 获取规则
-    extract_rules(allow_urls, core_set_raw, white_set)
+    # 获取规则 (优化：allow_urls 开启强制白名单模式)
+    extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
     extract_rules(tier1_urls + tier2_urls, core_set_raw, white_set)
     extract_rules(tier3_urls, tier3_set_raw, white_set)
 
