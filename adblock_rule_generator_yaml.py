@@ -211,7 +211,7 @@ def main():
         
         # 情况 3: 后缀匹配 (Suffix)
         # 逻辑：对于常规二级、三级域名，使用 '.' 前缀进行泛域名拦截
-        formatted_rules.append(f"- '+.{domain}'")
+        formatted_rules.append(f"- '.{domain}'")
         count_suffix += 1
 
     # 输出文件
