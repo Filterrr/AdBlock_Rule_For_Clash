@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 # Title: AdBlock_Rule_For_Mihomo
 # Description: 专为 Mihomo 内核优化的广告拦截规则生成脚本
 # 功能：根据 AdGuard 语法结构，智能分配精确、单级通配、纯子域与完整泛域名匹配格式。
