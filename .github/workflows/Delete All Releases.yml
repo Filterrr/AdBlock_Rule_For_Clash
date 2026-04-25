@@ -2,6 +2,9 @@ name: Delete All Releases
 
 on:
   workflow_dispatch:  # 手动触发
+  schedule:
+    - cron: 0 0 */2 * *
+
 
 jobs:
   delete-releases:
