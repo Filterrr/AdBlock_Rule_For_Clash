@@ -226,8 +226,8 @@ def main():
 # -----------------------------------------------
 # 统计信息:
 # - [单级通配符] (*.*.example.com)   : {count_wildcard} 条
-# - [精准匹配  ] (exact.example.com) : {count_exact} 条
-# - [完整泛匹配] (+.domain.com)      : {count_suffix} 条
+# - [ 精准匹配 ] (exact.example.com) : {count_exact} 条
+# - [完整泛匹配] (.domain.com)       : {count_suffix} 条
 # -----------------------------------------------
 
 payload:
