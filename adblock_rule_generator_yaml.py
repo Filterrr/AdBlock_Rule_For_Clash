@@ -22,7 +22,7 @@ custom_excluded_domains = [
 
 # === 订阅源配置 ===
 allow_urls = [
-#    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
+    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
 ]
 
 tier1_urls = [
@@ -211,7 +211,7 @@ def main():
         
         # 情况 3: 后缀匹配 (Suffix)
         # 逻辑：对于常规二级、三级域名，使用 '.' 前缀进行泛域名拦截
-        formatted_rules.append(f"- '.{domain}'")
+        formatted_rules.append(f"- '+.{domain}'")
         count_suffix += 1
 
     # 输出文件
