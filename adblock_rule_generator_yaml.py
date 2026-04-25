@@ -22,7 +22,7 @@ custom_excluded_domains = [
 
 # === 订阅源配置 ===
 allow_urls = [
-    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
+#    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
 ]
 
 tier1_urls = [
@@ -41,8 +41,7 @@ tier3_urls = [
     "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
     "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt",
     "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
-    "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt",
-    "https://johnshall.github.io/Shadowrocket-ADBlock-Rules-Forever/sr_ad_only.conf"
+    "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt"
 ]
 
 # 目录设置
