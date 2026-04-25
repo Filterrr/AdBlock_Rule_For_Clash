@@ -1,11 +1,11 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-25 16:55:37 (UTC+8)
-# Total Items: 81131 条
+# Generated: 2026-04-25 16:57:28 (UTC+8)
+# Total Items: 81113 条
 # -----------------------------------------------
 # 统计信息:
 # - [单级通配符] (*.*.example.com)   : 146 条
-# - [ 精准匹配 ] (exact.example.com) : 1918 条
-# - [完整泛匹配] (.domain.com)       : 79067 条
+# - [ 精准匹配 ] (exact.example.com) : 1910 条
+# - [完整泛匹配] (.domain.com)       : 79057 条
 # -----------------------------------------------
 
 payload:
@@ -3954,7 +3954,6 @@ payload:
 - '.a.yuzhainan.com'
 - '.a.zuowenku.net'
 - '.a.zuowenxuan.cn'
-- 'a0.app.xiaomi.com'
 - '.a00s.net'
 - '.a011c1f8f2.dcff90fa75.com'
 - '.a05fda840b.cd6b9b5aa4.com'
@@ -7381,7 +7380,6 @@ payload:
 - '.amdahlbr.com'
 - '.amdc.alipay.com'
 - '.amdc.lazada.com'
-- 'amdc.m.taobao.com'
 - 'amdcopen.m.taobao.com'
 - '.amelatrina.com'
 - '.amellusslangs.cfd'
@@ -8002,7 +8000,6 @@ payload:
 - '.api-logsdk.hismarttv.com'
 - '.api-push.meizu.com'
 - '.api-shoppingguider.hismarttv.com'
-- '.api-shoulei-ssl.xunlei.com'
 - '.api-v2.shareitgames.com'
 - '.api-vidaaasst.hismarttv.com'
 - '.api-vipgw-launcher.hismarttv.com'
@@ -13579,7 +13576,6 @@ payload:
 - '.ccav.website'
 - '.ccbrvpolhwrrj.online'
 - '.ccbvr.com'
-- '.ccc-x.jd.com'
 - 'ccc.sys.miui.com'
 - '.ccc354db8e.05cb34d5f9.com'
 - '.cceotabubmypm.online'
@@ -19852,7 +19848,6 @@ payload:
 - '.difice-milton.com'
 - '.difucyvkjayoc.space'
 - '.difyferukentaspe.com'
-- '.dig.bdurl.net'
 - '.dig.lianjia.com'
 - '.dig.qbao.com'
 - '.dig.zjurl.cn'
@@ -20736,6 +20731,7 @@ payload:
 - '.dottypeguidance.com'
 - '.dotyruntchan.com'
 - '.douaoocmkytcg.site'
+- '.douban.com'
 - '.doubanio.com'
 - '.doubanio.top'
 - '.double-check.com'
@@ -23110,7 +23106,6 @@ payload:
 - '.erdecisesgeorg.info'
 - '.ereandhthrew.org'
 - '.erebeefetid.com'
-- '.erebor.douban.com'
 - '.erectedoakum.cyou'
 - '.eredrubygsworlow.com'
 - '.ereedmadehimal.org'
@@ -35975,7 +35970,6 @@ payload:
 - '.knfeiikyojdib.life'
 - '.knfuooxe.com'
 - '.kngkkiwfqqgho.site'
-- '.knicks.jd.com'
 - '.knifebackfiretraveller.com'
 - '.knifepierce.com'
 - '.knishquirtedgumweed.cfd'
@@ -43747,7 +43741,6 @@ payload:
 - 'ns2.xidian.edu.cn'
 - '.nsb42.com'
 - '.nscash.com'
-- '.nsclick.baidu.com'
 - '.nsclickvideo.baidu.com'
 - '.nsclickvideo.xiaodutv.com'
 - '.nscnpglhanbhm.website'
@@ -45615,7 +45608,6 @@ payload:
 - '.otfx.cn'
 - '.otgihnae.com'
 - '.otgyufesofpmu.online'
-- 'oth.eve.mdt.qq.com'
 - 'oth.str.mdt.qq.com'
 - '.othellomajahowked.cyou'
 - '.other.appcpi.net'
@@ -48261,7 +48253,6 @@ payload:
 - '.pkniseahawkhv.space'
 - '.pknlagnbfzxoy.online'
 - '.pknnuyaekwdlu.website'
-- '.pkoplink.com'
 - '.pkpmhr2gw.com'
 - '.pkqkuaguyyxjr.online'
 - '.pkrbkxkclcuif.online'
@@ -50903,7 +50894,6 @@ payload:
 - '.pwzxkpphqoeby.store'
 - '.px-intl.ucweb.com'
 - '.px.adhigh.net'
-- '.px.ucweb.com'
 - 'px.wpk.quark.cn'
 - '.px02mouzas.com'
 - '.px3792.com'
@@ -54880,7 +54870,6 @@ payload:
 - '.rlnvbmsxrreot.store'
 - '.rlog.popin.cc'
 - '.rlogcejfsgtar.site'
-- '.rlogs.youdao.com'
 - '.rlogscbdafnjf.site'
 - '.rlotcaapstumc.space'
 - '.rlpbld.icu'
@@ -58368,7 +58357,6 @@ payload:
 - '.sentinelol.com'
 - 'sentry.d.xiaomi.net'
 - 'sentry.eks.hoyoverse.com'
-- '.sentry.io'
 - 'sentry.music.163.com'
 - '.sentrytheft.qpon'
 - '.senxiaopang.top'
@@ -61553,7 +61541,6 @@ payload:
 - 'stat.v.baidu.com'
 - 'stat.ws.126.net'
 - 'stat.xgo.com.cn'
-- 'stat.y.qq.com'
 - 'stat.youpin.mi.com'
 - 'stat.zol.com.cn'
 - '.stat2.pixpin.cn'
@@ -63429,7 +63416,6 @@ payload:
 - '.t1thmtn5.xyz'
 - '.t1voo2e5wrjlprrcuq4h.rest'
 - '.t1w.pfqg753un1ekhnf.cyou'
-- 't2.a.market.xiaomi.com'
 - '.t2.fancyapi.com'
 - '.t2.picb.cc'
 - '.t2.xiaohongshu.com'
@@ -63440,7 +63426,6 @@ payload:
 - '.t2nlwfmuq2io4bwm8i2uoryb9w.cfd'
 - '.t2q0gv7zjg.com'
 - '.t2zfyxjj.icu'
-- 't3.a.market.xiaomi.com'
 - '.t32euhq2c7wzt6wy.cfd'
 - '.t33ng.com'
 - '.t3n1qgbxjviw977hj9.cfd'
@@ -65399,7 +65384,6 @@ payload:
 - '.tnc3-aliec2.toutiaoapi.com'
 - '.tnc3-aliec2.zijieapi'
 - '.tnc3-aliec2.zijieapi.com'
-- '.tnc3-alisc1.bytedance.com'
 - '.tnc3-alisc1.snssdk.com'
 - '.tnc3-alisc1.toutiaoapi.com'
 - '.tnc3-alisc1.zijieapi'
@@ -66149,7 +66133,6 @@ payload:
 - 'tracker-00.qvb.qcloud.com'
 - '.tracker-2.com'
 - '.tracker-tds.info'
-- 'tracker.ai.xiaomi.com'
 - '.tracker.cdnbye.com'
 - '.tracker.citicsinfo.com'
 - 'tracker.dcdn.baidu.com'
@@ -75295,7 +75278,6 @@ payload:
 - '.wxhiojortldjyegtkx.bid'
 - '.wxholjwexghnl.site'
 - '.wxikfd89f.com'
-- 'wximg.wxs.qq.com'
 - '.wxixxpgnajzxr.website'
 - '.wxkvfxvujdpwl.site'
 - '.wxl0gfw.icu'
