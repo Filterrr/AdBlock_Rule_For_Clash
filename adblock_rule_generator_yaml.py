@@ -218,7 +218,7 @@ def main():
 # Total Items: {rule_count} 条规则
 # -----------------------------------------------
 # 规则格式统计信息 (基于 Mihomo 特性解析):
-# -[完整泛匹配] (+.domain.com)      : {count_full_suffix} 条 (匹配多级及根域名)
+# - [完整泛匹配] (+.domain.com)      : {count_full_suffix} 条 (匹配多级及根域名)
 # - [纯子域匹配] (.example.com)      : {count_sub_only} 条 (匹配多级，不匹配根)
 # - [精准匹配  ] (exact.example.com) : {count_exact} 条 (直接比对)
 # - [单级通配符] (*.*.example.com)   : {count_wildcard} 条 (*仅限匹配单层)
