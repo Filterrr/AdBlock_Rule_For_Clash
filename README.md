@@ -53,7 +53,13 @@
   #### *使用方式：将下面对应格式的配置文件中rule-providers字段和rules字段内容添加到你的配置文件充当远程规则集，需要特别注意配置文件的缩进和对齐（同步本仓库的云端部署的远程规则集配置)*
 <hr>
 
-
+```conf
+#DNS模块拦截
+dns:
+  enable: true
+  nameserver-policy:
+    'rule-set:adblock': rcode://success
+```
 
 
 ```conf
