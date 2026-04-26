@@ -33,15 +33,18 @@ tier1_urls = [
 ]
 
 tier2_urls = [
-    "https://easylist-downloads.adblockplus.org/easylistchina.txt",
-    "https://easylist-downloads.adblockplus.org/easylist.txt"
+    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/ThirdParty/filter_104_EasyListChina/filter.txt",
+    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/thirdparties/easylist/easylist.txt"
 ]
 
 tier3_urls = [
     "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
  #   "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt",
     "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
-    "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt"
+    "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt",
+    "https://anti-ad.net/adguard.txt",
+    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
+    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-general.txt"
 ]
 
 # 目录设置
