@@ -86,11 +86,14 @@ def parse_line_to_domain(line):
     if line.startswith("@@"): 
         line = line[2:]
     
-    if m := regex1.match(line): return m.group(1)
-    if m := regex2.match(line): return m.group(1)
-    if m := regex3.match(line): return m.group(1)
-    if m := regex4.match(line): return m.group(1)
-    if m := regex5.match(line): return m.group(1)
+    domain = None
+    if m := regex1.match(line): domain = m.group(1)
+    elif m := regex2.match(line): domain = m.group(1)
+    elif m := regex3.match(line): domain = m.group(1)
+    elif m := regex4.match(line): domain = m.group(1)
+    elif m := regex5.match(line): domain = m.group(1)
+    
+    # 修复前导或后缀点引起的 +.. 格式错误
     return domain.strip('.') if domain else None
 
 def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
