@@ -39,7 +39,7 @@ tier2_urls = [
 
 tier3_urls = [
     "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
- #   "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt",
+    "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt",
     "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
     "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt"
 ]
@@ -226,9 +226,9 @@ def main():
 # Total Items: {rule_count} 条
 # -----------------------------------------------
 # 统计信息:
-# - [单级通配符] (*.*.a.com)    : {count_wildcard} 条
-# - [ 精准匹配 ] (+.a.b.c.com)  : {count_exact} 条
-# - [完整泛匹配] (.a.com)       : {count_suffix} 条
+# - [通配符匹配] (*.*.a.com)   : {count_wildcard} 条
+# - [精准匹配 ] (+.a.b.c.com)  : {count_exact} 条
+# - [后缀匹配 ] (.a.com)       : {count_suffix} 条
 # -----------------------------------------------
 
 payload:
