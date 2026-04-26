@@ -193,17 +193,11 @@ def main():
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
     
     # --- 新增计数器 ---
-    count_wildcard = 0
     count_exact = 0
     count_suffix = 0
     
     formatted_rules = []
     for domain in sorted(optimized_domains):
-        # 情况 1: 通配符匹配 (Wildcard)
-        if '*' in domain:
-            formatted_rules.append(f"- '{domain}'")
-            count_wildcard += 1
-            continue
         
         # 情况 2: 精确匹配 (Exact)
         # 逻辑：层级过深 (点数 >= 3，如 a.b.c.d) 的域名通常是特定接口，使用精确匹配防误杀
@@ -217,7 +211,6 @@ def main():
         if domain.count('.') <= 2:
            formatted_rules.append(f"- '.{domain}'")
            count_suffix += 1
-           continue
 
     # 输出文件
     rule_count = len(formatted_rules)
@@ -229,7 +222,6 @@ def main():
 # Total Items: {rule_count} 条
 # -----------------------------------------------
 # 统计信息:
-# - [单级通配符] (*.*.a.com)    : {count_wildcard} 条
 # - [ 精准匹配 ] (+.a.b.c.com)  : {count_exact} 条
 # - [完整泛匹配] (.a.com)       : {count_suffix} 条
 # -----------------------------------------------
