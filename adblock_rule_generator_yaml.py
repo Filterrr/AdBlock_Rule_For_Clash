@@ -92,8 +92,7 @@ def parse_line_to_domain(line):
     elif m := regex3.match(line): domain = m.group(1)
     elif m := regex4.match(line): domain = m.group(1)
     elif m := regex5.match(line): domain = m.group(1)
-    
-    # 修复前导或后缀点引起的 +.. 格式错误
+
     return domain.strip('.') if domain else None
 
 def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
@@ -200,8 +199,8 @@ def main():
     formatted_rules = []
     for domain in sorted(optimized_domains):
         # 情况 1: 通配符匹配 (Wildcard)
-        if '*' in domain:
-            formatted_rules.append(f"- '{domain}'")
+        if '*' in domain.count('.') >= 2:
+            formatted_rules.append(f"- '+.{domain}'")
             count_wildcard += 1
             continue
         
@@ -217,7 +216,6 @@ def main():
         if domain.count('.') <= 2:
            formatted_rules.append(f"- '.{domain}'")
            count_suffix += 1
-           continue
 
     # 输出文件
     rule_count = len(formatted_rules)
