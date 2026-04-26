@@ -203,21 +203,15 @@ def main():
             formatted_rules.append(f"- '+.{domain}'")
             count_wildcard += 1
             continue
-
-        # 情况 2: 通配符匹配 (Wildcard)
-        if '*' in domain and domain.count('.') = 1:
-            formatted_rules.append(f"- '.{domain}'")
-            count_wildcard += 1
-            continue
         
-        # 情况 3: 精确匹配 (Exact)
+        # 情况 2: 精确匹配 (Exact)
         # 逻辑：层级过深 (点数 >= 3，如 a.b.c.d) 的域名通常是特定接口，使用精确匹配防误杀
         if domain.count('.') >= 3:
             formatted_rules.append(f"- '+.{domain}'")
             count_exact += 1
             continue
         
-        # 情况 4: 后缀匹配 (Suffix)
+        # 情况 3: 后缀匹配 (Suffix)
         # 逻辑：对于常规二级、三级域名，使用 '.' 前缀进行泛域名拦截
         if domain.count('.') <= 2:
            formatted_rules.append(f"- '.{domain}'")
