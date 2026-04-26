@@ -1,11 +1,11 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-26 13:57:27 (UTC+8)
-# Total Items: 81288 条
+# Generated: 2026-04-26 14:02:34 (UTC+8)
+# Total Items: 81289 条
 # -----------------------------------------------
 # 统计信息:
-# - [单级通配符] (*.*.example.com)   : 146 条
-# - [ 精准匹配 ] (exact.example.com) : 1910 条
-# - [完整泛匹配] (.domain.com)       : 79232 条
+# - [单级通配符] (*.*.a.com)    : 146 条
+# - [ 精准匹配 ] (+.a.b.c.com)  : 1910 条
+# - [完整泛匹配] (.a.com)       : 79233 条
 # -----------------------------------------------
 
 payload:
@@ -34919,6 +34919,7 @@ payload:
 - '.jtbunh.xyz'
 - '.jtdkmjuiogidh.site'
 - '.jtfsrnmxdcwtx.site'
+- '.jthkegumzcwkz.site'
 - '.jthvhvisxilvq.space'
 - '.jtienla.top'
 - '.jtijneiumjttd.space'
