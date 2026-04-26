@@ -205,7 +205,7 @@ def main():
             continue
 
         # 情况 2: 通配符匹配 (Wildcard)
-        if '*' in domain and domain.count('.') <= 2:
+        if '*' in domain and domain.count('.') = 1:
             formatted_rules.append(f"- '.{domain}'")
             count_wildcard += 1
             continue
