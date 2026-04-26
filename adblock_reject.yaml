@@ -1,11 +1,11 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-26 14:02:34 (UTC+8)
-# Total Items: 81289 条
+# Generated: 2026-04-26 14:30:35 (UTC+8)
+# Total Items: 81304 条
 # -----------------------------------------------
 # 统计信息:
-# - [单级通配符] (*.*.a.com)    : 146 条
-# - [ 精准匹配 ] (+.a.b.c.com)  : 1910 条
-# - [完整泛匹配] (.a.com)       : 79233 条
+# - [单级通配符] (*.*.a.com)    : 148 条
+# - [ 精准匹配 ] (+.a.b.c.com)  : 1909 条
+# - [完整泛匹配] (.a.com)       : 79247 条
 # -----------------------------------------------
 
 payload:
@@ -13,9 +13,6 @@ payload:
 - '*.exaapi.com'
 - '*.libaishuo.com'
 - '*two-gun-volley.pages.dev'
-- '+..3.n.2.1.l50.js'
-- '+..3.n.2.2.l30.js'
-- '+..z.dkt-ib.com'
 - '+.0.www.0ul1wlo58s-vu69us-r1u.xyz'
 - '+.0.www.2wu0m0ms098w7148.xyz'
 - '+.0.www.3l521lt85429q1kn6-r770.xyz'
@@ -669,6 +666,7 @@ payload:
 - '.1osb.com'
 - '.1p8ln1dtr.de'
 - '.1paujqtq9.com'
+- '.1pbi568k7vpkq3g16z.rest'
 - '.1phyxws373.com'
 - '.1pqfa71mc.de'
 - '.1pt7wq8di.com'
@@ -1078,6 +1076,8 @@ payload:
 - '.2ztav5r7r.com'
 - '.3.5646.cn'
 - '.3.cjcp.cn'
+- '+.3.n.2.1.l50.js'
+- '+.3.n.2.2.l30.js'
 - '.3.ssqzj.com'
 - '+.3.www.0ul1wlo58s-vu69us-r1u.xyz'
 - '+.3.www.2wu0m0ms098w7148.xyz'
@@ -3598,6 +3598,7 @@ payload:
 - '.9cf7c25458.b8bd2d84d4.com'
 - '.9ck9umcyvt.com'
 - '.9clasfdc3.com'
+- '.9cuo1fv233p5x889jolrw7ybzcomnvvn4c53h.cfd'
 - '.9cwcu1574.com'
 - '.9d611c2d8a.com'
 - '.9d97519345.b27d2d191d.com'
@@ -6203,6 +6204,7 @@ payload:
 - '.advertising-cdn.com'
 - '.advertising-cdn.dpgmedia.cloud'
 - '.advertising.apple.com'
+- '.advertising.civitai'
 - '.advertising.com'
 - '.advertising.goldseek.com'
 - '.advertising.ntuplay.xyz'
@@ -6270,6 +6272,7 @@ payload:
 - '.adworldmedia.net'
 - '.adwozwzigog.in'
 - '.adwx6vcj.com'
+- 'adx-*.dbankcloud'
 - 'adx-*.dbankedge.cn'
 - 'adx-*.op.dbankcloud.com.edgekey.net'
 - '.adx-ad.smart-tv.cn'
@@ -9097,6 +9100,7 @@ payload:
 - '.atticalgodshipthumps.qpon'
 - '.atticcourthousetechnique.com'
 - '.attirecideryeah.com'
+- '.attmzxgfkrnbn.com'
 - '.attomyjelib.qpon'
 - '.attpmhuguafrl.space'
 - '.attqbruefzfsc.space'
@@ -9558,6 +9562,7 @@ payload:
 - '.azm-kuailian.com.cn'
 - '.azmexngawjzhx.space'
 - '.aznapoz.info'
+- '.aznjmyopdl.in'
 - '.azofierlogliketourize.cyou'
 - '.azoniumtiangue.top'
 - '.azoniumtigrina.cyou'
@@ -12598,6 +12603,7 @@ payload:
 - '.burgersscathy.qpon'
 - '.burglargiggleportion.com'
 - '.burglarycirculationintense.com'
+- '.burgoolynched.cfd'
 - '.burgsmithra.cfd'
 - '.burialhotter.com'
 - '.burialspoises.cfd'
@@ -25196,6 +25202,7 @@ payload:
 - '.finishedneat.com'
 - '.finishedwindscreen.com'
 - '.finishingrex.com'
+- '.finjanwollop.qpon'
 - '.finlearningcluster.com'
 - '.finnersonly.cfd'
 - '.finnysubgyregroped.qpon'
@@ -25915,6 +25922,7 @@ payload:
 - 'fpb*.51edu.com'
 - '.fpb.sohu.com'
 - '.fpb1.apple886.com'
+- '.fpb1.chinacar'
 - '.fpb1.jsq886.com'
 - '.fpb1.kedabai.com'
 - '.fpbfaexptti.com'
@@ -26756,6 +26764,7 @@ payload:
 - '.galaksion.com'
 - '.galaxyearningsfly.com'
 - '.galaxypush.com'
+- '.galeaedifformpapaio.qpon'
 - '.galeaeevovae.com'
 - '.galeateinocyte.cfd'
 - '.galeindelicatedrove.com'
@@ -30381,6 +30390,7 @@ payload:
 - '.hlhguzuidislw.site'
 - '.hlhuihrzbebkv.one'
 - '.hlieylbicxtm.com'
+- '.hligoarcsbi.com'
 - '.hlinit.com'
 - '.hlj10010ip.com'
 - '.hlj10011ip.com'
@@ -35119,6 +35129,7 @@ payload:
 - '.jwcpgnlnwbukt.xyz'
 - '.jwddpvu.cn'
 - '.jwdyjlafpkxkf.space'
+- '.jweekuxflrgqj.site'
 - '.jweoe.xyz'
 - '.jwf8lxo7b.com'
 - '.jwfaregtarvql.space'
@@ -38154,6 +38165,7 @@ payload:
 - '.lnfncvjaweewi.tech'
 - '.lnfqqqnevxuvl.website'
 - '.lng.xiaohongshu.com'
+- '.lngbqjutikehs.online'
 - '.lnhsjob.com'
 - '.lninwkhw9zopc9qq.rest'
 - '.lnk0.com'
@@ -39261,6 +39273,7 @@ payload:
 - '.lyusuwiuwhwtl.online'
 - '.lyvkvqitzktkx.store'
 - '.lyvlbjzbozkxy.space'
+- '.lyvootnkgwxkq.online'
 - '.lywaelm.online'
 - '.lywasnothycanty.info'
 - '.lywdoo.cn'
@@ -57646,6 +57659,7 @@ payload:
 - '.sawlikewrester.cfd'
 - '.sawneboenolic.com'
 - '.sawp.cloud'
+- 'sax*.sina'
 - '.sax.sina.cn'
 - '+.saxn.sina.com.cn'
 - '.saxophone90.top'
@@ -79597,6 +79611,7 @@ payload:
 - '.z.73i9ik6p997n8o6.cfd'
 - '+.z.cdn.adpool.bet'
 - '+.z.cdn.braun634.com'
+- '.z.dkt-ib.com'
 - '.z.grfyw.com'
 - '.z.nowscore.com'
 - '.z.oviss.space'
