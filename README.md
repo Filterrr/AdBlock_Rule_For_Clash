@@ -6,9 +6,6 @@
 <!-- 居中的副标题 -->
 <h2 align="center" style="font-size: 30px; margin-bottom: 40px;">适用于Clash（mihomo核心）的广告域名拦截RULE-SET规则集，每天更新一次</h2>
 
-<!-- 居中的副标题 -->
-<h2 align="center" style="font-size: 30px; margin-bottom: 40px;">功能：自动识别域名特征，智能转换分配 DOMAIN、DOMAIN-SUFFIX、DOMAIN-WILDCARD、DOMAIN-REGEX 格式</h2>
-
 <!-- 徽章（根据需要调整） -->
 <p align="center" style="margin-bottom: 40px;">
     <img src="https://img.shields.io/badge/last%20commit-today-brightgreen" alt="last commit" style="margin-right: 10px;">
