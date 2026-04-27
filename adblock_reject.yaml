@@ -1,12 +1,12 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-27 21:56:53 (UTC+8)
-# Total Items: 78018 条
+# Generated: 2026-04-27 22:02:07 (UTC+8)
+# Total Items: 78024 条
 # -----------------------------------------------
 # 统计信息:
 # - [DOMAIN-WILDCARD] : 3 条
 # - [DOMAIN-REGEX]    : 146 条
 # - [DOMAIN]          : 1062 条
-# - [DOMAIN-SUFFIX]   : 76807 条
+# - [DOMAIN-SUFFIX]   : 76813 条
 # -----------------------------------------------
 
 payload:
@@ -4706,6 +4706,7 @@ payload:
 - DOMAIN-SUFFIX,ad.mazc.org
 - DOMAIN,ad.mediamixer.co.kr
 - DOMAIN,ad.mediaprimaplus.com.my
+- DOMAIN-SUFFIX,ad.mgtv.com
 - DOMAIN-SUFFIX,ad.missena.io
 - DOMAIN-SUFFIX,ad.mobiuspace.net
 - DOMAIN-SUFFIX,ad.moe.video
@@ -5167,6 +5168,7 @@ payload:
 - DOMAIN-SUFFIX,admaster.cc
 - DOMAIN-SUFFIX,admaster.cz
 - DOMAIN-SUFFIX,admaster.iqiyi.com
+- DOMAIN-SUFFIX,admaster.mgtv.com
 - DOMAIN-SUFFIX,admasters.media
 - DOMAIN-SUFFIX,admatic.de
 - DOMAIN-SUFFIX,admax.network
@@ -5509,6 +5511,7 @@ payload:
 - DOMAIN-REGEX,^ads\.livetv.*\.me$
 - DOMAIN-SUFFIX,ads.lot-tissimo.com
 - DOMAIN,ads.luffy.my.id
+- DOMAIN-SUFFIX,ads.mgtv.com
 - DOMAIN-SUFFIX,ads.mobilityware.com
 - DOMAIN-SUFFIX,ads.mobvertising.net
 - DOMAIN-SUFFIX,ads.mopub.com
@@ -5658,6 +5661,7 @@ payload:
 - DOMAIN-SUFFIX,adserver.iqiyi.com
 - DOMAIN-SUFFIX,adserver.kimia.es
 - DOMAIN-SUFFIX,adserver.kozoom.com
+- DOMAIN-SUFFIX,adserver.mgtv.com
 - DOMAIN-SUFFIX,adserver.pandora.com
 - DOMAIN-SUFFIX,adserver.rtvdrenthe.nl
 - DOMAIN-SUFFIX,adserver.rtvutrechtreclame.nl
@@ -36614,6 +36618,7 @@ payload:
 - DOMAIN-SUFFIX,log.ireader.com
 - DOMAIN-SUFFIX,log.kajicam.com
 - DOMAIN-SUFFIX,log.kuwo.cn
+- DOMAIN-SUFFIX,log.mgtv.com
 - DOMAIN,log.music.baidu.com
 - DOMAIN-SUFFIX,log.perfecttitspics.com
 - DOMAIN-SUFFIX,log.pinterest.com
@@ -63455,6 +63460,7 @@ payload:
 - DOMAIN-SUFFIX,trabucoalining.cfd
 - DOMAIN-SUFFIX,trace.aqyad.com
 - DOMAIN-SUFFIX,trace.iqiyi.com
+- DOMAIN-SUFFIX,trace.mgtv.com
 - DOMAIN-SUFFIX,tracelog-debug.aiclk.com
 - DOMAIN-SUFFIX,tracelog-debug.qquanquan.com
 - DOMAIN-SUFFIX,tracelog-debug.yunxish.com
