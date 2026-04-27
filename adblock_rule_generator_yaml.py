@@ -3,7 +3,7 @@
 
 # Title: AdBlock_Rule_For_Mihomo
 # Description: 专为 Mihomo 内核优化的广告拦截规则生成脚本
-# 功能：自动识别域名特征，智能分配 DOMAIN, DOMAIN-WILDCARD, DOMAIN-SUFFIX 与 DOMAIN-REGEX 匹配格式。
+# 功能：自动识别域名特征，智能分配 DOMAIN、DOMAIN-SUFFIX、DOMAIN-WILDCARD、DOMAIN-REGEX 格式，并在头部显示统计信息。
 
 import os
 import re
@@ -50,15 +50,13 @@ tier3_urls = [
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_FILE_PATH = os.path.join(SCRIPT_DIR, "adblock_log.txt")
 
-# --- 增强型正则引擎 ---
+# --- 增强型正则引擎：支持通配符 (*) 提取 ---
 domain_regex = re.compile(r'^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9.*-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$')
 regex1 = re.compile(r'^\|\|([a-zA-Z0-9.*-]+)(?:\^.*)?$')
 regex2 = re.compile(r'^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.*-]+)')
 regex3 = re.compile(r'^(?:address|server)=/([a-zA-Z0-9.*-]+)/')
 regex4 = re.compile(r'^(?:DOMAIN|HOST)(?:-SUFFIX|0WILD)?\s*,\s*([a-zA-Z0-9.*-]+\.[a-zA-Z]{2,})(?:\s*,.*)?$', re.IGNORECASE)
 regex5 = re.compile(r'^([a-zA-Z0-9.*-]+)$')
-# 新增：用于匹配 Adblock 语法中被 / 包裹的正则规则 (例如 /^abc.*com/)
-regex_adblock_regex = re.compile(r'^/(.+)/$')
 
 def write_log(message):
     print(message)
@@ -84,16 +82,12 @@ def safe_read_file(file_path):
             continue
     return []
 
-# --- 通用提取器 ---
-def parse_line_to_domain_or_regex(line):
-    """提取域名或纯正则表达式，返回 (类型, 值)"""
+# --- 通用域名提取器 ---
+def parse_line_to_domain(line):
+    """统一使用正则提取域名，兼容各种规则格式"""
     if line.startswith("@@"): 
         line = line[2:]
     
-    # 优先检测是否为纯正则规则 (例如 /regex/)
-    if m := regex_adblock_regex.match(line):
-        return 'regex', m.group(1)
-        
     domain = None
     if m := regex1.match(line): domain = m.group(1)
     elif m := regex2.match(line): domain = m.group(1)
@@ -101,13 +95,12 @@ def parse_line_to_domain_or_regex(line):
     elif m := regex4.match(line): domain = m.group(1)
     elif m := regex5.match(line): domain = m.group(1)
 
-    if domain:
-        return 'domain', domain.strip('.')
-    return None, None
+    return domain.strip('.') if domain else None
 
-def extract_rules(urls, domain_set, regex_set, global_whitelist, force_whitelist=False):
+def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
     """
     提取规则
+    :param force_whitelist: 如果为 True，无论规则有无 @@ 前缀，均强制视为白名单
     """
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     for url in urls:
@@ -125,28 +118,47 @@ def extract_rules(urls, domain_set, regex_set, global_whitelist, force_whitelist
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
             
+            # 判断是否为白名单（强制模式 or 自带 @@ 前缀）
             is_whitelist = force_whitelist or line.startswith("@@")
             
-            # 使用提取器判断是正则还是域名
-            rule_type, rule_value = parse_line_to_domain_or_regex(line)
+            # 使用通用解析器提取域名
+            domain = parse_line_to_domain(line)
 
-            if rule_type == 'regex':
-                if not is_whitelist: # 暂不处理正则白名单，防止误伤
-                    regex_set.add(rule_value)
-            elif rule_type == 'domain' and domain_regex.match(rule_value):
-                rule_value = rule_value.lower()
+            if domain and domain_regex.match(domain):
+                domain = domain.lower()
                 if is_whitelist: 
-                    global_whitelist.add(rule_value)
+                    global_whitelist.add(domain)
                 else: 
-                    domain_set.add(rule_value)
+                    rules_set.add(domain)
+
+def wildcard_to_regex(domain):
+    """
+    将 Adblock 通配符域名转换为 Mihomo 可用的正则表达式
+    只处理含有 * 的域名，转换规则：
+    - 转义正则特殊字符（. ? + 等）
+    - 将 * 替换为 .*
+    - 添加行首行尾锚定
+    若 * 只出现在开头且紧跟着 '.', 返回 None 表示应使用 DOMAIN-WILDCARD
+    """
+    if '*' not in domain:
+        return None
+    # 如果符合 *.example.com 这种简单格式，交给 DOMAIN-WILDCARD
+    if domain.startswith('*.') and '*' not in domain[2:]:
+        return None
+    # 复杂通配符：转义除 * 外的正则符号，然后把 * 换成 .*
+    # 先转义所有正则特殊字符：\ . ^ $ + - ( ) [ ] { } | ? 
+    escaped = re.escape(domain)
+    # re.escape 会把 * 也转义成 \*，我们需要把 \* 替换为 .*
+    # 注意 re.escape 后 '*' 变成 '\\*'，需要还原为 '.*'
+    regex_str = escaped.replace(r'\*', '.*')
+    return f"^{regex_str}$"
 
 def main():
     write_log("==== 开始初始化设置 ====")
     white_set = set(d.lower() for d in custom_excluded_domains)
     core_set_raw, tier3_set_raw = set(), set()
-    regex_rules_raw = set() # 新增正则规则存储容器
 
-    # 加载本地高权重白名单
+    # 优化：加载本地高权重白名单 (支持纯域名及各种复杂规则格式)
     top_whitelist_file = os.path.join(SCRIPT_DIR, "top_whitelist.txt")
     if os.path.exists(top_whitelist_file):
         for line in safe_read_file(top_whitelist_file):
@@ -154,20 +166,21 @@ def main():
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
             
-            rule_type, rule_value = parse_line_to_domain_or_regex(line)
-            if rule_type == 'domain' and domain_regex.match(rule_value):
-                white_set.add(rule_value.lower())
+            domain = parse_line_to_domain(line)
+            if domain and domain_regex.match(domain):
+                white_set.add(domain.lower())
         write_log(f"已加载本地白名单，当前白名单库共 {len(white_set)} 条。")
 
-    # 获取规则 
-    extract_rules(allow_urls, core_set_raw, regex_rules_raw, white_set, force_whitelist=True)
-    extract_rules(tier1_urls + tier2_urls, core_set_raw, regex_rules_raw, white_set)
-    extract_rules(tier3_urls, tier3_set_raw, regex_rules_raw, white_set)
+    # 获取规则 (优化：allow_urls 开启强制白名单模式)
+    extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
+    extract_rules(tier1_urls + tier2_urls, core_set_raw, white_set)
+    extract_rules(tier3_urls, tier3_set_raw, white_set)
 
-    # 阶段 1 & 2：预处理与冲突检测 (仅针对普通域名)
+    # 阶段 1 & 2：预处理与冲突检测
     write_log(">> 正在执行冲突清洗与保护机制校验...")
     valid_core = {d for d in core_set_raw if d not in white_set}
     
+    # 构建父级保护伞（防止 Tier 3 误杀）
     protected_ancestors = set()
     for s in (white_set, valid_core):
         for item in s:
@@ -182,7 +195,7 @@ def main():
     valid_tier3 = set()
     for d in tier3_set_raw:
         if d in protected_ancestors or '*' in d: 
-            if '*' in d: valid_tier3.add(d)
+            if '*' in d: valid_tier3.add(d) # 通配符直接放行，不参与保护校验
             continue
         valid_tier3.add(d)
 
@@ -190,6 +203,7 @@ def main():
     write_log(">> 正在执行 Mihomo 域名匹配类型自动分类...")
     all_domains = valid_core.union(valid_tier3)
     
+    # 全局后缀去重计算（仅对非通配符域名）
     suffix_candidates = {d for d in all_domains if '*' not in d}
     global_subs_detector = set()
     for d in suffix_candidates:
@@ -198,35 +212,42 @@ def main():
             temp = temp[temp.find('.')+1:]
             global_subs_detector.add(temp)
     
+    # 剔除已被父域名覆盖的子域名（仅针对非通配符）
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
     
     # --- 新增计数器 ---
     count_wildcard = 0
+    count_regex = 0
     count_exact = 0
     count_suffix = 0
-    count_regex = 0
     
     formatted_rules = []
-    
-    # 优先写入正则规则 (DOMAIN-REGEX)
-    for regex_rule in sorted(regex_rules_raw):
-        # 简单清洗，防止空正则
-        if len(regex_rule) > 2: 
-            formatted_rules.append(f"- DOMAIN-REGEX,{regex_rule}")
-            count_regex += 1
-
-    # 写入常规路由规则
     for domain in sorted(optimized_domains):
+        # 情况 1: 含通配符 -> DOMAIN-WILDCARD 或 DOMAIN-REGEX
         if '*' in domain:
-            formatted_rules.append(f"- DOMAIN-WILDCARD,{domain}")
-            count_wildcard += 1
+            # 简单前缀通配：*.example.com -> DOMAIN-WILDCARD
+            if domain.startswith('*.') and '*' not in domain[2:]:
+                formatted_rules.append(f"- DOMAIN-WILDCARD,{domain}")
+                count_wildcard += 1
+            else:
+                # 复杂通配：转为 DOMAIN-REGEX
+                regex_pattern = wildcard_to_regex(domain)
+                if regex_pattern:
+                    formatted_rules.append(f"- DOMAIN-REGEX,{regex_pattern}")
+                    count_regex += 1
+                else:
+                    # 理论上不会走到这里，但万一转换失败则回退为 DOMAIN-WILDCARD
+                    formatted_rules.append(f"- DOMAIN-WILDCARD,{domain}")
+                    count_wildcard += 1
             continue
         
+        # 情况 2: 精确匹配 (层级 >= 3，如 a.b.c.d) -> DOMAIN
         if domain.count('.') >= 2:
             formatted_rules.append(f"- DOMAIN,{domain}")
             count_exact += 1
             continue
         
+        # 情况 3: 后缀匹配 (常规二/三级域名) -> DOMAIN-SUFFIX
         formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
         count_suffix += 1
 
@@ -234,16 +255,16 @@ def main():
     rule_count = len(formatted_rules)
     generation_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
     
-    # 在 Header 中添加正则统计信息
+    # 在 Header 中添加详细统计信息
     header = f"""# Title: AdBlock_Rule_For_Mihomo
 # Generated: {generation_time} (UTC+8)
 # Total Items: {rule_count} 条
 # -----------------------------------------------
-# 统计分类信息:
-# - [正则匹配 ] (DOMAIN-REGEX)    : {count_regex} 条
-# - [通配符匹配] (DOMAIN-WILDCARD) : {count_wildcard} 条
-# - [精准匹配 ] (DOMAIN)          : {count_exact} 条
-# - [后缀匹配 ] (DOMAIN-SUFFIX)   : {count_suffix} 条
+# 统计信息:
+# - [DOMAIN-WILDCARD] : {count_wildcard} 条
+# - [DOMAIN-REGEX]    : {count_regex} 条
+# - [DOMAIN]          : {count_exact} 条
+# - [DOMAIN-SUFFIX]   : {count_suffix} 条
 # -----------------------------------------------
 
 payload:
