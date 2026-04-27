@@ -41,8 +41,7 @@ tier3_urls = [
     "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
     "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt",
     "https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/AD.txt",
-    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
-    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-general.txt"
+    "https://anti-ad.net/adguard.txt"
 ]
 
 # 目录设置
