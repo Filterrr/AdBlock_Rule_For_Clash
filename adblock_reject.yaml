@@ -1,69 +1,25 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-27 16:31:55 (UTC+8)
-# Total Items: 130994 条
+# Generated: 2026-04-27 16:48:03 (UTC+8)
+# Total Items: 130950 条
 # -----------------------------------------------
-# 统计分类信息:
-# - [正则匹配 ] (DOMAIN-REGEX)    : 44 条
-# - [通配符匹配] (DOMAIN-WILDCARD) : 172 条
-# - [精准匹配 ] (DOMAIN)          : 55890 条
-# - [后缀匹配 ] (DOMAIN-SUFFIX)   : 74888 条
+# 统计信息:
+# - [DOMAIN-WILDCARD] : 4 条
+# - [DOMAIN-REGEX]    : 168 条
+# - [DOMAIN]          : 55890 条
+# - [DOMAIN-SUFFIX]   : 74888 条
 # -----------------------------------------------
 
 payload:
-- DOMAIN-REGEX,(https?:\/\/)104\.154\..{100,}
-- DOMAIN-REGEX,(https?:\/\/)104\.197\..{100,}
-- DOMAIN-REGEX,(https?:\/\/)104\.198\..{100,}
-- DOMAIN-REGEX,(https?:\/\/)130\.211\..{100,}
-- DOMAIN-REGEX,(https?:\/\/)142\.91\.159\..{100,}
-- DOMAIN-REGEX,(https?:\/\/)213\.32\.115\..{100,}
-- DOMAIN-REGEX,(https?:\/\/)216\.21\..{100,}
-- DOMAIN-REGEX,(https?:\/\/)217\.182\.11\..{100,}
-- DOMAIN-REGEX,(https?:\/\/)51\.195\.31\..{100,}
-- DOMAIN-REGEX,^(a|c)\.[0-9a-f]{56}\.com$
-- DOMAIN-REGEX,^(mon|tue|wed|thu|fri|sat|sun)\d{1,2}\.\w{2}\d{1,6}\w{4}\.com$
-- DOMAIN-REGEX,^139\.45\.197\.2(4[0-9]|5[0-4])
-- DOMAIN-REGEX,^139\.45\.19[5-7]\.\d{1,3}
-- DOMAIN-REGEX,^188\.42\.84\.\d{1,3}
-- DOMAIN-REGEX,^23\.109\.170\.(18[7-9]|19[0-2])$
-- DOMAIN-REGEX,^23\.109\.73\.\d{3}
-- DOMAIN-REGEX,^94\.242\.247\.(2[0-9]|3[0-2])
-- DOMAIN-REGEX,^https:\/\/(a|c)\.[0-9a-f]{56}\.com$
-- DOMAIN-REGEX,^https:\/\/[-a-z]{8,}\.com\/[f-j][-0-9A-Z_a-z]{2,}\/[0-9A-Za-z][-\/0-9A-Z_a-z]{115,132}$/$script,xhr,3p,match-case,to=com,method=get,header=X-Request-ID:/^[0-9a-f]{32}$
-- DOMAIN-REGEX,^https:\/\/[-a-z]{8,}\.com\/[f-j][-0-9A-Z_a-z]{2,}\/[0-9A-Za-z][-\/0-9A-Z_a-z]{115,132}$/$script,xhr,3p,match-case,to=com,method=get,ipaddress=/^1[7-9]2\.24[03]\.\d{2,3}\.\d{2,3}$
-- DOMAIN-REGEX,^https:\/\/[0-9a-z.]+\/wp-content\/litespeed\/js\/[0-9a-f]{32}\.js\?ver=/$script,~third-party,match-case,replace=/function _0x[a-z0-9]{3}adb\(\)\{[\s\S]*?\}/function _0x2d3adb(){};
-- DOMAIN-REGEX,^https:\/\/[0-9a-z]+\.xyz\/rinku\/land/$document,~third-party,match-case,replace=/const proxyStatus = "Y";/const proxyStatus = "N";
-- DOMAIN-REGEX,^https:\/\/[0-9a-z]{6,12}\.(?:com|in)(?:\/[a-z]{2,10}){1,3}(?:\?id=\d+)?$/$script,3p,match-case,from=~edu|~gov,to=com|in,ipaddress=/64\.120\.116\.15[34]$
-- DOMAIN-REGEX,^https:\/\/[a-z0-9]+\.[a-z0-9]+\.[a-z]{2,3}:\d{1,6}\/bug\?i=\d+$
-- DOMAIN-REGEX,^https:\/\/[a-z]{3,4}\.[a-z]{8,16}\.com\/loader\.min\.js$/$script,third-party,match-case,header=etag:/^W\/"[0-9a-f]{32}-\d{13}"$
-- DOMAIN-REGEX,^https:\/\/d[0-9a-z]{12,13}\.cloudfront\.net\/loader\.min\.js$/$script,third-party,match-case,header=etag:/^W\/"[0-9a-f]{32}"$
-- DOMAIN-REGEX,^https:\/\/www\.[a-z]{8,16}\.com\/(?:[A-Za-z]+\/)*(?:[_0-9A-Za-z]{1,20}[-.])*[_0-9A-Za-z]{1,20}\.js$/$script,3p,match-case,to=com,ipaddress=/^([78]9\.1[28]7\.[12]\d{2}\.\d{1,3}|84\.17\.57\.\d{1,2}|207\.211\.208\.184|2a02:6ea0:d[16]0[0c]::\d{1,2})$
-- DOMAIN-REGEX,^https:\/\/www\.[a-z]{8,16}\.com\/(?:[A-Za-z]+\/)*(?:[_0-9A-Za-z]{1,20}[-.])*[_0-9A-Za-z]{1,20}\.js$/$script,third-party,match-case,header=link:/adsco\.re\/>;rel=preconnect
-- DOMAIN-REGEX,^https:\/\/www\.[a-z]{8,16}\.com\/(?:[A-Za-z]+\/)*(?:[_0-9A-Za-z]{1,20}[-.])*[_0-9A-Za-z]{1,20}\.js$/$script,xhr,3p,match-case,to=com,header=link:/adsco\.re\/>;rel=preconnect
-- DOMAIN-REGEX,^https?:\/\/.*\/easylist\/[0-9]{5}
-- DOMAIN-REGEX,^https?:\/\/[a-z]{8,15}\.com\/$/$xhr,3p,to=com,method=head,header=access-control-expose-headers:/X-DirectionPartner-Id
-- DOMAIN-REGEX,^https?:\/\/[a-z]{8,15}\.net\/$/$xhr,3p,to=net,method=head,header=access-control-expose-headers:/X-DirectionPartner-Id
-- DOMAIN-REGEX,^https?:\/\/[a-z]{8,15}\.xyz\/$/$xhr,3p,to=xyz,method=head,header=access-control-expose-headers:/X-DirectionPartner-Id
-- DOMAIN-REGEX,^https?:\/\/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\/.*(\?|&)__cpo=aHR0c/$replace=/__Cpn.prototype.showAds = true;/__Cpn.prototype.showAds = false;/,document,domain=/^\d{1\,3}\.\d{1\,3}\.\d{1\,3}\.\d{1\,3}\$
-- DOMAIN-REGEX,doseofporn.com\/[a-z]{0,5}[1-9]{0,5}[a-z]{0,5}[1-9][s\S]*.js
-- DOMAIN-REGEX,getjs?nadipdata$third-party,replace=/[\s\S]+openOriginalUrl[\s\S]+/openOriginalUrl()
-- DOMAIN-REGEX,https?:\/\/[a-z0-9]{10,25}\.[a-z0-9]{10,20}\.cfd\/[a-zA-Z0-9]{10,25}\/[a-zA-Z0-9]{1,5}$/$script,match-case,header=set-cookie:/^GL_UI4=
-- DOMAIN-REGEX,https?:\/\/[a-z]{10,15}\.com\/[0-9a-zA-Z]{5,20}\/[0-9]{1,10}$/$script,match-case,header=set-cookie:/^GL_UI4=
-- DOMAIN-REGEX,https?:\/\/[a-z]{2}\.[a-z]{10,15}\.com\/[0-9a-zA-Z]{5,15}\/[a-zA-Z]{1,5}$/$script,match-case,header=set-cookie:/^GL_UI4=
-- DOMAIN-REGEX,js/sextb.js$domain=sextb.date|sextb.net,replace=/if\(checkads\(\)==false\)/if(!0)
-- DOMAIN-REGEX,loader.min.js$xhr,script,domain=dogdrip.net|smsonline.cloud,replace=/\)\)\)\};function [a-z]{1\,2}\([a-z]{1\,2}\,[a-z]{1\,2}\,[a-z]{1\,2}\)\{try\{!async function.*?\)\]\([a-z0-9]{1\,2}\)\}\}function /)))}; function 
-- DOMAIN-REGEX,m.realgfporn.com\/[a-z]{1,13}[0-9]{1,13}[a-z]{1,13}.js
-- DOMAIN-REGEX,pa.dajiahao*.top
-- DOMAIN-REGEX,torrenttrackerlist.com\/(wp-content)\/(uploads)\/[a-zA-Z0-9]{10,}\/[a-zA-Z0-9]{10,}.js
-- DOMAIN-WILDCARD,*-analytics*.huami.com
+- DOMAIN-REGEX,^.*\-analytics.*\.huami\.com$
 - DOMAIN-WILDCARD,*.bp.blogspot.com
 - DOMAIN-WILDCARD,*.exaapi.com
 - DOMAIN-WILDCARD,*.libaishuo.com
 - DOMAIN-WILDCARD,*.mmstat.com
-- DOMAIN-WILDCARD,*mistat*.xiaomi.com
-- DOMAIN-WILDCARD,*serror*.wo.com.cn
-- DOMAIN-WILDCARD,*tsdk.vivo.com.cn
-- DOMAIN-WILDCARD,*two-gun-volley.pages.dev
-- DOMAIN-WILDCARD,*us*watcab*.blob.core.windows.net
+- DOMAIN-REGEX,^.*mistat.*\.xiaomi\.com$
+- DOMAIN-REGEX,^.*serror.*\.wo\.com\.cn$
+- DOMAIN-REGEX,^.*tsdk\.vivo\.com\.cn$
+- DOMAIN-REGEX,^.*two\-gun\-volley\.pages\.dev$
+- DOMAIN-REGEX,^.*us.*watcab.*\.blob\.core\.windows\.net$
 - DOMAIN,0.myikas.com
 - DOMAIN,0.net.easyjet.com
 - DOMAIN,0.www.0ul1wlo58s-vu69us-r1u.xyz
@@ -496,8 +452,8 @@ payload:
 - DOMAIN-SUFFIX,104i5bbzs.com
 - DOMAIN-SUFFIX,105app.com
 - DOMAIN-SUFFIX,10614305.xyz
-- DOMAIN-WILDCARD,107.167.16.*.gif
-- DOMAIN-WILDCARD,107.167.22.*.gif
+- DOMAIN-REGEX,^107\.167\.16\..*\.gif$
+- DOMAIN-REGEX,^107\.167\.22\..*\.gif$
 - DOMAIN-SUFFIX,10753990.xyz
 - DOMAIN-SUFFIX,107788.com
 - DOMAIN,107a0d5d90.fb33be3463.com
@@ -566,7 +522,7 @@ payload:
 - DOMAIN-SUFFIX,1200koine.com
 - DOMAIN-SUFFIX,1205qitiao2022.xyz
 - DOMAIN,1208344341.rsc.cdn77.org
-- DOMAIN-WILDCARD,121.204.246.*.gif
+- DOMAIN-REGEX,^121\.204\.246\..*\.gif$
 - DOMAIN,12112336.pix-cdn.org
 - DOMAIN,12114200.pix-cdn.org
 - DOMAIN-SUFFIX,121networks.com
@@ -698,7 +654,7 @@ payload:
 - DOMAIN,161779.publy.co
 - DOMAIN-SUFFIX,16211973.xyz
 - DOMAIN-SUFFIX,16327739.xyz
-- DOMAIN-WILDCARD,163487*.qmgmw.com
+- DOMAIN-REGEX,^163487.*\.qmgmw\.com$
 - DOMAIN-SUFFIX,163ren.com
 - DOMAIN,1640831964042.se-life.cn
 - DOMAIN,164e84ce61.ac3fc8f2a5.com
@@ -2158,7 +2114,7 @@ payload:
 - DOMAIN-SUFFIX,37pk49.com
 - DOMAIN-SUFFIX,37wan.com
 - DOMAIN-SUFFIX,37xs.net
-- DOMAIN-WILDCARD,38.33.15.*.gif
+- DOMAIN-REGEX,^38\.33\.15\..*\.gif$
 - DOMAIN-SUFFIX,380.tw
 - DOMAIN,3815573.notify6.com
 - DOMAIN-SUFFIX,381a8b362e.com
@@ -3407,7 +3363,7 @@ payload:
 - DOMAIN-SUFFIX,66l11y82dn.com
 - DOMAIN-SUFFIX,66pxwy2r6q5v5qe.rest
 - DOMAIN-SUFFIX,66wen.com
-- DOMAIN-WILDCARD,67.21.92.*.gif
+- DOMAIN-REGEX,^67\.21\.92\..*\.gif$
 - DOMAIN-SUFFIX,670t5x.cn
 - DOMAIN-SUFFIX,6711.com
 - DOMAIN,671c.pandasuite.io
@@ -4596,7 +4552,7 @@ payload:
 - DOMAIN,9ywl0cwf7e37m5yi.tapin.gg
 - DOMAIN-SUFFIX,9z6p1shhsh.top
 - DOMAIN-SUFFIX,9zgjybtp7lmq71c5llgczx3v7z3rucqc.rest
-- DOMAIN-WILDCARD,a*.chajiaotong.com
+- DOMAIN-REGEX,^a.*\.chajiaotong\.com$
 - DOMAIN-SUFFIX,a-ads.com
 - DOMAIN-SUFFIX,a-calc.de
 - DOMAIN-SUFFIX,a-cast.jp
@@ -7170,8 +7126,8 @@ payload:
 - DOMAIN-SUFFIX,abyssfar.com
 - DOMAIN,abz.latelust.site
 - DOMAIN-SUFFIX,abzkyjleooqja.top
-- DOMAIN-WILDCARD,ac*.786ip.com
-- DOMAIN-WILDCARD,ac*.faxingchina.com
+- DOMAIN-REGEX,^ac.*\.786ip\.com$
+- DOMAIN-REGEX,^ac.*\.faxingchina\.com$
 - DOMAIN,ac-ebis-otrk.usen.com
 - DOMAIN,ac-ebis-stb.usen.com
 - DOMAIN,ac-ebis-uhome.usen.com
@@ -7611,13 +7567,13 @@ payload:
 - DOMAIN-SUFFIX,acyxssqjdvfaj.space
 - DOMAIN-SUFFIX,aczqghbgetaef.store
 - DOMAIN-SUFFIX,aczshurk.in
-- DOMAIN-WILDCARD,ad*.nexage.com
-- DOMAIN-WILDCARD,ad*.on.cc
-- DOMAIN-WILDCARD,ad*.zonaplus.tv
-- DOMAIN-WILDCARD,ad-*.amazonaws.com
-- DOMAIN-WILDCARD,ad-*.appacc.dbankedge.cn
-- DOMAIN-WILDCARD,ad-*.com
-- DOMAIN-WILDCARD,ad-*.net
+- DOMAIN-REGEX,^ad.*\.nexage\.com$
+- DOMAIN-REGEX,^ad.*\.on\.cc$
+- DOMAIN-REGEX,^ad.*\.zonaplus\.tv$
+- DOMAIN-REGEX,^ad\-.*\.amazonaws\.com$
+- DOMAIN-REGEX,^ad\-.*\.appacc\.dbankedge\.cn$
+- DOMAIN-REGEX,^ad\-.*\.com$
+- DOMAIN-REGEX,^ad\-.*\.net$
 - DOMAIN,ad-1258444056.cos.accelerate.myqcloud.com
 - DOMAIN-SUFFIX,ad-adapex.io
 - DOMAIN-SUFFIX,ad-adblock.com
@@ -7650,8 +7606,8 @@ payload:
 - DOMAIN,ad-files.classting.com
 - DOMAIN-SUFFIX,ad-flow.com
 - DOMAIN-SUFFIX,ad-free.info
-- DOMAIN-WILDCARD,ad-host*.amazonaws.com
-- DOMAIN-WILDCARD,ad-host-backup-*.aliyuncs.com
+- DOMAIN-REGEX,^ad\-host.*\.amazonaws\.com$
+- DOMAIN-REGEX,^ad\-host\-backup\-.*\.aliyuncs\.com$
 - DOMAIN,ad-img.diyidan.net
 - DOMAIN-SUFFIX,ad-m.asia
 - DOMAIN-SUFFIX,ad-mapps.com
@@ -8012,7 +7968,7 @@ payload:
 - DOMAIN-SUFFIX,adapd.com
 - DOMAIN-SUFFIX,adapex.io
 - DOMAIN-SUFFIX,adapf.com
-- DOMAIN-WILDCARD,adapi*.boomplaymusic.com
+- DOMAIN-REGEX,^adapi.*\.boomplaymusic\.com$
 - DOMAIN,adapi.izuiyou.com
 - DOMAIN,adapi.lenovogame.com
 - DOMAIN,adapi.shouji.360.cn
@@ -8232,7 +8188,7 @@ payload:
 - DOMAIN,adcreative.naver.com
 - DOMAIN-SUFFIX,adcrowd.com
 - DOMAIN-SUFFIX,adcryp.to
-- DOMAIN-WILDCARD,adcs-*.myappsget.com
+- DOMAIN-REGEX,^adcs\-.*\.myappsget\.com$
 - DOMAIN,adcs-ap.myappsget.com
 - DOMAIN,adcs-ue.myappsget.com
 - DOMAIN,adcs.myappsget.com
@@ -8485,7 +8441,7 @@ payload:
 - DOMAIN,adhudg.nec-lavie.jp
 - DOMAIN-SUFFIX,adhunt.net
 - DOMAIN-SUFFIX,adhunter.media
-- DOMAIN-WILDCARD,adi*.cnool.net
+- DOMAIN-REGEX,^adi.*\.cnool\.net$
 - DOMAIN,adi.ni.com
 - DOMAIN-SUFFIX,adikteev.com
 - DOMAIN,adilk.ilikecomix.com
@@ -8613,7 +8569,7 @@ payload:
 - DOMAIN-SUFFIX,adlserq.com
 - DOMAIN-SUFFIX,adltserv.com
 - DOMAIN-SUFFIX,adlux.com
-- DOMAIN-WILDCARD,adm*.autoimg.cn
+- DOMAIN-REGEX,^adm.*\.autoimg\.cn$
 - DOMAIN,adm.265g.com
 - DOMAIN,adm.52swine.com
 - DOMAIN,adm.6park.com
@@ -9045,20 +9001,20 @@ payload:
 - DOMAIN-SUFFIX,adrta.com
 - DOMAIN-SUFFIX,adrtx.net
 - DOMAIN-SUFFIX,adrunnr.com
-- DOMAIN-WILDCARD,ads*-adnow.com
-- DOMAIN-WILDCARD,ads*-normal*.zijieapi.com
-- DOMAIN-WILDCARD,ads*-normal-*.zijieapi.com
-- DOMAIN-WILDCARD,ads*-normal-hl.zijieapi.com
-- DOMAIN-WILDCARD,ads*-normal-lq.zijieapi.com
-- DOMAIN-WILDCARD,ads*.bojijulebu.com
-- DOMAIN-WILDCARD,ads*.depositfiles.com
-- DOMAIN-WILDCARD,ads*.depositfiles.org
-- DOMAIN-WILDCARD,ads*.dfiles.eu
-- DOMAIN-WILDCARD,ads*.dfiles.ru
-- DOMAIN-WILDCARD,ads*.opensubtitles.org
-- DOMAIN-WILDCARD,ads*.production-public.tubi.io
-- DOMAIN-WILDCARD,ads*.textra.me
-- DOMAIN-WILDCARD,ads-*-nfl.yinzcam.com
+- DOMAIN-REGEX,^ads.*\-adnow\.com$
+- DOMAIN-REGEX,^ads.*\-normal.*\.zijieapi\.com$
+- DOMAIN-REGEX,^ads.*\-normal\-.*\.zijieapi\.com$
+- DOMAIN-REGEX,^ads.*\-normal\-hl\.zijieapi\.com$
+- DOMAIN-REGEX,^ads.*\-normal\-lq\.zijieapi\.com$
+- DOMAIN-REGEX,^ads.*\.bojijulebu\.com$
+- DOMAIN-REGEX,^ads.*\.depositfiles\.com$
+- DOMAIN-REGEX,^ads.*\.depositfiles\.org$
+- DOMAIN-REGEX,^ads.*\.dfiles\.eu$
+- DOMAIN-REGEX,^ads.*\.dfiles\.ru$
+- DOMAIN-REGEX,^ads.*\.opensubtitles\.org$
+- DOMAIN-REGEX,^ads.*\.production\-public\.tubi\.io$
+- DOMAIN-REGEX,^ads.*\.textra\.me$
+- DOMAIN-REGEX,^ads\-.*\-nfl\.yinzcam\.com$
 - DOMAIN-SUFFIX,ads-6686.top
 - DOMAIN-SUFFIX,ads-abc.com
 - DOMAIN-SUFFIX,ads-adv.top
@@ -9205,7 +9161,7 @@ payload:
 - DOMAIN,ads.kelkoo.com
 - DOMAIN,ads.lemmatechnologies.com
 - DOMAIN,ads.linkedin.com
-- DOMAIN-WILDCARD,ads.livetv*.me
+- DOMAIN-REGEX,^ads\.livetv.*\.me$
 - DOMAIN,ads.lot-tissimo.com
 - DOMAIN,ads.luffy.my.id
 - DOMAIN,ads.mobgold.com
@@ -9409,7 +9365,7 @@ payload:
 - DOMAIN-SUFFIX,adserve.work
 - DOMAIN,adserve2.tom.com
 - DOMAIN,adserver-2084671375.us-east-1.elb.amazonaws.com
-- DOMAIN-WILDCARD,adserver.*.yahoodns.net
+- DOMAIN-REGEX,^adserver\..*\.yahoodns\.net$
 - DOMAIN,adserver.additionalmedia.com
 - DOMAIN,adserver.asiantb.com
 - DOMAIN,adserver.associationheadquarters.com
@@ -9790,7 +9746,7 @@ payload:
 - DOMAIN,adv.unionesarda.it
 - DOMAIN,adv.vk.com
 - DOMAIN,adv.vk.ru
-- DOMAIN-WILDCARD,adv0*.msa.cdn.mediaset.net
+- DOMAIN-REGEX,^adv0.*\.msa\.cdn\.mediaset\.net$
 - DOMAIN,adv2.downsave.com
 - DOMAIN-SUFFIX,advally.com
 - DOMAIN-SUFFIX,advalo.com
@@ -9824,7 +9780,7 @@ payload:
 - DOMAIN-SUFFIX,adversaldisplay.com
 - DOMAIN-SUFFIX,adversalservers.com
 - DOMAIN-SUFFIX,adverserve.net
-- DOMAIN-WILDCARD,advert*.livesportmedia.eu
+- DOMAIN-REGEX,^advert.*\.livesportmedia\.eu$
 - DOMAIN,advert-api-sandbox.wb.ru
 - DOMAIN,advert-api-sandbox.wildberries.ru
 - DOMAIN,advert-api.wb.ru
@@ -9945,9 +9901,9 @@ payload:
 - DOMAIN-SUFFIX,adwozwzigog.in
 - DOMAIN-SUFFIX,adwstats.com
 - DOMAIN-SUFFIX,adwx6vcj.com
-- DOMAIN-WILDCARD,adx-*.dbankcloud
-- DOMAIN-WILDCARD,adx-*.dbankedge.cn
-- DOMAIN-WILDCARD,adx-*.op.dbankcloud.com.edgekey.net
+- DOMAIN-REGEX,^adx\-.*\.dbankcloud$
+- DOMAIN-REGEX,^adx\-.*\.dbankedge\.cn$
+- DOMAIN-REGEX,^adx\-.*\.op\.dbankcloud\.com\.edgekey\.net$
 - DOMAIN,adx-ad.smart-tv.cn
 - DOMAIN,adx-api.jinmo.tech
 - DOMAIN,adx-bid.tianzhuobj.com
@@ -12838,9 +12794,9 @@ payload:
 - DOMAIN,aphid.thyself.me
 - DOMAIN,aphrodite.notifysrv.com
 - DOMAIN,aphxav.green-acres.it
-- DOMAIN-WILDCARD,api*.batmobi.net
-- DOMAIN-WILDCARD,api*.batmobil.net
-- DOMAIN-WILDCARD,api*.bidmachine.io
+- DOMAIN-REGEX,^api.*\.batmobi\.net$
+- DOMAIN-REGEX,^api.*\.batmobil\.net$
+- DOMAIN-REGEX,^api.*\.bidmachine\.io$
 - DOMAIN,api-a.op-mobile.opera.com
 - DOMAIN,api-access.pangolin-sdk-toutiao-b.com
 - DOMAIN,api-access.pangolin-sdk-toutiao.com
@@ -13054,7 +13010,7 @@ payload:
 - DOMAIN,api.youtu.qq.com
 - DOMAIN,api.zol.com
 - DOMAIN,api1.888zy.cn
-- DOMAIN-WILDCARD,api16-access-ttp*.tiktokpangle-b.us
+- DOMAIN-REGEX,^api16\-access\-ttp.*\.tiktokpangle\-b\.us$
 - DOMAIN-SUFFIX,api168168.com
 - DOMAIN,api2.play.cn
 - DOMAIN,api2.wshareit.com
@@ -13989,7 +13945,7 @@ payload:
 - DOMAIN,appgax.optica-optima.com
 - DOMAIN-SUFFIX,appget.cn
 - DOMAIN,appgift.sinaapp.com
-- DOMAIN-WILDCARD,appgiftwall.*.aliyuncs.com
+- DOMAIN-REGEX,^appgiftwall\..*\.aliyuncs\.com$
 - DOMAIN,appgiftwall.oss-us-west-1.aliyuncs.com
 - DOMAIN-SUFFIX,appgo.cn
 - DOMAIN-SUFFIX,apphiresandalarger.org
@@ -14650,7 +14606,7 @@ payload:
 - DOMAIN,asd.sincetrade.com
 - DOMAIN,asd.yhzbjz.com
 - DOMAIN,asd.zuhaowan8.com
-- DOMAIN-WILDCARD,asd8900.oss-*.aliyuncs.com
+- DOMAIN-REGEX,^asd8900\.oss\-.*\.aliyuncs\.com$
 - DOMAIN-SUFFIX,asdasdad.net
 - DOMAIN,asdf.eldos.xyz
 - DOMAIN-SUFFIX,asdffe22.com
@@ -14958,7 +14914,7 @@ payload:
 - DOMAIN,async-px.dynamicyield.com
 - DOMAIN-SUFFIX,asypwo.icu
 - DOMAIN-SUFFIX,aszsfjntyvrbg.website
-- DOMAIN-WILDCARD,at*.doubanio.com
+- DOMAIN-REGEX,^at.*\.doubanio\.com$
 - DOMAIN,at-cddc.actu-juridique.fr
 - DOMAIN,at-cdn.swisscom.ch
 - DOMAIN,at-ecomm.levi.com
@@ -15599,7 +15555,7 @@ payload:
 - DOMAIN-SUFFIX,awzbijw.com
 - DOMAIN-SUFFIX,awzpvorsyltel.website
 - DOMAIN-SUFFIX,awzsuxrw.in
-- DOMAIN-WILDCARD,ax.*.ifeng.com
+- DOMAIN-REGEX,^ax\..*\.ifeng\.com$
 - DOMAIN,ax.120ask.com
 - DOMAIN,ax.babe.today
 - DOMAIN,ax.ggfeng.com
@@ -16450,7 +16406,7 @@ payload:
 - DOMAIN-SUFFIX,banmamedia.com
 - DOMAIN-SUFFIX,banmeng.com
 - DOMAIN-SUFFIX,banner-iframe.com
-- DOMAIN-WILDCARD,banner.*.tccapis.com
+- DOMAIN-REGEX,^banner\..*\.tccapis\.com$
 - DOMAIN,banner.alimama.com
 - DOMAIN,banner.appsflyersdk.com
 - DOMAIN,banner.bet365partners.com
@@ -16949,7 +16905,7 @@ payload:
 - DOMAIN,bdcode.qinglue.com
 - DOMAIN,bdcode.youke.com
 - DOMAIN,bdcode1.haodou.com
-- DOMAIN-WILDCARD,bdcpro*.techweb.com.cn
+- DOMAIN-REGEX,^bdcpro.*\.techweb\.com\.cn$
 - DOMAIN-SUFFIX,bdcrihraly.com
 - DOMAIN,bdd.hainan.net
 - DOMAIN-SUFFIX,bddhlhaoxqtmo.online
@@ -16998,7 +16954,7 @@ payload:
 - DOMAIN-SUFFIX,bdkrltbdwxmxe.space
 - DOMAIN,bdkuth.smartbuyglasses.co.uk
 - DOMAIN,bdl.xefyr.com
-- DOMAIN-WILDCARD,bdlm*.hc360.com
+- DOMAIN-REGEX,^bdlm.*\.hc360\.com$
 - DOMAIN,bdlm.120askimages.com
 - DOMAIN,bdlmggcs1.familydoctor.com.cn
 - DOMAIN,bdm.911cha.com
@@ -18141,7 +18097,7 @@ payload:
 - DOMAIN-SUFFIX,bizx.info
 - DOMAIN,bizz.cochraneco.com
 - DOMAIN-SUFFIX,bizzclick.com
-- DOMAIN-WILDCARD,bj*.9669.cn
+- DOMAIN-REGEX,^bj.*\.9669\.cn$
 - DOMAIN,bj-td-menta-01-callback.advlion.com
 - DOMAIN,bj1.118pan.com
 - DOMAIN-SUFFIX,bj2550.com
@@ -18179,7 +18135,7 @@ payload:
 - DOMAIN-SUFFIX,bjk08251ip.com
 - DOMAIN-SUFFIX,bjk08260ip.com
 - DOMAIN-SUFFIX,bjk08261ip.com
-- DOMAIN-WILDCARD,bjkedv*.xyz
+- DOMAIN-REGEX,^bjkedv.*\.xyz$
 - DOMAIN-SUFFIX,bjlmok.com
 - DOMAIN-SUFFIX,bjlsvzikxpjxq.space
 - DOMAIN-SUFFIX,bjmantis.net
@@ -18195,7 +18151,7 @@ payload:
 - DOMAIN,bjs.mscto.com
 - DOMAIN-SUFFIX,bjseixtaiexgs.site
 - DOMAIN-SUFFIX,bjsncykyjctsbjxzx.cn
-- DOMAIN-WILDCARD,bjsvp*.space
+- DOMAIN-REGEX,^bjsvp.*\.space$
 - DOMAIN-SUFFIX,bjsvp35.space
 - DOMAIN-SUFFIX,bjtbtnuozsdgf.website
 - DOMAIN-SUFFIX,bjtlukksnzrlb.space
@@ -18424,7 +18380,7 @@ payload:
 - DOMAIN-SUFFIX,blobopics.biz
 - DOMAIN-SUFFIX,block-ad.com
 - DOMAIN,block.18tube.me
-- DOMAIN-WILDCARD,block.s*block.com
+- DOMAIN-REGEX,^block\.s.*block\.com$
 - DOMAIN-SUFFIX,blockadsnot.com
 - DOMAIN-SUFFIX,blockadstop.info
 - DOMAIN-SUFFIX,blockchain-ads.com
@@ -21468,7 +21424,7 @@ payload:
 - DOMAIN-SUFFIX,carvenbowet.help
 - DOMAIN-SUFFIX,carvercranberry.com
 - DOMAIN-SUFFIX,carvyre.com
-- DOMAIN-WILDCARD,cas.*.criteo.com
+- DOMAIN-REGEX,^cas\..*\.criteo\.com$
 - DOMAIN-SUFFIX,casaltyar.cfd
 - DOMAIN,cascadion.thermo.com
 - DOMAIN,cascadion.thermofisher.com
@@ -21842,7 +21798,7 @@ payload:
 - DOMAIN,cdn-10049480.file.myqcloud.com
 - DOMAIN,cdn-a.raptor.digital
 - DOMAIN,cdn-ad.wtzw.com
-- DOMAIN-WILDCARD,cdn-adn-*.rayjump.com
+- DOMAIN-REGEX,^cdn\-adn\-.*\.rayjump\.com$
 - DOMAIN,cdn-adn.rayjump.com
 - DOMAIN,cdn-ads.oss-cn-shanghai.aliyuncs.com
 - DOMAIN-SUFFIX,cdn-adtech.com
@@ -22738,7 +22694,7 @@ payload:
 - DOMAIN-SUFFIX,chebelviciousyellowy.cfd
 - DOMAIN-SUFFIX,chebfqsmfwovu.online
 - DOMAIN-SUFFIX,check-out-this.site
-- DOMAIN-WILDCARD,check-prizes-now*.life
+- DOMAIN-REGEX,^check\-prizes\-now.*\.life$
 - DOMAIN-SUFFIX,check-tl-ver-294-2.com
 - DOMAIN-SUFFIX,check-update-today.com
 - DOMAIN-SUFFIX,check-windows-ai.xyz
@@ -23952,7 +23908,7 @@ payload:
 - DOMAIN,clk.liberty-e.com
 - DOMAIN,clk.mindfulsuite.com
 - DOMAIN,clk.pdn-eu.com
-- DOMAIN-WILDCARD,clk.rtpdn*.com
+- DOMAIN-REGEX,^clk\.rtpdn.*\.com$
 - DOMAIN-SUFFIX,clk.sh
 - DOMAIN,clk.slutcam.org
 - DOMAIN,clk.taptica.com
@@ -26079,7 +26035,7 @@ payload:
 - DOMAIN-SUFFIX,countby.com
 - DOMAIN-SUFFIX,countenancedrykeeper.com
 - DOMAIN-SUFFIX,countenancetiring.com
-- DOMAIN-WILDCARD,counter*.stat.ovh
+- DOMAIN-REGEX,^counter.*\.stat\.ovh$
 - DOMAIN-SUFFIX,counter-go.de
 - DOMAIN-SUFFIX,counter-gratis.com
 - DOMAIN,counter-growthbook.minute-ly.com
@@ -26625,7 +26581,7 @@ payload:
 - DOMAIN-SUFFIX,createssque.club
 - DOMAIN-SUFFIX,creatincodecperks.cyou
 - DOMAIN-SUFFIX,creationpartnershipputrescent.com
-- DOMAIN-WILDCARD,creative*.bidease.com
+- DOMAIN-REGEX,^creative.*\.bidease\.com$
 - DOMAIN-SUFFIX,creative-awareness.pro
 - DOMAIN,creative-bunny.bidease.com
 - DOMAIN-SUFFIX,creative-message.pro
@@ -26843,7 +26799,7 @@ payload:
 - DOMAIN-SUFFIX,crossoverchina.com
 - DOMAIN-SUFFIX,crosspixel.net
 - DOMAIN-SUFFIX,crosspreferrite.com
-- DOMAIN-WILDCARD,crosspromo*.qplaze.com
+- DOMAIN-REGEX,^crosspromo.*\.qplaze\.com$
 - DOMAIN,crosspromo.voodoo.io
 - DOMAIN,crosspromotion-us.avosapps.us
 - DOMAIN,crosspromotion.weplayer.cc
@@ -27807,8 +27763,8 @@ payload:
 - DOMAIN-SUFFIX,czx5eyk0exbhwp43ya.biz
 - DOMAIN-SUFFIX,czxnozkdqlcrk.online
 - DOMAIN-SUFFIX,czynhitkvjkkw.space
-- DOMAIN-WILDCARD,d*.ruiwen.com
-- DOMAIN-WILDCARD,d*.xinshipu.com
+- DOMAIN-REGEX,^d.*\.ruiwen\.com$
+- DOMAIN-REGEX,^d.*\.xinshipu\.com$
 - DOMAIN-SUFFIX,d-1.co
 - DOMAIN-SUFFIX,d-agency.net
 - DOMAIN,d-app.progressive.com
@@ -32431,8 +32387,8 @@ payload:
 - DOMAIN,dlziqh9bo7.boring.fm
 - DOMAIN-SUFFIX,dlzuocvcjdqvq.space
 - DOMAIN-SUFFIX,dlzxazsvocjfy.online
-- DOMAIN-WILDCARD,dm*.yxlady.com
-- DOMAIN-WILDCARD,dm-*.toutiao.com
+- DOMAIN-REGEX,^dm.*\.yxlady\.com$
+- DOMAIN-REGEX,^dm\-.*\.toutiao\.com$
 - DOMAIN-SUFFIX,dm-event.net
 - DOMAIN,dm-hl.toutiao.com
 - DOMAIN,dm-target.fishersci.com
@@ -32570,7 +32526,7 @@ payload:
 - DOMAIN,dmz3nd5oywtsw.cloudfront.net
 - DOMAIN-SUFFIX,dmzadtwonmlfn.online
 - DOMAIN-SUFFIX,dmzjmp.com
-- DOMAIN-WILDCARD,dn*.ixinwei.com
+- DOMAIN-REGEX,^dn.*\.ixinwei\.com$
 - DOMAIN,dn-growing.qbox.me
 - DOMAIN,dn34cbtcv9mef.cloudfront.net
 - DOMAIN,dn3uy6cx65ujf.cloudfront.net
@@ -33463,7 +33419,7 @@ payload:
 - DOMAIN-SUFFIX,dsmueyhhycr.com
 - DOMAIN,dsnymrk0k4p3v.cloudfront.net
 - DOMAIN,dsoxjxin5jji.controlconceptsusa.com
-- DOMAIN-WILDCARD,dsp*.youdao.com
+- DOMAIN-REGEX,^dsp.*\.youdao\.com$
 - DOMAIN,dsp-api.moloco.com
 - DOMAIN,dsp-api.xaprio.com
 - DOMAIN,dsp-east.nativeads.com
@@ -37858,7 +37814,7 @@ payload:
 - DOMAIN,eventos.mirecweek.com
 - DOMAIN,eventos.ubmmexico.com
 - DOMAIN,eventos.usj.es
-- DOMAIN-WILDCARD,events-*.op.hicloud.com
+- DOMAIN-REGEX,^events\-.*\.op\.hicloud\.com$
 - DOMAIN,events-drcn.op.dbankcloud.cn
 - DOMAIN,events-endpoint.pointandplace.com
 - DOMAIN,events-logs.doctolib.com
@@ -38885,7 +38841,7 @@ payload:
 - DOMAIN-SUFFIX,fanjis.cn
 - DOMAIN-SUFFIX,fanjs.top
 - DOMAIN-SUFFIX,fannybacker.com
-- DOMAIN-WILDCARD,fanpingbi*.gaokao.com
+- DOMAIN-REGEX,^fanpingbi.*\.gaokao\.com$
 - DOMAIN-SUFFIX,fanplayr.com
 - DOMAIN-SUFFIX,fanpxawzwfjyu.site
 - DOMAIN-SUFFIX,fanqianbb.com
@@ -41151,7 +41107,7 @@ payload:
 - DOMAIN,fpag.w48ge.cn
 - DOMAIN-SUFFIX,fpapi.io
 - DOMAIN-SUFFIX,fpaudience.com
-- DOMAIN-WILDCARD,fpb*.51edu.com
+- DOMAIN-REGEX,^fpb.*\.51edu\.com$
 - DOMAIN,fpb.docin.com
 - DOMAIN,fpb.sohu.com
 - DOMAIN,fpb0.sohu.com
@@ -42734,7 +42690,7 @@ payload:
 - DOMAIN-SUFFIX,gcucilwrior.in
 - DOMAIN,gcudsn.tradetested.co.nz
 - DOMAIN-SUFFIX,gcvxhwgvpwpyv.online
-- DOMAIN-WILDCARD,gcw*.2liang.cn
+- DOMAIN-REGEX,^gcw.*\.2liang\.cn$
 - DOMAIN-SUFFIX,gcwslmwkvegrffe.com
 - DOMAIN,gcwubi.happypancake.fi
 - DOMAIN,gcxiyx.inspireuplift.com
@@ -43026,7 +42982,7 @@ payload:
 - DOMAIN-SUFFIX,gestaterivers.cyou
 - DOMAIN-SUFFIX,gesteswayland.qpon
 - DOMAIN,gestiondocumentaire.ricoh.fr
-- DOMAIN-WILDCARD,get*bannerads-6egeg2u34q-du.a.run.app
+- DOMAIN-REGEX,^get.*bannerads\-6egeg2u34q\-du\.a\.run\.app$
 - DOMAIN,get-beta.kabbee.com
 - DOMAIN,get-dev.mastersapp.com
 - DOMAIN-SUFFIX,get-express-vpn.online
@@ -43342,7 +43298,7 @@ payload:
 - DOMAIN-SUFFIX,gfxdn.pics
 - DOMAIN-SUFFIX,gfxlkemrkltqz.online
 - DOMAIN-SUFFIX,gfzyoomgfbnws.space
-- DOMAIN-WILDCARD,gg*.miguvideo.com
+- DOMAIN-REGEX,^gg.*\.miguvideo\.com$
 - DOMAIN,gg.0598yu.com
 - DOMAIN,gg.1whour.com
 - DOMAIN,gg.5173.com
@@ -45733,7 +45689,7 @@ payload:
 - DOMAIN-SUFFIX,gtlfubmmzmvfw.space
 - DOMAIN-SUFFIX,gtlmblpvpirgj.site
 - DOMAIN,gtlp.net.cn
-- DOMAIN-WILDCARD,gtlpa*.com
+- DOMAIN-REGEX,^gtlpa.*\.com$
 - DOMAIN-SUFFIX,gtlpaj.com
 - DOMAIN,gtm.diamond.jp
 - DOMAIN,gtm.lercio.it
@@ -47398,7 +47354,7 @@ payload:
 - DOMAIN-SUFFIX,hh6820123.com
 - DOMAIN-SUFFIX,hh9uv6tq.com
 - DOMAIN-SUFFIX,hhb123.tk
-- DOMAIN-WILDCARD,hhba0*kdh.com
+- DOMAIN-REGEX,^hhba0.*kdh\.com$
 - DOMAIN-SUFFIX,hhba03201kdh.com
 - DOMAIN-SUFFIX,hhba03210kdh.com
 - DOMAIN-SUFFIX,hhba03211kdh.com
@@ -48366,7 +48322,7 @@ payload:
 - DOMAIN-SUFFIX,hostelmenial.cfd
 - DOMAIN-SUFFIX,hostileconductive.com
 - DOMAIN,hosting.miarroba.info
-- DOMAIN-WILDCARD,hostingcloud.*.wasm
+- DOMAIN-REGEX,^hostingcloud\..*\.wasm$
 - DOMAIN-SUFFIX,hostingcloud.racing
 - DOMAIN-SUFFIX,hostingcloud.trade
 - DOMAIN-SUFFIX,hostingcloud.win
@@ -49446,8 +49402,8 @@ payload:
 - DOMAIN-SUFFIX,iachimocribral.qpon
 - DOMAIN,iaclick.ifeng.com
 - DOMAIN,iacpromotion.s3.amazonaws.com
-- DOMAIN-WILDCARD,iad-*.appboy.com
-- DOMAIN-WILDCARD,iad-*.braze.com
+- DOMAIN-REGEX,^iad\-.*\.appboy\.com$
+- DOMAIN-REGEX,^iad\-.*\.braze\.com$
 - DOMAIN,iad.appboy.com
 - DOMAIN,iad.apple.com
 - DOMAIN,iad.e.360.cn
@@ -49861,7 +49817,7 @@ payload:
 - DOMAIN-SUFFIX,ifdlcsfuafvst.store
 - DOMAIN-SUFFIX,ifdnzact.com
 - DOMAIN-SUFFIX,ifdvlh.cn
-- DOMAIN-WILDCARD,ifengad.*.ifeng.com
+- DOMAIN-REGEX,^ifengad\..*\.ifeng\.com$
 - DOMAIN,ifengad.3g.ifeng.com
 - DOMAIN-SUFFIX,ifewo.xyz
 - DOMAIN,iffalh.y-aoyama.jp
@@ -50250,7 +50206,7 @@ payload:
 - DOMAIN-SUFFIX,ilyaoipntdyol.space
 - DOMAIN-SUFFIX,ilyf4amifh.com
 - DOMAIN-SUFFIX,ilzualntjfjjd.online
-- DOMAIN-WILDCARD,im*-tub-ru.yandex.net
+- DOMAIN-REGEX,^im.*\-tub\-ru\.yandex\.net$
 - DOMAIN-SUFFIX,im-apps.net
 - DOMAIN,im-x.jd.com
 - DOMAIN,im.ov.yahoo.co.jp
@@ -51030,7 +50986,7 @@ payload:
 - DOMAIN,imginfo.insource.co.jp
 - DOMAIN-SUFFIX,imgix.video
 - DOMAIN-SUFFIX,imgkdetaddxre.space
-- DOMAIN-WILDCARD,imglnk*.com
+- DOMAIN-REGEX,^imglnk.*\.com$
 - DOMAIN-SUFFIX,imglnka.com
 - DOMAIN-SUFFIX,imglnkb.com
 - DOMAIN-SUFFIX,imglnkc.com
@@ -51224,8 +51180,8 @@ payload:
 - DOMAIN-SUFFIX,improvisevariables.com
 - DOMAIN-SUFFIX,impruads.com
 - DOMAIN-SUFFIX,impseeineclots.com
-- DOMAIN-WILDCARD,impservice*.yodao.com
-- DOMAIN-WILDCARD,impservice*.youdao.com
+- DOMAIN-REGEX,^impservice.*\.yodao\.com$
+- DOMAIN-REGEX,^impservice.*\.youdao\.com$
 - DOMAIN-SUFFIX,impugkpbilveh.website
 - DOMAIN-SUFFIX,impulsejewel.com
 - DOMAIN-SUFFIX,impulselumber.com
@@ -51353,7 +51309,7 @@ payload:
 - DOMAIN-SUFFIX,incorenext.com
 - DOMAIN-SUFFIX,incorporatehookersenses.com
 - DOMAIN-SUFFIX,incorporateunderstand.com
-- DOMAIN-WILDCARD,increase-rev*.static-cloudflare.workers.dev
+- DOMAIN-REGEX,^increase\-rev.*\.static\-cloudflare\.workers\.dev$
 - DOMAIN,increase-rev1.static-cloudflare.workers.dev
 - DOMAIN,increase-rev2.static-cloudflare.workers.dev
 - DOMAIN-SUFFIX,increaserev.com
@@ -53183,7 +53139,7 @@ payload:
 - DOMAIN-SUFFIX,iqyewu.cn
 - DOMAIN-SUFFIX,iqyhvzvpshtva.online
 - DOMAIN,iqyioj.harryanddavid.com
-- DOMAIN-WILDCARD,ir-new-cdn-eu-west-*-hb.rayjump.com
+- DOMAIN-REGEX,^ir\-new\-cdn\-eu\-west\-.*\-hb\.rayjump\.com$
 - DOMAIN,ir.mail.126.com
 - DOMAIN,ir.mail.163.com
 - DOMAIN,ir.mail.yeah.net
@@ -53877,7 +53833,7 @@ payload:
 - DOMAIN-SUFFIX,j8tzoy3xwn.com
 - DOMAIN,j927.statnews.com
 - DOMAIN-SUFFIX,j93557g.com
-- DOMAIN-WILDCARD,ja*.gamersky.com
+- DOMAIN-REGEX,^ja.*\.gamersky\.com$
 - DOMAIN,ja-jp-a8.etudehouse.com
 - DOMAIN,ja-jp.siemensplmevents.com
 - DOMAIN,ja.misav.sbs
@@ -55264,13 +55220,13 @@ payload:
 - DOMAIN,jrzgcz.ciociariaoggi.it
 - DOMAIN,jrzgcz.latinaoggi.eu
 - DOMAIN-SUFFIX,jrzrqi0au.com
-- DOMAIN-WILDCARD,js*.abolezi.com
+- DOMAIN-REGEX,^js.*\.abolezi\.com$
 - DOMAIN,js-1.pchome.net
 - DOMAIN,js-ad.a.yximgs.com
 - DOMAIN-SUFFIX,js-check.com
 - DOMAIN-SUFFIX,js-delivr.com
-- DOMAIN-WILDCARD,js.*2023*.live
-- DOMAIN-WILDCARD,js.*2023*.xyz
+- DOMAIN-REGEX,^js\..*2023.*\.live$
+- DOMAIN-REGEX,^js\..*2023.*\.xyz$
 - DOMAIN,js.139y.com
 - DOMAIN,js.1688988.com
 - DOMAIN,js.2011.8684.com
@@ -55533,7 +55489,7 @@ payload:
 - DOMAIN-SUFFIX,jtarfendijmmo.online
 - DOMAIN-SUFFIX,jtav.cn
 - DOMAIN,jtbaoo.belvini.de
-- DOMAIN-WILDCARD,jtbo*.nqxvevk.cn
+- DOMAIN-REGEX,^jtbo.*\.nqxvevk\.cn$
 - DOMAIN-SUFFIX,jtbunh.xyz
 - DOMAIN-SUFFIX,jtdkmjuiogidh.site
 - DOMAIN-SUFFIX,jtfsrnmxdcwtx.site
@@ -57732,7 +57688,7 @@ payload:
 - DOMAIN-SUFFIX,kxyumk.icu
 - DOMAIN,ky1amps1loy8iabe.pleasedonotblockme.com
 - DOMAIN-SUFFIX,ky595images.com
-- DOMAIN-WILDCARD,ky891.oss-*.aliyuncs.com
+- DOMAIN-REGEX,^ky891\.oss\-.*\.aliyuncs\.com$
 - DOMAIN-SUFFIX,kyad88.com
 - DOMAIN-SUFFIX,kyartoggled.cfd
 - DOMAIN-SUFFIX,kychq.cn
@@ -60858,7 +60814,7 @@ payload:
 - DOMAIN,log-upload.mihoyo.com
 - DOMAIN,log-verify.dutils.com
 - DOMAIN,log-verify.hiaiabc.com
-- DOMAIN-WILDCARD,log.*.hunantv.com
+- DOMAIN-REGEX,^log\..*\.hunantv\.com$
 - DOMAIN,log.120ask.com
 - DOMAIN,log.ad.xiaomi.com
 - DOMAIN,log.adplex.co.kr
@@ -65468,7 +65424,7 @@ payload:
 - DOMAIN-SUFFIX,marketo.net
 - DOMAIN-SUFFIX,marketpd4.top
 - DOMAIN-SUFFIX,marketperf.com
-- DOMAIN-WILDCARD,marketplace-*.hyprmx.com
+- DOMAIN-REGEX,^marketplace\-.*\.hyprmx\.com$
 - DOMAIN,marketplace-sentry.wb.ru
 - DOMAIN,marketreports.autovistagroup.com
 - DOMAIN,marketresearch.jacksonhealthcare.com
@@ -66232,7 +66188,7 @@ payload:
 - DOMAIN,mediasolutions.netinsight.net
 - DOMAIN-SUFFIX,mediasystems.am
 - DOMAIN-SUFFIX,mediatarget.com
-- DOMAIN-WILDCARD,mediate-ios-*.hyprmx.com
+- DOMAIN-REGEX,^mediate\-ios\-.*\.hyprmx\.com$
 - DOMAIN-SUFFIX,mediatescarf.com
 - DOMAIN-SUFFIX,mediation.goog
 - DOMAIN-SUFFIX,mediative.ca
@@ -68102,7 +68058,7 @@ payload:
 - DOMAIN-SUFFIX,mezir1nm.xyz
 - DOMAIN-SUFFIX,mezuzahbangkokhoyle.qpon
 - DOMAIN-SUFFIX,mezzobit.com
-- DOMAIN-WILDCARD,mf*.advantage.as
+- DOMAIN-REGEX,^mf.*\.advantage\.as$
 - DOMAIN,mf.atm.youku.com
 - DOMAIN,mf01.zybang.com
 - DOMAIN,mf02.zybang.com
@@ -68490,7 +68446,7 @@ payload:
 - DOMAIN-SUFFIX,minemytraffic.com
 - DOMAIN-SUFFIX,minerad.com
 - DOMAIN-SUFFIX,mineraltip.com
-- DOMAIN-WILDCARD,minero-proxy-*.sh
+- DOMAIN-REGEX,^minero\-proxy\-.*\.sh$
 - DOMAIN-SUFFIX,minero.cc
 - DOMAIN-SUFFIX,minero.pw
 - DOMAIN-SUFFIX,minesage.com
@@ -69124,7 +69080,7 @@ payload:
 - DOMAIN-SUFFIX,moat.com
 - DOMAIN-SUFFIX,moat4shot.com
 - DOMAIN-SUFFIX,moaxsgkqkivml.site
-- DOMAIN-WILDCARD,mob*.novanewsapp.com
+- DOMAIN-REGEX,^mob.*\.novanewsapp\.com$
 - DOMAIN,mob.12365chia.com
 - DOMAIN,mob.huimee.net
 - DOMAIN,mob.lowtid.fun
@@ -69155,7 +69111,7 @@ payload:
 - DOMAIN,mobi.yanosik.pl
 - DOMAIN-SUFFIX,mobi24.net
 - DOMAIN-SUFFIX,mobiads.ru
-- DOMAIN-WILDCARD,mobiadvert*.livesportmedia.eu
+- DOMAIN-REGEX,^mobiadvert.*\.livesportmedia\.eu$
 - DOMAIN-SUFFIX,mobicow.com
 - DOMAIN-SUFFIX,mobid.cn
 - DOMAIN-SUFFIX,mobidriven.com
@@ -69886,7 +69842,7 @@ payload:
 - DOMAIN-SUFFIX,mrydwiast.in
 - DOMAIN-SUFFIX,mryshl.com
 - DOMAIN-SUFFIX,mrzncayrlbjop.website
-- DOMAIN-WILDCARD,ms*.applvn.com
+- DOMAIN-REGEX,^ms.*\.applvn\.com$
 - DOMAIN,ms-trackingapi.phenompeople.com
 - DOMAIN,ms.actingidekex.cn
 - DOMAIN,ms.applovin.com
@@ -70462,7 +70418,7 @@ payload:
 - DOMAIN-SUFFIX,my-promo7.com
 - DOMAIN-SUFFIX,my-pu.sh
 - DOMAIN-SUFFIX,my-ranking.de
-- DOMAIN-WILDCARD,my-redirect-bucket-unique-*.s3.ap-northeast-1.amazonaws.com
+- DOMAIN-REGEX,^my\-redirect\-bucket\-unique\-.*\.s3\.ap\-northeast\-1\.amazonaws\.com$
 - DOMAIN-SUFFIX,my-romanceharmony.com
 - DOMAIN-SUFFIX,my-rudderjolly.com
 - DOMAIN-SUFFIX,my-stats.info
@@ -71319,7 +71275,7 @@ payload:
 - DOMAIN-SUFFIX,nellads.com
 - DOMAIN-SUFFIX,nellbeakerconsistency.com
 - DOMAIN-SUFFIX,nellforgery.com
-- DOMAIN-WILDCARD,nelonenmedia-pmd-ads-*.nm-stream.nelonenmedia.fi
+- DOMAIN-REGEX,^nelonenmedia\-pmd\-ads\-.*\.nm\-stream\.nelonenmedia\.fi$
 - DOMAIN-SUFFIX,nelreports.net
 - DOMAIN-SUFFIX,nelvyvlfyjksw.space
 - DOMAIN-SUFFIX,nemansnlssphf.website
@@ -75097,7 +75053,7 @@ payload:
 - DOMAIN-SUFFIX,oplnuqah.com
 - DOMAIN,oply.hearstapps.com
 - DOMAIN-SUFFIX,opmnstr.com
-- DOMAIN-WILDCARD,opnked*.xyz
+- DOMAIN-REGEX,^opnked.*\.xyz$
 - DOMAIN-SUFFIX,opnobbohq.com
 - DOMAIN,opo4.assuronline.com
 - DOMAIN-SUFFIX,opopfwyzcsbpn.space
@@ -76271,7 +76227,7 @@ payload:
 - DOMAIN-SUFFIX,ozxvyaklufsce.space
 - DOMAIN-SUFFIX,ozycode.cfd
 - DOMAIN-SUFFIX,ozyxnwnpfdiup.website
-- DOMAIN-WILDCARD,p*-ad-sign.byteimg.com
+- DOMAIN-REGEX,^p.*\-ad\-sign\.byteimg\.com$
 - DOMAIN-SUFFIX,p-advg.com
 - DOMAIN,p-behacdn.ksmobile.net
 - DOMAIN-SUFFIX,p-digital-server.com
@@ -76411,7 +76367,7 @@ payload:
 - DOMAIN-SUFFIX,p23hxejm1.com
 - DOMAIN-SUFFIX,p24.hu
 - DOMAIN-SUFFIX,p243xhjej2wycgfi458h89.cyou
-- DOMAIN-WILDCARD,p26.gejulm*.com
+- DOMAIN-REGEX,^p26\.gejulm.*\.com$
 - DOMAIN-SUFFIX,p269vhygzowkotz4.cfd
 - DOMAIN-SUFFIX,p2ed.site
 - DOMAIN-SUFFIX,p2h08fn94d.com
@@ -78634,7 +78590,7 @@ payload:
 - DOMAIN,pihxmq.98doci.com
 - DOMAIN-SUFFIX,piileihzsqelg.online
 - DOMAIN-SUFFIX,piiyxajbdkjkc.website
-- DOMAIN-WILDCARD,pijama.*.elasticbeanstalk.com
+- DOMAIN-REGEX,^pijama\..*\.elasticbeanstalk\.com$
 - DOMAIN-SUFFIX,pijhpgpwqudgl.website
 - DOMAIN-SUFFIX,pikeletrabbity.cfd
 - DOMAIN-SUFFIX,pikemancampman.shop
@@ -78701,7 +78657,7 @@ payload:
 - DOMAIN-SUFFIX,pinfoldvugh.cyou
 - DOMAIN-SUFFIX,ping-admin.ru
 - DOMAIN-SUFFIX,ping-fast.com
-- DOMAIN-WILDCARD,ping.*.sogou.com
+- DOMAIN-REGEX,^ping\..*\.sogou\.com$
 - DOMAIN,ping.anizm.net
 - DOMAIN,ping.cloud.tencent.com
 - DOMAIN,ping.dozuki.com
@@ -80696,8 +80652,8 @@ payload:
 - DOMAIN-SUFFIX,preanalytication.com
 - DOMAIN-SUFFIX,preaverastheny.cfd
 - DOMAIN-SUFFIX,prebazwnvwmej.website
-- DOMAIN-WILDCARD,prebid-*.rubiconproject.com
-- DOMAIN-WILDCARD,prebid-cache*.ifunny.co
+- DOMAIN-REGEX,^prebid\-.*\.rubiconproject\.com$
+- DOMAIN-REGEX,^prebid\-cache.*\.ifunny\.co$
 - DOMAIN,prebid-server.newsbreak.com
 - DOMAIN,prebid.cwi.re
 - DOMAIN-SUFFIX,prebid.org
@@ -81181,7 +81137,7 @@ payload:
 - DOMAIN,product.cloud.travelport.com
 - DOMAIN-SUFFIX,productdownload.pro
 - DOMAIN,production-.bloblohub.com
-- DOMAIN-WILDCARD,production-adserver-*.amazonaws.com
+- DOMAIN-REGEX,^production\-adserver\-.*\.amazonaws\.com$
 - DOMAIN,production-link-ccontact.focuscura.com
 - DOMAIN,productionprinting.ricoh.ch
 - DOMAIN,productionprinting.ricoh.co.uk
@@ -82471,7 +82427,7 @@ payload:
 - DOMAIN-SUFFIX,putmtmkfjbitxzlhijfc.top
 - DOMAIN,putphc.zuhre.com.tr
 - DOMAIN-SUFFIX,putriddelay.pro
-- DOMAIN-WILDCARD,putrr*.com
+- DOMAIN-REGEX,^putrr.*\.com$
 - DOMAIN-SUFFIX,putrr16.com
 - DOMAIN-SUFFIX,putrr7.com
 - DOMAIN-SUFFIX,putssugared.qpon
@@ -83055,7 +83011,7 @@ payload:
 - DOMAIN-SUFFIX,qcgg.net
 - DOMAIN,qcgtoz.cwjobs.co.uk
 - DOMAIN-SUFFIX,qcgzvywnvubee.online
-- DOMAIN-WILDCARD,qchannel*.cn
+- DOMAIN-REGEX,^qchannel.*\.cn$
 - DOMAIN-SUFFIX,qchannel03.cn
 - DOMAIN-SUFFIX,qchddgqqnwnnk.site
 - DOMAIN-SUFFIX,qchmlmtkpbswf.buzz
@@ -83873,7 +83829,7 @@ payload:
 - DOMAIN,qp.yunanfuwuqi.com
 - DOMAIN-SUFFIX,qpacubjmaod.com
 - DOMAIN-SUFFIX,qpastswynfzcb.space
-- DOMAIN-WILDCARD,qpb*.sohu.com
+- DOMAIN-REGEX,^qpb.*\.sohu\.com$
 - DOMAIN,qpb.sohu.com
 - DOMAIN,qpb0.sohu.com
 - DOMAIN,qpb1.sohu.com
@@ -85589,7 +85545,7 @@ payload:
 - DOMAIN,reach-id.orbit.tm-awx.com
 - DOMAIN,reach.ironmountain.com
 - DOMAIN,reach.terumo-bct.com
-- DOMAIN-WILDCARD,reachableads-av.*.amazonaws.com
+- DOMAIN-REGEX,^reachableads\-av\..*\.amazonaws\.com$
 - DOMAIN-SUFFIX,reachableads.com
 - DOMAIN-SUFFIX,reachankusha.cyou
 - DOMAIN-SUFFIX,reachedresinerprilled.cfd
@@ -86634,7 +86590,7 @@ payload:
 - DOMAIN-SUFFIX,rerubcakejawless.cfd
 - DOMAIN-SUFFIX,rerubminyas.cyou
 - DOMAIN-SUFFIX,reryn3ce.com
-- DOMAIN-WILDCARD,res*.pinpai8.cn
+- DOMAIN-REGEX,^res.*\.pinpai8\.cn$
 - DOMAIN,res-ga.smzdm.com
 - DOMAIN-SUFFIX,res-x.com
 - DOMAIN,res.adx.opera.com
@@ -87219,7 +87175,7 @@ payload:
 - DOMAIN-SUFFIX,rgjpcezrdyhuq.website
 - DOMAIN-SUFFIX,rgkccvmr.xyz
 - DOMAIN-SUFFIX,rglxpqjejwljl.website
-- DOMAIN-WILDCARD,rgmechanicsgames.com*vpn.exe
+- DOMAIN-REGEX,^rgmechanicsgames\.com.*vpn\.exe$
 - DOMAIN-SUFFIX,rgmhrvwugwlnd.website
 - DOMAIN-SUFFIX,rgmhynhrzzsao.site
 - DOMAIN,rgmseo.thejewellershop.com
@@ -89104,7 +89060,7 @@ payload:
 - DOMAIN-SUFFIX,rtbfactory.com
 - DOMAIN-SUFFIX,rtbfit.com
 - DOMAIN-SUFFIX,rtbhouse.com
-- DOMAIN-WILDCARD,rtbimp-loadbalancer-*.amazonaws.com
+- DOMAIN-REGEX,^rtbimp\-loadbalancer\-.*\.amazonaws\.com$
 - DOMAIN-SUFFIX,rtbiq.com
 - DOMAIN-SUFFIX,rtbix.com
 - DOMAIN-SUFFIX,rtbix.xyz
@@ -89784,7 +89740,7 @@ payload:
 - DOMAIN-SUFFIX,rzzgcjfxnjbqzb.com
 - DOMAIN-SUFFIX,rzztedqufypbh.online
 - DOMAIN-SUFFIX,rzzwgowiotgft.online
-- DOMAIN-WILDCARD,s*.skencituer.com
+- DOMAIN-REGEX,^s.*\.skencituer\.com$
 - DOMAIN,s-adashx.ut.uc.cn
 - DOMAIN,s-adashx.ut.youku.com
 - DOMAIN,s-adobe.wacoal.jp
@@ -90917,7 +90873,7 @@ payload:
 - DOMAIN-SUFFIX,salviolmarital.cyou
 - DOMAIN-SUFFIX,salwjc.cyou
 - DOMAIN,salzwerk.viessmann.de
-- DOMAIN-WILDCARD,sam*.baby-kingdom.com
+- DOMAIN-REGEX,^sam.*\.baby\-kingdom\.com$
 - DOMAIN,sam.manager-magazin.de
 - DOMAIN,sam.msn.com
 - DOMAIN-SUFFIX,samage-bility.icu
@@ -90936,7 +90892,7 @@ payload:
 - DOMAIN,samc.zkb.ch
 - DOMAIN,samc.zuerilaufcup.ch
 - DOMAIN-SUFFIX,samdddgljiurj.online
-- DOMAIN-WILDCARD,same*.stockstar.com
+- DOMAIN-REGEX,^same.*\.stockstar\.com$
 - DOMAIN-SUFFIX,same-curve.pro
 - DOMAIN-SUFFIX,same-replacement.pro
 - DOMAIN,same.chinadaily.com.cn
@@ -91448,7 +91404,7 @@ payload:
 - DOMAIN-SUFFIX,sawneboenolic.com
 - DOMAIN-SUFFIX,sawp.cloud
 - DOMAIN-SUFFIX,sawspignus.qpon
-- DOMAIN-WILDCARD,sax*.sina
+- DOMAIN-REGEX,^sax.*\.sina$
 - DOMAIN,sax.mobile.sina.cn
 - DOMAIN,sax.sina.cn
 - DOMAIN,sax1.sina.com.cn
@@ -92072,7 +92028,7 @@ payload:
 - DOMAIN,sd.jumei.com
 - DOMAIN,sd.kk3g.net
 - DOMAIN,sd.securitasdirect.fr
-- DOMAIN-WILDCARD,sd.yhzzzs*.com
+- DOMAIN-REGEX,^sd\.yhzzzs.*\.com$
 - DOMAIN-SUFFIX,sd01you.com
 - DOMAIN-SUFFIX,sd0ycgs3n0.com
 - DOMAIN-SUFFIX,sd6hon.cn
@@ -100651,7 +100607,7 @@ payload:
 - DOMAIN,ssgamf.stories.com
 - DOMAIN,ssgg.chazidian.com
 - DOMAIN-SUFFIX,ssgsjkkykcdmol.com
-- DOMAIN-WILDCARD,ssh.*.com
+- DOMAIN-REGEX,^ssh\..*\.com$
 - DOMAIN,ssh.hbhtbn.com
 - DOMAIN,ssh.hxlif.com
 - DOMAIN,ssh.jsyzw132.com
@@ -101090,7 +101046,7 @@ payload:
 - DOMAIN,st-a.cdp.asia
 - DOMAIN,st-a8.tscubic.com
 - DOMAIN,st-fly.b-cdn.net
-- DOMAIN-WILDCARD,st-n.ads*-adnow.com
+- DOMAIN-REGEX,^st\-n\.ads.*\-adnow\.com$
 - DOMAIN,st-nlyss1.plala.or.jp
 - DOMAIN-SUFFIX,st-to-uv.com
 - DOMAIN,st.anastasija.lt
@@ -101577,7 +101533,7 @@ payload:
 - DOMAIN-SUFFIX,stathat.com
 - DOMAIN-SUFFIX,stathome.org
 - DOMAIN-SUFFIX,stathound.com
-- DOMAIN-WILDCARD,static*.365inews.com
+- DOMAIN-REGEX,^static.*\.365inews\.com$
 - DOMAIN,static-cn.plista.com
 - DOMAIN,static-img.threatbook.cn
 - DOMAIN,static-rtb.adksrv.com
@@ -106816,7 +106772,7 @@ payload:
 - DOMAIN-SUFFIX,teleostabsupflows.qpon
 - DOMAIN-SUFFIX,telepang.com
 - DOMAIN-SUFFIX,telephoneapparatus.com
-- DOMAIN-WILDCARD,teleriumads-*.netdna-ssl.com
+- DOMAIN-REGEX,^teleriumads\-.*\.netdna\-ssl\.com$
 - DOMAIN-SUFFIX,telesiskhakhamboonies.cyou
 - DOMAIN-SUFFIX,telesmdhal.help
 - DOMAIN-SUFFIX,teletarget.ru
@@ -107536,7 +107492,7 @@ payload:
 - DOMAIN-SUFFIX,thewsclang.cfd
 - DOMAIN-SUFFIX,theyaplanat.shop
 - DOMAIN-SUFFIX,theyellownewtab.com
-- DOMAIN-WILDCARD,thezbpe5*.xyz
+- DOMAIN-REGEX,^thezbpe5.*\.xyz$
 - DOMAIN-SUFFIX,thfoglmtoxooy.online
 - DOMAIN-SUFFIX,thgrekourrkag.site
 - DOMAIN,thhesw.tre.it
@@ -108615,7 +108571,7 @@ payload:
 - DOMAIN,tnc0-aliec2.zijieapi.com
 - DOMAIN,tnc0-alisc1.zijieapi.com
 - DOMAIN,tnc0-bjlgy.zijieapi.com
-- DOMAIN-WILDCARD,tnc16-*.byteoversea.com
+- DOMAIN-REGEX,^tnc16\-.*\.byteoversea\.com$
 - DOMAIN,tnc16-alisg.isnssdk.com
 - DOMAIN,tnc16-useast1a.isnssdk.com
 - DOMAIN,tnc3-aliec1.toutiaoapi.com
@@ -109476,7 +109432,7 @@ payload:
 - DOMAIN-SUFFIX,tr-rollers.xyz
 - DOMAIN-SUFFIX,tr-usual.com
 - DOMAIN-SUFFIX,tr-usual.xyz
-- DOMAIN-WILDCARD,tr.*.espmp-*fr.net
+- DOMAIN-REGEX,^tr\..*\.espmp\-.*fr\.net$
 - DOMAIN,tr.3ou4xcb.cetelem.fr
 - DOMAIN,tr.3xcb.cofinoga.fr
 - DOMAIN,tr.7vid.net
@@ -110722,7 +110678,7 @@ payload:
 - DOMAIN-SUFFIX,trackeame.com
 - DOMAIN-SUFFIX,trackedlink.net
 - DOMAIN-SUFFIX,trackedweb.net
-- DOMAIN-WILDCARD,tracker*.qcloud.com
+- DOMAIN-REGEX,^tracker.*\.qcloud\.com$
 - DOMAIN-SUFFIX,tracker-2.com
 - DOMAIN,tracker-aa.paf.es
 - DOMAIN,tracker-aa.pafbetscore.lv
@@ -113006,7 +112962,7 @@ payload:
 - DOMAIN-SUFFIX,tuoens.cn
 - DOMAIN,tuos.kyouad.com
 - DOMAIN-SUFFIX,tupaiidbanyans.com
-- DOMAIN-WILDCARD,tupian888.*.bcebos.com
+- DOMAIN-REGEX,^tupian888\..*\.bcebos\.com$
 - DOMAIN-SUFFIX,tupiglanseghu.net
 - DOMAIN-SUFFIX,tuplzt.xyz
 - DOMAIN-SUFFIX,tupmenlairing.shop
@@ -113176,7 +113132,7 @@ payload:
 - DOMAIN-SUFFIX,tvyyvkro.com
 - DOMAIN-SUFFIX,tvzapt.icu
 - DOMAIN-SUFFIX,tvzyqtgcqhvtr.space
-- DOMAIN-WILDCARD,tw-726620180914.*.run.app
+- DOMAIN-REGEX,^tw\-726620180914\..*\.run\.app$
 - DOMAIN,tw-api.vpon.com
 - DOMAIN,tw-go.experian.com
 - DOMAIN,tw.adx.nextmedia.com
@@ -113852,7 +113808,7 @@ payload:
 - DOMAIN-SUFFIX,ubzgrdktninrfv.com
 - DOMAIN-SUFFIX,ubzmzxtdosgdh.online
 - DOMAIN-SUFFIX,ubztowsnyurmy.space
-- DOMAIN-WILDCARD,uc*.atobo.com
+- DOMAIN-REGEX,^uc.*\.atobo\.com$
 - DOMAIN,uc.haoyunyuan.cc
 - DOMAIN,uc.qq.uuaoz.com
 - DOMAIN,uc.ucweb.com
@@ -115014,7 +114970,7 @@ payload:
 - DOMAIN-SUFFIX,unikgoqgiissf.site
 - DOMAIN-SUFFIX,unimhk.com
 - DOMAIN-SUFFIX,uninterestedquarter.com
-- DOMAIN-WILDCARD,union*.365inews.com
+- DOMAIN-REGEX,^union.*\.365inews\.com$
 - DOMAIN,union-mlog.bigda.com
 - DOMAIN-SUFFIX,union-wifi.com
 - DOMAIN,union.56.com
@@ -115893,7 +115849,7 @@ payload:
 - DOMAIN,us-marketing.roxtec.com
 - DOMAIN,us-now.experian.com
 - DOMAIN,us-west-1.cdn1cloudflare.xyz
-- DOMAIN-WILDCARD,us.*.qwadro.com
+- DOMAIN-REGEX,^us\..*\.qwadro\.com$
 - DOMAIN,us.appbackupapi.micloud.xiaomi.net.iberostar.com
 - DOMAIN,us.l.qq.com
 - DOMAIN,us.lucanet.com
@@ -116118,7 +116074,7 @@ payload:
 - DOMAIN,utics.nodejibi.in
 - DOMAIN-SUFFIX,utienlt.top
 - DOMAIN-SUFFIX,utihriethlv.com
-- DOMAIN-WILDCARD,util-*.simply-hentai.com
+- DOMAIN-REGEX,^util\-.*\.simply\-hentai\.com$
 - DOMAIN,util.nphoto.net
 - DOMAIN,utility.baidu.cn
 - DOMAIN,utility.baidu.com
@@ -116901,7 +116857,7 @@ payload:
 - DOMAIN-SUFFIX,uzwx.cn
 - DOMAIN-SUFFIX,uzxksecxqrchr.online
 - DOMAIN-SUFFIX,uzzxkatxegdzh.website
-- DOMAIN-WILDCARD,v*-ad.video.yximgs.com
+- DOMAIN-REGEX,^v.*\-ad\.video\.yximgs\.com$
 - DOMAIN-SUFFIX,v-pack.net
 - DOMAIN,v-t.topya.com
 - DOMAIN,v.110route.cn
@@ -118903,7 +118859,7 @@ payload:
 - DOMAIN,vnqcyq.noon.co.kr
 - DOMAIN-SUFFIX,vnrbjvbwbqfob.click
 - DOMAIN-SUFFIX,vns800600.net
-- DOMAIN-WILDCARD,vns86.oss-*.aliyuncs.com
+- DOMAIN-REGEX,^vns86\.oss\-.*\.aliyuncs\.com$
 - DOMAIN-SUFFIX,vnte9urn.click
 - DOMAIN-SUFFIX,vntsm.com
 - DOMAIN-SUFFIX,vntsm.io
@@ -119309,7 +119265,7 @@ payload:
 - DOMAIN-SUFFIX,vrzbtcmdbzyiq.online
 - DOMAIN,vrzmfy.fool.com
 - DOMAIN-SUFFIX,vrzuhj.icu
-- DOMAIN-WILDCARD,vs*.gzcu.u3.ucweb.com
+- DOMAIN-REGEX,^vs.*\.gzcu\.u3\.ucweb\.com$
 - DOMAIN,vs.funshion.com
 - DOMAIN,vs.target.com
 - DOMAIN,vs.verisure.fr
@@ -123624,8 +123580,8 @@ payload:
 - DOMAIN,www.foolhardywear.pro
 - DOMAIN,www.forrepresentzen.com
 - DOMAIN,www.fumblingvacation.pro
-- DOMAIN-WILDCARD,www.fuze-hill*.xyz
-- DOMAIN-WILDCARD,www.fuze-sea*.xyz
+- DOMAIN-REGEX,^www\.fuze\-hill.*\.xyz$
+- DOMAIN-REGEX,^www\.fuze\-sea.*\.xyz$
 - DOMAIN,www.gahroundwhat.com
 - DOMAIN,www.garroteoutlying.com
 - DOMAIN,www.geodeep.org
@@ -123802,7 +123758,7 @@ payload:
 - DOMAIN,www.xiuxiu4.one
 - DOMAIN,www.xjwrq.com
 - DOMAIN,www.xpdyqax.cn
-- DOMAIN-WILDCARD,www.xxmh*.com
+- DOMAIN-REGEX,^www\.xxmh.*\.com$
 - DOMAIN,www.xz8.ru
 - DOMAIN,www.yippeewhenever.com
 - DOMAIN,www.ynxjf.com
@@ -124481,7 +124437,7 @@ payload:
 - DOMAIN-SUFFIX,xdxanagngxkff.site
 - DOMAIN-SUFFIX,xdxqw9nnr.com
 - DOMAIN-SUFFIX,xdyjt.com
-- DOMAIN-WILDCARD,xdyn0*jy.com
+- DOMAIN-REGEX,^xdyn0.*jy\.com$
 - DOMAIN-SUFFIX,xdyn03010jy.com
 - DOMAIN-SUFFIX,xdyn03011jy.com
 - DOMAIN-SUFFIX,xdyn03021jy.com
@@ -126327,7 +126283,7 @@ payload:
 - DOMAIN-SUFFIX,xsbyeeescqfjn.online
 - DOMAIN-SUFFIX,xsbzjmhvigahe.space
 - DOMAIN,xscmzs.tenki.jp
-- DOMAIN-WILDCARD,xscp0*xq.com
+- DOMAIN-REGEX,^xscp0.*xq\.com$
 - DOMAIN-SUFFIX,xscp03091xq.com
 - DOMAIN-SUFFIX,xscp03100xq.com
 - DOMAIN-SUFFIX,xscp03101xq.com
@@ -126947,7 +126903,7 @@ payload:
 - DOMAIN-SUFFIX,y9httmmlc8vk5zmg.cfd
 - DOMAIN-SUFFIX,y9ppy0icw1.com
 - DOMAIN-SUFFIX,y9yfexnb72pw5goz.cfd
-- DOMAIN-WILDCARD,ya*.dwstatic.com
+- DOMAIN-REGEX,^ya.*\.dwstatic\.com$
 - DOMAIN-SUFFIX,yaacdn.top
 - DOMAIN-SUFFIX,yaalchzajtoqg.online
 - DOMAIN,yaanom.tentenhunukwa.space
@@ -127595,7 +127551,7 @@ payload:
 - DOMAIN-SUFFIX,yhrzfhryejrzd.site
 - DOMAIN-SUFFIX,yhsbgm.icu
 - DOMAIN-SUFFIX,yhsegbkmhvrgx.space
-- DOMAIN-WILDCARD,yhsfsdv*.com
+- DOMAIN-REGEX,^yhsfsdv.*\.com$
 - DOMAIN,yhskfe.klipsch.com
 - DOMAIN-SUFFIX,yhsmyipta.com
 - DOMAIN-SUFFIX,yhsunoqvjwpkr.xyz
@@ -128438,7 +128394,7 @@ payload:
 - DOMAIN-SUFFIX,ysckhgcaqo.com
 - DOMAIN-SUFFIX,yscuspceqmprq.site
 - DOMAIN-SUFFIX,ysdcfwvpmucdw.website
-- DOMAIN-WILDCARD,ysdm*.ys137.com.cn
+- DOMAIN-REGEX,^ysdm.*\.ys137\.com\.cn$
 - DOMAIN-SUFFIX,ysdtufmmswzwh.online
 - DOMAIN-SUFFIX,yseodjirzuuax.website
 - DOMAIN-SUFFIX,ysesials.net
@@ -129076,7 +129032,7 @@ payload:
 - DOMAIN-SUFFIX,zaaukprozdvsl.space
 - DOMAIN,zaawds.farmae.it
 - DOMAIN-SUFFIX,zabanit.xyz
-- DOMAIN-WILDCARD,zabdybod*.club
+- DOMAIN-REGEX,^zabdybod.*\.club$
 - DOMAIN-SUFFIX,zabkvvqzulvwe.online
 - DOMAIN-SUFFIX,zablgoqpquvty.site
 - DOMAIN-SUFFIX,zabojdfziov.in
@@ -129105,7 +129061,7 @@ payload:
 - DOMAIN-SUFFIX,zahbvlocavpyv.website
 - DOMAIN,zahlen.olereissmann.de
 - DOMAIN-SUFFIX,zahmrhjtzkgrt.online
-- DOMAIN-WILDCARD,zahrvfbd*.xyz
+- DOMAIN-REGEX,^zahrvfbd.*\.xyz$
 - DOMAIN-SUFFIX,zahvrkdkeulsy.site
 - DOMAIN-SUFFIX,zai1648.xyz
 - DOMAIN-SUFFIX,zaiceyjjqq.com
@@ -129174,7 +129130,7 @@ payload:
 - DOMAIN-SUFFIX,zapmlugpzaufk.website
 - DOMAIN-SUFFIX,zapogentasofh.site
 - DOMAIN-SUFFIX,zapotezincky.com
-- DOMAIN-WILDCARD,zaqlovh*.xyz
+- DOMAIN-REGEX,^zaqlovh.*\.xyz$
 - DOMAIN-SUFFIX,zaqptv2bo.xyz
 - DOMAIN-SUFFIX,zaqxmbjhdyvmx.website
 - DOMAIN-SUFFIX,zardoossuy.net
@@ -129210,18 +129166,18 @@ payload:
 - DOMAIN-SUFFIX,zay7gs1xkl.com
 - DOMAIN-SUFFIX,zayjbkhuzgoks.site
 - DOMAIN-SUFFIX,zayzjuetnoavs.website
-- DOMAIN-WILDCARD,zazgbqg*.xyz
-- DOMAIN-WILDCARD,zazgiyoh*.world
-- DOMAIN-WILDCARD,zazgiyoh*.xyz
+- DOMAIN-REGEX,^zazgbqg.*\.xyz$
+- DOMAIN-REGEX,^zazgiyoh.*\.world$
+- DOMAIN-REGEX,^zazgiyoh.*\.xyz$
 - DOMAIN-SUFFIX,zazlluqbstvzk.website
 - DOMAIN-SUFFIX,zazlpkapqlrai.website
 - DOMAIN,zb.516624.com
 - DOMAIN-SUFFIX,zb94bheebq2bip.cfd
 - DOMAIN-SUFFIX,zbaleqvaffoqg.com
-- DOMAIN-WILDCARD,zbb.bbb.*.pics
+- DOMAIN-REGEX,^zbb\.bbb\..*\.pics$
 - DOMAIN-SUFFIX,zbbmothculony.space
-- DOMAIN-WILDCARD,zbc6hy*.live
-- DOMAIN-WILDCARD,zbc6hye*.xyz
+- DOMAIN-REGEX,^zbc6hy.*\.live$
+- DOMAIN-REGEX,^zbc6hye.*\.xyz$
 - DOMAIN-SUFFIX,zbc6hyip.xyz
 - DOMAIN,zbdtkk.totvs.com
 - DOMAIN-SUFFIX,zbdyhiafvbonu.website
@@ -129277,8 +129233,8 @@ payload:
 - DOMAIN-SUFFIX,zcbwoorjvzbcu.online
 - DOMAIN-SUFFIX,zccamorykaexo.website
 - DOMAIN-SUFFIX,zccfnakbucamq.site
-- DOMAIN-WILDCARD,zcchyr*.xyz
-- DOMAIN-WILDCARD,zcchyw*.xyz
+- DOMAIN-REGEX,^zcchyr.*\.xyz$
+- DOMAIN-REGEX,^zcchyw.*\.xyz$
 - DOMAIN-SUFFIX,zcck60eqyw.world
 - DOMAIN-SUFFIX,zcck60qyw.xyz
 - DOMAIN-SUFFIX,zcck60wqyw.xyz
@@ -129788,7 +129744,7 @@ payload:
 - DOMAIN-SUFFIX,zhisuyunonline.cn
 - DOMAIN-SUFFIX,zhixin.host
 - DOMAIN-SUFFIX,zhiyaspa.com
-- DOMAIN-WILDCARD,zhizhizhizhi.oss-*.aliyuncs.com
+- DOMAIN-REGEX,^zhizhizhizhi\.oss\-.*\.aliyuncs\.com$
 - DOMAIN-SUFFIX,zhizhunbao.top
 - DOMAIN,zhizi.qq.com
 - DOMAIN-SUFFIX,zhiziyun.com
