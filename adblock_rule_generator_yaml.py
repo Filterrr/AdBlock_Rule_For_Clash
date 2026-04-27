@@ -242,7 +242,7 @@ def main():
             continue
         
         # 情况 2: 精确匹配 (层级 >= 3，如 a.b.c.d) -> DOMAIN
-        if domain.count('.') >= 2:
+        if domain.count('.') >= 3:
             formatted_rules.append(f"- DOMAIN,{domain}")
             count_exact += 1
             continue
