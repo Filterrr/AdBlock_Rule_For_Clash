@@ -83,9 +83,9 @@ def safe_read_file(file_path):
 # --- 通用域名提取器 ---
 def parse_line_to_domain(line):
     """统一使用正则提取域名，兼容各种规则格式"""
-    if line.startswith("@@"): 
+    if line.startswith("@@"):
         line = line[2:]
-    
+
     domain = None
     if m := regex1.match(line): domain = m.group(1)
     elif m := regex2.match(line): domain = m.group(1)
@@ -115,18 +115,18 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
             line = line.strip()
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
-            
+
             # 判断是否为白名单（强制模式 or 自带 @@ 前缀）
             is_whitelist = force_whitelist or line.startswith("@@")
-            
+
             # 使用通用解析器提取域名
             domain = parse_line_to_domain(line)
 
             if domain and domain_regex.match(domain):
                 domain = domain.lower()
-                if is_whitelist: 
+                if is_whitelist:
                     global_whitelist.add(domain)
-                else: 
+                else:
                     rules_set.add(domain)
 
 def wildcard_to_regex(domain):
@@ -144,10 +144,7 @@ def wildcard_to_regex(domain):
     if domain.startswith('*.') and '*' not in domain[2:]:
         return None
     # 复杂通配符：转义除 * 外的正则符号，然后把 * 换成 .*
-    # 先转义所有正则特殊字符：\ . ^ $ + - ( ) [ ] { } | ? 
     escaped = re.escape(domain)
-    # re.escape 会把 * 也转义成 \*，我们需要把 \* 替换为 .*
-    # 注意 re.escape 后 '*' 变成 '\\*'，需要还原为 '.*'
     regex_str = escaped.replace(r'\*', '.*')
     return f"^{regex_str}$"
 
@@ -163,7 +160,7 @@ def main():
             line = line.strip()
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
-            
+
             domain = parse_line_to_domain(line)
             if domain and domain_regex.match(domain):
                 white_set.add(domain.lower())
@@ -177,7 +174,7 @@ def main():
     # 阶段 1 & 2：预处理与冲突检测
     write_log(">> 正在执行冲突清洗与保护机制校验...")
     valid_core = {d for d in core_set_raw if d not in white_set}
-    
+
     # 构建父级保护伞（防止 Tier 3 误杀）
     protected_ancestors = set()
     for s in (white_set, valid_core):
@@ -192,15 +189,15 @@ def main():
     # 阶段 3：过滤 Tier 3
     valid_tier3 = set()
     for d in tier3_set_raw:
-        if d in protected_ancestors or '*' in d: 
-            if '*' in d: valid_tier3.add(d) # 通配符直接放行，不参与保护校验
+        if d in protected_ancestors or '*' in d:
+            if '*' in d: valid_tier3.add(d)
             continue
         valid_tier3.add(d)
 
     # 阶段 4：Mihomo 格式智能转换
     write_log(">> 正在执行 Mihomo 域名匹配类型自动分类...")
     all_domains = valid_core.union(valid_tier3)
-    
+
     # 全局后缀去重计算（仅对非通配符域名）
     suffix_candidates = {d for d in all_domains if '*' not in d}
     global_subs_detector = set()
@@ -209,51 +206,56 @@ def main():
         while '.' in temp:
             temp = temp[temp.find('.')+1:]
             global_subs_detector.add(temp)
-    
+
     # 剔除已被父域名覆盖的子域名（仅针对非通配符）
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
-    
+
     # --- 新增计数器 ---
     count_wildcard = 0
     count_regex = 0
     count_exact = 0
     count_suffix = 0
-    
-    formatted_rules = []
+
+    # 按规则类型分组收集
+    domain_rules = []
+    suffix_rules = []
+    wildcard_rules = []
+    regex_rules = []
+
     for domain in sorted(optimized_domains):
         # 情况 1: 含通配符 -> DOMAIN-WILDCARD 或 DOMAIN-REGEX
         if '*' in domain:
-            # 简单前缀通配：*.example.com -> DOMAIN-WILDCARD
             if domain.startswith('*.') and '*' not in domain[2:]:
-                formatted_rules.append(f"- DOMAIN-WILDCARD,{domain}")
+                wildcard_rules.append(f"- DOMAIN-WILDCARD,{domain}")
                 count_wildcard += 1
             else:
-                # 复杂通配：转为 DOMAIN-REGEX
                 regex_pattern = wildcard_to_regex(domain)
                 if regex_pattern:
-                    formatted_rules.append(f"- DOMAIN-REGEX,{regex_pattern}")
+                    regex_rules.append(f"- DOMAIN-REGEX,{regex_pattern}")
                     count_regex += 1
                 else:
-                    # 理论上不会走到这里，但万一转换失败则回退为 DOMAIN-WILDCARD
-                    formatted_rules.append(f"- DOMAIN-WILDCARD,{domain}")
+                    wildcard_rules.append(f"- DOMAIN-WILDCARD,{domain}")
                     count_wildcard += 1
             continue
-        
+
         # 情况 2: 精确匹配 (层级 >= 3，如 a.b.c.d) -> DOMAIN
         if domain.count('.') >= 3:
-            formatted_rules.append(f"- DOMAIN,{domain}")
+            domain_rules.append(f"- DOMAIN,{domain}")
             count_exact += 1
             continue
-        
+
         # 情况 3: 后缀匹配 (常规二/三级域名) -> DOMAIN-SUFFIX
-        formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
+        suffix_rules.append(f"- DOMAIN-SUFFIX,{domain}")
         count_suffix += 1
+
+    # 按指定顺序合并所有规则：DOMAIN → DOMAIN-SUFFIX → DOMAIN-WILDCARD → DOMAIN-REGEX
+    formatted_rules = domain_rules + suffix_rules + wildcard_rules + regex_rules
 
     # 输出文件
     rule_count = len(formatted_rules)
     generation_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
-    
-    # 在 Header 中添加详细统计信息
+
+    # 在 Header 中添加详细统计信息（保持不变，也可按需调整顺序）
     header = f"""# Title: AdBlock_Rule_For_Mihomo
 # Generated: {generation_time} (UTC+8)
 # Total Items: {rule_count} 条
