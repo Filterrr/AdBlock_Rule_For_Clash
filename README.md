@@ -67,7 +67,7 @@ dns:
 rule-providers:
   adblock:
     type: http
-    behavior: domain
+    behavior: classical
     format: yaml
     url: https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.yaml
     path: ./ruleset/adblock_reject.yaml
