@@ -1,10 +1,10 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 06:16:55 (UTC+8)
-# Total Items: 130937 条
+# Generated: 2026-04-28 06:18:27 (UTC+8)
+# Total Items: 130955 条
 # -----------------------------------------------
 # 统计信息:
 # - [通配符匹配] (*.*.a.com)   : 144 条
-# - [精准匹配 ] (+.a.b.c.com)  : 55850 条
+# - [精准匹配 ] (+.a.b.c.com)  : 55868 条
 # - [后缀匹配 ] (.a.com)       : 74943 条
 # -----------------------------------------------
 
@@ -7748,6 +7748,7 @@ payload:
 - '+.ad.intools.dev'
 - '+.ad.iot.360.cn'
 - '+.ad.ipadview.com'
+- '+.ad.iqiyi.com'
 - '+.ad.iwhop.cn'
 - '+.ad.jamba.net'
 - '+.ad.jamster.co.uk'
@@ -7790,6 +7791,7 @@ payload:
 - '+.ad.mazc.org'
 - '+.ad.mediamixer.co.kr'
 - '+.ad.mediaprimaplus.com.my'
+- '+.ad.mgtv.com'
 - '+.ad.mi.com'
 - '+.ad.missena.io'
 - '+.ad.mnt123.com'
@@ -8602,6 +8604,8 @@ payload:
 - '+.admarvel.s3.amazonaws.com'
 - '.admaster.cc'
 - '.admaster.cz'
+- '+.admaster.iqiyi.com'
+- '+.admaster.mgtv.com'
 - '.admasters.media'
 - '.admate.cn'
 - '.admatex.cn'
@@ -9149,6 +9153,7 @@ payload:
 - '+.ads.inmobi.com'
 - '+.ads.iosappsworld.com'
 - '+.ads.ipfighter.com'
+- '+.ads.iqiyi.com'
 - '+.ads.javtit.com'
 - '+.ads.jianchiapp.com'
 - '+.ads.kelkoo.com'
@@ -9157,6 +9162,7 @@ payload:
 - '+.ads.livetv*.me'
 - '+.ads.lot-tissimo.com'
 - '+.ads.luffy.my.id'
+- '+.ads.mgtv.com'
 - '+.ads.mobgold.com'
 - '+.ads.mobilityware.com'
 - '+.ads.mobvertising.net'
@@ -9247,6 +9253,7 @@ payload:
 - '+.ads.yap.yahoo.com'
 - '+.ads.yeeyi.com'
 - '+.ads.yimg.com'
+- '+.ads.youku.com'
 - '+.ads.zhinengxiyifang.cn'
 - '+.ads01.pages.dev'
 - '.ads1-adnow.com'
@@ -9366,8 +9373,10 @@ payload:
 - '+.adserver.fa-mag.com'
 - '+.adserver.goforandroid.com'
 - '+.adserver.infotorg.se'
+- '+.adserver.iqiyi.com'
 - '+.adserver.kimia.es'
 - '+.adserver.kozoom.com'
+- '+.adserver.mgtv.com'
 - '+.adserver.pandora.com'
 - '+.adserver.rtvdrenthe.nl'
 - '+.adserver.rtvutrechtreclame.nl'
@@ -9376,6 +9385,7 @@ payload:
 - '+.adserver.sonicplug.com'
 - '+.adserver.unityads.unity3d.com'
 - '+.adserver.yahoo.com'
+- '+.adserver.youku.com'
 - '.adserverplus.com'
 - '.adserverpub.com'
 - '+.adservice.google.com'
@@ -41934,6 +41944,7 @@ payload:
 - '.fvfxpkmo.icu'
 - '.fvhuhspmvbgxm.online'
 - '.fvibcxczgkhmd.website'
+- '+.fvid.atm.youku.com'
 - '.fvitteilse.com'
 - '.fvizlybgteujg.space'
 - '.fvjhdijvqirab.site'
@@ -60837,6 +60848,7 @@ payload:
 - '+.log.hypebeast.com'
 - '+.log.idnes.cz'
 - '+.log.iflytek.com'
+- '+.log.iqiyi.com'
 - '+.log.ireader.com'
 - '+.log.kaayun.com'
 - '+.log.kajicam.com'
@@ -61702,7 +61714,6 @@ payload:
 - '.lsqyahmytfwhn.store'
 - '.lsrvndktyxbz.com'
 - '.lssocybaoqyeu.online'
-- '+.lstat.youku.com'
 - '.lstlrgmgbv.com'
 - '+.lsv5.belambra.fr'
 - '.lsvfzskgudyyr.site'
@@ -67241,6 +67252,7 @@ payload:
 - '+.metrics.ionos.mx'
 - '+.metrics.iossc.natwest.com'
 - '+.metrics.iossc.rbs.co.uk'
+- '+.metrics.iqiyi.com'
 - '+.metrics.ireport.com'
 - '+.metrics.its.de'
 - '+.metrics.ittoolbox.com'
@@ -99675,6 +99687,7 @@ payload:
 - '.speechcleopatraadmiral.com'
 - '.speechlesstow.com'
 - '.speed-trap.com'
+- '+.speed.lstat.youku.com'
 - '+.speed.notifysrv.com'
 - '.speedcount.de'
 - '.speedcounter.net'
@@ -110380,7 +110393,9 @@ payload:
 - '+.trace.bluemonkey.jp'
 - '.trace.events'
 - '+.trace.insead.edu'
+- '+.trace.iqiyi.com'
 - '+.trace.m1905.cn'
+- '+.trace.mgtv.com'
 - '+.trace.swaven.com'
 - '+.trace.ynet.com'
 - '.tracead.com'
@@ -115697,6 +115712,7 @@ payload:
 - '.urcadnhtikrlq.space'
 - '+.urchin.5173.com'
 - '.urchin.com'
+- '+.urchin.lstat.youku.com'
 - '.urctimzbtcdgv.site'
 - '.urdatingassistant.com'
 - '.urdeemoet.shop'
@@ -118042,6 +118058,7 @@ payload:
 - '+.vid-rtb-india.xapads.com'
 - '+.vid-rtb-sg.xapads.com'
 - '+.vid-rtb.xapads.com'
+- '+.vid.atm.youku.com'
 - '.vid.me'
 - '.vid12031hl.com'
 - '.vid12040hl.com'
@@ -120034,6 +120051,7 @@ payload:
 - '.walmeric.com'
 - '.walnutamyenamor.cyou'
 - '.walnutneckvariability.com'
+- '+.walp.atm.youku.com'
 - '+.walrus.fetzcolor.at'
 - '+.walrus.oscaroarevalo.com'
 - '+.walrus.scalue.com'
