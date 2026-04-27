@@ -1,11 +1,11 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-27 21:06:22 (UTC+8)
-# Total Items: 131009 条
+# Generated: 2026-04-27 21:09:37 (UTC+8)
+# Total Items: 131008 条
 # -----------------------------------------------
 # 统计信息:
 # - [通配符匹配] (*.*.a.com)   : 144 条
 # - [精准匹配 ] (+.a.b.c.com)  : 55893 条
-# - [后缀匹配 ] (.a.com)       : 74972 条
+# - [后缀匹配 ] (.a.com)       : 74971 条
 # -----------------------------------------------
 
 payload:
@@ -129796,7 +129796,6 @@ payload:
 - '.zhilingshidai.com'
 - '.zhimaad.cn'
 - '.zhimengad.com'
-- '.zhimg.com'
 - '.zhipufs.com'
 - '.zhisuyunonline.cn'
 - '.zhixin.host'
