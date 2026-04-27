@@ -1,10 +1,10 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-27 08:35:02 (UTC+8)
-# Total Items: 130844 条
+# Generated: 2026-04-27 08:42:14 (UTC+8)
+# Total Items: 130843 条
 # -----------------------------------------------
 # 统计信息:
 # - [通配符匹配] (*.*.a.com)   : 143 条
-# - [精准匹配 ] (+.a.b.c.com)  : 55885 条
+# - [精准匹配 ] (+.a.b.c.com)  : 55884 条
 # - [后缀匹配 ] (.a.com)       : 74816 条
 # -----------------------------------------------
 
@@ -16985,7 +16985,6 @@ payload:
 - '+.beacon-api.aliyuncs.com'
 - '+.beacon.adelphic.com'
 - '+.beacon.affil.walmart.com'
-- '+.beacon.cdn.qq.com'
 - '+.beacon.cdnma.com'
 - '+.beacon.coofis.com'
 - '+.beacon.dropbox.com'
