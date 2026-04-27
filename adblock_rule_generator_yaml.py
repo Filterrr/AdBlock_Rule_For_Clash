@@ -182,16 +182,28 @@ def main():
     all_domains = valid_core.union(valid_tier3)
     
     # 全局后缀去重计算
-    suffix_candidates = {d for d in all_domains if '*' not in d}
-    global_subs_detector = set()
-    for d in suffix_candidates:
-        temp = d
-        while '.' in temp:
-            temp = temp[temp.find('.')+1:]
-            global_subs_detector.add(temp)
-    
-    # 剔除已被父域名覆盖的子域名（仅针对非通配符）
-    optimized_domains = [d for d in all_domains if d not in global_subs_detector]
+    suffix_candidates = [d for d in all_domains if '*' not in d]
+
+    suffix_candidates.sort(key=lambda d: d.count('.'))
+
+    seen_parents = set()
+    optimized_normal = []
+
+    for domain in suffix_candidates:
+        covered = False
+        parts = domain.split('.')
+        for i in range(1, len(parts)):
+            parent = '.'.join(parts[i:])
+            if parent in seen_parents:
+                covered = True
+                break
+        if covered:
+            continue
+
+        seen_parents.add(domain)
+        optimized_normal.append(domain)
+
+    optimized_domains = [d for d in all_domains if '*' in d] + optimized_normal
     
     # --- 新增计数器 ---
     count_wildcard = 0
