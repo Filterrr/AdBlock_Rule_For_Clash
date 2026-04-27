@@ -24,7 +24,8 @@
   <tr>
     <td style="padding: 8px;">YAML</td>
     <td style="padding: 8px;">
-      <strong><a href="https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.yaml" style="color: #0066cc;">Github原始链接</a></strong>
+      <strong><a href="https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.yaml" style="color: #0066cc;">Github原始链接</a></strong>| 
+      <strong><a style="padding: 8px;">YAML</a></strong>
     </td>
   </tr>
   <tr>
