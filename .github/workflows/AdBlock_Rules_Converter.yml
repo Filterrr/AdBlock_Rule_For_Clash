@@ -34,9 +34,9 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: install pyyaml
-      run: pip install pyyaml
-
+    - name: Install dependencies
+      run: pip install pyyaml publicsuffix2
+      
     - name: Checkout repository
       uses: actions/checkout@v6      # 已修复：升级至 v6 以支持 Node.js 24
 
