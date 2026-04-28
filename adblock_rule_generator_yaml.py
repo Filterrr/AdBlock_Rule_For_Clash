@@ -10,42 +10,21 @@ import re
 import urllib.request
 import datetime
 import sys
+import yaml  # 需要安装 PyYAML: pip install pyyaml
 
 # 强制标准输出为 UTF-8
 if sys.stdout.encoding.lower() != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
 
-# === 自定义全局白名单 ===
+# === 自定义全局白名单（可在此补充） ===
 custom_excluded_domains = [
- #   "*.bp.blogspot.com",
-]
-
-# === 订阅源配置 ===
-allow_urls = [
-    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
-]
-
-tier1_urls = [
-    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",
-    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt",
-    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt"
-]
-
-tier2_urls = [
-    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/ThirdParty/filter_104_EasyListChina/filter.txt",
-    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/thirdparties/easylist/easylist.txt"
-]
-
-tier3_urls = [
-    "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
-    "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
-    "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt",
-    "https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/AD.txt"
+   # "*.bp.blogspot.com",
 ]
 
 # 目录设置
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_FILE_PATH = os.path.join(SCRIPT_DIR, "adblock_log.txt")
+SOURCES_CONFIG = os.path.join(SCRIPT_DIR, "sources.yaml")
 
 # --- 增强型正则引擎：支持通配符 (*) 提取 ---
 domain_regex = re.compile(r'^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9.*-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$')
@@ -78,6 +57,37 @@ def safe_read_file(file_path):
         except Exception:
             continue
     return []
+
+# --- 加载外部订阅源配置 ---
+def load_sources(config_path=SOURCES_CONFIG):
+    """
+    从外部 YAML 文件读取订阅源 URL 列表。
+    返回字典，包含 'allow_urls', 'tier1_urls', 'tier2_urls', 'tier3_urls' 键。
+    若文件不存在或格式错误，则返回空列表的字典。
+    """
+    default_sources = {
+        "allow_urls": [],
+        "tier1_urls": [],
+        "tier2_urls": [],
+        "tier3_urls": []
+    }
+
+    if not os.path.exists(config_path):
+        write_log(f"警告: 配置文件 {config_path} 不存在，使用空订阅源")
+        return default_sources
+
+    try:
+        with open(config_path, 'r', encoding='utf-8') as f:
+            sources = yaml.safe_load(f)
+    except Exception as e:
+        write_log(f"读取配置文件失败: {e}，使用空订阅源")
+        return default_sources
+
+    # 确保每个键都存在且为列表
+    for key in default_sources:
+        if key not in sources or not isinstance(sources[key], list):
+            sources[key] = default_sources[key]
+    return sources
 
 # --- 通用域名提取器 ---
 def parse_line_to_domain(line):
@@ -135,7 +145,7 @@ def wildcard_to_regex(domain):
     - 转义正则特殊字符（. ? + 等）
     - 将 * 替换为 .*
     - 添加行首行尾锚定
-    若 * 只出现在开头且紧跟着 '.', 返回 None 表示应使用 DOMAIN-WILDCARD
+    若 * 只出现在开头且紧跟着 '.'，返回 None 表示应使用 DOMAIN-WILDCARD
     """
     if '*' not in domain:
         return None
@@ -149,6 +159,14 @@ def wildcard_to_regex(domain):
 
 def main():
     write_log("==== 开始初始化设置 ====")
+
+    # 加载外部订阅源配置
+    sources = load_sources()
+    allow_urls = sources["allow_urls"]
+    tier1_urls = sources["tier1_urls"]
+    tier2_urls = sources["tier2_urls"]
+    tier3_urls = sources["tier3_urls"]
+
     white_set = set(d.lower() for d in custom_excluded_domains)
     core_set_raw, tier3_set_raw = set(), set()
 
