@@ -1,10 +1,10 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 09:10:29 (UTC+8)
-# Total Items: 78141 条
+# Generated: 2026-04-28 09:18:06 (UTC+8)
+# Total Items: 78133 条
 # -----------------------------------------------
 # 统计信息:
 # - [通配符匹配] (*.*.a.com)   : 126 条
-# - [精准匹配 ] (+.a.b.c.com)  : 13675 条
+# - [精准匹配 ] (+.a.b.c.com)  : 13667 条
 # - [后缀匹配 ] (.a.com)       : 64340 条
 # -----------------------------------------------
 
@@ -4303,7 +4303,6 @@ payload:
 - '.abstractreunion.com'
 - '.absurdbatchconfess.com'
 - '.abtaurosa.club'
-- '+.abtest-ch.snssdk.com'
 - '+.abtest.alibaba.com'
 - '+.abtest.mistat.xiaomi.com'
 - '+.abtest.swrve.com'
@@ -36678,7 +36677,6 @@ payload:
 - '+.log.perfecttitspics.com'
 - '+.log.pinterest.com'
 - '+.log.popin.cc'
-- '+.log.snssdk.com'
 - '+.log.stat.kugou.com'
 - '+.log.tagtic.cn'
 - '+.log.tbs.qq.com'
@@ -43319,7 +43317,6 @@ payload:
 - '+.open.kuaishouzt.com'
 - '+.open.kwaizt.com'
 - '+.open.oneplus.net'
-- '+.open.snssdk.com'
 - '+.openadapi.fancydsp.com'
 - '+.openads.aira.cz'
 - '.openadserving.com'
@@ -62896,17 +62893,14 @@ payload:
 - '+.tnc16-useast1a.isnssdk.com'
 - '+.tnc3-aliec1.toutiaoapi.com'
 - '+.tnc3-aliec2.bytedance.com'
-- '+.tnc3-aliec2.snssdk.com'
 - '+.tnc3-aliec2.toutiaoapi.com'
 - '.tnc3-aliec2.zijieapi'
 - '+.tnc3-aliec2.zijieapi.com'
-- '+.tnc3-alisc1.snssdk.com'
 - '+.tnc3-alisc1.toutiaoapi.com'
 - '.tnc3-alisc1.zijieapi'
 - '+.tnc3-alisc1.zijieapi.com'
 - '+.tnc3-alisc2.zijieapi.com'
 - '+.tnc3-bjlgy.bytedance.com'
-- '+.tnc3-bjlgy.snssdk.com'
 - '+.tnc3-bjlgy.toutiaoapi.com'
 - '.tnc3-bjlgy.zijieapi'
 - '+.tnc3-bjlgy.zijieapi.com'
@@ -64139,7 +64133,6 @@ payload:
 - '.tsdibqhdyeslo.online'
 - '.tsdmxbhvbznxq.online'
 - '.tsdtvcx579.com'
-- '+.tsearch.snssdk.com'
 - '.tseconomousw.org'
 - '.tseda1.icu'
 - '.tseda4.icu'
@@ -65277,7 +65270,6 @@ payload:
 - '.ufyxvgupbdcjv.website'
 - '+.ufz.doesxyz.com'
 - '+.ug.baidu.com'
-- '+.ug.snssdk.com'
 - '.ug4x1tagz.com'
 - '.ug54oqjpqq.com'
 - '.ugbjqwe.com'
