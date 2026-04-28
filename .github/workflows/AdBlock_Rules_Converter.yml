@@ -2,8 +2,6 @@
 name: AdBlock_Rules_Converter
 
 on:
-  push:
-    branches: [ main ]
   schedule:
     - cron: 0 */3 * * *
   workflow_dispatch:  # 允许手动触发工作流
