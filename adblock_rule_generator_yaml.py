@@ -17,9 +17,7 @@ if sys.stdout.encoding.lower() != 'utf-8':
 
 # === 自定义全局白名单 ===
 custom_excluded_domains = [
-    "*.bp.blogspot.com",
-    "*.exaapi.com",
-    "*.libaishuo.com"
+ #   "*.bp.blogspot.com",
 ]
 
 # === 订阅源配置 ===
