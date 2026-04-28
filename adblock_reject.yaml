@@ -1,12 +1,12 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 22:51:03 (UTC+8)
+# Generated: 2026-04-28 22:54:35 (UTC+8)
 # Total Items: 78259 条
 # -----------------------------------------------
 # 统计信息:
 # - [DOMAIN-WILDCARD] : 3 条
 # - [DOMAIN-REGEX]    : 149 条
-# - [DOMAIN]          : 1052 条
-# - [DOMAIN-SUFFIX]   : 77055 条
+# - [DOMAIN]          : 1019 条
+# - [DOMAIN-SUFFIX]   : 77088 条
 # -----------------------------------------------
 
 payload:
@@ -352,7 +352,7 @@ payload:
 - DOMAIN-REGEX,^107\.167\.22\..*\.gif$
 - DOMAIN-SUFFIX,10753990.xyz
 - DOMAIN-SUFFIX,107a0d5d90.fb33be3463.com
-- DOMAIN,1080872514.rsc.cdn77.org
+- DOMAIN-SUFFIX,1080872514.rsc.cdn77.org
 - DOMAIN-SUFFIX,1090pjopm.de
 - DOMAIN-SUFFIX,109218er.xyz
 - DOMAIN-SUFFIX,1099d89511.c4ff1123f0.com
@@ -385,7 +385,7 @@ payload:
 - DOMAIN-SUFFIX,114lm.com
 - DOMAIN-SUFFIX,1156f180c8.c03e5b557d.com
 - DOMAIN-SUFFIX,11778562.xyz
-- DOMAIN,1187531871.rsc.cdn77.org
+- DOMAIN-SUFFIX,1187531871.rsc.cdn77.org
 - DOMAIN-SUFFIX,1188.com
 - DOMAIN-SUFFIX,119xiazai.com
 - DOMAIN-SUFFIX,11dyw.com
@@ -403,7 +403,7 @@ payload:
 - DOMAIN-SUFFIX,1200555.com
 - DOMAIN-SUFFIX,1200koine.com
 - DOMAIN-SUFFIX,1205qitiao2022.xyz
-- DOMAIN,1208344341.rsc.cdn77.org
+- DOMAIN-SUFFIX,1208344341.rsc.cdn77.org
 - DOMAIN-REGEX,^121\.204\.246\..*\.gif$
 - DOMAIN-SUFFIX,12112336.pix-cdn.org
 - DOMAIN-SUFFIX,12114200.pix-cdn.org
@@ -448,7 +448,7 @@ payload:
 - DOMAIN-SUFFIX,142644ec71.a61bc11442.com
 - DOMAIN-SUFFIX,142801df41.ca2865fb41.com
 - DOMAIN-SUFFIX,1433a25a2b.976caebe7b.com
-- DOMAIN,1437953666.rsc.cdn77.org
+- DOMAIN-SUFFIX,1437953666.rsc.cdn77.org
 - DOMAIN-SUFFIX,14381834.xyz
 - DOMAIN-SUFFIX,1480d5060b.8b023d788d.com
 - DOMAIN-SUFFIX,1492b67edf.1fa25f6cc1.com
@@ -464,11 +464,11 @@ payload:
 - DOMAIN,1500026601.vodplayer.wxamedia.com
 - DOMAIN-SUFFIX,150791bf69.com
 - DOMAIN-SUFFIX,15272973.xyz
-- DOMAIN,1529462937.rsc.cdn77.org
+- DOMAIN-SUFFIX,1529462937.rsc.cdn77.org
 - DOMAIN-SUFFIX,152a3793ce.9e031f589f.com
 - DOMAIN-SUFFIX,152media.cloud
 - DOMAIN-SUFFIX,153c349024.com
-- DOMAIN,1548164934.rsc.cdn77.org
+- DOMAIN-SUFFIX,1548164934.rsc.cdn77.org
 - DOMAIN-SUFFIX,155b473ce5.2878644238.com
 - DOMAIN-SUFFIX,155zn.com
 - DOMAIN-SUFFIX,158e65a1db.com
@@ -487,7 +487,7 @@ payload:
 - DOMAIN-SUFFIX,164e84ce61.ac3fc8f2a5.com
 - DOMAIN-SUFFIX,165tchuang.com
 - DOMAIN-SUFFIX,166ymcv8.2nqmub5hzuxm4prm.cfd
-- DOMAIN,1675450967.rsc.cdn77.org
+- DOMAIN-SUFFIX,1675450967.rsc.cdn77.org
 - DOMAIN-SUFFIX,168.it168.com
 - DOMAIN-SUFFIX,16972675.xyz
 - DOMAIN-SUFFIX,16iis7i2p.de
@@ -532,7 +532,7 @@ payload:
 - DOMAIN-SUFFIX,19515bia.de
 - DOMAIN-SUFFIX,196a5595bc.e0b2d6a445.com
 - DOMAIN-SUFFIX,1990tu.com
-- DOMAIN,1991482557.rsc.cdn77.org
+- DOMAIN-SUFFIX,1991482557.rsc.cdn77.org
 - DOMAIN-SUFFIX,1999019.com
 - DOMAIN-SUFFIX,19c1cd4c61.9a8f641701.com
 - DOMAIN-SUFFIX,19d28d847e.b3beca4e4a.com
@@ -3120,7 +3120,7 @@ payload:
 - DOMAIN-SUFFIX,7mxn77h4vr.com
 - DOMAIN-SUFFIX,7na721c64.com
 - DOMAIN-SUFFIX,7nb71ub2xi.com
-- DOMAIN,7ng6v3lu3c.execute-api.us-east-1.amazonaws.com
+- DOMAIN-SUFFIX,7ng6v3lu3c.execute-api.us-east-1.amazonaws.com
 - DOMAIN-SUFFIX,7nt9p4d4.de
 - DOMAIN-SUFFIX,7nujijkfh5xfbehzetp.rest
 - DOMAIN-SUFFIX,7o2l520r0a.com
@@ -3129,7 +3129,7 @@ payload:
 - DOMAIN-SUFFIX,7oo2r9vfgw2k22kwrzobtv7.rest
 - DOMAIN-SUFFIX,7p5ruxflv0.com
 - DOMAIN-SUFFIX,7pe59uixcyqevun3f73i8f5.rest
-- DOMAIN,7q1z79gxsi.global.ssl.fastly.net
+- DOMAIN-SUFFIX,7q1z79gxsi.global.ssl.fastly.net
 - DOMAIN-SUFFIX,7qi2.fowebsiqa.shop
 - DOMAIN-SUFFIX,7qo2met.com
 - DOMAIN-SUFFIX,7qxv9s5q16.com
@@ -5174,7 +5174,7 @@ payload:
 - DOMAIN-SUFFIX,admarketing.yahoo.net
 - DOMAIN-SUFFIX,admaru.com
 - DOMAIN-SUFFIX,admarvel.com
-- DOMAIN,admarvel.s3.amazonaws.com
+- DOMAIN-SUFFIX,admarvel.s3.amazonaws.com
 - DOMAIN-SUFFIX,admaster.cc
 - DOMAIN-SUFFIX,admaster.cz
 - DOMAIN-SUFFIX,admaster.iqiyi.com
@@ -5355,7 +5355,7 @@ payload:
 - DOMAIN-SUFFIX,adprofits.ru
 - DOMAIN-SUFFIX,adprotected.com
 - DOMAIN-SUFFIX,adproxy.tf1.fr
-- DOMAIN,adpublisher.s3.amazonaws.com
+- DOMAIN-SUFFIX,adpublisher.s3.amazonaws.com
 - DOMAIN-SUFFIX,adpush.goforandroid.com
 - DOMAIN-SUFFIX,adpushup.com
 - DOMAIN-SUFFIX,adquake.com
@@ -5437,7 +5437,7 @@ payload:
 - DOMAIN-SUFFIX,ads-console.recon.com
 - DOMAIN-SUFFIX,ads-d.viber.com
 - DOMAIN-SUFFIX,ads-delivery.gunosy.com
-- DOMAIN,ads-dot-fbc-web-2018.uc.r.appspot.com
+- DOMAIN-SUFFIX,ads-dot-fbc-web-2018.uc.r.appspot.com
 - DOMAIN,ads-game-configuration-master.ads.prd.ie.internal.unity3d.com
 - DOMAIN-SUFFIX,ads-gdl.imovideo.ru
 - DOMAIN-SUFFIX,ads-img-al.xhscdn.com
@@ -5660,7 +5660,7 @@ payload:
 - DOMAIN-SUFFIX,adserve.com
 - DOMAIN-SUFFIX,adserve.ph
 - DOMAIN-SUFFIX,adserve.work
-- DOMAIN,adserver-2084671375.us-east-1.elb.amazonaws.com
+- DOMAIN-SUFFIX,adserver-2084671375.us-east-1.elb.amazonaws.com
 - DOMAIN-REGEX,^adserver\..*\.yahoodns\.net$
 - DOMAIN-SUFFIX,adserver.additionalmedia.com
 - DOMAIN-SUFFIX,adserver.asiantb.com
@@ -5847,7 +5847,7 @@ payload:
 - DOMAIN-SUFFIX,adt574.com
 - DOMAIN-SUFFIX,adt598.com
 - DOMAIN-SUFFIX,adtag.sphdigital.com
-- DOMAIN,adtago.s3.amazonaws.com
+- DOMAIN-SUFFIX,adtago.s3.amazonaws.com
 - DOMAIN-SUFFIX,adtags.mobi
 - DOMAIN-SUFFIX,adtaily.com
 - DOMAIN-SUFFIX,adtaily.pl
@@ -5862,7 +5862,7 @@ payload:
 - DOMAIN-SUFFIX,adtechium.com
 - DOMAIN-SUFFIX,adtechjp.com
 - DOMAIN-SUFFIX,adtechus.com
-- DOMAIN,adtechvideo.s3.amazonaws.com
+- DOMAIN-SUFFIX,adtechvideo.s3.amazonaws.com
 - DOMAIN-SUFFIX,adtegrity.net
 - DOMAIN-SUFFIX,adtelligent.com
 - DOMAIN-SUFFIX,adteractive.com
@@ -5992,7 +5992,7 @@ payload:
 - DOMAIN-SUFFIX,advertur.ru
 - DOMAIN-SUFFIX,advfeeds.com
 - DOMAIN-SUFFIX,adviad.com
-- DOMAIN,advice-ads.s3.amazonaws.com
+- DOMAIN-SUFFIX,advice-ads.s3.amazonaws.com
 - DOMAIN-SUFFIX,adviceglossaryeminence.com
 - DOMAIN-SUFFIX,adview.cn
 - DOMAIN-SUFFIX,advil.waze.com
@@ -6063,7 +6063,7 @@ payload:
 - DOMAIN-SUFFIX,adx.tuia.cn
 - DOMAIN-SUFFIX,adx.ws
 - DOMAIN-SUFFIX,adx1.com
-- DOMAIN,adx1js.s3.amazonaws.com
+- DOMAIN-SUFFIX,adx1js.s3.amazonaws.com
 - DOMAIN-SUFFIX,adxadserv.com
 - DOMAIN-SUFFIX,adxadtracker.com
 - DOMAIN-SUFFIX,adxapi.online
@@ -7261,11 +7261,11 @@ payload:
 - DOMAIN,analytics.pointdrive.linkedin.com
 - DOMAIN,analytics.query.yahoo.com
 - DOMAIN-SUFFIX,analytics.rayjump.com
-- DOMAIN,analytics.s3.amazonaws.com
+- DOMAIN-SUFFIX,analytics.s3.amazonaws.com
 - DOMAIN-SUFFIX,analytics.scalemonk.com
 - DOMAIN-SUFFIX,analytics.woozooo.com
 - DOMAIN-SUFFIX,analytics.yahoo.com
-- DOMAIN,analyticsengine.s3.amazonaws.com
+- DOMAIN-SUFFIX,analyticsengine.s3.amazonaws.com
 - DOMAIN-SUFFIX,analyticsq.com
 - DOMAIN-SUFFIX,analyticsq1.com
 - DOMAIN-SUFFIX,analyze.lemurbrowser.com
@@ -9175,7 +9175,7 @@ payload:
 - DOMAIN-SUFFIX,bab3105053.com
 - DOMAIN-SUFFIX,babbittickier.cfd
 - DOMAIN-SUFFIX,babbnrs.com
-- DOMAIN,babes-mansion.s3.amazonaws.com
+- DOMAIN-SUFFIX,babes-mansion.s3.amazonaws.com
 - DOMAIN-SUFFIX,babeshows.co.uk
 - DOMAIN-SUFFIX,babesinporn.com
 - DOMAIN-SUFFIX,babiteloughsbath.cfd
@@ -14868,7 +14868,7 @@ payload:
 - DOMAIN-SUFFIX,coghlemaselin.cfd
 - DOMAIN-SUFFIX,cognacjugfuls.cfd
 - DOMAIN-SUFFIX,cognatesyringe.com
-- DOMAIN,cognito-identity.us-east-1.amazonaws.com
+- DOMAIN-SUFFIX,cognito-identity.us-east-1.amazonaws.com
 - DOMAIN-SUFFIX,cognizancesteepleelevate.com
 - DOMAIN-SUFFIX,cogocast.net
 - DOMAIN-SUFFIX,cogocs.com
@@ -21923,7 +21923,7 @@ payload:
 - DOMAIN-SUFFIX,entrapspilpai.cyou
 - DOMAIN-SUFFIX,entreatbeggar.com
 - DOMAIN-SUFFIX,entreatyfungusgaily.com
-- DOMAIN,entrecard.s3.amazonaws.com
+- DOMAIN-SUFFIX,entrecard.s3.amazonaws.com
 - DOMAIN-SUFFIX,entreesmoothstir.com
 - DOMAIN-SUFFIX,entreguei.com
 - DOMAIN-SUFFIX,entrepreneurnegativesupportive.com
@@ -27114,7 +27114,7 @@ payload:
 - DOMAIN-SUFFIX,gorxusrnnmooe.space
 - DOMAIN-SUFFIX,gos.tbllad.com
 - DOMAIN-SUFFIX,gosbyfencjhqa.online
-- DOMAIN,goshare-fleet-ads.s3.ap-southeast-1.amazonaws.com
+- DOMAIN-SUFFIX,goshare-fleet-ads.s3.ap-southeast-1.amazonaws.com
 - DOMAIN-SUFFIX,goshbiopsy.com
 - DOMAIN-SUFFIX,gositego.live
 - DOMAIN-SUFFIX,gosjumpy.com
@@ -32477,7 +32477,7 @@ payload:
 - DOMAIN-SUFFIX,japanhotties.jp
 - DOMAIN-SUFFIX,japbdpdmazimj.club
 - DOMAIN-SUFFIX,japeddesmid.cfd
-- DOMAIN,japfg-trending-content.uc.r.appspot.com
+- DOMAIN-SUFFIX,japfg-trending-content.uc.r.appspot.com
 - DOMAIN-SUFFIX,jappkummodah.in
 - DOMAIN-SUFFIX,japw.cloud
 - DOMAIN-SUFFIX,jaqhbfzeufxgp.online
@@ -34998,7 +34998,7 @@ payload:
 - DOMAIN-SUFFIX,kudszedudxi.in
 - DOMAIN-SUFFIX,kudwmaucyncfk.website
 - DOMAIN-SUFFIX,kueezrtb.com
-- DOMAIN,kufar-promo-block.s3-eu-west-1.amazonaws.com
+- DOMAIN-SUFFIX,kufar-promo-block.s3-eu-west-1.amazonaws.com
 - DOMAIN-SUFFIX,kugepaiwari.cfd
 - DOMAIN-SUFFIX,kugeshuffle.com
 - DOMAIN-SUFFIX,kugmpivc.in
@@ -40603,7 +40603,7 @@ payload:
 - DOMAIN-SUFFIX,native-adserver.com
 - DOMAIN-SUFFIX,native-track.com
 - DOMAIN-SUFFIX,native.cli.bz
-- DOMAIN,nativead.s3.amazonaws.com
+- DOMAIN-SUFFIX,nativead.s3.amazonaws.com
 - DOMAIN-SUFFIX,nativeadmatch.com
 - DOMAIN-SUFFIX,nativeantecedent.com
 - DOMAIN-SUFFIX,nativegram.com
@@ -44493,7 +44493,7 @@ payload:
 - DOMAIN-SUFFIX,packsofgood.com
 - DOMAIN-SUFFIX,packwaxclips.cyou
 - DOMAIN-SUFFIX,pacogage.cfd
-- DOMAIN,pacontainer.s3.amazonaws.com
+- DOMAIN-SUFFIX,pacontainer.s3.amazonaws.com
 - DOMAIN-SUFFIX,pacotaanankes.help
 - DOMAIN-SUFFIX,pacsglean.shop
 - DOMAIN-SUFFIX,pacteaten.com
@@ -44629,7 +44629,7 @@ payload:
 - DOMAIN-SUFFIX,pallairrate.com
 - DOMAIN-SUFFIX,pallrutul.in
 - DOMAIN-SUFFIX,pallssayal.shop
-- DOMAIN,palmendeals.blob.core.windows.net
+- DOMAIN-SUFFIX,palmendeals.blob.core.windows.net
 - DOMAIN-SUFFIX,palmerdebye.cfd
 - DOMAIN-SUFFIX,palmierxdiv.com
 - DOMAIN-SUFFIX,palmitekrubut.cyou
@@ -58457,7 +58457,7 @@ payload:
 - DOMAIN-SUFFIX,sp03k.sbs
 - DOMAIN-SUFFIX,sp1.baidu.com
 - DOMAIN-SUFFIX,sp1.freeonlinegayporn.com
-- DOMAIN,sp148.global.ssl.fastly.net
+- DOMAIN-SUFFIX,sp148.global.ssl.fastly.net
 - DOMAIN-SUFFIX,spa.arabtoons.net
 - DOMAIN-SUFFIX,spaallied.com
 - DOMAIN-SUFFIX,spacash.com
@@ -61338,7 +61338,7 @@ payload:
 - DOMAIN-SUFFIX,tapasidlinslicking.cfd
 - DOMAIN-SUFFIX,tapasvimuftisemim.cyou
 - DOMAIN-SUFFIX,tapchibitcoin.care
-- DOMAIN,tapdaq-adverts.global.ssl.fastly.net
+- DOMAIN-SUFFIX,tapdaq-adverts.global.ssl.fastly.net
 - DOMAIN-SUFFIX,tapdb.net
 - DOMAIN-SUFFIX,tapecompensationinjustice.com
 - DOMAIN-SUFFIX,tapedhaji.cfd
@@ -71150,7 +71150,7 @@ payload:
 - DOMAIN-SUFFIX,wivesaccelerateyielded.com
 - DOMAIN-SUFFIX,wivesvacancycraft.com
 - DOMAIN-SUFFIX,wivvgympunpoc.space
-- DOMAIN,wixlabs-adsense-v3.uc.r.appspot.com
+- DOMAIN-SUFFIX,wixlabs-adsense-v3.uc.r.appspot.com
 - DOMAIN-SUFFIX,wiyoabspreetm.com
 - DOMAIN-SUFFIX,wiyqdatgczefl.space
 - DOMAIN-SUFFIX,wizardscharityvisa.com
@@ -75219,7 +75219,7 @@ payload:
 - DOMAIN-SUFFIX,ybyjbuzjanfdd.space
 - DOMAIN-SUFFIX,ybzgzkfgkukik.online
 - DOMAIN-SUFFIX,ybzttjjqnmare.website
-- DOMAIN,yc-ads.s3.amazonaws.com
+- DOMAIN-SUFFIX,yc-ads.s3.amazonaws.com
 - DOMAIN-SUFFIX,ycafuymxouvbq.store
 - DOMAIN-SUFFIX,ycaihhkovkgwt.website
 - DOMAIN-SUFFIX,ycaomcphyjxxt.space
