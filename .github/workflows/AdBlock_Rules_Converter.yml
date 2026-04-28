@@ -25,6 +25,9 @@ jobs:
       with:
         python-version: '3.11'
 
+    - name: 安装依赖
+      run: pip install pyyaml
+
     - name: Checkout repository
       uses: actions/checkout@v6      # 已修复：升级至 v6 以支持 Node.js 24
 
