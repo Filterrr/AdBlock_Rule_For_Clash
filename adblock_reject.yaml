@@ -1,12 +1,12 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 09:18:03 (UTC+8)
-# Total Items: 78133 条
+# Generated: 2026-04-28 09:20:55 (UTC+8)
+# Total Items: 78141 条
 # -----------------------------------------------
 # 统计信息:
 # - [DOMAIN-WILDCARD] : 3 条
 # - [DOMAIN-REGEX]    : 146 条
 # - [DOMAIN]          : 1062 条
-# - [DOMAIN-SUFFIX]   : 76922 条
+# - [DOMAIN-SUFFIX]   : 76930 条
 # -----------------------------------------------
 
 payload:
@@ -5128,6 +5128,7 @@ payload:
 - DOMAIN-SUFFIX,abstractreunion.com
 - DOMAIN-SUFFIX,absurdbatchconfess.com
 - DOMAIN-SUFFIX,abtaurosa.club
+- DOMAIN-SUFFIX,abtest-ch.snssdk.com
 - DOMAIN-SUFFIX,abtest.alibaba.com
 - DOMAIN-SUFFIX,abtest.swrve.com
 - DOMAIN-SUFFIX,abtrcker.com
@@ -36999,6 +37000,7 @@ payload:
 - DOMAIN-SUFFIX,log.perfecttitspics.com
 - DOMAIN-SUFFIX,log.pinterest.com
 - DOMAIN-SUFFIX,log.popin.cc
+- DOMAIN-SUFFIX,log.snssdk.com
 - DOMAIN-SUFFIX,log.tagtic.cn
 - DOMAIN-SUFFIX,log.vcgame.cn
 - DOMAIN-SUFFIX,log.vdisk.cn
@@ -43574,6 +43576,7 @@ payload:
 - DOMAIN-SUFFIX,open.kuaishouzt.com
 - DOMAIN-SUFFIX,open.kwaizt.com
 - DOMAIN-SUFFIX,open.oneplus.net
+- DOMAIN-SUFFIX,open.snssdk.com
 - DOMAIN-SUFFIX,openadapi.fancydsp.com
 - DOMAIN-SUFFIX,openads.aira.cz
 - DOMAIN-SUFFIX,openadserving.com
@@ -62926,14 +62929,17 @@ payload:
 - DOMAIN-SUFFIX,tnc16-useast1a.isnssdk.com
 - DOMAIN-SUFFIX,tnc3-aliec1.toutiaoapi.com
 - DOMAIN-SUFFIX,tnc3-aliec2.bytedance.com
+- DOMAIN-SUFFIX,tnc3-aliec2.snssdk.com
 - DOMAIN-SUFFIX,tnc3-aliec2.toutiaoapi.com
 - DOMAIN-SUFFIX,tnc3-aliec2.zijieapi
 - DOMAIN-SUFFIX,tnc3-aliec2.zijieapi.com
+- DOMAIN-SUFFIX,tnc3-alisc1.snssdk.com
 - DOMAIN-SUFFIX,tnc3-alisc1.toutiaoapi.com
 - DOMAIN-SUFFIX,tnc3-alisc1.zijieapi
 - DOMAIN-SUFFIX,tnc3-alisc1.zijieapi.com
 - DOMAIN-SUFFIX,tnc3-alisc2.zijieapi.com
 - DOMAIN-SUFFIX,tnc3-bjlgy.bytedance.com
+- DOMAIN-SUFFIX,tnc3-bjlgy.snssdk.com
 - DOMAIN-SUFFIX,tnc3-bjlgy.toutiaoapi.com
 - DOMAIN-SUFFIX,tnc3-bjlgy.zijieapi
 - DOMAIN-SUFFIX,tnc3-bjlgy.zijieapi.com
@@ -64160,6 +64166,7 @@ payload:
 - DOMAIN-SUFFIX,tsdibqhdyeslo.online
 - DOMAIN-SUFFIX,tsdmxbhvbznxq.online
 - DOMAIN-SUFFIX,tsdtvcx579.com
+- DOMAIN-SUFFIX,tsearch.snssdk.com
 - DOMAIN-SUFFIX,tseconomousw.org
 - DOMAIN-SUFFIX,tseda1.icu
 - DOMAIN-SUFFIX,tseda4.icu
@@ -65283,6 +65290,7 @@ payload:
 - DOMAIN-SUFFIX,ufyxvgupbdcjv.website
 - DOMAIN-SUFFIX,ufz.doesxyz.com
 - DOMAIN-SUFFIX,ug.baidu.com
+- DOMAIN-SUFFIX,ug.snssdk.com
 - DOMAIN-SUFFIX,ug4x1tagz.com
 - DOMAIN-SUFFIX,ug54oqjpqq.com
 - DOMAIN-SUFFIX,ugbjqwe.com
