@@ -2,13 +2,14 @@
 # -*- coding: utf-8 -*-
 
 # Title: AdBlock_Rule_For_Mihomo
-# Description: 专为 Mihomo 内核优化的广告拦截规则生成脚本
+# Description: 专为 Mihomo 内核优化的广告拦截规则生成脚本（TXT 输出）
 
 import os
 import re
 import urllib.request
 import datetime
 import sys
+import yaml  # 需要安装 PyYAML: pip install pyyaml
 
 # 强制标准输出为 UTF-8
 if sys.stdout.encoding.lower() != 'utf-8':
@@ -19,32 +20,10 @@ custom_excluded_domains = [
     # "example.com",
 ]
 
-# === 订阅源配置 ===
-allow_urls = [
-    "https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt"
-]
-
-tier1_urls = [
-    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt",
-    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_11_Mobile/filter.txt",
-    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt"
-]
-
-tier2_urls = [
-    "https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/ThirdParty/filter_104_EasyListChina/filter.txt",
-    "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/thirdparties/easylist/easylist.txt"
-]
-
-tier3_urls = [
-    "https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt",
-    "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt",
-    "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt",
-    "https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/AD.txt"
-]
-
 # 目录设置
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_FILE_PATH = os.path.join(SCRIPT_DIR, "adblock_log.txt")
+SOURCES_CONFIG = os.path.join(SCRIPT_DIR, "sources.yaml")
 
 # --- 增强型正则引擎：支持通配符 (*) 提取 ---
 domain_regex = re.compile(r'^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9.*-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$')
@@ -78,12 +57,43 @@ def safe_read_file(file_path):
             continue
     return []
 
-# --- 新增：通用域名提取器 ---
+# --- 加载外部订阅源配置 ---
+def load_sources(config_path=SOURCES_CONFIG):
+    """
+    从外部 YAML 文件读取订阅源 URL 列表。
+    返回字典，包含 'allow_urls', 'tier1_urls', 'tier2_urls', 'tier3_urls' 键。
+    若文件不存在或格式错误，则返回空列表的字典。
+    """
+    default_sources = {
+        "allow_urls": [],
+        "tier1_urls": [],
+        "tier2_urls": [],
+        "tier3_urls": []
+    }
+
+    if not os.path.exists(config_path):
+        write_log(f"警告: 配置文件 {config_path} 不存在，使用空订阅源")
+        return default_sources
+
+    try:
+        with open(config_path, 'r', encoding='utf-8') as f:
+            sources = yaml.safe_load(f)
+    except Exception as e:
+        write_log(f"读取配置文件失败: {e}，使用空订阅源")
+        return default_sources
+
+    # 确保每个键都存在且为列表
+    for key in default_sources:
+        if key not in sources or not isinstance(sources[key], list):
+            sources[key] = default_sources[key]
+    return sources
+
+# --- 通用域名提取器 ---
 def parse_line_to_domain(line):
     """统一使用正则提取域名，兼容各种规则格式"""
-    if line.startswith("@@"): 
+    if line.startswith("@@"):
         line = line[2:]
-    
+
     domain = None
     if m := regex1.match(line): domain = m.group(1)
     elif m := regex2.match(line): domain = m.group(1)
@@ -113,22 +123,30 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
             line = line.strip()
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
-            
+
             # 判断是否为白名单（强制模式 or 自带 @@ 前缀）
             is_whitelist = force_whitelist or line.startswith("@@")
-            
+
             # 使用通用解析器提取域名
             domain = parse_line_to_domain(line)
 
             if domain and domain_regex.match(domain):
                 domain = domain.lower()
-                if is_whitelist: 
+                if is_whitelist:
                     global_whitelist.add(domain)
-                else: 
+                else:
                     rules_set.add(domain)
 
 def main():
     write_log("==== 开始初始化设置 ====")
+
+    # 加载外部订阅源配置
+    sources = load_sources()
+    allow_urls = sources["allow_urls"]
+    tier1_urls = sources["tier1_urls"]
+    tier2_urls = sources["tier2_urls"]
+    tier3_urls = sources["tier3_urls"]
+
     white_set = set(d.lower() for d in custom_excluded_domains)
     core_set_raw, tier3_set_raw = set(), set()
 
@@ -139,7 +157,7 @@ def main():
             line = line.strip()
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
-            
+
             domain = parse_line_to_domain(line)
             if domain and domain_regex.match(domain):
                 white_set.add(domain.lower())
@@ -153,7 +171,7 @@ def main():
     # 阶段 1 & 2：预处理与冲突检测
     write_log(">> 正在执行冲突清洗与保护机制校验...")
     valid_core = {d for d in core_set_raw if d not in white_set}
-    
+
     # 构建父级保护伞（防止 Tier 3 误杀）
     protected_ancestors = set()
     for s in (white_set, valid_core):
@@ -168,15 +186,15 @@ def main():
     # 阶段 3：过滤 Tier 3
     valid_tier3 = set()
     for d in tier3_set_raw:
-        if d in protected_ancestors or '*' in d: 
-            if '*' in d: valid_tier3.add(d) # 通配符直接放行，不参与保护校验
+        if d in protected_ancestors or '*' in d:
+            if '*' in d: valid_tier3.add(d)  # 通配符直接放行，不参与保护校验
             continue
         valid_tier3.add(d)
 
-    # 阶段 4：Mihomo 格式智能转换
+    # 阶段 4：Mihomo 格式智能转换（TXT 版本）
     write_log(">> 正在执行 Mihomo 域名匹配类型自动分类...")
     all_domains = valid_core.union(valid_tier3)
-    
+
     # 全局后缀去重计算
     suffix_candidates = {d for d in all_domains if '*' not in d}
     global_subs_detector = set()
@@ -185,40 +203,38 @@ def main():
         while '.' in temp:
             temp = temp[temp.find('.')+1:]
             global_subs_detector.add(temp)
-    
+
     # 剔除已被父域名覆盖的子域名（仅针对非通配符）
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
-    
-    # --- 新增计数器 ---
+
+    # --- 计数器 ---
     count_wildcard = 0
     count_exact = 0
     count_suffix = 0
-    
+
     formatted_rules = []
     for domain in sorted(optimized_domains):
-        # 情况 1: 通配符匹配 (Wildcard)
-        if '*' in domain and domain.count('.') >= 2:
-            formatted_rules.append(f"- '+.{domain}'")
+        # 情况 1: 通配符匹配 (Wildcard) - 保留原逻辑
+        if '*' in domain:
+            formatted_rules.append(f"- '{domain}'")
             count_wildcard += 1
             continue
-        
-        # 情况 2: 精确匹配 (Exact)
-        # 逻辑：层级过深 (点数 >= 3，如 a.b.c.d) 的域名通常是特定接口，使用精确匹配防误杀
+
+        # 情况 2: 精确匹配 (Exact) - 层级深直接用 +. 方式
         if domain.count('.') >= 2:
             formatted_rules.append(f"- '+.{domain}'")
             count_exact += 1
             continue
-        
+
         # 情况 3: 后缀匹配 (Suffix)
-        # 逻辑：对于常规二级、三级域名，使用 '.' 前缀进行泛域名拦截
         formatted_rules.append(f"- '.{domain}'")
         count_suffix += 1
 
     # 输出文件
     rule_count = len(formatted_rules)
     generation_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
-    
-    # 在 Header 中添加详细统计信息
+
+    # Header 统计信息
     header = f"""# Title: AdBlock_Rule_For_Mihomo
 # Generated: {generation_time} (UTC+8)
 # Total Items: {rule_count} 条
