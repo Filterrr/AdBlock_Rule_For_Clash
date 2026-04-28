@@ -1,12 +1,12 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 10:48:27 (UTC+8)
-# Total Items: 78146 条
+# Generated: 2026-04-28 11:01:18 (UTC+8)
+# Total Items: 78127 条
 # -----------------------------------------------
 # 统计信息:
 # - [DOMAIN-WILDCARD] : 3 条
 # - [DOMAIN-REGEX]    : 146 条
-# - [DOMAIN]          : 1062 条
-# - [DOMAIN-SUFFIX]   : 76935 条
+# - [DOMAIN]          : 1051 条
+# - [DOMAIN-SUFFIX]   : 76927 条
 # -----------------------------------------------
 
 payload:
@@ -448,9 +448,7 @@ payload:
 - DOMAIN,cdn.personare.com.br
 - DOMAIN,cdn.slots.baxter.olx.org
 - DOMAIN,cdn.welcome.pussysaga.com
-- DOMAIN,cdn.ynuf.aliapp.org
 - DOMAIN,ceshi127722.obs.cn-north-4.myhuaweicloud.com
-- DOMAIN,cfg.imtt.qq.com
 - DOMAIN,chaoku.oss-cn-chengdu.aliyuncs.com
 - DOMAIN,cheetah.zeh.co.il
 - DOMAIN,cheezwhiz.z9.web.core.windows.net
@@ -501,14 +499,12 @@ payload:
 - DOMAIN,data.ads.oppomobile.com
 - DOMAIN,data.mistat.india.xiaomi.com
 - DOMAIN,data.mistat.rus.xiaomi.com
-- DOMAIN,data.mistat.xiaomi.com
 - DOMAIN,datacollection.uve.weibo.com
 - DOMAIN,de.as.pptv.com
 - DOMAIN,delivery.2d.net.co
 - DOMAIN,delivery.ads.fantagiroditalia.it
 - DOMAIN,delivery.ads.fantasanremo.com
 - DOMAIN,delivery.momentummedia.com.au
-- DOMAIN,diagnosis.ad.xiaomi.com
 - DOMAIN,dianying-1304791696.cos.ap-shanghai.myqcloud.com
 - DOMAIN,dingbu.bj.bcebos.com
 - DOMAIN,dl-adx.op-mobile.opera.com
@@ -517,7 +513,6 @@ payload:
 - DOMAIN,donkey.guggenbichler.co.at
 - DOMAIN,download.changhong.upgrade2.huan.tv
 - DOMAIN,downloadxml.changhong.upgrade2.huan.tv
-- DOMAIN,drcn-weather.cloud.huawei.com
 - DOMAIN,dreemdmbabys.oss-cn-guangzhou.aliyuncs.com
 - DOMAIN,dsp.lenovo.com.cn
 - DOMAIN,dust-0001.delorazahnow.workers.dev
@@ -551,7 +546,6 @@ payload:
 - DOMAIN,gg88.bj.bcebos.com
 - DOMAIN,ggtp-1255424916.cos.ap-chengdu.myqcloud.com
 - DOMAIN,global-staticplat.cdn.bcebos.com
-- DOMAIN,globalapi.ad.xiaomi.com
 - DOMAIN,go.aff.betplays.com
 - DOMAIN,go.aff.estrelabetpartners.com
 - DOMAIN,go.hangzhou.com.cn
@@ -564,7 +558,6 @@ payload:
 - DOMAIN,guess.h.qhimg.com
 - DOMAIN,guppy.ausowned.com.au
 - DOMAIN,h-adashx.ut.taobao.com
-- DOMAIN,h.trace.qq.com
 - DOMAIN,h5.analytics.126.net
 - DOMAIN,h5.hpplay.com.cn
 - DOMAIN,hare.startupbootcamp.com.au
@@ -673,7 +666,6 @@ payload:
 - DOMAIN,m.s.tpcdn.top
 - DOMAIN,m.wantemachine.com.cn
 - DOMAIN,m.yap.yahoo.com
-- DOMAIN,mapi.m.jd.com
 - DOMAIN,marten.joqr.co.jp
 - DOMAIN,mas.martech.yahoo.com
 - DOMAIN,masdk.3g.qq.com
@@ -924,7 +916,6 @@ payload:
 - DOMAIN,tools.3g.qq.com
 - DOMAIN,tp.hit.stat24.com
 - DOMAIN,track.lc.quark.cn
-- DOMAIN,tracking.rus.miui.com
 - DOMAIN,tttppp.oss-cn-guangzhou.aliyuncs.com
 - DOMAIN,tw.api.vpon.com
 - DOMAIN,tw.partner.buy.yahoo.com
@@ -939,7 +930,6 @@ payload:
 - DOMAIN,umengacs.m.taobao.com
 - DOMAIN,umengjmacs.m.taobao.com
 - DOMAIN,union.china.com.cn
-- DOMAIN,update.avlyun.sec.miui.com
 - DOMAIN,upgrade.xl9.xunlei.com
 - DOMAIN,urchin.lstat.youku.com
 - DOMAIN,us.l.qq.com
@@ -985,7 +975,6 @@ payload:
 - DOMAIN,wm.szdushi.com.cn
 - DOMAIN,wn.x.jd.com
 - DOMAIN,wren.camdenmecc.org.uk
-- DOMAIN,ws-keyboard.shouji.sogou.com
 - DOMAIN,ws.sj.qq.com
 - DOMAIN,wuliao.epro.sogou.com
 - DOMAIN,www.3243082.notifysrv.com
@@ -27881,8 +27870,6 @@ payload:
 - DOMAIN-SUFFIX,grqdkqvxbburi.site
 - DOMAIN-SUFFIX,grquadonaxobq.site
 - DOMAIN-SUFFIX,grrergiol.com
-- DOMAIN-SUFFIX,grs.dbankcloud.com
-- DOMAIN-SUFFIX,grs.hicloud.com
 - DOMAIN-SUFFIX,grsketenes.cyou
 - DOMAIN-SUFFIX,grsm.io
 - DOMAIN-SUFFIX,grt02.com
@@ -31238,7 +31225,6 @@ payload:
 - DOMAIN-SUFFIX,images.kxuexue.com
 - DOMAIN-SUFFIX,images.mannenmedia.nl
 - DOMAIN-SUFFIX,images.outbrainimg.com
-- DOMAIN-SUFFIX,images.pinduoduo.com
 - DOMAIN-SUFFIX,images.proxena-adserver.com
 - DOMAIN-SUFFIX,images.sacommunications.com
 - DOMAIN-SUFFIX,images.swiss-equestrian.ch
@@ -31283,7 +31269,6 @@ payload:
 - DOMAIN-SUFFIX,imfuuvpqartcd.space
 - DOMAIN-SUFFIX,img-c.heytapimage.com
 - DOMAIN-SUFFIX,img-load.com
-- DOMAIN-SUFFIX,img-x.jd.com
 - DOMAIN-SUFFIX,img.0279.net
 - DOMAIN-SUFFIX,img.175532.com
 - DOMAIN-SUFFIX,img.263y.com
@@ -31315,7 +31300,6 @@ payload:
 - DOMAIN-SUFFIX,img11.biyan8.com
 - DOMAIN-SUFFIX,img16.diyifanwen.com
 - DOMAIN-SUFFIX,img2.126.net
-- DOMAIN-SUFFIX,img2.360buyimg.com
 - DOMAIN-SUFFIX,img2.qqwangming6.com
 - DOMAIN-SUFFIX,img2.titan007.com
 - DOMAIN-SUFFIX,img3.126.net
@@ -32769,7 +32753,6 @@ payload:
 - DOMAIN-SUFFIX,jampredestination.com
 - DOMAIN-SUFFIX,jamsalon.com
 - DOMAIN-SUFFIX,jamstech.store
-- DOMAIN-SUFFIX,janapi.jd.com
 - DOMAIN-SUFFIX,jangledcloskeyfattish.qpon
 - DOMAIN-SUFFIX,jangmglkchtgl.website
 - DOMAIN-SUFFIX,jango.com
@@ -58062,7 +58045,6 @@ payload:
 - DOMAIN-SUFFIX,snoutwastedeeply.com
 - DOMAIN-SUFFIX,snowdayonline.xyz
 - DOMAIN-SUFFIX,snowdiminutionsponge.com
-- DOMAIN-SUFFIX,snowflake.qq.com
 - DOMAIN-SUFFIX,snowman77.com
 - DOMAIN-SUFFIX,snowmancasaun.qpon
 - DOMAIN-SUFFIX,snowmanjo.com
@@ -63628,7 +63610,6 @@ payload:
 - DOMAIN-SUFFIX,tracking.cirrusinsight.com
 - DOMAIN-SUFFIX,tracking.gusclicks.com
 - DOMAIN-SUFFIX,tracking.kdnet.net
-- DOMAIN-SUFFIX,tracking.miui.com
 - DOMAIN-SUFFIX,tracking.pretrackings.com
 - DOMAIN-SUFFIX,tracking.scenepass.com
 - DOMAIN-SUFFIX,trackingmembers.com
