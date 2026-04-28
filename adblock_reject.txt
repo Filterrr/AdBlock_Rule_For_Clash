@@ -1,10 +1,10 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 09:01:28 (UTC+8)
-# Total Items: 130993 条
+# Generated: 2026-04-28 09:05:36 (UTC+8)
+# Total Items: 130997 条
 # -----------------------------------------------
 # 统计信息:
 # - [通配符匹配] (*.*.a.com)   : 144 条
-# - [精准匹配 ] (+.a.b.c.com)  : 55864 条
+# - [精准匹配 ] (+.a.b.c.com)  : 55868 条
 # - [后缀匹配 ] (.a.com)       : 74985 条
 # -----------------------------------------------
 
@@ -60834,6 +60834,8 @@ payload:
 - '+.log.adplex.co.kr'
 - '+.log.ads-m.net'
 - '+.log.aispeech.com'
+- '+.log.aliyuncs.com'
+- '+.log.amemv.com'
 - '+.log.appstore3.huan.tv'
 - '+.log.arkansasonline.com'
 - '+.log.avlyun.com'
@@ -60910,6 +60912,7 @@ payload:
 - '+.log.seekda.com'
 - '+.log.sina.cn'
 - '+.log.snapdeal.com'
+- '+.log.snssdk.com'
 - '+.log.stat.kugou.com'
 - '+.log.tagtic.cn'
 - '+.log.targetpush.co.kr'
@@ -114126,6 +114129,7 @@ payload:
 - '.ufyxvgupbdcjv.website'
 - '+.ufz.doesxyz.com'
 - '+.ug.baidu.com'
+- '+.ug.snssdk.com'
 - '.ug4x1tagz.com'
 - '.ug54oqjpqq.com'
 - '.ugbjqwe.com'

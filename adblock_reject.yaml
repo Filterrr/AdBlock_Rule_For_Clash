@@ -1,12 +1,12 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 09:01:24 (UTC+8)
-# Total Items: 78137 条
+# Generated: 2026-04-28 09:05:34 (UTC+8)
+# Total Items: 78141 条
 # -----------------------------------------------
 # 统计信息:
 # - [DOMAIN-WILDCARD] : 3 条
 # - [DOMAIN-REGEX]    : 146 条
 # - [DOMAIN]          : 1062 条
-# - [DOMAIN-SUFFIX]   : 76926 条
+# - [DOMAIN-SUFFIX]   : 76930 条
 # -----------------------------------------------
 
 payload:
@@ -36984,6 +36984,8 @@ payload:
 - DOMAIN-SUFFIX,log-verify.hiaiabc.com
 - DOMAIN-SUFFIX,log.ads-m.net
 - DOMAIN-SUFFIX,log.aispeech.com
+- DOMAIN-SUFFIX,log.aliyuncs.com
+- DOMAIN-SUFFIX,log.amemv.com
 - DOMAIN-SUFFIX,log.avlyun.com
 - DOMAIN-SUFFIX,log.bigroundass.net
 - DOMAIN-SUFFIX,log.byteoversea.com
@@ -36998,6 +37000,7 @@ payload:
 - DOMAIN-SUFFIX,log.perfecttitspics.com
 - DOMAIN-SUFFIX,log.pinterest.com
 - DOMAIN-SUFFIX,log.popin.cc
+- DOMAIN-SUFFIX,log.snssdk.com
 - DOMAIN-SUFFIX,log.tagtic.cn
 - DOMAIN-SUFFIX,log.vcgame.cn
 - DOMAIN-SUFFIX,log.vdisk.cn
@@ -65287,6 +65290,7 @@ payload:
 - DOMAIN-SUFFIX,ufyxvgupbdcjv.website
 - DOMAIN-SUFFIX,ufz.doesxyz.com
 - DOMAIN-SUFFIX,ug.baidu.com
+- DOMAIN-SUFFIX,ug.snssdk.com
 - DOMAIN-SUFFIX,ug4x1tagz.com
 - DOMAIN-SUFFIX,ug54oqjpqq.com
 - DOMAIN-SUFFIX,ugbjqwe.com
