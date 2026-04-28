@@ -1,9 +1,9 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 11:38:24 (UTC+8)
-# Total Items: 78139 条
+# Generated: 2026-04-28 11:41:21 (UTC+8)
+# Total Items: 78142 条
 # -----------------------------------------------
 # 统计信息:
-# - [DOMAIN-WILDCARD] : 0 条
+# - [DOMAIN-WILDCARD] : 3 条
 # - [DOMAIN-REGEX]    : 146 条
 # - [DOMAIN]          : 1051 条
 # - [DOMAIN-SUFFIX]   : 76942 条
@@ -78003,6 +78003,9 @@ payload:
 - DOMAIN-SUFFIX,zzzjhkyprpsvl.store
 - DOMAIN-SUFFIX,zzzmjfixezere.site
 - DOMAIN-SUFFIX,zzzn1j9m4evqno.rest
+- DOMAIN-WILDCARD,*.bp.blogspot.com
+- DOMAIN-WILDCARD,*.exaapi.com
+- DOMAIN-WILDCARD,*.libaishuo.com
 - DOMAIN-REGEX,^.*two\-gun\-volley\.pages\.dev$
 - DOMAIN-REGEX,^107\.167\.16\..*\.gif$
 - DOMAIN-REGEX,^107\.167\.22\..*\.gif$
