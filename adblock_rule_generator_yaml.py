@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 # Title: AdBlock_Rule_For_Mihomo
 # Description: 专为 Mihomo 内核优化的广告拦截规则生成脚本
-# 功能：自动识别域名特征，智能分配 DOMAIN、DOMAIN-SUFFIX、DOMAIN-WILDCARD、DOMAIN-REGEX 格式，并在头部显示统计信息。
+
 
 import os
 import re
@@ -192,7 +191,7 @@ def main():
     write_log(">> 正在执行冲突清洗与保护机制校验...")
     valid_core = {d for d in core_set_raw if d not in white_set}
 
-    # 构建父级保护伞（防止 Tier 3 误杀）
+    # 构建父级保护伞（防止 Tier 3 误杀白名单或核心列表中的域名的父级）
     protected_ancestors = set()
     for s in (white_set, valid_core):
         for item in s:
@@ -215,16 +214,15 @@ def main():
     write_log(">> 正在执行 Mihomo 域名匹配类型自动分类...")
     all_domains = valid_core.union(valid_tier3)
 
-    # 全局后缀去重计算（仅对非通配符域名）
     suffix_candidates = {d for d in all_domains if '*' not in d}
     global_subs_detector = set()
     for d in suffix_candidates:
         temp = d
+
         while '.' in temp:
             temp = temp[temp.find('.')+1:]
             global_subs_detector.add(temp)
 
-    # 剔除已被父域名覆盖的子域名（仅针对非通配符）
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
 
     # --- 计数器 ---
