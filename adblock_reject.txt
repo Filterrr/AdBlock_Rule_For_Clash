@@ -1,11 +1,11 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 19:21:02 (UTC+8)
-# Total Items: 78236 条
+# Generated: 2026-04-28 19:35:04 (UTC+8)
+# Total Items: 78249 条
 # -----------------------------------------------
 # 统计信息:
-# - [通配符匹配] (*.*.a.com)   : 149 条
-# - [精准匹配 ] (+.a.b.c.com)  : 13654 条
-# - [后缀匹配 ] (.a.com)       : 64433 条
+# - [通配符匹配] (*.*.a.com)   : 152 条
+# - [精准匹配 ] (+.a.b.c.com)  : 13657 条
+# - [后缀匹配 ] (.a.com)       : 64440 条
 # -----------------------------------------------
 
 payload:
@@ -4306,6 +4306,7 @@ payload:
 - '.abstractreunion.com'
 - '.absurdbatchconfess.com'
 - '.abtaurosa.club'
+- '+.abtest-api.bytedance.com'
 - '+.abtest-ch.snssdk.com'
 - '+.abtest.alibaba.com'
 - '+.abtest.mistat.xiaomi.com'
@@ -4681,6 +4682,7 @@ payload:
 - '+.ad.hpplay.cn'
 - '+.ad.imp.joins.com'
 - '+.ad.inston.ltd'
+- '+.ad.intl.bytego.com'
 - '+.ad.intools.dev'
 - '+.ad.iot.360.cn'
 - '+.ad.iqiyi.com'
@@ -5403,6 +5405,7 @@ payload:
 - 'ads*-normal-*.zijieapi.com'
 - 'ads*-normal-lq.zijieapi.com'
 - 'ads*.bojijulebu.com'
+- 'ads*.bytedance.com'
 - 'ads*.depositfiles.com'
 - 'ads*.depositfiles.org'
 - 'ads*.dfiles.eu'
@@ -10305,6 +10308,7 @@ payload:
 - '.bgf05290lko.com'
 - '.bgf05291lko.com'
 - '+.bgg.baidu.com'
+- '.bghcrpujtjedp.space'
 - '.bghxhsfhrfqhr.website'
 - '.bgjylr.icu'
 - '.bglflksg.com'
@@ -11141,6 +11145,7 @@ payload:
 - '.bonusgew.com'
 - '.bonusmaniac.com'
 - '.bonuspis.com'
+- '.bonwtunwgboos.online'
 - '.bonyspecialist.pro'
 - '.bonzai.co'
 - '.bonzuna.com'
@@ -12229,6 +12234,7 @@ payload:
 - '.byssinsuzukiepochs.cfd'
 - '.byswxkgrsbekt.website'
 - '.byt73g6rrr.com'
+- '.bytegsdk.com'
 - '.bytogeticr.com'
 - '.bytytxkz.icu'
 - '.byvlph.xyz'
@@ -18530,6 +18536,7 @@ payload:
 - '.demandzoo.com'
 - '.demanier.com'
 - '.demastseolith.qpon'
+- '.dembvurvkwmfo.online'
 - '.dementedjudged.com'
 - '.demeoremincypos.cfd'
 - '.demiseskill.com'
@@ -21324,6 +21331,7 @@ payload:
 - '.eiadf.xyz'
 - '.eiaffrjrykttz.online'
 - '.eicbhvfrqwtof.space'
+- '.eicrpbaojyadd.online'
 - '.eicyobandony.com'
 - '.eidzzyexqbtnn.online'
 - '.eifyeldw.top'
@@ -23617,6 +23625,7 @@ payload:
 - '.fgnvnqsoqehlp.space'
 - '.fgnzdb.xyz'
 - '.fgoqfrzcwdmrh.online'
+- '.fgqxcrpyhuw.com'
 - '.fgqymntnqmcby.website'
 - '.fgqyxgbqfxyot.website'
 - '.fgre9.top'
@@ -31923,6 +31932,7 @@ payload:
 - '.irzdkfmbzbhcm.site'
 - '.irzebpsbojrbp.space'
 - '.irzi.cn'
+- '+.is.snssdk.com'
 - '.isabellaentire.com'
 - '.isabellagodpointy.com'
 - '.isabellalive.cfd'
@@ -33895,6 +33905,7 @@ payload:
 - '.kaishq.top'
 - '.kaiu-marketing.com'
 - '+.kaixinhaoren99.foolhardywear.pro'
+- '.kajfjxjrcn.com'
 - '.kajyqgfjhohks.website'
 - '.kakbik.info'
 - '.kakkechudic.shop'
@@ -44660,6 +44671,7 @@ payload:
 - '.pangfulpiccata.com'
 - '.pangiuseable.com'
 - '.pangle.io'
+- 'pangolin*.toutiao.com'
 - '+.pangolin.snssdk.com'
 - '+.pangolin16.isnssdk.com'
 - '+.pangolin16.sgsnssdk.com'
@@ -59240,6 +59252,7 @@ payload:
 - '.starvedesolatesaturday.com'
 - '.starwfondlytannoid.qpon'
 - '.stashessnouter.cfd'
+- 'stat*.bytedance.com'
 - '.stat-rock.com'
 - '+.stat.cnmo.com'
 - '+.stat.dongqiudi.com'

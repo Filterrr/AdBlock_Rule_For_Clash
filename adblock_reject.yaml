@@ -1,12 +1,12 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 19:21:00 (UTC+8)
-# Total Items: 78236 条
+# Generated: 2026-04-28 19:35:02 (UTC+8)
+# Total Items: 78249 条
 # -----------------------------------------------
 # 统计信息:
 # - [DOMAIN-WILDCARD] : 3 条
-# - [DOMAIN-REGEX]    : 146 条
-# - [DOMAIN]          : 1051 条
-# - [DOMAIN-SUFFIX]   : 77036 条
+# - [DOMAIN-REGEX]    : 149 条
+# - [DOMAIN]          : 1052 条
+# - [DOMAIN-SUFFIX]   : 77045 条
 # -----------------------------------------------
 
 payload:
@@ -4307,6 +4307,7 @@ payload:
 - DOMAIN-SUFFIX,abstractreunion.com
 - DOMAIN-SUFFIX,absurdbatchconfess.com
 - DOMAIN-SUFFIX,abtaurosa.club
+- DOMAIN-SUFFIX,abtest-api.bytedance.com
 - DOMAIN-SUFFIX,abtest-ch.snssdk.com
 - DOMAIN-SUFFIX,abtest.alibaba.com
 - DOMAIN,abtest.mistat.xiaomi.com
@@ -4682,6 +4683,7 @@ payload:
 - DOMAIN-SUFFIX,ad.hpplay.cn
 - DOMAIN,ad.imp.joins.com
 - DOMAIN-SUFFIX,ad.inston.ltd
+- DOMAIN,ad.intl.bytego.com
 - DOMAIN-SUFFIX,ad.intools.dev
 - DOMAIN,ad.iot.360.cn
 - DOMAIN-SUFFIX,ad.iqiyi.com
@@ -5404,6 +5406,7 @@ payload:
 - DOMAIN-REGEX,^ads.*\-normal\-.*\.zijieapi\.com$
 - DOMAIN-REGEX,^ads.*\-normal\-lq\.zijieapi\.com$
 - DOMAIN-REGEX,^ads.*\.bojijulebu\.com$
+- DOMAIN-REGEX,^ads.*\.bytedance\.com$
 - DOMAIN-REGEX,^ads.*\.depositfiles\.com$
 - DOMAIN-REGEX,^ads.*\.depositfiles\.org$
 - DOMAIN-REGEX,^ads.*\.dfiles\.eu$
@@ -10306,6 +10309,7 @@ payload:
 - DOMAIN-SUFFIX,bgf05290lko.com
 - DOMAIN-SUFFIX,bgf05291lko.com
 - DOMAIN-SUFFIX,bgg.baidu.com
+- DOMAIN-SUFFIX,bghcrpujtjedp.space
 - DOMAIN-SUFFIX,bghxhsfhrfqhr.website
 - DOMAIN-SUFFIX,bgjylr.icu
 - DOMAIN-SUFFIX,bglflksg.com
@@ -11142,6 +11146,7 @@ payload:
 - DOMAIN-SUFFIX,bonusgew.com
 - DOMAIN-SUFFIX,bonusmaniac.com
 - DOMAIN-SUFFIX,bonuspis.com
+- DOMAIN-SUFFIX,bonwtunwgboos.online
 - DOMAIN-SUFFIX,bonyspecialist.pro
 - DOMAIN-SUFFIX,bonzai.co
 - DOMAIN-SUFFIX,bonzuna.com
@@ -12230,6 +12235,7 @@ payload:
 - DOMAIN-SUFFIX,byssinsuzukiepochs.cfd
 - DOMAIN-SUFFIX,byswxkgrsbekt.website
 - DOMAIN-SUFFIX,byt73g6rrr.com
+- DOMAIN-SUFFIX,bytegsdk.com
 - DOMAIN-SUFFIX,bytogeticr.com
 - DOMAIN-SUFFIX,bytytxkz.icu
 - DOMAIN-SUFFIX,byvlph.xyz
@@ -18531,6 +18537,7 @@ payload:
 - DOMAIN-SUFFIX,demandzoo.com
 - DOMAIN-SUFFIX,demanier.com
 - DOMAIN-SUFFIX,demastseolith.qpon
+- DOMAIN-SUFFIX,dembvurvkwmfo.online
 - DOMAIN-SUFFIX,dementedjudged.com
 - DOMAIN-SUFFIX,demeoremincypos.cfd
 - DOMAIN-SUFFIX,demiseskill.com
@@ -21325,6 +21332,7 @@ payload:
 - DOMAIN-SUFFIX,eiadf.xyz
 - DOMAIN-SUFFIX,eiaffrjrykttz.online
 - DOMAIN-SUFFIX,eicbhvfrqwtof.space
+- DOMAIN-SUFFIX,eicrpbaojyadd.online
 - DOMAIN-SUFFIX,eicyobandony.com
 - DOMAIN-SUFFIX,eidzzyexqbtnn.online
 - DOMAIN-SUFFIX,eifyeldw.top
@@ -23618,6 +23626,7 @@ payload:
 - DOMAIN-SUFFIX,fgnvnqsoqehlp.space
 - DOMAIN-SUFFIX,fgnzdb.xyz
 - DOMAIN-SUFFIX,fgoqfrzcwdmrh.online
+- DOMAIN-SUFFIX,fgqxcrpyhuw.com
 - DOMAIN-SUFFIX,fgqymntnqmcby.website
 - DOMAIN-SUFFIX,fgqyxgbqfxyot.website
 - DOMAIN-SUFFIX,fgre9.top
@@ -31924,6 +31933,7 @@ payload:
 - DOMAIN-SUFFIX,irzdkfmbzbhcm.site
 - DOMAIN-SUFFIX,irzebpsbojrbp.space
 - DOMAIN-SUFFIX,irzi.cn
+- DOMAIN-SUFFIX,is.snssdk.com
 - DOMAIN-SUFFIX,isabellaentire.com
 - DOMAIN-SUFFIX,isabellagodpointy.com
 - DOMAIN-SUFFIX,isabellalive.cfd
@@ -33896,6 +33906,7 @@ payload:
 - DOMAIN-SUFFIX,kaishq.top
 - DOMAIN-SUFFIX,kaiu-marketing.com
 - DOMAIN-SUFFIX,kaixinhaoren99.foolhardywear.pro
+- DOMAIN-SUFFIX,kajfjxjrcn.com
 - DOMAIN-SUFFIX,kajyqgfjhohks.website
 - DOMAIN-SUFFIX,kakbik.info
 - DOMAIN-SUFFIX,kakkechudic.shop
@@ -44661,6 +44672,7 @@ payload:
 - DOMAIN-SUFFIX,pangfulpiccata.com
 - DOMAIN-SUFFIX,pangiuseable.com
 - DOMAIN-SUFFIX,pangle.io
+- DOMAIN-REGEX,^pangolin.*\.toutiao\.com$
 - DOMAIN-SUFFIX,pangolin.snssdk.com
 - DOMAIN-SUFFIX,pangolin16.isnssdk.com
 - DOMAIN-SUFFIX,pangolin16.sgsnssdk.com
@@ -59241,6 +59253,7 @@ payload:
 - DOMAIN-SUFFIX,starvedesolatesaturday.com
 - DOMAIN-SUFFIX,starwfondlytannoid.qpon
 - DOMAIN-SUFFIX,stashessnouter.cfd
+- DOMAIN-REGEX,^stat.*\.bytedance\.com$
 - DOMAIN-SUFFIX,stat-rock.com
 - DOMAIN-SUFFIX,stat.cnmo.com
 - DOMAIN-SUFFIX,stat.dongqiudi.com
