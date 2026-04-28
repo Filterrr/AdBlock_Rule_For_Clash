@@ -1,12 +1,12 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 19:35:02 (UTC+8)
-# Total Items: 78249 条
+# Generated: 2026-04-28 19:51:43 (UTC+8)
+# Total Items: 78254 条
 # -----------------------------------------------
 # 统计信息:
 # - [DOMAIN-WILDCARD] : 3 条
 # - [DOMAIN-REGEX]    : 149 条
 # - [DOMAIN]          : 1052 条
-# - [DOMAIN-SUFFIX]   : 77045 条
+# - [DOMAIN-SUFFIX]   : 77050 条
 # -----------------------------------------------
 
 payload:
@@ -9777,6 +9777,7 @@ payload:
 - DOMAIN-SUFFIX,bduwesnxbmmjq.site
 - DOMAIN-SUFFIX,bdwmhz.120askimages.com
 - DOMAIN-SUFFIX,bdx.playnext.cn
+- DOMAIN-SUFFIX,bdxbtv.icu
 - DOMAIN-SUFFIX,bdxydp.icu
 - DOMAIN-SUFFIX,be1d40e516.com
 - DOMAIN-SUFFIX,be3b287535.cf9e789bf0.com
@@ -12379,6 +12380,7 @@ payload:
 - DOMAIN-SUFFIX,c5ddfbbe96.cde497d52a.com
 - DOMAIN-SUFFIX,c5f18bbf67.4afe4f94c5.com
 - DOMAIN-SUFFIX,c5fdf44fce.4fee6d013f.com
+- DOMAIN-SUFFIX,c5mwwyqfvi.com
 - DOMAIN-SUFFIX,c6.friok.com
 - DOMAIN-SUFFIX,c635e33b2e.com
 - DOMAIN-SUFFIX,c64ihqx0gj.com
@@ -18179,6 +18181,7 @@ payload:
 - DOMAIN-SUFFIX,dcmbaescepqsq.space
 - DOMAIN-SUFFIX,dcmbzbtgqiyvd.website
 - DOMAIN-SUFFIX,dcmdquudzpmkc.store
+- DOMAIN-SUFFIX,dcpgdj.icu
 - DOMAIN-SUFFIX,dcpqlckkntmoc.site
 - DOMAIN-SUFFIX,dcrtkdqknftyn.website
 - DOMAIN-SUFFIX,dcs.creativecow.net
@@ -38748,6 +38751,7 @@ payload:
 - DOMAIN-SUFFIX,mgladthereisso.com
 - DOMAIN-SUFFIX,mgmaringpoli.org
 - DOMAIN-SUFFIX,mgnloxyquiiow.online
+- DOMAIN-SUFFIX,mgpl5pqg29.com
 - DOMAIN-SUFFIX,mgpofsndupctm.com
 - DOMAIN-SUFFIX,mgptijzevfuxj.space
 - DOMAIN-SUFFIX,mgqisdwxswpuj.online
@@ -44358,6 +44362,7 @@ payload:
 - DOMAIN,p.l.qq.com
 - DOMAIN-SUFFIX,p.netork.ru
 - DOMAIN-SUFFIX,p.octoberads.space
+- DOMAIN-SUFFIX,p.pangle.io
 - DOMAIN-SUFFIX,p.popjanuary.shop
 - DOMAIN-SUFFIX,p.popunderoctober.store
 - DOMAIN-SUFFIX,p.porn0hd.online
@@ -44671,7 +44676,6 @@ payload:
 - DOMAIN-SUFFIX,pangenossal.shop
 - DOMAIN-SUFFIX,pangfulpiccata.com
 - DOMAIN-SUFFIX,pangiuseable.com
-- DOMAIN-SUFFIX,pangle.io
 - DOMAIN-REGEX,^pangolin.*\.toutiao\.com$
 - DOMAIN-SUFFIX,pangolin.snssdk.com
 - DOMAIN-SUFFIX,pangolin16.isnssdk.com
@@ -56489,6 +56493,7 @@ payload:
 - DOMAIN-SUFFIX,seznam.cz
 - DOMAIN-SUFFIX,sezyaajtqobxn.space
 - DOMAIN-SUFFIX,sf-ads.io
+- DOMAIN-SUFFIX,sf1-cdn-tos.pstatp.com
 - DOMAIN-SUFFIX,sf16-static.i18n-pglstatp.com
 - DOMAIN-SUFFIX,sf3-fe-tos.pglstatp-toutiao.com
 - DOMAIN-SUFFIX,sfacjbrjfczyy.online
