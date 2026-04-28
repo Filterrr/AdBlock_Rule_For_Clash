@@ -334,7 +334,7 @@ def main():
 # -----------------------------------------------
 payload:
 """
-    output_path = os.path.join(SCRIPT_DIR, "adblock_reject_safe.yaml")
+    output_path = os.path.join(SCRIPT_DIR, "adblock_reject.yaml")
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(header + "\n".join(formatted_rules))
     write_log(f"成功导出 {rule_count} 条安全规则至: {output_path}")
