@@ -15,6 +15,14 @@ import yaml  # 需要安装 PyYAML: pip install pyyaml
 if sys.stdout.encoding.lower() != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
 
+# --- 尝试导入 publicsuffixlist (需安装: pip install publicsuffixlist) ---
+try:
+    from publicsuffixlist import PublicSuffixList
+except ImportError:
+    PublicSuffixList = None
+    print("⚠️ 警告: 未安装 publicsuffixlist，将退回到简单的点数判断。")
+    print("    (建议执行: pip install publicsuffixlist)")
+
 # === 自定义全局白名单 ===
 custom_excluded_domains = [
     # "example.com",
@@ -32,6 +40,28 @@ regex2 = re.compile(r'^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.*-]+)')
 regex3 = re.compile(r'^(?:address|server)=/([a-zA-Z0-9.*-]+)/')
 regex4 = re.compile(r'^(?:DOMAIN|HOST)(?:-SUFFIX|0WILD)?\s*,\s*([a-zA-Z0-9.*-]+\.[a-zA-Z]{2,})(?:\s*,.*)?$', re.IGNORECASE)
 regex5 = re.compile(r'^([a-zA-Z0-9.*-]+)$')
+
+# --- 初始化 PublicSuffixList ---
+_psl = PublicSuffixList() if PublicSuffixList else None
+
+def is_public_suffix(domain):
+    """检查域名是否为公共后缀 (如 'com', 'co.uk')，若是则返回 True"""
+    if _psl is None:
+        return False
+    try:
+        return _psl.is_public_suffix(domain)
+    except Exception:
+        return False
+
+def get_registrable_domain(domain):
+    """获取域名的注册域 (eTLD+1)，例如 'example.com.cn'。失败返回 None"""
+    if _psl is None:
+        return None
+    try:
+        # publicsuffixlist 的 privatesuffix 返回注册域部分
+        return _psl.privatesuffix(domain)
+    except Exception:
+        return None
 
 def write_log(message):
     print(message)
@@ -109,6 +139,7 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
     :param force_whitelist: 如果为 True，无论规则有无 @@ 前缀，均强制视为白名单
     """
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+    skipped_psl = 0
     for url in urls:
         write_log(f"正在获取: {url}")
         req = urllib.request.Request(url, headers=headers)
@@ -132,10 +163,16 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
 
             if domain and domain_regex.match(domain):
                 domain = domain.lower()
+                # 过滤公共后缀（如 "com", "co.uk"）
+                if is_public_suffix(domain):
+                    skipped_psl += 1
+                    continue
                 if is_whitelist:
                     global_whitelist.add(domain)
                 else:
                     rules_set.add(domain)
+    if skipped_psl:
+        write_log(f"已过滤 {skipped_psl} 条公共后缀域名规则")
 
 def wildcard_to_regex(domain):
     """
@@ -179,7 +216,9 @@ def main():
 
             domain = parse_line_to_domain(line)
             if domain and domain_regex.match(domain):
-                white_set.add(domain.lower())
+                domain = domain.lower()
+                if not is_public_suffix(domain):
+                    white_set.add(domain)
         write_log(f"已加载本地白名单，当前白名单库共 {len(white_set)} 条。")
 
     # 获取规则 (优化：allow_urls 开启强制白名单模式)
@@ -218,7 +257,6 @@ def main():
     global_subs_detector = set()
     for d in suffix_candidates:
         temp = d
-
         while '.' in temp:
             temp = temp[temp.find('.')+1:]
             global_subs_detector.add(temp)
@@ -248,13 +286,20 @@ def main():
                     count_wildcard += 1
             continue
 
-        # 情况 2: 精确匹配 (层级 >= 3，如 a.b.c.d) -> DOMAIN
+        # 情况 2: 普通域名（无通配符）分类
         if domain.count('.') >= 3:
-            formatted_rules.append(f"- DOMAIN,{domain}")
-            count_exact += 1
+            registrable = get_registrable_domain(domain)
+            if registrable and domain == registrable:
+                # 该域名本身是注册域（例如 example.com.cn），应后缀匹配
+                formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
+                count_suffix += 1
+            else:
+                # 深层子域，保持精确匹配（与原输出一致）
+                formatted_rules.append(f"- DOMAIN,{domain}")
+                count_exact += 1
             continue
 
-        # 情况 3: 后缀匹配 (常规二/三级域名) -> DOMAIN-SUFFIX
+        # 情况 3: 常规二/三级域名 -> DOMAIN-SUFFIX
         formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
         count_suffix += 1
 
