@@ -20,7 +20,7 @@ try:
     from publicsuffixlist import PublicSuffixList
 except ImportError:
     PublicSuffixList = None
-    print("⚠️ 警告: 未安装 publicsuffixlist，将跳过公共后缀过滤。")
+    print("⚠️ 警告: 未安装 publicsuffixlist，将退回到简单的点数判断。")
     print("    (建议执行: pip install publicsuffixlist)")
 
 # === 自定义全局白名单 ===
@@ -47,11 +47,21 @@ _psl = PublicSuffixList() if PublicSuffixList else None
 def is_public_suffix(domain):
     """检查域名是否为公共后缀 (如 'com', 'co.uk')，若是则返回 True"""
     if _psl is None:
-        return False  # 无法检查时放行
+        return False
     try:
         return _psl.is_public_suffix(domain)
     except Exception:
         return False
+
+def get_registrable_domain(domain):
+    """获取域名的注册域 (eTLD+1)，例如 'example.com.cn'。失败返回 None"""
+    if _psl is None:
+        return None
+    try:
+        # publicsuffixlist 的 privatesuffix 返回注册域部分
+        return _psl.privatesuffix(domain)
+    except Exception:
+        return None
 
 def write_log(message):
     print(message)
@@ -247,7 +257,6 @@ def main():
     global_subs_detector = set()
     for d in suffix_candidates:
         temp = d
-
         while '.' in temp:
             temp = temp[temp.find('.')+1:]
             global_subs_detector.add(temp)
@@ -277,13 +286,20 @@ def main():
                     count_wildcard += 1
             continue
 
-        # 情况 2: 精确匹配 (层级 >= 3，如 a.b.c.d) -> DOMAIN
+        # 情况 2: 普通域名（无通配符）分类
         if domain.count('.') >= 3:
-            formatted_rules.append(f"- DOMAIN,{domain}")
-            count_exact += 1
+            registrable = get_registrable_domain(domain)
+            if registrable and domain == registrable:
+                # 该域名本身是注册域（例如 example.com.cn），应后缀匹配
+                formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
+                count_suffix += 1
+            else:
+                # 深层子域，保持精确匹配（与原输出一致）
+                formatted_rules.append(f"- DOMAIN,{domain}")
+                count_exact += 1
             continue
 
-        # 情况 3: 后缀匹配 (常规二/三级域名) -> DOMAIN-SUFFIX
+        # 情况 3: 常规二/三级域名 -> DOMAIN-SUFFIX
         formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
         count_suffix += 1
 
