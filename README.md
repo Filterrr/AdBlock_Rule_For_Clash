@@ -38,7 +38,7 @@
 
 <hr>
 
-## 警告:本过滤器订阅有可能破坏某些网站的功能，也有可能封禁某些色情、赌博网站，使用前请斟酌考虑，如有误杀请积极issue反馈。
+## 警告:本过滤器订阅有可能破坏某些网站的功能，也有可能封禁某些色情、赌博网站，使用前请斟酌考虑，如有误杀请积极<strong><a href="https://github.com/Filterrr/AdBlock_Rule_For_Clash/issues" style="color: #0066cc;">issue</a></strong>反馈。
 
 <hr>
 
