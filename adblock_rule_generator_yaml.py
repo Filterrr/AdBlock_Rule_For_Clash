@@ -7,7 +7,7 @@ import urllib.request
 import datetime
 import sys
 import yaml
-from publicsuffix2 import PublicSuffixList
+from PublicSuffixList import PublicSuffixList
 
 # 强制标准输出为 UTF-8
 if sys.stdout.encoding.lower() != 'utf-8':
