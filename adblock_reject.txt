@@ -1,10 +1,10 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 10:46:22 (UTC+8)
-# Total Items: 78156 条
+# Generated: 2026-04-28 10:48:30 (UTC+8)
+# Total Items: 78146 条
 # -----------------------------------------------
 # 统计信息:
 # - [通配符匹配] (*.*.a.com)   : 126 条
-# - [精准匹配 ] (+.a.b.c.com)  : 13674 条
+# - [精准匹配 ] (+.a.b.c.com)  : 13664 条
 # - [后缀匹配 ] (.a.com)       : 64356 条
 # -----------------------------------------------
 
@@ -7822,7 +7822,6 @@ payload:
 - '+.applog-perf.uc.cn'
 - '+.applog.lc.quark.cn'
 - '+.applog.uc.cn'
-- '+.applog.zijieapi.com'
 - '.applstr.com'
 - '+.appmetrica.yandex.ru'
 - '+.appnext-a.akamaihd.net'
@@ -36689,7 +36688,6 @@ payload:
 - '+.log.vcgame.cn'
 - '+.log.vdisk.cn'
 - '+.log.web.kugou.com'
-- '+.log.zijieapi.com'
 - '+.log.zongheng.com'
 - '+.log1.17173.com'
 - '+.log1.cmpassport.com'
@@ -38266,7 +38264,6 @@ payload:
 - '.mcppsh.com'
 - '.mcprofits.com'
 - '.mcpuwpsh.com'
-- '+.mcs.zijieapi.com'
 - '.mcurrentlysea.info'
 - '.mcwtjxxpphqrs.online'
 - '.mcxuorwlaqtyd.site'
@@ -39857,7 +39854,6 @@ payload:
 - '.msrvt.net'
 - '.mssdhde.cn'
 - '+.mssdk.volces.com'
-- '+.mssdk.zijieapi.com'
 - '.msslwa.icu'
 - '.mssuzyhqlqjwj.site'
 - '.mstjfzekwtufe.online'
@@ -62897,9 +62893,6 @@ payload:
 - '.tnaygpxwlubq.com'
 - '.tnbigewpbffra.website'
 - '.tnbmdavwrgygn.online'
-- '+.tnc0-aliec2.zijieapi.com'
-- '+.tnc0-alisc1.zijieapi.com'
-- '+.tnc0-bjlgy.zijieapi.com'
 - '+.tnc16-*.byteoversea.com'
 - '+.tnc16-alisg.isnssdk.com'
 - '+.tnc16-useast1a.isnssdk.com'
@@ -62908,12 +62901,9 @@ payload:
 - '+.tnc3-aliec2.snssdk.com'
 - '+.tnc3-aliec2.toutiaoapi.com'
 - '.tnc3-aliec2.zijieapi'
-- '+.tnc3-aliec2.zijieapi.com'
 - '+.tnc3-alisc1.snssdk.com'
 - '+.tnc3-alisc1.toutiaoapi.com'
 - '.tnc3-alisc1.zijieapi'
-- '+.tnc3-alisc1.zijieapi.com'
-- '+.tnc3-alisc2.zijieapi.com'
 - '+.tnc3-bjlgy.bytedance.com'
 - '+.tnc3-bjlgy.snssdk.com'
 - '+.tnc3-bjlgy.toutiaoapi.com'

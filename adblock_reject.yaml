@@ -1,12 +1,12 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-04-28 10:46:20 (UTC+8)
-# Total Items: 78156 条
+# Generated: 2026-04-28 10:48:27 (UTC+8)
+# Total Items: 78146 条
 # -----------------------------------------------
 # 统计信息:
 # - [DOMAIN-WILDCARD] : 3 条
 # - [DOMAIN-REGEX]    : 146 条
 # - [DOMAIN]          : 1062 条
-# - [DOMAIN-SUFFIX]   : 76945 条
+# - [DOMAIN-SUFFIX]   : 76935 条
 # -----------------------------------------------
 
 payload:
@@ -8463,7 +8463,6 @@ payload:
 - DOMAIN-SUFFIX,applinzi.com
 - DOMAIN-SUFFIX,applog-perf.uc.cn
 - DOMAIN-SUFFIX,applog.uc.cn
-- DOMAIN-SUFFIX,applog.zijieapi.com
 - DOMAIN-SUFFIX,applstr.com
 - DOMAIN-SUFFIX,appmetrica.yandex.ru
 - DOMAIN-SUFFIX,appnext-a.akamaihd.net
@@ -37008,7 +37007,6 @@ payload:
 - DOMAIN-SUFFIX,log.tagtic.cn
 - DOMAIN-SUFFIX,log.vcgame.cn
 - DOMAIN-SUFFIX,log.vdisk.cn
-- DOMAIN-SUFFIX,log.zijieapi.com
 - DOMAIN-SUFFIX,log.zongheng.com
 - DOMAIN-SUFFIX,log1.17173.com
 - DOMAIN-SUFFIX,log1.cmpassport.com
@@ -38564,7 +38562,6 @@ payload:
 - DOMAIN-SUFFIX,mcppsh.com
 - DOMAIN-SUFFIX,mcprofits.com
 - DOMAIN-SUFFIX,mcpuwpsh.com
-- DOMAIN-SUFFIX,mcs.zijieapi.com
 - DOMAIN-SUFFIX,mcurrentlysea.info
 - DOMAIN-SUFFIX,mcwtjxxpphqrs.online
 - DOMAIN-SUFFIX,mcxuorwlaqtyd.site
@@ -40132,7 +40129,6 @@ payload:
 - DOMAIN-SUFFIX,msrvt.net
 - DOMAIN-SUFFIX,mssdhde.cn
 - DOMAIN-SUFFIX,mssdk.volces.com
-- DOMAIN-SUFFIX,mssdk.zijieapi.com
 - DOMAIN-SUFFIX,msslwa.icu
 - DOMAIN-SUFFIX,mssuzyhqlqjwj.site
 - DOMAIN-SUFFIX,mstjfzekwtufe.online
@@ -62931,9 +62927,6 @@ payload:
 - DOMAIN-SUFFIX,tnaygpxwlubq.com
 - DOMAIN-SUFFIX,tnbigewpbffra.website
 - DOMAIN-SUFFIX,tnbmdavwrgygn.online
-- DOMAIN-SUFFIX,tnc0-aliec2.zijieapi.com
-- DOMAIN-SUFFIX,tnc0-alisc1.zijieapi.com
-- DOMAIN-SUFFIX,tnc0-bjlgy.zijieapi.com
 - DOMAIN-SUFFIX,tnc16-alisg.isnssdk.com
 - DOMAIN-SUFFIX,tnc16-useast1a.isnssdk.com
 - DOMAIN-SUFFIX,tnc3-aliec1.toutiaoapi.com
@@ -62941,12 +62934,9 @@ payload:
 - DOMAIN-SUFFIX,tnc3-aliec2.snssdk.com
 - DOMAIN-SUFFIX,tnc3-aliec2.toutiaoapi.com
 - DOMAIN-SUFFIX,tnc3-aliec2.zijieapi
-- DOMAIN-SUFFIX,tnc3-aliec2.zijieapi.com
 - DOMAIN-SUFFIX,tnc3-alisc1.snssdk.com
 - DOMAIN-SUFFIX,tnc3-alisc1.toutiaoapi.com
 - DOMAIN-SUFFIX,tnc3-alisc1.zijieapi
-- DOMAIN-SUFFIX,tnc3-alisc1.zijieapi.com
-- DOMAIN-SUFFIX,tnc3-alisc2.zijieapi.com
 - DOMAIN-SUFFIX,tnc3-bjlgy.bytedance.com
 - DOMAIN-SUFFIX,tnc3-bjlgy.snssdk.com
 - DOMAIN-SUFFIX,tnc3-bjlgy.toutiaoapi.com
