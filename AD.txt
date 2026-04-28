@@ -35,3 +35,13 @@
 127.0.0.1 trace.mgtv.com
 127.0.0.1 sdk.e.qq.com
 127.0.0.1 mi.gdt.qq.com
+# 红果短视频/短剧 广告域名拦截
+||ads*.bytedance.com^
+||pangolin*.toutiao.com^
+||pglstatp-toutiao.com^
+||bytegsdk.com^
+||is.snssdk.com^
+||log.snssdk.com^
+||abtest-api.bytedance.com^
+||ad.intl.bytego.com^
+||stat*.bytedance.com^
