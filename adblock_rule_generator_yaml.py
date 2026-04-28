@@ -16,9 +16,9 @@ import yaml  # 需要安装 PyYAML: pip install pyyaml
 if sys.stdout.encoding.lower() != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
 
-# === 自定义全局白名单（可在此补充） ===
+# === 自定义全局白名单 ===
 custom_excluded_domains = [
-   # "*.bp.blogspot.com",
+    # "example.com",
 ]
 
 # 目录设置
@@ -145,7 +145,7 @@ def wildcard_to_regex(domain):
     - 转义正则特殊字符（. ? + 等）
     - 将 * 替换为 .*
     - 添加行首行尾锚定
-    若 * 只出现在开头且紧跟着 '.'，返回 None 表示应使用 DOMAIN-WILDCARD
+    若 * 只出现在开头且紧跟着 '.', 返回 None 表示应使用 DOMAIN-WILDCARD
     """
     if '*' not in domain:
         return None
@@ -160,7 +160,7 @@ def wildcard_to_regex(domain):
 def main():
     write_log("==== 开始初始化设置 ====")
 
-    # 加载外部订阅源配置
+    # 从外部配置文件加载订阅源
     sources = load_sources()
     allow_urls = sources["allow_urls"]
     tier1_urls = sources["tier1_urls"]
@@ -207,7 +207,7 @@ def main():
     valid_tier3 = set()
     for d in tier3_set_raw:
         if d in protected_ancestors or '*' in d:
-            if '*' in d: valid_tier3.add(d)
+            if '*' in d: valid_tier3.add(d)   # 通配符直接放行
             continue
         valid_tier3.add(d)
 
@@ -227,52 +227,43 @@ def main():
     # 剔除已被父域名覆盖的子域名（仅针对非通配符）
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
 
-    # --- 新增计数器 ---
+    # --- 计数器 ---
     count_wildcard = 0
     count_regex = 0
     count_exact = 0
     count_suffix = 0
 
-    # 按规则类型分组收集
-    domain_rules = []
-    suffix_rules = []
-    wildcard_rules = []
-    regex_rules = []
-
+    formatted_rules = []
     for domain in sorted(optimized_domains):
         # 情况 1: 含通配符 -> DOMAIN-WILDCARD 或 DOMAIN-REGEX
         if '*' in domain:
             if domain.startswith('*.') and '*' not in domain[2:]:
-                wildcard_rules.append(f"- DOMAIN-WILDCARD,{domain}")
+                formatted_rules.append(f"- DOMAIN-WILDCARD,{domain}")
                 count_wildcard += 1
             else:
                 regex_pattern = wildcard_to_regex(domain)
                 if regex_pattern:
-                    regex_rules.append(f"- DOMAIN-REGEX,{regex_pattern}")
+                    formatted_rules.append(f"- DOMAIN-REGEX,{regex_pattern}")
                     count_regex += 1
                 else:
-                    wildcard_rules.append(f"- DOMAIN-WILDCARD,{domain}")
+                    formatted_rules.append(f"- DOMAIN-WILDCARD,{domain}")
                     count_wildcard += 1
             continue
 
         # 情况 2: 精确匹配 (层级 >= 3，如 a.b.c.d) -> DOMAIN
         if domain.count('.') >= 3:
-            domain_rules.append(f"- DOMAIN,{domain}")
+            formatted_rules.append(f"- DOMAIN,{domain}")
             count_exact += 1
             continue
 
         # 情况 3: 后缀匹配 (常规二/三级域名) -> DOMAIN-SUFFIX
-        suffix_rules.append(f"- DOMAIN-SUFFIX,{domain}")
+        formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
         count_suffix += 1
-
-    # 按指定顺序合并所有规则：DOMAIN → DOMAIN-SUFFIX → DOMAIN-WILDCARD → DOMAIN-REGEX
-    formatted_rules = domain_rules + suffix_rules + wildcard_rules + regex_rules
 
     # 输出文件
     rule_count = len(formatted_rules)
     generation_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
 
-    # 在 Header 中添加详细统计信息（保持不变，也可按需调整顺序）
     header = f"""# Title: AdBlock_Rule_For_Mihomo
 # Generated: {generation_time} (UTC+8)
 # Total Items: {rule_count} 条
