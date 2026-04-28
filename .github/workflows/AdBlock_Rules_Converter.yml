@@ -25,7 +25,7 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: 安装依赖
+    - name: install pyyaml
       run: pip install pyyaml
 
     - name: Checkout repository
