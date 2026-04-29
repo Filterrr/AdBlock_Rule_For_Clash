@@ -59,10 +59,10 @@ jobs:
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
         # Git 添加生成的输出文件名称并未变更，所以这部分无缝承接
-        git add -f adblock_reject.yaml adblock_reject.txt
+        git add -f adblock_reject.yaml adblock.yaml
         
         # 捕获如果未改动抛出的 commit 异常，自动进行 Empty commit 以完成空推
-        git commit -m "Update adblock_reject.yaml and adblock_reject.txt"
+        git commit -m "Update adblock_reject.yaml and adblock.yaml"
         if ($LASTEXITCODE -ne 0) {
           git commit --allow-empty -m "Empty commit to force push"
         }
