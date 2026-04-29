@@ -239,7 +239,7 @@ def main():
 
 payload:
 """
-    output_path = os.path.join(SCRIPT_DIR, "adblock_reject.txt")
+    output_path = os.path.join(SCRIPT_DIR, "adblock.yaml")
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(header + "\n".join(formatted_rules))
 
