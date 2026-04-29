@@ -209,7 +209,6 @@ def main():
 
     # --- 计数器 ---
     count_wildcard = 0
-    count_exact = 0
     count_suffix = 0
 
     formatted_rules = []
@@ -220,14 +219,8 @@ def main():
             count_wildcard += 1
             continue
 
-        # 情况 2: 精确匹配 (Exact) - 层级深直接用 +. 方式
-        if domain.count('.') >= 2:
-            formatted_rules.append(f"- '+.{domain}'")
-            count_exact += 1
-            continue
-
         # 情况 3: 后缀匹配 (Suffix)
-        formatted_rules.append(f"- '.{domain}'")
+        formatted_rules.append(f"- '+.{domain}'")
         count_suffix += 1
 
     # 输出文件
@@ -241,8 +234,7 @@ def main():
 # -----------------------------------------------
 # 统计信息:
 # - [通配符匹配] (*.*.a.com)   : {count_wildcard} 条
-# - [精准匹配 ] (+.a.b.c.com)  : {count_exact} 条
-# - [后缀匹配 ] (.a.com)       : {count_suffix} 条
+# - [后缀匹配 ] (+.a.com)       : {count_suffix} 条
 # -----------------------------------------------
 
 payload:
