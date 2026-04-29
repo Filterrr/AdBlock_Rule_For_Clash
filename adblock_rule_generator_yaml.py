@@ -303,6 +303,17 @@ def main():
         formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
         count_suffix += 1
 
+    def rule_sort_key(rule):
+        # 提取规则前缀用于判断优先级
+        if rule.startswith("- DOMAIN,"): return 1
+        if rule.startswith("- DOMAIN-SUFFIX,"): return 2
+        if rule.startswith("- DOMAIN-WILDCARD,"): return 3
+        if rule.startswith("- DOMAIN-REGEX,"): return 4
+        return 99
+
+    # 按照 规则类型优先级排列，同类型下再按字母表顺序(x)进行二次排列
+    formatted_rules.sort(key=lambda x: (rule_sort_key(x), x))
+    
     # 输出文件
     rule_count = len(formatted_rules)
     generation_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
