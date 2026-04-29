@@ -323,10 +323,10 @@ def main():
 # Total Items: {rule_count} 条
 # -----------------------------------------------
 # 统计信息:
-# - [DOMAIN-WILDCARD] : {count_wildcard} 条
-# - [DOMAIN-REGEX]    : {count_regex} 条
-# - [DOMAIN]          : {count_exact} 条
-# - [DOMAIN-SUFFIX]   : {count_suffix} 条
+# - [DOMAIN]         : {count_exact} 条
+# - [DOMAIN-SUFFIX]  : {count_suffix} 条
+# - [DOMAIN-WILDCARD]: {count_wildcard} 条
+# - [DOMAIN-REGEX]   : {count_regex} 条
 # -----------------------------------------------
 
 payload:
