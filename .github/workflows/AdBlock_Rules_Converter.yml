@@ -181,7 +181,7 @@ jobs:
         run: |
           $exePath = "./mihomo.exe"
           if (Test-Path $exePath) {
-            Write-Host "Starting conversion from TXT to MRS..."
+            Write-Host "Starting conversion..."
             # 使用 text 格式读取纯文本域名列表
             $success = $false
             for ($i=1; $i -le 3; $i++) {
