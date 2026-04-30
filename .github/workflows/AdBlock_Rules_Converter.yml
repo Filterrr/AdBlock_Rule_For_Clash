@@ -20,7 +20,7 @@ jobs:
   # 作业 1：在 Windows 环境下生成 YAML 和 TXT 规则文件
   # ==========================================
   generate-rules:
-    runs-on: windows-2022
+    runs-on: windows-latest
 
     steps:
     - name: Setup Node.js 24
@@ -32,7 +32,7 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v6  # 已修复：升级至 v6 以支持 Node.js 24
       with:
-        python-version: '3.11'
+        python-version: '3.x'
 
     - name: Install dependencies
       run: pip install pyyaml publicsuffixlist
