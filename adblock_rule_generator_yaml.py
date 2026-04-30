@@ -3,7 +3,6 @@
 # Title: AdBlock_Rule_For_Mihomo
 # Description: 专为 Mihomo 内核优化的广告拦截规则生成脚本
 
-
 import os
 import re
 import urllib.request
@@ -24,7 +23,7 @@ except ImportError:
     print("    (建议执行: pip install publicsuffixlist)")
 
 # === 自定义全局白名单 ===
-custom_excluded_domains = [
+custom_excluded_domains =[
     # "example.com",
 ]
 
@@ -39,7 +38,9 @@ regex1 = re.compile(r'^\|\|([a-zA-Z0-9.*-]+)(?:\^.*)?$')
 regex2 = re.compile(r'^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.*-]+)')
 regex3 = re.compile(r'^(?:address|server)=/([a-zA-Z0-9.*-]+)/')
 regex4 = re.compile(r'^(?:DOMAIN|HOST)(?:-SUFFIX|0WILD)?\s*,\s*([a-zA-Z0-9.*-]+\.[a-zA-Z]{2,})(?:\s*,.*)?$', re.IGNORECASE)
-regex5 = re.compile(r'^([a-zA-Z0-9.*-]+)$')
+
+# 新增关键字正则匹配：允许提取如 .bid/ads/、-1316632262.cos. 这种包含 /、_ 以及 - 和 . 等字符的规则
+regex_keyword = re.compile(r'^([-.a-zA-Z0-9/_*]+)$')
 
 # --- 初始化 PublicSuffixList ---
 _psl = PublicSuffixList() if PublicSuffixList else None
@@ -78,27 +79,22 @@ def smart_decode(data):
     return data.decode('utf-8', errors='ignore')
 
 def safe_read_file(file_path):
-    encodings = ['utf-8-sig', 'utf-8', 'gbk', 'latin-1']
+    encodings =['utf-8-sig', 'utf-8', 'gbk', 'latin-1']
     for enc in encodings:
         try:
             with open(file_path, 'r', encoding=enc) as f:
                 return f.readlines()
         except Exception:
             continue
-    return []
+    return[]
 
 # --- 加载外部订阅源配置 ---
 def load_sources(config_path=SOURCES_CONFIG):
-    """
-    从外部 YAML 文件读取订阅源 URL 列表。
-    返回字典，包含 'allow_urls', 'tier1_urls', 'tier2_urls', 'tier3_urls' 键。
-    若文件不存在或格式错误，则返回空列表的字典。
-    """
     default_sources = {
         "allow_urls": [],
-        "tier1_urls": [],
+        "tier1_urls":[],
         "tier2_urls": [],
-        "tier3_urls": []
+        "tier3_urls":[]
     }
 
     if not os.path.exists(config_path):
@@ -112,28 +108,36 @@ def load_sources(config_path=SOURCES_CONFIG):
         write_log(f"读取配置文件失败: {e}，使用空订阅源")
         return default_sources
 
-    # 确保每个键都存在且为列表
     for key in default_sources:
         if key not in sources or not isinstance(sources[key], list):
             sources[key] = default_sources[key]
     return sources
 
-# --- 通用域名提取器 ---
-def parse_line_to_domain(line):
-    """统一使用正则提取域名，兼容各种规则格式"""
+# --- 通用域名/关键字提取器 ---
+def parse_line(line):
+    """统一提取域名或关键字，返回元组 (类型, 值)"""
     if line.startswith("@@"):
         line = line[2:]
 
-    domain = None
-    if m := regex1.match(line): domain = m.group(1)
-    elif m := regex2.match(line): domain = m.group(1)
-    elif m := regex3.match(line): domain = m.group(1)
-    elif m := regex4.match(line): domain = m.group(1)
-    elif m := regex5.match(line): domain = m.group(1)
+    val = None
+    if m := regex1.match(line): val = m.group(1)
+    elif m := regex2.match(line): val = m.group(1)
+    elif m := regex3.match(line): val = m.group(1)
+    elif m := regex4.match(line): val = m.group(1)
+    elif m := regex_keyword.match(line): val = m.group(1)
 
-    return domain.strip('.') if domain else None
+    if val:
+        val_stripped = val.strip('.')
+        # 如果符合标准域名规范，则返回 DOMAIN
+        if domain_regex.match(val_stripped):
+            return ('DOMAIN', val_stripped.lower())
+        # 否则判定为关键字，返回 KEYWORD (这里保留用户规则原始的末尾点或斜杠)
+        else:
+            return ('KEYWORD', val.lower())
+            
+    return (None, None)
 
-def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
+def extract_rules(urls, rules_set, keyword_set, global_whitelist, keyword_whitelist, force_whitelist=False):
     """
     提取规则
     :param force_whitelist: 如果为 True，无论规则有无 @@ 前缀，均强制视为白名单
@@ -158,11 +162,11 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
             # 判断是否为白名单（强制模式 or 自带 @@ 前缀）
             is_whitelist = force_whitelist or line.startswith("@@")
 
-            # 使用通用解析器提取域名
-            domain = parse_line_to_domain(line)
+            # 使用分类解析器提取
+            parsed_type, val = parse_line(line)
 
-            if domain and domain_regex.match(domain):
-                domain = domain.lower()
+            if parsed_type == 'DOMAIN':
+                domain = val
                 # 过滤公共后缀（如 "com", "co.uk"）
                 if is_public_suffix(domain):
                     skipped_psl += 1
@@ -171,24 +175,21 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
                     global_whitelist.add(domain)
                 else:
                     rules_set.add(domain)
+            elif parsed_type == 'KEYWORD':
+                keyword = val
+                if is_whitelist:
+                    keyword_whitelist.add(keyword)
+                else:
+                    keyword_set.add(keyword)
+                    
     if skipped_psl:
         write_log(f"已过滤 {skipped_psl} 条公共后缀域名规则")
 
 def wildcard_to_regex(domain):
-    """
-    将 Adblock 通配符域名转换为 Mihomo 可用的正则表达式
-    只处理含有 * 的域名，转换规则：
-    - 转义正则特殊字符（. ? + 等）
-    - 将 * 替换为 .*
-    - 添加行首行尾锚定
-    若 * 只出现在开头且紧跟着 '.', 返回 None 表示应使用 DOMAIN-WILDCARD
-    """
     if '*' not in domain:
         return None
-    # 如果符合 *.example.com 这种简单格式，交给 DOMAIN-WILDCARD
     if domain.startswith('*.') and '*' not in domain[2:]:
         return None
-    # 复杂通配符：转义除 * 外的正则符号，然后把 * 换成 .*
     escaped = re.escape(domain)
     regex_str = escaped.replace(r'\*', '.*')
     return f"^{regex_str}$"
@@ -204,7 +205,9 @@ def main():
     tier3_urls = sources["tier3_urls"]
 
     white_set = set(d.lower() for d in custom_excluded_domains)
+    keyword_white_set = set()
     core_set_raw, tier3_set_raw = set(), set()
+    keyword_set_raw, keyword_tier3_set_raw = set(), set()
 
     # 优化：加载本地高权重白名单 (支持纯域名及各种复杂规则格式)
     top_whitelist_file = os.path.join(SCRIPT_DIR, "top_whitelist.txt")
@@ -214,21 +217,24 @@ def main():
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
 
-            domain = parse_line_to_domain(line)
-            if domain and domain_regex.match(domain):
-                domain = domain.lower()
+            parsed_type, val = parse_line(line)
+            if parsed_type == 'DOMAIN':
+                domain = val
                 if not is_public_suffix(domain):
                     white_set.add(domain)
-        write_log(f"已加载本地白名单，当前白名单库共 {len(white_set)} 条。")
+            elif parsed_type == 'KEYWORD':
+                keyword_white_set.add(val)
+        write_log(f"已加载本地白名单，当前白名单库共 {len(white_set)} 条，关键字白名单 {len(keyword_white_set)} 条。")
 
     # 获取规则 (优化：allow_urls 开启强制白名单模式)
-    extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
-    extract_rules(tier1_urls + tier2_urls, core_set_raw, white_set)
-    extract_rules(tier3_urls, tier3_set_raw, white_set)
+    extract_rules(allow_urls, core_set_raw, keyword_set_raw, white_set, keyword_white_set, force_whitelist=True)
+    extract_rules(tier1_urls + tier2_urls, core_set_raw, keyword_set_raw, white_set, keyword_white_set)
+    extract_rules(tier3_urls, tier3_set_raw, keyword_tier3_set_raw, white_set, keyword_white_set)
 
     # 阶段 1 & 2：预处理与冲突检测
     write_log(">> 正在执行冲突清洗与保护机制校验...")
     valid_core = {d for d in core_set_raw if d not in white_set}
+    valid_keyword_core = {k for k in keyword_set_raw if k not in keyword_white_set}
 
     # 构建父级保护伞（防止 Tier 3 误杀白名单或核心列表中的域名的父级）
     protected_ancestors = set()
@@ -248,10 +254,13 @@ def main():
             if '*' in d: valid_tier3.add(d)   # 通配符直接放行
             continue
         valid_tier3.add(d)
+        
+    valid_keyword_tier3 = {k for k in keyword_tier3_set_raw if k not in keyword_white_set}
 
     # 阶段 4：Mihomo 格式智能转换
-    write_log(">> 正在执行 Mihomo 域名匹配类型自动分类...")
+    write_log(">> 正在执行 Mihomo 匹配类型自动分类...")
     all_domains = valid_core.union(valid_tier3)
+    all_keywords = valid_keyword_core.union(valid_keyword_tier3)
 
     suffix_candidates = {d for d in all_domains if '*' not in d}
     global_subs_detector = set()
@@ -262,16 +271,20 @@ def main():
             global_subs_detector.add(temp)
 
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
+    # 为关键字增加基础的安全检查：过滤因拼写错误等导致过于宽泛的极短关键字规则 (至少2位字符)
+    optimized_keywords =[k for k in all_keywords if len(k) >= 2]
 
     # --- 计数器 ---
     count_wildcard = 0
     count_regex = 0
     count_exact = 0
     count_suffix = 0
+    count_keyword = 0
 
-    formatted_rules = []
+    formatted_rules =[]
+    
+    # 域名处理部分
     for domain in sorted(optimized_domains):
-        # 情况 1: 含通配符 -> DOMAIN-WILDCARD 或 DOMAIN-REGEX
         if '*' in domain:
             if domain.startswith('*.') and '*' not in domain[2:]:
                 formatted_rules.append(f"- DOMAIN-WILDCARD,{domain}")
@@ -286,32 +299,34 @@ def main():
                     count_wildcard += 1
             continue
 
-        # 情况 2: 普通域名（无通配符）分类
         if domain.count('.') >= 3:
             registrable = get_registrable_domain(domain)
             if registrable and domain == registrable:
-                # 该域名本身是注册域（例如 example.com.cn），应后缀匹配
                 formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
                 count_suffix += 1
             else:
-                # 深层子域，保持精确匹配（与原输出一致）
                 formatted_rules.append(f"- DOMAIN,{domain}")
                 count_exact += 1
             continue
 
-        # 情况 3: 常规二/三级域名 -> DOMAIN-SUFFIX
         formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
         count_suffix += 1
+
+    # 关键字处理部分：输出为 DOMAIN-KEYWORD
+    for keyword in sorted(optimized_keywords):
+        formatted_rules.append(f"- DOMAIN-KEYWORD,{keyword}")
+        count_keyword += 1
 
     def rule_sort_key(rule):
         # 提取规则前缀用于判断优先级
         if rule.startswith("- DOMAIN,"): return 1
         if rule.startswith("- DOMAIN-SUFFIX,"): return 2
         if rule.startswith("- DOMAIN-WILDCARD,"): return 3
-        if rule.startswith("- DOMAIN-REGEX,"): return 4
+        if rule.startswith("- DOMAIN-KEYWORD,"): return 4
+        if rule.startswith("- DOMAIN-REGEX,"): return 5
         return 99
 
-    # 按照 规则类型优先级排列，同类型下再按字母表顺序(x)进行二次排列
+    # 按照 规则类型优先级排列，同类型下再按字母表顺序进行二次排列
     formatted_rules.sort(key=lambda x: (rule_sort_key(x), x))
     
     # 输出文件
@@ -325,6 +340,7 @@ def main():
 # - [DOMAIN]         : {count_exact} 条
 # - [DOMAIN-SUFFIX]  : {count_suffix} 条
 # - [DOMAIN-WILDCARD]: {count_wildcard} 条
+# -[DOMAIN-KEYWORD] : {count_keyword} 条
 # - [DOMAIN-REGEX]   : {count_regex} 条
 # -----------------------------------------------
 
