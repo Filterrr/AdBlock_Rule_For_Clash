@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # Title: AdBlock_Rule_For_Mihomo
 # Description: 专为 Mihomo 内核优化的广告拦截规则生成脚本
+#              支持 DOMAIN-KEYWORD 兜底匹配畸形域名片段
 
 
 import os
@@ -58,7 +59,6 @@ def get_registrable_domain(domain):
     if _psl is None:
         return None
     try:
-        # publicsuffixlist 的 privatesuffix 返回注册域部分
         return _psl.privatesuffix(domain)
     except Exception:
         return None
@@ -133,10 +133,39 @@ def parse_line_to_domain(line):
 
     return domain.strip('.') if domain else None
 
-def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
+def extract_keyword_for_domain_rule(line):
+    """
+    尝试从一行规则中提取可用于 DOMAIN-KEYWORD 的关键字。
+    仅处理：不含路径，且看起来像域名片段（包含点）的条目。
+    返回：关键字字符串（已去除首尾特殊字符，长度>=5），或 None
+    """
+    # 移除开头的 @@ 或 ||
+    cleaned = re.sub(r'^(?:@@|\|\|)', '', line).strip()
+    # 去掉通配符、首尾的 . 和 - 以及 ^ 等
+    cleaned = cleaned.strip('.*-^ ')
+    # 如果包含路径（/）则不处理（这不是域名片段）
+    if '/' in cleaned:
+        return None
+    # 必须包含点，且剩余字符为可能的域名片段
+    if '.' not in cleaned:
+        return None
+    # 进一步清理：移除可能残留的前缀如 "address=/" 等
+    if '=' in cleaned:
+        return None
+    # 只保留 [a-zA-Z0-9.-] 字符
+    keyword = re.sub(r'[^a-zA-Z0-9.-]', '', cleaned)
+    # 去掉首尾的点或连字符，得到核心关键字
+    keyword = keyword.strip('.-')
+    # 长度至少 5 个字符，避免过短关键字（如 "co.in" 不足5也会跳过）
+    if len(keyword) >= 5:
+        return keyword.lower()
+    return None
+
+def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False, keyword_set=None):
     """
     提取规则
     :param force_whitelist: 如果为 True，无论规则有无 @@ 前缀，均强制视为白名单
+    :param keyword_set: 若提供，会将无法识别为标准域名的条目提取为关键字集
     """
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     skipped_psl = 0
@@ -171,6 +200,12 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
                     global_whitelist.add(domain)
                 else:
                     rules_set.add(domain)
+            else:
+                # 域名格式不符合标准，尝试提取为 DOMAIN-KEYWORD（仅针对黑名单规则）
+                if not is_whitelist and keyword_set is not None:
+                    kw = extract_keyword_for_domain_rule(line)
+                    if kw:
+                        keyword_set.add(kw)
     if skipped_psl:
         write_log(f"已过滤 {skipped_psl} 条公共后缀域名规则")
 
@@ -205,6 +240,7 @@ def main():
 
     white_set = set(d.lower() for d in custom_excluded_domains)
     core_set_raw, tier3_set_raw = set(), set()
+    keyword_set = set()  # 收集无法识别为域名的关键字
 
     # 优化：加载本地高权重白名单 (支持纯域名及各种复杂规则格式)
     top_whitelist_file = os.path.join(SCRIPT_DIR, "top_whitelist.txt")
@@ -223,8 +259,8 @@ def main():
 
     # 获取规则 (优化：allow_urls 开启强制白名单模式)
     extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
-    extract_rules(tier1_urls + tier2_urls, core_set_raw, white_set)
-    extract_rules(tier3_urls, tier3_set_raw, white_set)
+    extract_rules(tier1_urls + tier2_urls, core_set_raw, white_set, keyword_set=keyword_set)
+    extract_rules(tier3_urls, tier3_set_raw, white_set, keyword_set=keyword_set)
 
     # 阶段 1 & 2：预处理与冲突检测
     write_log(">> 正在执行冲突清洗与保护机制校验...")
@@ -268,8 +304,10 @@ def main():
     count_regex = 0
     count_exact = 0
     count_suffix = 0
+    count_keyword = 0
 
     formatted_rules = []
+    # 处理标准域名规则
     for domain in sorted(optimized_domains):
         # 情况 1: 含通配符 -> DOMAIN-WILDCARD 或 DOMAIN-REGEX
         if '*' in domain:
@@ -294,7 +332,7 @@ def main():
                 formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
                 count_suffix += 1
             else:
-                # 深层子域，保持精确匹配（与原输出一致）
+                # 深层子域，保持精确匹配
                 formatted_rules.append(f"- DOMAIN,{domain}")
                 count_exact += 1
             continue
@@ -303,17 +341,23 @@ def main():
         formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
         count_suffix += 1
 
+    # 追加 DOMAIN-KEYWORD 规则（来自畸形片段）
+    for kw in sorted(keyword_set):
+        formatted_rules.append(f"- DOMAIN-KEYWORD,{kw}")
+        count_keyword += 1
+
     def rule_sort_key(rule):
         # 提取规则前缀用于判断优先级
         if rule.startswith("- DOMAIN,"): return 1
         if rule.startswith("- DOMAIN-SUFFIX,"): return 2
         if rule.startswith("- DOMAIN-WILDCARD,"): return 3
         if rule.startswith("- DOMAIN-REGEX,"): return 4
+        if rule.startswith("- DOMAIN-KEYWORD,"): return 5
         return 99
 
-    # 按照 规则类型优先级排列，同类型下再按字母表顺序(x)进行二次排列
+    # 按照规则类型优先级排列，同类型下再按字母表顺序进行二次排列
     formatted_rules.sort(key=lambda x: (rule_sort_key(x), x))
-    
+
     # 输出文件
     rule_count = len(formatted_rules)
     generation_time = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
@@ -326,6 +370,7 @@ def main():
 # - [DOMAIN-SUFFIX]  : {count_suffix} 条
 # - [DOMAIN-WILDCARD]: {count_wildcard} 条
 # - [DOMAIN-REGEX]   : {count_regex} 条
+# - [DOMAIN-KEYWORD] : {count_keyword} 条
 # -----------------------------------------------
 
 payload:
