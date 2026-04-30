@@ -127,11 +127,12 @@ def parse_line(line):
     elif m := regex_keyword.match(line): val = m.group(1)
 
     if val:
+        if '/' in val:
+            return (None, None)
+            
         val_stripped = val.strip('.')
-        # 如果符合标准域名规范，则返回 DOMAIN
         if domain_regex.match(val_stripped):
             return ('DOMAIN', val_stripped.lower())
-        # 否则判定为关键字，返回 KEYWORD (这里保留用户规则原始的末尾点或斜杠)
         else:
             return ('KEYWORD', val.lower())
             
