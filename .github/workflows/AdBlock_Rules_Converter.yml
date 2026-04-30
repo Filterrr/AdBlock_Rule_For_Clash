@@ -185,7 +185,7 @@ jobs:
             # 使用 text 格式读取纯文本域名列表
             $success = $false
             for ($i=1; $i -le 3; $i++) {
-              & $exePath convert-ruleset domain text adblock_reject.txt adblock_reject.mrs
+              & $exePath convert-ruleset domain yaml adblock_reject.txt adblock_reject.mrs
               if ($LASTEXITCODE -eq 0) { $success = $true; break }
               Write-Host "Conversion attempt $i failed, retrying..."
               Start-Sleep -Seconds 3
