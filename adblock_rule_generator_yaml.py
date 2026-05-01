@@ -303,11 +303,6 @@ def main():
 # Generated: {generation_time} (UTC+8)
 # Total Items: {rule_count} 条
 # -----------------------------------------------
-# 全局统计:
-# - 拦截规则总数: {total_block} 条
-# - 白名单总数: {total_allow} 条
-# - 过滤顶级域总数: {total_psl} 条
-# -----------------------------------------------
 # 规则分类统计:
 # - [DOMAIN]         : {count_exact} 条
 # - [DOMAIN-SUFFIX]  : {count_suffix} 条
