@@ -3,7 +3,6 @@
 # Title: AdBlock_Rule_For_Mihomo
 # Description: 专为 Mihomo 内核优化的广告拦截规则生成脚本
 
-
 import os
 import re
 import urllib.request
@@ -58,7 +57,6 @@ def get_registrable_domain(domain):
     if _psl is None:
         return None
     try:
-        # publicsuffixlist 的 privatesuffix 返回注册域部分
         return _psl.privatesuffix(domain)
     except Exception:
         return None
@@ -89,11 +87,6 @@ def safe_read_file(file_path):
 
 # --- 加载外部订阅源配置 ---
 def load_sources(config_path=SOURCES_CONFIG):
-    """
-    从外部 YAML 文件读取订阅源 URL 列表。
-    返回字典，包含 'allow_urls', 'tier1_urls', 'tier2_urls', 'tier3_urls' 键。
-    若文件不存在或格式错误，则返回空列表的字典。
-    """
     default_sources = {
         "allow_urls": [],
         "tier1_urls": [],
@@ -112,7 +105,6 @@ def load_sources(config_path=SOURCES_CONFIG):
         write_log(f"读取配置文件失败: {e}，使用空订阅源")
         return default_sources
 
-    # 确保每个键都存在且为列表
     for key in default_sources:
         if key not in sources or not isinstance(sources[key], list):
             sources[key] = default_sources[key]
@@ -120,7 +112,6 @@ def load_sources(config_path=SOURCES_CONFIG):
 
 # --- 通用域名提取器 ---
 def parse_line_to_domain(line):
-    """统一使用正则提取域名，兼容各种规则格式"""
     if line.startswith("@@"):
         line = line[2:]
 
@@ -135,17 +126,17 @@ def parse_line_to_domain(line):
 
 def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
     """
-    提取规则
-    :param force_whitelist: 如果为 True，无论规则有无 @@ 前缀，均强制视为白名单
+    提取规则，返回 (total_block, total_allow, total_psl) 作为该批次的总计数
     """
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+    total_block = 0
+    total_allow = 0
+    total_psl = 0
 
-    # 先打印本组订阅源数量
     write_log(f"开始并获取 {len(urls)} 个订阅源...")
 
     for url in urls:
         req = urllib.request.Request(url, headers=headers)
-        # 每个源独立计数
         block_cnt = 0
         allow_cnt = 0
         psl_cnt = 0
@@ -177,23 +168,18 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
                     rules_set.add(domain)
                     block_cnt += 1
 
+        total_block += block_cnt
+        total_allow += allow_cnt
+        total_psl += psl_cnt
         write_log(f"✔ 解析: {url} (拦截: {block_cnt}, 白名单: {allow_cnt}, 过滤顶级域: {psl_cnt})")
 
+    return total_block, total_allow, total_psl
+
 def wildcard_to_regex(domain):
-    """
-    将 Adblock 通配符域名转换为 Mihomo 可用的正则表达式
-    只处理含有 * 的域名，转换规则：
-    - 转义正则特殊字符（. ? + 等）
-    - 将 * 替换为 .*
-    - 添加行首行尾锚定
-    若 * 只出现在开头且紧跟着 '.', 返回 None 表示应使用 DOMAIN-WILDCARD
-    """
     if '*' not in domain:
         return None
-    # 如果符合 *.example.com 这种简单格式，交给 DOMAIN-WILDCARD
     if domain.startswith('*.') and '*' not in domain[2:]:
         return None
-    # 复杂通配符：转义除 * 外的正则符号，然后把 * 换成 .*
     escaped = re.escape(domain)
     regex_str = escaped.replace(r'\*', '.*')
     return f"^{regex_str}$"
@@ -201,7 +187,6 @@ def wildcard_to_regex(domain):
 def main():
     write_log("==== 开始初始化设置 ====")
 
-    # 从外部配置文件加载订阅源
     sources = load_sources()
     allow_urls = sources["allow_urls"]
     tier1_urls = sources["tier1_urls"]
@@ -211,14 +196,13 @@ def main():
     white_set = set(d.lower() for d in custom_excluded_domains)
     core_set_raw, tier3_set_raw = set(), set()
 
-    # 优化：加载本地高权重白名单 (支持纯域名及各种复杂规则格式)
+    # 加载本地高权重白名单
     top_whitelist_file = os.path.join(SCRIPT_DIR, "top_whitelist.txt")
     if os.path.exists(top_whitelist_file):
         for line in safe_read_file(top_whitelist_file):
             line = line.strip()
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
-
             domain = parse_line_to_domain(line)
             if domain and domain_regex.match(domain):
                 domain = domain.lower()
@@ -226,16 +210,19 @@ def main():
                     white_set.add(domain)
         write_log(f"已加载本地白名单，当前白名单库共 {len(white_set)} 条。")
 
-    # 获取规则 (优化：allow_urls 开启强制白名单模式)
-    extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
-    extract_rules(tier1_urls + tier2_urls, core_set_raw, white_set)
-    extract_rules(tier3_urls, tier3_set_raw, white_set)
+    # 获取规则并累计总数
+    block1, allow1, psl1 = extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
+    block2, allow2, psl2 = extract_rules(tier1_urls + tier2_urls, core_set_raw, white_set)
+    block3, allow3, psl3 = extract_rules(tier3_urls, tier3_set_raw, white_set)
 
-    # 阶段 1 & 2：预处理与冲突检测
+    total_block = block1 + block2 + block3
+    total_allow = allow1 + allow2 + allow3
+    total_psl = psl1 + psl2 + psl3
+
+    # 冲突清洗与保护机制
     write_log(">> 正在执行冲突清洗与保护机制校验...")
     valid_core = {d for d in core_set_raw if d not in white_set}
 
-    # 构建父级保护伞（防止 Tier 3 误杀白名单或核心列表中的域名的父级）
     protected_ancestors = set()
     for s in (white_set, valid_core):
         for item in s:
@@ -246,15 +233,14 @@ def main():
                 curr = curr[curr.find('.')+1:]
                 protected_ancestors.add(curr)
 
-    # 阶段 3：过滤 Tier 3
     valid_tier3 = set()
     for d in tier3_set_raw:
         if d in protected_ancestors or '*' in d:
-            if '*' in d: valid_tier3.add(d)   # 通配符直接放行
+            if '*' in d: valid_tier3.add(d)
             continue
         valid_tier3.add(d)
 
-    # 阶段 4：Mihomo 格式智能转换
+    # Mihomo 格式转换
     write_log(">> 正在执行 Mihomo 域名匹配类型自动分类...")
     all_domains = valid_core.union(valid_tier3)
 
@@ -268,7 +254,6 @@ def main():
 
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
 
-    # --- 计数器 ---
     count_wildcard = 0
     count_regex = 0
     count_exact = 0
@@ -276,7 +261,6 @@ def main():
 
     formatted_rules = []
     for domain in sorted(optimized_domains):
-        # 情况 1: 含通配符 -> DOMAIN-WILDCARD 或 DOMAIN-REGEX
         if '*' in domain:
             if domain.startswith('*.') and '*' not in domain[2:]:
                 formatted_rules.append(f"- DOMAIN-WILDCARD,{domain}")
@@ -291,42 +275,40 @@ def main():
                     count_wildcard += 1
             continue
 
-        # 情况 2: 普通域名（无通配符）分类
         if domain.count('.') >= 3:
             registrable = get_registrable_domain(domain)
             if registrable and domain == registrable:
-                # 该域名本身是注册域（例如 example.com.cn），应后缀匹配
                 formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
                 count_suffix += 1
             else:
-                # 深层子域，保持精确匹配（与原输出一致）
                 formatted_rules.append(f"- DOMAIN,{domain}")
                 count_exact += 1
             continue
 
-        # 情况 3: 常规二/三级域名 -> DOMAIN-SUFFIX
         formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
         count_suffix += 1
 
     def rule_sort_key(rule):
-        # 提取规则前缀用于判断优先级
         if rule.startswith("- DOMAIN,"): return 1
         if rule.startswith("- DOMAIN-SUFFIX,"): return 2
         if rule.startswith("- DOMAIN-WILDCARD,"): return 3
         if rule.startswith("- DOMAIN-REGEX,"): return 4
         return 99
 
-    # 按照 规则类型优先级排列，同类型下再按字母表顺序(x)进行二次排列
     formatted_rules.sort(key=lambda x: (rule_sort_key(x), x))
-    
-    # 输出文件
+
     rule_count = len(formatted_rules)
     generation_time = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
     header = f"""# Title: AdBlock_Rule_For_Mihomo
 # Generated: {generation_time} (UTC+8)
 # Total Items: {rule_count} 条
 # -----------------------------------------------
-# 统计信息:
+# 全局统计:
+# - 拦截规则总数: {total_block} 条
+# - 白名单总数: {total_allow} 条
+# - 过滤顶级域总数: {total_psl} 条
+# -----------------------------------------------
+# 规则分类统计:
 # - [DOMAIN]         : {count_exact} 条
 # - [DOMAIN-SUFFIX]  : {count_suffix} 条
 # - [DOMAIN-WILDCARD]: {count_wildcard} 条
@@ -339,7 +321,7 @@ payload:
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(header + "\n".join(formatted_rules))
 
-    write_log(f"成功导出 {rule_count} 条规则至: {output_path}")
+    write_log(f"成功导出 {rule_count} 条规则至: {output_path} (拦截: {total_block}, 白名单: {total_allow}, 过滤顶级域: {total_psl})")
 
 if __name__ == "__main__":
     main()
