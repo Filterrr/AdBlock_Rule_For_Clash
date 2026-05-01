@@ -13,7 +13,7 @@ on:
       - '.gitignore'
       - .github
   schedule:
-    - cron: 0 */3 * * *
+    - cron: "20 2,10,18 * * *"
   workflow_dispatch:  # 允许手动触发工作流
 
 jobs:
