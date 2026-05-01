@@ -105,11 +105,16 @@ def parse_line_to_domain(line):
 
 def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
     """
-    提取规则
+    提取规则并输出每个源的统计信息
     :param force_whitelist: 如果为 True，无论规则有无 @@ 前缀，均强制视为白名单
     """
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     for url in urls:
+        # 统计变量
+        blocked = 0
+        whitelisted = 0
+        filtered_tld = 0
+
         write_log(f"正在获取: {url}")
         req = urllib.request.Request(url, headers=headers)
         try:
@@ -124,19 +129,23 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
 
-            # 判断是否为白名单（强制模式 or 自带 @@ 前缀）
             is_whitelist = force_whitelist or line.startswith("@@")
-
-            # 使用通用解析器提取域名
             domain = parse_line_to_domain(line)
 
-            if domain and domain_regex.match(domain):
-                domain = domain.lower()
-                if is_whitelist:
-                    global_whitelist.add(domain)
+            if domain:
+                if domain_regex.match(domain):
+                    domain = domain.lower()
+                    if is_whitelist:
+                        global_whitelist.add(domain)
+                        whitelisted += 1
+                    else:
+                        rules_set.add(domain)
+                        blocked += 1
                 else:
-                    rules_set.add(domain)
+                    filtered_tld += 1
 
+        print(f"✔ 解析: {url} (拦截: {blocked}, 白名单: {whitelisted}, 过滤顶级域: {filtered_tld})")
+        
 def main():
     write_log("==== 开始初始化设置 ====")
 
@@ -163,10 +172,21 @@ def main():
                 white_set.add(domain.lower())
         write_log(f"已加载本地白名单，当前白名单库共 {len(white_set)} 条。")
 
-    # 获取规则 (优化：allow_urls 开启强制白名单模式)
-    extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
-    extract_rules(tier1_urls + tier2_urls, core_set_raw, white_set)
-    extract_rules(tier3_urls, tier3_set_raw, white_set)
+    # 处理允许列表（强制白名单）
+    if allow_urls:
+        print(f"开始并获取 {len(allow_urls)} 个订阅源...")
+        extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
+
+    # 处理 Tier1 + Tier2
+    tier12 = tier1_urls + tier2_urls
+    if tier12:
+        print(f"开始并获取 {len(tier12)} 个订阅源...")
+        extract_rules(tier12, core_set_raw, white_set)
+
+    # 处理 Tier3
+    if tier3_urls:
+        print(f"开始并获取 {len(tier3_urls)} 个订阅源...")
+        extract_rules(tier3_urls, tier3_set_raw, white_set)
 
     # 阶段 1 & 2：预处理与冲突检测
     write_log(">> 正在执行冲突清洗与保护机制校验...")
