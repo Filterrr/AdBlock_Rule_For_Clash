@@ -9,23 +9,17 @@ import re
 import urllib.request
 import datetime
 import sys
-import yaml  # 需要安装 PyYAML: pip install pyyaml
+import yaml
 
-# 强制标准输出为 UTF-8
 if sys.stdout.encoding.lower() != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
 
-# === 自定义全局白名单 ===
-custom_excluded_domains = [
-    # "example.com",
-]
+custom_excluded_domains = []
 
-# 目录设置
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_FILE_PATH = os.path.join(SCRIPT_DIR, "adblock_log.txt")
 SOURCES_CONFIG = os.path.join(SCRIPT_DIR, "sources.yaml")
 
-# --- 增强型正则引擎：支持通配符 (*) 提取 ---
 domain_regex = re.compile(r'^(?=.{1,253}$)(?:(?!-)[a-zA-Z0-9.*-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$')
 regex1 = re.compile(r'^\|\|([a-zA-Z0-9.*-]+)(?:\^.*)?$')
 regex2 = re.compile(r'^(?:0\.0\.0\.0|127\.0\.0\.1|::1?)\s+([a-zA-Z0-9.*-]+)')
@@ -57,64 +51,43 @@ def safe_read_file(file_path):
             continue
     return []
 
-# --- 加载外部订阅源配置 ---
 def load_sources(config_path=SOURCES_CONFIG):
-    """
-    从外部 YAML 文件读取订阅源 URL 列表。
-    返回字典，包含 'allow_urls', 'tier1_urls', 'tier2_urls', 'tier3_urls' 键。
-    若文件不存在或格式错误，则返回空列表的字典。
-    """
-    default_sources = {
-        "allow_urls": [],
-        "tier1_urls": [],
-        "tier2_urls": [],
-        "tier3_urls": []
-    }
-
+    default_sources = {"allow_urls": [], "tier1_urls": [], "tier2_urls": [], "tier3_urls": []}
     if not os.path.exists(config_path):
         write_log(f"警告: 配置文件 {config_path} 不存在，使用空订阅源")
         return default_sources
-
     try:
         with open(config_path, 'r', encoding='utf-8') as f:
             sources = yaml.safe_load(f)
     except Exception as e:
         write_log(f"读取配置文件失败: {e}，使用空订阅源")
         return default_sources
-
-    # 确保每个键都存在且为列表
     for key in default_sources:
         if key not in sources or not isinstance(sources[key], list):
             sources[key] = default_sources[key]
     return sources
 
-# --- 通用域名提取器 ---
 def parse_line_to_domain(line):
-    """统一使用正则提取域名，兼容各种规则格式"""
     if line.startswith("@@"):
         line = line[2:]
-
     domain = None
     if m := regex1.match(line): domain = m.group(1)
     elif m := regex2.match(line): domain = m.group(1)
     elif m := regex3.match(line): domain = m.group(1)
     elif m := regex4.match(line): domain = m.group(1)
     elif m := regex5.match(line): domain = m.group(1)
-
     return domain.strip('.') if domain else None
 
 def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
-    """
-    提取规则并输出每个源的统计信息
-    :param force_whitelist: 如果为 True，无论规则有无 @@ 前缀，均强制视为白名单
-    """
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+    total_blocked = 0
+    total_whitelisted = 0
+    total_filtered = 0
+
     for url in urls:
-        # 统计变量
         blocked = 0
         whitelisted = 0
         filtered_tld = 0
-
         write_log(f"正在获取: {url}")
         req = urllib.request.Request(url, headers=headers)
         try:
@@ -128,10 +101,8 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
             line = line.strip()
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
-
             is_whitelist = force_whitelist or line.startswith("@@")
             domain = parse_line_to_domain(line)
-
             if domain:
                 if domain_regex.match(domain):
                     domain = domain.lower()
@@ -145,11 +116,14 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
                     filtered_tld += 1
 
         print(f"✔ 解析: {url} (拦截: {blocked}, 白名单: {whitelisted}, 过滤顶级域: {filtered_tld})")
-        
+        total_blocked += blocked
+        total_whitelisted += whitelisted
+        total_filtered += filtered_tld
+
+    return total_blocked, total_whitelisted, total_filtered
+
 def main():
     write_log("==== 开始初始化设置 ====")
-
-    # 加载外部订阅源配置
     sources = load_sources()
     allow_urls = sources["allow_urls"]
     tier1_urls = sources["tier1_urls"]
@@ -159,40 +133,46 @@ def main():
     white_set = set(d.lower() for d in custom_excluded_domains)
     core_set_raw, tier3_set_raw = set(), set()
 
-    # 优化：加载本地高权重白名单 (支持纯域名及各种复杂规则格式)
     top_whitelist_file = os.path.join(SCRIPT_DIR, "top_whitelist.txt")
     if os.path.exists(top_whitelist_file):
         for line in safe_read_file(top_whitelist_file):
             line = line.strip()
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
-
             domain = parse_line_to_domain(line)
             if domain and domain_regex.match(domain):
                 white_set.add(domain.lower())
         write_log(f"已加载本地白名单，当前白名单库共 {len(white_set)} 条。")
 
-    # 处理允许列表（强制白名单）
+    final_blocked = 0
+    final_whitelisted = 0
+    final_filtered_tld = 0
+
     if allow_urls:
         print(f"开始并获取 {len(allow_urls)} 个订阅源...")
-        extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
+        b, w, f = extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
+        final_blocked += b
+        final_whitelisted += w
+        final_filtered_tld += f
 
-    # 处理 Tier1 + Tier2
     tier12 = tier1_urls + tier2_urls
     if tier12:
         print(f"开始并获取 {len(tier12)} 个订阅源...")
-        extract_rules(tier12, core_set_raw, white_set)
+        b, w, f = extract_rules(tier12, core_set_raw, white_set)
+        final_blocked += b
+        final_whitelisted += w
+        final_filtered_tld += f
 
-    # 处理 Tier3
     if tier3_urls:
         print(f"开始并获取 {len(tier3_urls)} 个订阅源...")
-        extract_rules(tier3_urls, tier3_set_raw, white_set)
+        b, w, f = extract_rules(tier3_urls, tier3_set_raw, white_set)
+        final_blocked += b
+        final_whitelisted += w
+        final_filtered_tld += f
 
-    # 阶段 1 & 2：预处理与冲突检测
     write_log(">> 正在执行冲突清洗与保护机制校验...")
     valid_core = {d for d in core_set_raw if d not in white_set}
 
-    # 构建父级保护伞（防止 Tier 3 误杀）
     protected_ancestors = set()
     for s in (white_set, valid_core):
         for item in s:
@@ -203,19 +183,16 @@ def main():
                 curr = curr[curr.find('.')+1:]
                 protected_ancestors.add(curr)
 
-    # 阶段 3：过滤 Tier 3
     valid_tier3 = set()
     for d in tier3_set_raw:
         if d in protected_ancestors or '*' in d:
-            if '*' in d: valid_tier3.add(d)  # 通配符直接放行，不参与保护校验
+            if '*' in d: valid_tier3.add(d)
             continue
         valid_tier3.add(d)
 
-    # 阶段 4：Mihomo 格式智能转换（TXT 版本）
     write_log(">> 正在执行 Mihomo 域名匹配类型自动分类...")
     all_domains = valid_core.union(valid_tier3)
 
-    # 全局后缀去重计算
     suffix_candidates = {d for d in all_domains if '*' not in d}
     global_subs_detector = set()
     for d in suffix_candidates:
@@ -224,29 +201,21 @@ def main():
             temp = temp[temp.find('.')+1:]
             global_subs_detector.add(temp)
 
-    # 剔除已被父域名覆盖的子域名（仅针对非通配符）
     optimized_domains = [d for d in all_domains if d not in global_subs_detector]
 
-    # --- 计数器 ---
     count_wildcard = 0
     count_suffix = 0
-
     formatted_rules = []
     for domain in sorted(optimized_domains):
-        # 情况 1: 通配符匹配 (Wildcard) - 保留原逻辑
         if '*' in domain:
             formatted_rules.append(f"- '{domain}'")
             count_wildcard += 1
             continue
-
-        # 情况 3: 后缀匹配 (Suffix)
         formatted_rules.append(f"- '+.{domain}'")
         count_suffix += 1
 
-    # 输出文件
     rule_count = len(formatted_rules)
     generation_time = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
-    # Header 统计信息
     header = f"""# Title: AdBlock_Rule_For_Mihomo
 # Generated: {generation_time} (UTC+8)
 # Total Items: {rule_count} 条
@@ -262,6 +231,8 @@ payload:
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(header + "\n".join(formatted_rules))
 
+    # 最终汇总输出
+    write_log(f"拦截: {final_blocked}, 白名单: {final_whitelisted}, 过滤顶级域: {final_filtered_tld}")
     write_log(f"成功导出 {rule_count} 条规则至: {output_path}")
 
 if __name__ == "__main__":
