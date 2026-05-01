@@ -11,7 +11,6 @@ on:
       - '**.exe'
       - 'adblock_reject.*'
       - '.gitignore'
-      - .github
   schedule:
     - cron: "20 2,10,18 * * *"
   workflow_dispatch:  # 允许手动触发工作流
