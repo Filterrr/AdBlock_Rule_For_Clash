@@ -139,15 +139,22 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
     :param force_whitelist: 如果为 True，无论规则有无 @@ 前缀，均强制视为白名单
     """
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
-    skipped_psl = 0
+
+    # 先打印本组订阅源数量
+    write_log(f"开始并获取 {len(urls)} 个订阅源...")
+
     for url in urls:
-        write_log(f"正在获取: {url}")
         req = urllib.request.Request(url, headers=headers)
+        # 每个源独立计数
+        block_cnt = 0
+        allow_cnt = 0
+        psl_cnt = 0
+
         try:
             with urllib.request.urlopen(req, timeout=20) as response:
                 content = smart_decode(response.read())
         except Exception as e:
-            write_log(f"获取失败: {e}")
+            write_log(f"✖ 获取失败: {url} - {e}")
             continue
 
         for line in content.splitlines():
@@ -155,24 +162,22 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
             if not line or line.startswith(("!", "#", "[", ";", "//")):
                 continue
 
-            # 判断是否为白名单（强制模式 or 自带 @@ 前缀）
             is_whitelist = force_whitelist or line.startswith("@@")
-
-            # 使用通用解析器提取域名
             domain = parse_line_to_domain(line)
 
             if domain and domain_regex.match(domain):
                 domain = domain.lower()
-                # 过滤公共后缀（如 "com", "co.uk"）
                 if is_public_suffix(domain):
-                    skipped_psl += 1
+                    psl_cnt += 1
                     continue
                 if is_whitelist:
                     global_whitelist.add(domain)
+                    allow_cnt += 1
                 else:
                     rules_set.add(domain)
-    if skipped_psl:
-        write_log(f"已过滤 {skipped_psl} 条公共后缀域名规则")
+                    block_cnt += 1
+
+        write_log(f"✔ 解析: {url} (拦截: {block_cnt}, 白名单: {allow_cnt}, 过滤顶级域: {psl_cnt})")
 
 def wildcard_to_regex(domain):
     """
