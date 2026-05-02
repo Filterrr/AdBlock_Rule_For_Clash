@@ -13,7 +13,7 @@ tier1_urls:
 tier2_urls:
   - https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/ThirdParty/filter_104_EasyListChina/filter.txt
   - https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/thirdparties/easylist/easylist.txt
-  - https://easylist-downloads.adblockplus.org/easyprivacy.txt
+#  - https://easylist-downloads.adblockplus.org/easyprivacy.txt
  
 # 规则3
 tier3_urls:
@@ -23,3 +23,5 @@ tier3_urls:
   - https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/AD.txt
   - https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt
   - https://anti-ad.net/adguard.txt
+  - https://raw.githubusercontent.com/Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Custom/video-ad.list
+  - https://raw.githubusercontent.com/sve1r/Rules-For-Quantumult-X/develop/Rules/Advertising/AdReject.list
