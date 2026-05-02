@@ -275,7 +275,7 @@ def main():
                     count_wildcard += 1
             continue
 
-        if domain.count('.') >= 3:
+        if domain.count('.') >= 4:
             registrable = get_registrable_domain(domain)
             if registrable and domain == registrable:
                 formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
