@@ -221,8 +221,8 @@ def main():
 # Total Items: {rule_count} 条
 # -----------------------------------------------
 # 统计信息:
-# - [通配符匹配] (*.*.a.com)   : {count_wildcard} 条
-# - [后缀匹配 ] (+.a.com)       : {count_suffix} 条
+# - [通配匹配] (*.*.a.com)   : {count_wildcard} 条
+# - [后缀匹配] (+.a.com)     : {count_suffix} 条
 # -----------------------------------------------
 
 payload:
