@@ -64,7 +64,7 @@ rule-providers:
     behavior: classical
     format: yaml
     url: https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.yaml
-    path: ./ruleset/adblock_reject.yaml
+    path: ./adblock_reject.yaml
     interval: 120
     
 rules:
@@ -79,7 +79,7 @@ rule-providers:
     behavior: domain
     format: mrs
     url: https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.mrs
-    path: ./ruleset/adblock_reject.mrs
+    path: ./adblock_reject.mrs
     interval: 120
     
 rules:
@@ -94,7 +94,7 @@ rule-providers:
     behavior: domain
     format: txt
     url: https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.txt
-    path: ./ruleset/adblock_reject.txt
+    path: ./adblock_reject.txt
     interval: 120
     
 rules:
