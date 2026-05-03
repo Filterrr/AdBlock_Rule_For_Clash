@@ -1,10 +1,10 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-05-04 06:56:14 (UTC+8)
-# Total Items: 155744 条
+# Generated: 2026-05-04 06:57:53 (UTC+8)
+# Total Items: 155791 条
 # -----------------------------------------------
 # 规则分类统计:
-# - [DOMAIN]         : 1307 条
-# - [DOMAIN-SUFFIX]  : 154276 条
+# - [DOMAIN]         : 1319 条
+# - [DOMAIN-SUFFIX]  : 154311 条
 # - [DOMAIN-WILDCARD]: 3 条
 # - [DOMAIN-REGEX]   : 158 条
 # -----------------------------------------------
@@ -253,6 +253,7 @@ payload:
 - DOMAIN,awssgp0-files.fds.api.xiaomi.com
 - DOMAIN,az.appstore.vivo.com.cn
 - DOMAIN,b.mail.tabcorp.com.au
+- DOMAIN,b.netcheck.gallery.pandora.xiaomi.com
 - DOMAIN,b.prod1.youroffers.dominos.ca
 - DOMAIN,b.your.rewardsemail.dominos.ca
 - DOMAIN,backup.customstat.video.51togic.com
@@ -271,6 +272,7 @@ payload:
 - DOMAIN,branch.link.loop.net.nz
 - DOMAIN,branch.nc.mails.sssports.com
 - DOMAIN,branch.vcf-test.vzw.dev.llabs.io
+- DOMAIN,broker.mqtt.pandora.xiaomi.com
 - DOMAIN,browser.events.data.msn.cn
 - DOMAIN,browser.events.data.msn.com
 - DOMAIN,browser.pipe.aria.microsoft.com
@@ -471,6 +473,7 @@ payload:
 - DOMAIN,fs.uc.nearme.com.cn
 - DOMAIN,g-br-cdn.kwai.net.iberostar.com
 - DOMAIN,g-fallback.whatsapp.net.iberostar.com
+- DOMAIN,g.dtv.cn.miaozhan.com
 - DOMAIN,g.dtv.cn.miaozhen.com
 - DOMAIN,g.rs.yoyi.com.cn
 - DOMAIN,g.whatsapp.net.iberostar.com
@@ -781,6 +784,7 @@ payload:
 - DOMAIN,omgmta.play.aiseet.atianqi.com
 - DOMAIN,optimus-ads.amap.com.w.alikunlun.com
 - DOMAIN,origin.www.images.2.forms.healthcare.philips.com
+- DOMAIN,ota.cdn.pandora.xiaomi.com
 - DOMAIN,oth.str.mdt.qq.com
 - DOMAIN,oth.update.mdt.qq.com
 - DOMAIN,otheve.play.aiseet.atianqi.com
@@ -794,6 +798,7 @@ payload:
 - DOMAIN,p06.sc.origins.en25.com
 - DOMAIN,p16-tiktokcdn-com.akamaized.net.iberostar.com
 - DOMAIN,p3-ad-sign.byteimg.com.queniusy.com
+- DOMAIN,package.cdn.pandora.xiaomi.com
 - DOMAIN,pages.comunicaciones.ficohsa.com.gt
 - DOMAIN,pages.feedback.ignite.gleague.nba.com
 - DOMAIN,pages.info.ficohsa.com.pa
@@ -1058,6 +1063,7 @@ payload:
 - DOMAIN,ssl.o.guidelinesinpractice.co.uk
 - DOMAIN,ssl.o.medscape.co.uk
 - DOMAIN,staging.admin.e.mi.com
+- DOMAIN,staging.ai.api.xiaomi.com
 - DOMAIN,stat.browser.nearme.com.cn
 - DOMAIN,stat.tpns.gz2.tencent.com
 - DOMAIN,static.ad.logic-prod.viasat.io
@@ -1094,6 +1100,8 @@ payload:
 - DOMAIN,t1.a.market.xiaomi.com
 - DOMAIN,t1.benefits.tops.co.th
 - DOMAIN,t1.discover.flashnews.com.au
+- DOMAIN,t4.a.market.xiaomi.com
+- DOMAIN,t5.a.market.xiaomi.com
 - DOMAIN,t7z.cupid.ptqy.gitv.tv
 - DOMAIN,target.onlinebanking.bancogalicia.com.ar
 - DOMAIN,target.wsec06.bancogalicia.com.ar
@@ -1120,6 +1128,7 @@ payload:
 - DOMAIN,test.links.emails.discoveryplus.com
 - DOMAIN,test.links.emails.emea.discoveryplus.com
 - DOMAIN,test.links.emails.ph.discoveryplus.com
+- DOMAIN,test.new.api.ad.xiaomi.com
 - DOMAIN,thind-gke-euw.prd.data.corp.unity3d.com
 - DOMAIN,time.video.ptqy.gitv.tv
 - DOMAIN,titan.guestworld.tripod.lycos.com
@@ -1217,6 +1226,7 @@ payload:
 - DOMAIN,trk.fr.business.westernunion.ch
 - DOMAIN,trk.mt.business.westernunion.com
 - DOMAIN,trk.send.safestyle.com.au
+- DOMAIN,tv.weixin.pandora.xiaomi.com
 - DOMAIN,tw.partner.buy.yahoo.com
 - DOMAIN,tx-br-cdn.kwai.net.iberostar.com
 - DOMAIN,tx-pro-pull.kwai.net.iberostar.com
@@ -1229,6 +1239,7 @@ payload:
 - DOMAIN,up1.tj.u2.ucweb.com
 - DOMAIN,update.avlyun.sec.miui.com
 - DOMAIN,upgrade.m.tv.sohu.com
+- DOMAIN,upgrade.mishop.pandora.xiaomi.com
 - DOMAIN,url4142.dev.att.llabs.io
 - DOMAIN,us.api.micloud.xiaomi.net
 - DOMAIN,us.appbackupapi.micloud.xiaomi.net.iberostar.com
@@ -1260,6 +1271,7 @@ payload:
 - DOMAIN,vserv.bc.cdn.bitgravity.com
 - DOMAIN,vstat.my.tv.sohu.com
 - DOMAIN,vstat.v.blog.sohu.com
+- DOMAIN,vv.play.aiseet.atianqi.com
 - DOMAIN,w88.m.espn.go.com
 - DOMAIN,watson.telemetry.microsoft.com.nsatc.net
 - DOMAIN,web.ajostg.cfs.com.au
@@ -4689,6 +4701,7 @@ payload:
 - DOMAIN-SUFFIX,5186246.notify6.com
 - DOMAIN-SUFFIX,5188yy.com
 - DOMAIN-SUFFIX,518ad.com
+- DOMAIN-SUFFIX,519332da.rtc.youme.im
 - DOMAIN-SUFFIX,519397.com
 - DOMAIN-SUFFIX,51ads.com
 - DOMAIN-SUFFIX,51chumoping.com
@@ -6095,10 +6108,13 @@ payload:
 - DOMAIN-SUFFIX,86eed1e4bf.baf3838b31.com
 - DOMAIN-SUFFIX,86f1b067c2.a2255d1d36.com
 - DOMAIN-SUFFIX,86f4fd3b507f774.com
+- DOMAIN-SUFFIX,86file.megajoy.com
+- DOMAIN-SUFFIX,86get.joy.cn
 - DOMAIN-SUFFIX,86gx67fyk372pl9.rest
 - DOMAIN-SUFFIX,86hhiuu88n3rpqmhlolf2bzu.cfd
 - DOMAIN-SUFFIX,86hi9r4f.xyz
 - DOMAIN-SUFFIX,86kx.com
+- DOMAIN-SUFFIX,86log.joy.cn
 - DOMAIN-SUFFIX,86pjokx7vklxqp5iug2o.cfd
 - DOMAIN-SUFFIX,86uk.com
 - DOMAIN-SUFFIX,8707c7e689.dec0c1a14f.com
@@ -14595,7 +14611,6 @@ payload:
 - DOMAIN-SUFFIX,adsummos.net
 - DOMAIN-SUFFIX,adsunflower.cn
 - DOMAIN-SUFFIX,adsunflower.com
-- DOMAIN-SUFFIX,adsunion.com
 - DOMAIN-SUFFIX,adsup.togothermany.cn
 - DOMAIN-SUFFIX,adsupermarket.com
 - DOMAIN-SUFFIX,adsupply.com
@@ -16504,6 +16519,7 @@ payload:
 - DOMAIN-SUFFIX,aleroninc.actonservice.com
 - DOMAIN-SUFFIX,alersemenders.com
 - DOMAIN-SUFFIX,alert.autohome.com.cn
+- DOMAIN-SUFFIX,alert.kuyun.com
 - DOMAIN-SUFFIX,alertme.news
 - DOMAIN-SUFFIX,alerts.ironmountain.com
 - DOMAIN-SUFFIX,alerts.ndtv.com
@@ -16716,7 +16732,6 @@ payload:
 - DOMAIN-SUFFIX,allycollegedstrie.info
 - DOMAIN-SUFFIX,allycurrantliability.com
 - DOMAIN-SUFFIX,allyes.cn
-- DOMAIN-SUFFIX,allyes.com
 - DOMAIN-SUFFIX,allykitchen.com
 - DOMAIN-SUFFIX,alma-cmp.almamedia.io
 - DOMAIN-SUFFIX,almabelen.com
@@ -18659,7 +18674,6 @@ payload:
 - DOMAIN-SUFFIX,api.557400.com
 - DOMAIN-SUFFIX,api.aalbbh84.info
 - DOMAIN-SUFFIX,api.ad-locus.com
-- DOMAIN-SUFFIX,api.ad.xiaomi.com
 - DOMAIN-SUFFIX,api.ad.xv555.com
 - DOMAIN-SUFFIX,api.ad.yipinread.com
 - DOMAIN-SUFFIX,api.adaether.com
@@ -18740,6 +18754,7 @@ payload:
 - DOMAIN-SUFFIX,api.growingio.com
 - DOMAIN-SUFFIX,api.grumft.com
 - DOMAIN-SUFFIX,api.hdtv.letv.com
+- DOMAIN-SUFFIX,api.hpplay.com.cn
 - DOMAIN-SUFFIX,api.hugemedia.cz
 - DOMAIN-SUFFIX,api.hzsanjiaomao.com
 - DOMAIN-SUFFIX,api.iapps.ifeng.com
@@ -20954,6 +20969,7 @@ payload:
 - DOMAIN-SUFFIX,assimilatecigarettes.com
 - DOMAIN-SUFFIX,assistancetrack.changehealthcare.com
 - DOMAIN-SUFFIX,assistant.dg1.com
+- DOMAIN-SUFFIX,assistant.pandora.xiaomi.com
 - DOMAIN-SUFFIX,assistantinsignificantthings.com
 - DOMAIN-SUFFIX,assisthaboub.com
 - DOMAIN-SUFFIX,assoc-amazon.ca
@@ -29064,6 +29080,7 @@ payload:
 - DOMAIN-SUFFIX,cct2.o2online.de
 - DOMAIN-SUFFIX,cctpyneuuiuwn.site
 - DOMAIN-SUFFIX,cctrkom.creditcards.com
+- DOMAIN-SUFFIX,cctv.adsunion.com
 - DOMAIN-SUFFIX,cctvgb.com.cn
 - DOMAIN-SUFFIX,cctyly.com
 - DOMAIN-SUFFIX,ccuoqedyqvttq.tech
@@ -29183,6 +29200,7 @@ payload:
 - DOMAIN-SUFFIX,cdn.99kia.com
 - DOMAIN-SUFFIX,cdn.9gtb.com
 - DOMAIN-SUFFIX,cdn.ad.page
+- DOMAIN-SUFFIX,cdn.ad.xiaomi.com
 - DOMAIN-SUFFIX,cdn.adapi.fotoable.com
 - DOMAIN-SUFFIX,cdn.adblade.com
 - DOMAIN-SUFFIX,cdn.adc.eamobile.com
@@ -29540,6 +29558,7 @@ payload:
 - DOMAIN-SUFFIX,cdn0.sxhjty.cn
 - DOMAIN-SUFFIX,cdn1.crispadvertising.com
 - DOMAIN-SUFFIX,cdn1.digita.media
+- DOMAIN-SUFFIX,cdn1.hpplay.cn
 - DOMAIN-SUFFIX,cdn1.lbesec.com
 - DOMAIN-SUFFIX,cdn1.memojav.com
 - DOMAIN-SUFFIX,cdn1.pebx.pl
@@ -31762,6 +31781,7 @@ payload:
 - DOMAIN-SUFFIX,cloud-miner.eu
 - DOMAIN-SUFFIX,cloud.codenow.cn
 - DOMAIN-SUFFIX,cloud.diagral.fr
+- DOMAIN-SUFFIX,cloud.hpplay.cn
 - DOMAIN-SUFFIX,cloud.rovio.com
 - DOMAIN-SUFFIX,cloud.setupad.com
 - DOMAIN-SUFFIX,cloud.trapptechnology.com
@@ -36006,6 +36026,7 @@ payload:
 - DOMAIN-SUFFIX,d1.showself.com
 - DOMAIN-SUFFIX,d1.sina.com.cn
 - DOMAIN-SUFFIX,d1.sinaimg.cn
+- DOMAIN-SUFFIX,d1.xiaomi.com
 - DOMAIN-SUFFIX,d1.zhuangxiu6.com
 - DOMAIN-SUFFIX,d1054130-28095.cp.blacknight.com
 - DOMAIN-SUFFIX,d108nnfn2eigw4.cloudfront.net
@@ -39540,6 +39561,7 @@ payload:
 - DOMAIN-SUFFIX,device.fishmobi.com
 - DOMAIN-SUFFIX,device9.com
 - DOMAIN-SUFFIX,deviceinf.com
+- DOMAIN-SUFFIX,devicemgr.hpplay.cn
 - DOMAIN-SUFFIX,deviceprotect.eu
 - DOMAIN-SUFFIX,devidekiangspermin.cyou
 - DOMAIN-SUFFIX,devilinquiry.com
@@ -48229,6 +48251,8 @@ payload:
 - DOMAIN-SUFFIX,f1.lutouwang.net
 - DOMAIN-SUFFIX,f1.mailperf.com
 - DOMAIN-SUFFIX,f1.mailperformance.com
+- DOMAIN-SUFFIX,f1.market.mi-img.com
+- DOMAIN-SUFFIX,f1.market.xiaomi.com
 - DOMAIN-SUFFIX,f1.meishichina.com
 - DOMAIN-SUFFIX,f1.mperf.com
 - DOMAIN-SUFFIX,f1.np6.com
@@ -48252,6 +48276,8 @@ payload:
 - DOMAIN-SUFFIX,f1e17919db.15b4a9d5e8.com
 - DOMAIN-SUFFIX,f1tbit.com
 - DOMAIN-SUFFIX,f1tfmxzg.icu
+- DOMAIN-SUFFIX,f2.market.mi-img.com
+- DOMAIN-SUFFIX,f2.market.xiaomi.com
 - DOMAIN-SUFFIX,f2.p0y.cn
 - DOMAIN-SUFFIX,f2.voyage-prive.com
 - DOMAIN-SUFFIX,f2038c988e.90d92b6a4e.com
@@ -48268,6 +48294,8 @@ payload:
 - DOMAIN-SUFFIX,f2958da6965fde48.com
 - DOMAIN-SUFFIX,f2ae48a2ec.93a72bfca9.com
 - DOMAIN-SUFFIX,f2f38069d7.e918781f38.com
+- DOMAIN-SUFFIX,f3.market.mi-img.com
+- DOMAIN-SUFFIX,f3.market.xiaomi.com
 - DOMAIN-SUFFIX,f3.vedeh.com
 - DOMAIN-SUFFIX,f35c5dba3b0b5b017.com
 - DOMAIN-SUFFIX,f362.nola.com
@@ -48279,6 +48307,8 @@ payload:
 - DOMAIN-SUFFIX,f3dfe4416a.528b4dabec.com
 - DOMAIN-SUFFIX,f3fea4450e3b.xzccie.com
 - DOMAIN-SUFFIX,f3k194f9i7.com
+- DOMAIN-SUFFIX,f4.market.mi-img.com
+- DOMAIN-SUFFIX,f4.market.xiaomi.com
 - DOMAIN-SUFFIX,f40f89d54b8.com
 - DOMAIN-SUFFIX,f42aee9897.78f201e862.com
 - DOMAIN-SUFFIX,f45c5d6b32.9dcae0f138.com
@@ -48289,6 +48319,8 @@ payload:
 - DOMAIN-SUFFIX,f4f0f3d579cae238.com
 - DOMAIN-SUFFIX,f4h123m89w.com
 - DOMAIN-SUFFIX,f5.dfcwg.com
+- DOMAIN-SUFFIX,f5.market.mi-img.com
+- DOMAIN-SUFFIX,f5.market.xiaomi.com
 - DOMAIN-SUFFIX,f5.mtqys.com
 - DOMAIN-SUFFIX,f5.track-mv-01.com
 - DOMAIN-SUFFIX,f5080f5cee5a00.com
@@ -49627,6 +49659,7 @@ payload:
 - DOMAIN-SUFFIX,file.bmob.cn
 - DOMAIN-SUFFIX,file.daihuo.qq.com
 - DOMAIN-SUFFIX,file.iporngay.com
+- DOMAIN-SUFFIX,file.xmpush.xiaomi.com
 - DOMAIN-SUFFIX,filecatcher.xyz
 - DOMAIN-SUFFIX,fileescd.cfd
 - DOMAIN-SUFFIX,fileloadr.com
@@ -50754,6 +50787,7 @@ payload:
 - DOMAIN-SUFFIX,foccqbujbfcyj.love
 - DOMAIN-SUFFIX,fociblastievena.qpon
 - DOMAIN-SUFFIX,focmefzojwehp.space
+- DOMAIN-SUFFIX,focusbaiduafp.allyes.com
 - DOMAIN-SUFFIX,focusedcountry.pro
 - DOMAIN-SUFFIX,focusedquit.pro
 - DOMAIN-SUFFIX,focusprolight.com
@@ -51862,6 +51896,7 @@ payload:
 - DOMAIN-SUFFIX,ftnqjmzmboydf.online
 - DOMAIN-SUFFIX,ftoihsukifuqw.website
 - DOMAIN-SUFFIX,ftp.happ.social
+- DOMAIN-SUFFIX,ftp.hpplay.com.cn
 - DOMAIN-SUFFIX,ftp.ywxww.net
 - DOMAIN-SUFFIX,ftpcontent.worldnow.com
 - DOMAIN-SUFFIX,ftpd188.com
@@ -56862,6 +56897,7 @@ payload:
 - DOMAIN-SUFFIX,gvmogilshxbdg.store
 - DOMAIN-SUFFIX,gvmomuqjv1.swyftx.com
 - DOMAIN-SUFFIX,gvnqfiwzronbq.com
+- DOMAIN-SUFFIX,gvod.aiseejapp.atianqi.com
 - DOMAIN-SUFFIX,gvodieta.com
 - DOMAIN-SUFFIX,gvokzhdxjylzk.site
 - DOMAIN-SUFFIX,gvooqtrsbfueb.site
@@ -72042,6 +72078,7 @@ payload:
 - DOMAIN-SUFFIX,lebiutacsvaat.website
 - DOMAIN-SUFFIX,lebkeresxa.ml
 - DOMAIN-SUFFIX,lebneeklnuru.com
+- DOMAIN-SUFFIX,leboapi.hpplay.com.cn
 - DOMAIN-SUFFIX,lebqrivt.com
 - DOMAIN-SUFFIX,lebtpm.co-medical.com
 - DOMAIN-SUFFIX,leche69.com
@@ -80262,7 +80299,6 @@ payload:
 - DOMAIN-SUFFIX,megaffiliates.com
 - DOMAIN-SUFFIX,megahrepsh.com
 - DOMAIN-SUFFIX,megaihargi.com
-- DOMAIN-SUFFIX,megajoy.com
 - DOMAIN-SUFFIX,megapopads.com
 - DOMAIN-SUFFIX,megappu.com
 - DOMAIN-SUFFIX,megarafiddly.com
@@ -82706,6 +82742,7 @@ payload:
 - DOMAIN-SUFFIX,misarea.com
 - DOMAIN-SUFFIX,misavermaomao.cyou
 - DOMAIN-SUFFIX,misc.api.snaptube.app
+- DOMAIN-SUFFIX,misc.in.duokanbox.com
 - DOMAIN-SUFFIX,misc.pandora.xiaomi.com
 - DOMAIN-SUFFIX,miscarriageapartment.com
 - DOMAIN-SUFFIX,miscarriagedevelopmentfoil.com
@@ -82731,7 +82768,6 @@ payload:
 - DOMAIN-SUFFIX,misguidedfix.pro
 - DOMAIN-SUFFIX,misguidedshelves.com
 - DOMAIN-SUFFIX,mishandlepretty.com
-- DOMAIN-SUFFIX,mishop.pandora.xiaomi.com
 - DOMAIN-SUFFIX,misjudgebuoyeye.com
 - DOMAIN-SUFFIX,misjudgedistilentice.com
 - DOMAIN-SUFFIX,misknewdenials.cyou
@@ -82801,6 +82837,7 @@ payload:
 - DOMAIN-SUFFIX,mitt.3.se
 - DOMAIN-SUFFIX,mitt3.3.se
 - DOMAIN-SUFFIX,mittendrownministry.com
+- DOMAIN-SUFFIX,mitv.tracking.miui.com
 - DOMAIN-SUFFIX,mitvoppwqjiqo.space
 - DOMAIN-SUFFIX,miui-fxcse.avlyun.com
 - DOMAIN-SUFFIX,miui.hdfdm.com
@@ -103503,6 +103540,7 @@ payload:
 - DOMAIN-SUFFIX,register.notifysrv.com
 - DOMAIN-SUFFIX,register.purina.com
 - DOMAIN-SUFFIX,register.redhat.com
+- DOMAIN-SUFFIX,register.xmpush.xiaomi.com
 - DOMAIN-SUFFIX,register04.top
 - DOMAIN-SUFFIX,registered-spotters-build.com
 - DOMAIN-SUFFIX,registration.presonus.com
@@ -105930,6 +105968,7 @@ payload:
 - DOMAIN-SUFFIX,rp.crasheye.cn
 - DOMAIN-SUFFIX,rp.gwallet.com
 - DOMAIN-SUFFIX,rp.hpplay.cn
+- DOMAIN-SUFFIX,rp.hpplay.com.cn
 - DOMAIN-SUFFIX,rp.mustreadnew.com
 - DOMAIN-SUFFIX,rpahyhn.cn
 - DOMAIN-SUFFIX,rpaulfrank.com
@@ -119779,6 +119818,7 @@ payload:
 - DOMAIN-SUFFIX,ssp.21ic.com
 - DOMAIN-SUFFIX,ssp.4hw.com.cn
 - DOMAIN-SUFFIX,ssp.86str.com
+- DOMAIN-SUFFIX,ssp.ad.xiaomi.com
 - DOMAIN-SUFFIX,ssp.asiaflix.net
 - DOMAIN-SUFFIX,ssp.chaohutechan.com
 - DOMAIN-SUFFIX,ssp.cibn.starschina.com
@@ -120834,6 +120874,7 @@ payload:
 - DOMAIN-SUFFIX,static.live.nagezan.net
 - DOMAIN-SUFFIX,static.livingmagonline.com
 - DOMAIN-SUFFIX,static.lot-tissimo.com
+- DOMAIN-SUFFIX,static.lstat.youku.com
 - DOMAIN-SUFFIX,static.mackeeper.com
 - DOMAIN-SUFFIX,static.mannixmarketing.com
 - DOMAIN-SUFFIX,static.map.bdimg.com
@@ -133630,9 +133671,11 @@ payload:
 - DOMAIN-SUFFIX,tuziluoluo.com
 - DOMAIN-SUFFIX,tuzoufxhjnejx.online
 - DOMAIN-SUFFIX,tv-test.esvdigital.com
+- DOMAIN-SUFFIX,tv.aiseet.atianqi.com
 - DOMAIN-SUFFIX,tv.code.jjyx.com
 - DOMAIN-SUFFIX,tv.totaljobs.com
 - DOMAIN-SUFFIX,tvabqt.cn
+- DOMAIN-SUFFIX,tvapi.kuyun.com
 - DOMAIN-SUFFIX,tvapp.hpplay.cn
 - DOMAIN-SUFFIX,tvas-a.pw
 - DOMAIN-SUFFIX,tvas-b.pw
@@ -133667,6 +133710,8 @@ payload:
 - DOMAIN-SUFFIX,tvlmwraahoqwn.online
 - DOMAIN-SUFFIX,tvlmzx.icu
 - DOMAIN-SUFFIX,tvlsiednsircj.online
+- DOMAIN-SUFFIX,tvmanager.pandora.xiaomi.com
+- DOMAIN-SUFFIX,tvmgr.pandora.xiaomi.com
 - DOMAIN-SUFFIX,tvmnogzzkdoku.online
 - DOMAIN-SUFFIX,tvmsjfyylpgoo.website
 - DOMAIN-SUFFIX,tvmulesmelt.com
@@ -136976,6 +137021,7 @@ payload:
 - DOMAIN-SUFFIX,user.tiankongzudui.com
 - DOMAIN-SUFFIX,user.userguiding.com
 - DOMAIN-SUFFIX,user1.game.qq.com
+- DOMAIN-SUFFIX,userapi.hpplay.com.cn
 - DOMAIN-SUFFIX,usercash.com
 - DOMAIN-SUFFIX,usercenter.ha.cn
 - DOMAIN-SUFFIX,usercenter.he.cn
@@ -138043,6 +138089,7 @@ payload:
 - DOMAIN-SUFFIX,v.76768hwj.cn
 - DOMAIN-SUFFIX,v.adblockultimate.net
 - DOMAIN-SUFFIX,v.adintl.cn
+- DOMAIN-SUFFIX,v.admaster.com.cn
 - DOMAIN-SUFFIX,v.angha.me
 - DOMAIN-SUFFIX,v.cameo.com
 - DOMAIN-SUFFIX,v.center
@@ -139719,6 +139766,7 @@ payload:
 - DOMAIN-SUFFIX,viphirsaick.net
 - DOMAIN-SUFFIX,viphotdream.com
 - DOMAIN-SUFFIX,viplp.top
+- DOMAIN-SUFFIX,vipsdkauth.hpplay.cn
 - DOMAIN-SUFFIX,viptv91.cn
 - DOMAIN-SUFFIX,vipwao.nutrimuscle.com
 - DOMAIN-SUFFIX,vipyou.bulkpowders.es
@@ -149347,7 +149395,6 @@ payload:
 - DOMAIN-SUFFIX,xmpebokbrcbbh.com
 - DOMAIN-SUFFIX,xmpoiotsmpkro.website
 - DOMAIN-SUFFIX,xmptuirxnncf.com
-- DOMAIN-SUFFIX,xmpush.xiaomi.com
 - DOMAIN-SUFFIX,xmpzln.icu
 - DOMAIN-SUFFIX,xmqiibdqhtvvq.website
 - DOMAIN-SUFFIX,xmqrvx.jewelry-queen-shop.com
