@@ -1,10 +1,10 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-05-03 13:59:16 (UTC+8)
-# Total Items: 137302 条
+# Generated: 2026-05-03 14:04:12 (UTC+8)
+# Total Items: 137305 条
 # -----------------------------------------------
 # 规则分类统计:
 # - [DOMAIN]         : 1282 条
-# - [DOMAIN-SUFFIX]  : 135850 条
+# - [DOMAIN-SUFFIX]  : 135853 条
 # - [DOMAIN-WILDCARD]: 4 条
 # - [DOMAIN-REGEX]   : 166 条
 # -----------------------------------------------
@@ -16297,6 +16297,7 @@ payload:
 - DOMAIN-SUFFIX,arjhazqre.in
 - DOMAIN-SUFFIX,arjkyishfnbms.site
 - DOMAIN-SUFFIX,arjunbeatee.shop
+- DOMAIN-SUFFIX,ark.bravo.youku.com
 - DOMAIN-SUFFIX,ark.cocounion.com
 - DOMAIN-SUFFIX,ark.letv.com
 - DOMAIN-SUFFIX,arkadium.com
@@ -64911,6 +64912,7 @@ payload:
 - DOMAIN-SUFFIX,log.tutuapp.com
 - DOMAIN-SUFFIX,log.tv.moliv.cn
 - DOMAIN-SUFFIX,log.us.xiaoyi.com
+- DOMAIN-SUFFIX,log.v.mgtv.com
 - DOMAIN-SUFFIX,log.v2.hunantv.com
 - DOMAIN-SUFFIX,log.vcgame.cn
 - DOMAIN-SUFFIX,log.vdisk.cn
@@ -124371,6 +124373,7 @@ payload:
 - DOMAIN-SUFFIX,vlhqwfcajivguim.com
 - DOMAIN-SUFFIX,vliplatform.com
 - DOMAIN-SUFFIX,vlitag.com
+- DOMAIN-SUFFIX,vlive.qq.com
 - DOMAIN-SUFFIX,vljmtgugalujt.website
 - DOMAIN-SUFFIX,vlkvviufipfsw.website
 - DOMAIN-SUFFIX,vlkwblmxudpoo.online
