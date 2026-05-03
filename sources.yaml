@@ -1,29 +1,28 @@
 # sources.yaml
 # 白名单
 allow_urls:
- # - https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt
+  - https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt
   
 # 规则1
 tier1_urls:
-#  - https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
- # - https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt
-#  - https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt
+  - https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_2_Base/filter.txt
+  - https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_224_Chinese/filter.txt
+  - https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/MobileFilter/sections/adservers.txt
   
 # 规则2
 tier2_urls:
- # - https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/ThirdParty/filter_104_EasyListChina/filter.txt
-#  - https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/thirdparties/easylist/easylist.txt
-#  - https://easylist-downloads.adblockplus.org/easyprivacy.txt
+  - https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/ThirdParty/filter_104_EasyListChina/filter.txt
+  - https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/thirdparties/easylist/easylist.txt
+  - https://easylist-downloads.adblockplus.org/easyprivacy.txt
  
 # 规则3
 tier3_urls:
-#  - https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt
- # - https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt
- # - https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt
- # - https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/AD.txt
-#  - https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt
-#  - https://anti-ad.net/adguard.txt
+  - https://raw.githubusercontent.com/damengzhu/banad/main/jiekouAD.txt
+  - https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/mv.txt
+  - https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt
+  - https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/AD.txt
+  - https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnslite.txt
   - https://raw.githubusercontent.com/Hackl0us/SS-Rule-Snippet/master/Rulesets/Surge/Custom/video-ad.list
   - https://raw.githubusercontent.com/sve1r/Rules-For-Quantumult-X/develop/Rules/Advertising/AdReject.list
- # - https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt
-  - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/AdGuard/Advertising/Advertising.txt
+  - https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt
+  - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/AdGuard/AdvertisingLite/AdvertisingLite.txt
