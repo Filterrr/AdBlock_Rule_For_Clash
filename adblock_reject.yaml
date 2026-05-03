@@ -1,10 +1,10 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-05-03 13:40:25 (UTC+8)
-# Total Items: 137290 条
+# Generated: 2026-05-03 13:59:16 (UTC+8)
+# Total Items: 137302 条
 # -----------------------------------------------
 # 规则分类统计:
 # - [DOMAIN]         : 1282 条
-# - [DOMAIN-SUFFIX]  : 135838 条
+# - [DOMAIN-SUFFIX]  : 135850 条
 # - [DOMAIN-WILDCARD]: 4 条
 # - [DOMAIN-REGEX]   : 166 条
 # -----------------------------------------------
@@ -6632,6 +6632,7 @@ payload:
 - DOMAIN-SUFFIX,a6.bjdianyue.com
 - DOMAIN-SUFFIX,a6.codejumps.com
 - DOMAIN-SUFFIX,a6.hn985.com
+- DOMAIN-SUFFIX,a6.hujiang.com
 - DOMAIN-SUFFIX,a6.taobanapp.com
 - DOMAIN-SUFFIX,a64x.com
 - DOMAIN-SUFFIX,a65vocvbfe.com
@@ -13335,6 +13336,7 @@ payload:
 - DOMAIN-SUFFIX,analyse.hinemos.info
 - DOMAIN-SUFFIX,analyse.weather.com.cn
 - DOMAIN-SUFFIX,analysis.chatglm.cn
+- DOMAIN-SUFFIX,analysis.chinaiiss.com
 - DOMAIN-SUFFIX,analysis.yozocloud.cn
 - DOMAIN-SUFFIX,analysys.cn
 - DOMAIN-SUFFIX,analyt.ir
@@ -21043,6 +21045,7 @@ payload:
 - DOMAIN-SUFFIX,boogiesflathe.cfd
 - DOMAIN-SUFFIX,book.londonsoundacademy.com
 - DOMAIN-SUFFIX,book.rollingvideogames.com
+- DOMAIN-SUFFIX,book118.com
 - DOMAIN-SUFFIX,bookadil.com
 - DOMAIN-SUFFIX,bookbannershop.com
 - DOMAIN-SUFFIX,bookbeef.com
@@ -27181,6 +27184,7 @@ payload:
 - DOMAIN-SUFFIX,com-eonsun-owl-user.oss-cn-hangzhou.aliyuncs.com
 - DOMAIN-SUFFIX,com-eonsun-owl.oss-cn-hangzhou.aliyuncs.com
 - DOMAIN-SUFFIX,com.carte-gr.total.fr
+- DOMAIN-SUFFIX,com.day
 - DOMAIN-SUFFIX,com.econa.com
 - DOMAIN-SUFFIX,com052bin.com
 - DOMAIN-SUFFIX,com5.com.cn
@@ -35332,6 +35336,7 @@ payload:
 - DOMAIN-SUFFIX,doc.e-statements.app
 - DOMAIN-SUFFIX,doc.go.sohu.com
 - DOMAIN-SUFFIX,doc830ytc7pyp.cloudfront.net
+- DOMAIN-SUFFIX,doc88.com
 - DOMAIN-SUFFIX,doccd.xyz
 - DOMAIN-SUFFIX,docentcliquybepen.cyou
 - DOMAIN-SUFFIX,docerad.wps.cn
@@ -38559,6 +38564,7 @@ payload:
 - DOMAIN-SUFFIX,eiadf.xyz
 - DOMAIN-SUFFIX,eiaffrjrykttz.online
 - DOMAIN-SUFFIX,eib2.cc
+- DOMAIN-SUFFIX,eic.org.cn
 - DOMAIN-SUFFIX,eicbhvfrqwtof.space
 - DOMAIN-SUFFIX,eicrpbaojyadd.online
 - DOMAIN-SUFFIX,eicyds.qoo10.jp
@@ -43681,7 +43687,6 @@ payload:
 - DOMAIN-SUFFIX,flytechb.com
 - DOMAIN-SUFFIX,flznib.weblio.jp
 - DOMAIN-SUFFIX,fm.duokanbox.com
-- DOMAIN-SUFFIX,fm.p0y.cn
 - DOMAIN-SUFFIX,fma7.aegon.es
 - DOMAIN-SUFFIX,fmad.cc
 - DOMAIN-SUFFIX,fmaiyleoxlfbm.online
@@ -44862,6 +44867,7 @@ payload:
 - DOMAIN-SUFFIX,fukzsbkp8.com
 - DOMAIN-SUFFIX,fulaxcalkapv.in
 - DOMAIN-SUFFIX,fulgentrosalyn.com
+- DOMAIN-SUFFIX,fulitech.com.cn
 - DOMAIN-SUFFIX,fuliwang.cc
 - DOMAIN-SUFFIX,fulkunripsmarybud.cfd
 - DOMAIN-SUFFIX,full-copy.com
@@ -64251,6 +64257,7 @@ payload:
 - DOMAIN-SUFFIX,live.vot.media
 - DOMAIN-SUFFIX,live.zrmtrm.com
 - DOMAIN-SUFFIX,live4sport.net
+- DOMAIN-SUFFIX,live800.com
 - DOMAIN-SUFFIX,liveadexchanger.com
 - DOMAIN-SUFFIX,liveadoptimizer.com
 - DOMAIN-SUFFIX,liveadvert.com
@@ -107137,6 +107144,7 @@ payload:
 - DOMAIN-SUFFIX,static.ymidydlesswales.com
 - DOMAIN-SUFFIX,static.youdm.cn
 - DOMAIN-SUFFIX,static.zctx8.com
+- DOMAIN-SUFFIX,static.zongheng.com
 - DOMAIN-SUFFIX,static.zorka.agency
 - DOMAIN-SUFFIX,static1.andbeyond.media
 - DOMAIN-SUFFIX,static1.kewaishu.info
@@ -112387,6 +112395,7 @@ payload:
 - DOMAIN-SUFFIX,terrificdark.com
 - DOMAIN-SUFFIX,terrinecocco.qpon
 - DOMAIN-SUFFIX,terronzesting.qpon
+- DOMAIN-SUFFIX,terrynow.com
 - DOMAIN-SUFFIX,tersatedtheother.com
 - DOMAIN-SUFFIX,terserhowffotalgia.cyou
 - DOMAIN-SUFFIX,terveesitkan.cfd
@@ -118340,6 +118349,7 @@ payload:
 - DOMAIN-SUFFIX,tuhhfhswiabhz.space
 - DOMAIN-SUFFIX,tuhxuuzcllppe.online
 - DOMAIN-SUFFIX,tuhzjrr.cn
+- DOMAIN-SUFFIX,tui.cnzz.net
 - DOMAIN-SUFFIX,tui.gtimg.com
 - DOMAIN-SUFFIX,tui.weibo.com
 - DOMAIN-SUFFIX,tui1999.com
@@ -124405,6 +124415,7 @@ payload:
 - DOMAIN-SUFFIX,vlzbstbjzcamf.website
 - DOMAIN-SUFFIX,vlzcnhjdgmenp.space
 - DOMAIN-SUFFIX,vlzyxkjxfrpku.space
+- DOMAIN-SUFFIX,vm.aty.sohu.com
 - DOMAIN-SUFFIX,vm.target-video.com
 - DOMAIN-SUFFIX,vm5apis.com
 - DOMAIN-SUFFIX,vm5xs8nvqh.com
@@ -135794,6 +135805,7 @@ payload:
 - DOMAIN-SUFFIX,zh4qnnf63.com
 - DOMAIN-SUFFIX,zh7o6ecvnff93.8ttxeoz8cfk3cxbvnqf7bth.cfd
 - DOMAIN-SUFFIX,zhads.com
+- DOMAIN-SUFFIX,zhan.com
 - DOMAIN-SUFFIX,zhan.vivo.com.cn
 - DOMAIN-SUFFIX,zhaner.xyz
 - DOMAIN-SUFFIX,zhangchi.work
