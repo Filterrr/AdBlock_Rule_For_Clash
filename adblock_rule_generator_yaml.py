@@ -111,19 +111,38 @@ def load_sources(config_path=SOURCES_CONFIG):
     return sources
 
 # --- 通用域名提取器 ---
-def parse_line_to_domain(line):
+def parse_line_to_domain(line: str) -> str | None:
+    # 去除白名单前缀
     if line.startswith("@@"):
         line = line[2:]
 
     domain = None
-    if m := regex1.match(line): domain = m.group(1)
-    elif m := regex2.match(line): domain = m.group(1)
-    elif m := regex3.match(line): domain = m.group(1)
-    elif m := regex4.match(line): domain = m.group(1)
-    elif m := regex5.match(line): domain = m.group(1)
+    if m := regex1.match(line):
+        domain = m.group(1)
+    elif m := regex2.match(line):
+        domain = m.group(1)
+    elif m := regex3.match(line):
+        domain = m.group(1)
+    elif m := regex4.match(line):
+        domain = m.group(1)
+    elif m := regex5.match(line):
+        domain = m.group(1)
 
-    return domain.strip('.') if domain else None
+    if not domain:
+        return None
 
+    # ---------- 集中规范化 ----------
+    # 去除首尾的点
+    domain = domain.strip('.')
+    # 转为小写
+    domain = domain.lower()
+    # 可选：如果存在空格或不可见字符，也可以在此清洗
+    domain = domain.strip()
+    # ---------------------------------
+
+    # 空字符串检查
+    return domain if domain else None
+    # ---------------------------------
 def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
     """
     提取规则，返回 (total_block, total_allow, total_psl) 作为该批次的总计数
@@ -205,7 +224,7 @@ def main():
                 continue
             domain = parse_line_to_domain(line)
             if domain and domain_regex.match(domain):
-                domain = domain.lower()
+             #   domain = domain.lower()
                 if not is_public_suffix(domain):
                     white_set.add(domain)
         write_log(f"已加载本地白名单，当前白名单库共 {len(white_set)} 条。")
