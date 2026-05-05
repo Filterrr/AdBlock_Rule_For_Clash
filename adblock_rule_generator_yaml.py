@@ -256,7 +256,6 @@ def main():
 
     count_wildcard = 0
     count_regex = 0
-    count_exact = 0
     count_suffix = 0
 
     formatted_rules = []
@@ -275,21 +274,10 @@ def main():
                     count_wildcard += 1
             continue
 
-        if domain.count('.') >= 4:
-            registrable = get_registrable_domain(domain)
-            if registrable and domain == registrable:
-                formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
-                count_suffix += 1
-            else:
-                formatted_rules.append(f"- DOMAIN,{domain}")
-                count_exact += 1
-            continue
-
         formatted_rules.append(f"- DOMAIN-SUFFIX,{domain}")
         count_suffix += 1
 
     def rule_sort_key(rule):
-        if rule.startswith("- DOMAIN,"): return 1
         if rule.startswith("- DOMAIN-SUFFIX,"): return 2
         if rule.startswith("- DOMAIN-WILDCARD,"): return 3
         if rule.startswith("- DOMAIN-REGEX,"): return 4
@@ -304,7 +292,6 @@ def main():
 # Total Items: {rule_count} 条
 # -----------------------------------------------
 # 规则分类统计:
-# - [DOMAIN]         : {count_exact} 条
 # - [DOMAIN-SUFFIX]  : {count_suffix} 条
 # - [DOMAIN-WILDCARD]: {count_wildcard} 条
 # - [DOMAIN-REGEX]   : {count_regex} 条
