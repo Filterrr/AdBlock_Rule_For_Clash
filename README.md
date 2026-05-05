@@ -113,9 +113,9 @@ rules:
 <br>
 <hr>
 
-## **外部资源**
+### **外部资源**
 
-*项目中资源来自互联网上其他开源项目，这里主要进行一些整合和备份。对于此类资源，无法对使用过程中出现的任何问题进行解答，您需要联系原作者。*
+*项目中规则来自互联网上其他开源项目，这里主要进行一些整合和备份。对于此类资源，无法对使用过程中出现的任何问题进行解答，您需要联系原作者。*
 <br>
 *地址：<strong><a href="https://github.com/Filterrr/AdBlock_Rule_For_Clash/blob/main/sources.yaml" style="color: #0066cc;">sources</a></strong>*
 <br>
