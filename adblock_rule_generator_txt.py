@@ -70,33 +70,13 @@ def load_sources(config_path=SOURCES_CONFIG):
 def parse_line_to_domain(line):
     if line.startswith("@@"):
         line = line[2:]
-
     domain = None
-    if m := regex1.match(line):
-        domain = m.group(1)
-    elif m := regex2.match(line):
-        domain = m.group(1)
-    elif m := regex3.match(line):
-        domain = m.group(1)
-    elif m := regex4.match(line):
-        domain = m.group(1)
-    elif m := regex5.match(line):
-        domain = m.group(1)
-
-    if not domain:
-        return None
-
-    # ---------- 集中规范化 ----------
-    # 去除首尾的点
-    domain = domain.strip('.')
-    # 转为小写
-    domain = domain.lower()
-    # 可选：如果存在空格或不可见字符，也可以在此清洗
-    domain = domain.strip()
-    # ---------------------------------
-
-    # 空字符串检查
-    return domain if domain else None
+    if m := regex1.match(line): domain = m.group(1)
+    elif m := regex2.match(line): domain = m.group(1)
+    elif m := regex3.match(line): domain = m.group(1)
+    elif m := regex4.match(line): domain = m.group(1)
+    elif m := regex5.match(line): domain = m.group(1)
+    return domain.strip('.') if domain else None
 
 def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
@@ -161,7 +141,7 @@ def main():
                 continue
             domain = parse_line_to_domain(line)
             if domain and domain_regex.match(domain):
-            #    white_set.add(domain.lower())
+                white_set.add(domain.lower())
         write_log(f"已加载本地白名单，当前白名单库共 {len(white_set)} 条。")
 
     final_blocked = 0
