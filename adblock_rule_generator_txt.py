@@ -67,8 +67,7 @@ def load_sources(config_path=SOURCES_CONFIG):
             sources[key] = default_sources[key]
     return sources
 
-def parse_line_to_domain(line: str) -> str | None:
-    # 去除白名单前缀
+def parse_line_to_domain(line):
     if line.startswith("@@"):
         line = line[2:]
 
