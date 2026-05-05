@@ -13,6 +13,7 @@ tier1_urls:
 tier2_urls:
   - https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/ThirdParty/filter_104_EasyListChina/filter.txt
   - https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/thirdparties/easylist/easylist.txt
+  - https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
  
 # 规则3
 tier3_urls:
