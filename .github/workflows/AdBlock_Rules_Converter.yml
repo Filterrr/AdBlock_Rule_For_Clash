@@ -20,7 +20,7 @@ jobs:
   # 作业 1：在 Windows 环境下生成 YAML 和 TXT 规则文件
   # ==========================================
   generate-rules:
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
     - name: Setup Node.js 24
