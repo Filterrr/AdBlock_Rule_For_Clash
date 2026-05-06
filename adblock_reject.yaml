@@ -1,9 +1,9 @@
 # Title: AdBlock_Rule_For_Mihomo
-# Generated: 2026-05-06 14:23:37 (UTC+8)
-# Total Items: 115666 条
+# Generated: 2026-05-06 14:26:28 (UTC+8)
+# Total Items: 115667 条
 # -----------------------------------------------
 # 规则分类统计:
-# - [DOMAIN-SUFFIX]  : 115522 条
+# - [DOMAIN-SUFFIX]  : 115523 条
 # - [DOMAIN-WILDCARD]: 3 条
 # - [DOMAIN-REGEX]   : 141 条
 # -----------------------------------------------
@@ -45607,6 +45607,7 @@ payload:
 - DOMAIN-SUFFIX,i-components.net
 - DOMAIN-SUFFIX,i-fk.cn
 - DOMAIN-SUFFIX,i-gamer.net
+- DOMAIN-SUFFIX,i-lq.snssdk.com
 - DOMAIN-SUFFIX,i-media.co.nz
 - DOMAIN-SUFFIX,i-reklama.sk
 - DOMAIN-SUFFIX,i-sg01a.ocloud.heytapmobi.com
