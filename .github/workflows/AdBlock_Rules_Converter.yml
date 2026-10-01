@@ -116,7 +116,11 @@ jobs:
         run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
-          git pull https://${env:TOKEN}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }} --rebase
+          # 注意: 使用显式分支名而非 HEAD:<branch> 作为 refspec。
+          # 远端裸仓库的 HEAD 指向默认分支(main)，在特性分支上运行
+          # `git pull <url> HEAD:<branch>` 会试图将 main 写入当前特性分支
+          # （非快进，必然失败)；改用 <branch> 可同时兼容 main 与特性分支。
+          git pull https://${env:TOKEN}@github.com/${{ github.repository }}.git ${{ github.ref }} --rebase
 
       - name: Check, compare and download latest mihomo
         shell: powershell
@@ -242,7 +246,8 @@ jobs:
               }
 
               git commit -m "Auto-update ruleset and mihomo [skip ci]"
-              git pull $repoUrl HEAD:${{ github.ref }} --rebase
+              # 同前：远端 HEAD 指向默认分支，特性分支场景下须用显式分支名 refspec
+              git pull $repoUrl ${{ github.ref }} --rebase
               git push $repoUrl HEAD:${{ github.ref }} --force
               Write-Host "Push successful."
               break
