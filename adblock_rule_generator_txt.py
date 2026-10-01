@@ -163,7 +163,7 @@ def parse_block_rule(line: str) -> str | None:
 
     return None
 
-def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
+def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False, curated_white=None):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     total_blocked = 0
     total_whitelisted = 0
@@ -209,6 +209,9 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
                         continue
                     global_whitelist.add(domain)
                     whitelisted += 1
+                    # ★ 记录人工维护的功能性白名单（用于父域降级保护/白名单产物）
+                    if curated_white is not None:
+                        curated_white.add(domain)
                 continue
 
             # ★ 拦截行：仅收『无条件全局域名拦截』
@@ -238,6 +241,7 @@ def main():
     tier4_urls = sources["tier4_urls"]
 
     white_set = set(d.lower() for d in custom_excluded_domains)
+    curated_white = set()  # ★ 人工维护的功能性白名单（需要父域级保护）
     core_set_raw, tier3_set_raw = set(), set()
 
     top_whitelist_file = os.path.join(SCRIPT_DIR, "top_whitelist.txt")
@@ -258,7 +262,7 @@ def main():
 
     if allow_urls:
         print(f"开始并获取 {len(allow_urls)} 个订阅源...")
-        b, w, f = extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
+        b, w, f = extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True, curated_white=curated_white)
         final_blocked += b
         final_whitelisted += w
         final_filtered_tld += f
@@ -342,9 +346,31 @@ def main():
 # -----------------------------------------------
 
 """
+    # ★ 以二进制模式写入，确保 LF 行尾（Windows 文本模式会把 \n 写成 \r\n）
     output_path = os.path.join(SCRIPT_DIR, "adblock_reject.txt")
-    with open(output_path, "w", encoding="utf-8") as f:
+    with open(output_path, "w", encoding="utf-8", newline="\n") as f:
         f.write(header + "\n".join(formatted_rules))
+
+    # ★ 额外产物：功能性白名单纯文本规则集（adblock_allow.txt）
+    # 用法: 在主拦截规则之前引用 → RULE-SET,adblock-allow,DIRECT
+    allow_lines = []
+    for d in sorted(white_set):
+        if is_public_suffix(d):
+            continue
+        allow_lines.append(f"+.{d}")
+    allow_header = f"""# Title: AdBlock_Rule_For_Mihomo (Allowlist)
+# Generated: {generation_time} (UTC+8)
+# Total Items: {len(allow_lines)} 条
+# 用途: 功能性白名单例外。请在主拦截规则之前引用:
+#   rules:
+#     - RULE-SET,adblock-allow,DIRECT
+#     - RULE-SET,adblock,REJECT
+
+"""
+    allow_path = os.path.join(SCRIPT_DIR, "adblock_allow.txt")
+    with open(allow_path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(allow_header + "\n".join(allow_lines))
+    write_log(f"成功导出 {len(allow_lines)} 条白名单规则至: {allow_path}")
 
     # 最终汇总输出
     write_log(f"拦截: {final_blocked}, 白名单: {final_whitelisted}, 过滤顶级域: {final_filtered_tld}")

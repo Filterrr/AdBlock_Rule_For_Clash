@@ -102,6 +102,23 @@ rules:
   - RULE-SET,adblock,REJECT
 ```
 
+```conf
+# （可选）功能性白名单规则集：恢复被整域拦截规则覆盖的功能性域名例外
+# 如不使用白名单可忽略本段
+rule-providers:
+  adblock-allow:
+    type: http
+    behavior: domain
+    format: text
+    url: https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_allow.txt
+    path: ./adblock_allow.txt
+    interval: 120
+
+rules:
+  - RULE-SET,adblock-allow,DIRECT   # ★ 白名单必须放在拦截规则之前
+  - RULE-SET,adblock,REJECT
+```
+
 
 
 

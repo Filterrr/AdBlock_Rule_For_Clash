@@ -237,9 +237,11 @@ def parse_block_rule(line: str) -> str | None:
 
     return None
 
-def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
+def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False, curated_white=None):
     """
-    提取规则，返回 (total_block, total_allow, total_psl) 作为该批次的总计数
+    提取规则，返回 (total_block, total_allow, total_psl) 作为该批次的总计数。
+    curated_white: 仅在 allow 源(force_whitelist)时收集——人工维护的功能性白名单，
+    与上游 @@ 提取的自动白名单分开管理（前者触发父域降级保护）。
     """
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     total_block = 0
@@ -289,6 +291,9 @@ def extract_rules(urls, rules_set, global_whitelist, force_whitelist=False):
                         continue
                     global_whitelist.add(domain)
                     allow_cnt += 1
+                    # ★ 记录人工维护的功能性白名单（用于后续父域降级保护）
+                    if curated_white is not None:
+                        curated_white.add(domain)
                 continue
 
             # ★ 拦截行：仅收『无条件全局域名拦截』
@@ -328,6 +333,7 @@ def main():
     tier4_urls = sources["tier4_urls"]
 
     white_set = set(d.lower() for d in custom_excluded_domains)
+    curated_white = set()  # ★ 人工维护的功能性白名单（white.txt + top_whitelist），需要父域级保护
     core_set_raw, tier3_set_raw = set(), set()
 
     # 加载本地高权重白名单
@@ -342,10 +348,11 @@ def main():
              #   domain = domain.lower()
                 if not is_public_suffix(domain):
                     white_set.add(domain)
+                    curated_white.add(domain.lower())
         write_log(f"已加载本地白名单，当前白名单库共 {len(white_set)} 条。")
 
     # 获取规则并累计总数（tier4 为高质量 DNS 拦截列表，与 tier3 同池处理）
-    block1, allow1, psl1 = extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True)
+    block1, allow1, psl1 = extract_rules(allow_urls, core_set_raw, white_set, force_whitelist=True, curated_white=curated_white)
     block2, allow2, psl2 = extract_rules(tier1_urls + tier2_urls, core_set_raw, white_set)
     block3, allow3, psl3 = extract_rules(tier3_urls + tier4_urls, tier3_set_raw, white_set)
 
@@ -371,6 +378,11 @@ def main():
 
     valid_core = {d for d in core_set_raw if not under_whitelist(d)}
     valid_tier3 = {d for d in tier3_set_raw if not under_whitelist(d)}
+
+    # 注：单条后缀规则集无法表达『拦截父域但豁免某些子域』。
+    # 人工维护的功能性白名单（curated_white）通过额外产出的
+    # adblock_allow.yaml/txt 白名单规则集解决——用户只需在
+    # RULE-SET,adblock,REJECT 之前加一条 RULE-SET,adblock-allow,DIRECT。
 
     # Mihomo 格式转换
     write_log(">> 正在执行 Mihomo 域名匹配类型自动分类...")
@@ -431,11 +443,40 @@ def main():
 
 payload:
 """
+    # ★ 以 LF 行尾写出（Windows 文本模式默认会把 \n 写成 \r\n）
     output_path = os.path.join(SCRIPT_DIR, "adblock_reject.yaml")
-    with open(output_path, "w", encoding="utf-8") as f:
+    with open(output_path, "w", encoding="utf-8", newline="\n") as f:
         f.write(header + "\n".join(formatted_rules))
 
     write_log(f"成功导出 {rule_count} 条规则至: {output_path} (拦截: {total_block}, 白名单: {total_allow}, 过滤顶级域: {total_psl})")
+
+    # ★ 额外产物：功能性白名单规则集（adblock_allow.yaml）。
+    # 背景：单条后缀规则集无法表达『拦截父域但豁免某些子域』。
+    # curated 白名单（人工维护的功能性例外，如 t1.market.xiaomi.com）
+    # 会被新源中的父域规则（+.market.xiaomi.com）覆盖而失效。
+    # 用法：在主规则之前引用本白名单即可恢复例外：
+    #   rules:
+    #     - RULE-SET,adblock-allow,DIRECT   # 白名单优先放行
+    #     - RULE-SET,adblock,REJECT
+    allow_rules = []
+    for d in sorted(white_set):
+        if is_public_suffix(d):
+            continue
+        allow_rules.append(f"- DOMAIN-SUFFIX,{d}")
+    allow_header = f"""# Title: AdBlock_Rule_For_Mihomo (Allowlist)
+# Generated: {generation_time} (UTC+8)
+# Total Items: {len(allow_rules)} 条
+# 用途: 功能性白名单例外。请在主拦截规则之前引用:
+#   rules:
+#     - RULE-SET,adblock-allow,DIRECT
+#     - RULE-SET,adblock,REJECT
+
+payload:
+"""
+    allow_path = os.path.join(SCRIPT_DIR, "adblock_allow.yaml")
+    with open(allow_path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(allow_header + "\n".join(allow_rules))
+    write_log(f"成功导出 {len(allow_rules)} 条白名单规则至: {allow_path}")
 
 if __name__ == "__main__":
     main()

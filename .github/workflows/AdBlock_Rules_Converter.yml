@@ -65,6 +65,12 @@ jobs:
           Write-Host "::error::YAML 规则数异常 ($yamlCount)，构建中断"
           exit 1
         }
+        $allowCount = (Get-Content adblock_allow.txt | Where-Object { $_ -match '^\+\.' }).Count
+        Write-Host "Allow TXT 规则行数: $allowCount"
+        if ($allowCount -lt 100) {
+          Write-Host "::error::白名单规则数异常 ($allowCount)，构建中断"
+          exit 1
+        }
 
     - name: Force Add, Commit and Push YAML & TXT files
       shell: pwsh  
@@ -76,7 +82,7 @@ jobs:
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
         # Git 添加生成的输出文件名称并未变更，所以这部分无缝承接
-        git add -f adblock_reject.yaml adblock_reject.txt
+        git add -f adblock_reject.yaml adblock_reject.txt adblock_allow.yaml adblock_allow.txt
         
         # 捕获如果未改动抛出的 commit 异常，自动进行 Empty commit 以完成空推
         git commit -m "Update adblock_reject.yaml and adblock_reject.txt"
