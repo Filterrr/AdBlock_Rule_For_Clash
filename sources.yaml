@@ -1,7 +1,7 @@
 # sources.yaml
 # 白名单
 allow_urls:
-#  - https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt
+  - https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/white.txt
   
 # 规则1
 tier1_urls:
@@ -28,5 +28,14 @@ tier3_urls:
   - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/AdGuard/AdvertisingLite/AdvertisingLite.txt
   - https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/AdGuard/AdvertisingMiTV/AdvertisingMiTV.txt
   - https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts
-  - https://github.com/AdguardTeam/AdGuardSDNSFilter/raw/gh-pages/Filters/rules.txt
+  # 修复: 原地址指向的 rules.txt 仅含 564 条规则; gh-pages 分支的 filter.txt 为完整版(17.9万条)
+  - https://raw.githubusercontent.com/AdguardTeam/AdGuardSDNSFilter/gh-pages/Filters/filter.txt
+
+# 规则4：高质量综合 DNS 拦截列表（新增，显著提升拦截覆盖率）
+tier4_urls:
+  - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro-onlydomains.txt
+  - https://big.oisd.nl/domainswild
+  - https://raw.githubusercontent.com/badmojr/1Hosts/master/Lite/domains.txt
+  - https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-domains.txt
+#  - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus-onlydomains.txt
 #  - https://anti-ad.net/adguard.txt

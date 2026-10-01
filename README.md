@@ -88,11 +88,12 @@ rules:
 
 ```conf
 #TEXT格式外部远程拦截域名规则集
+#注意: 本文件为纯文本格式（每行 +.domain），必须搭配 behavior: domain + format: text 使用
 rule-providers:
   adblock:
     type: http
     behavior: domain
-    format: txt
+    format: text
     url: https://raw.githubusercontent.com/Filterrr/AdBlock_Rule_For_Clash/main/adblock_reject.txt
     path: ./adblock_reject.txt
     interval: 120
@@ -128,6 +129,10 @@ rules:
 3. [REIJI007](https://github.com/REIJI007/AdBlock_Rule_For_Clash)
 4. [217heidai](https://github.com/217heidai/adblockfilters)
 5. [blackmatrix7](https://github.com/blackmatrix7/ios_rule_script)
+6. [HaGeZi](https://github.com/hagezi/dns-blocklists)
+7. [oisd](https://oisd.nl)
+8. [1Hosts](https://github.com/badmojr/1Hosts)
+9. [anti-AD](https://github.com/privacy-protection-tools/anti-AD)
 
 
 ## LICENSE
