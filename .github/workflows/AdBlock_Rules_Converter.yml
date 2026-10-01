@@ -198,7 +198,9 @@ jobs:
           }
 
       - name: Convert ruleset (txt -> mrs)
-        shell: powershell
+        # 使用 pwsh(PowerShell 7)：默认 UTF-8 读取脚本，避免 Windows PowerShell 5.1
+        # 按 ANSI 读取含中文字符串的脚本时破坏引号解析的问题
+        shell: pwsh
         run: |
           $exePath = "./mihomo.exe"
           if (Test-Path $exePath) {
