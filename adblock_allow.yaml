@@ -1,6 +1,6 @@
 # Title: AdBlock_Rule_For_Mihomo (Allowlist)
-# Generated: 2026-10-09 17:07:08 (UTC+8)
-# Total Items: 233 条
+# Generated: 2026-10-10 01:00:26 (UTC+8)
+# Total Items: 234 条
 # 用途: 功能性白名单例外。请在主拦截规则之前引用:
 #   rules:
 #     - RULE-SET,adblock-allow,DIRECT
@@ -13,6 +13,7 @@ payload:
 - DOMAIN-SUFFIX,a.market.xiaomi.com
 - DOMAIN-SUFFIX,a0.app.xiaomi.com
 - DOMAIN-SUFFIX,ac.dun.163.com
+- DOMAIN-SUFFIX,acs-m.daraz.com.bd
 - DOMAIN-SUFFIX,acs-m.daraz.pk
 - DOMAIN-SUFFIX,ad.10010.com
 - DOMAIN-SUFFIX,ad.abchina.com
