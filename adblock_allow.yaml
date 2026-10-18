@@ -1,6 +1,6 @@
 # Title: AdBlock_Rule_For_Mihomo (Allowlist)
-# Generated: 2026-10-18 15:14:28 (UTC+8)
-# Total Items: 234 条
+# Generated: 2026-10-18 22:01:50 (UTC+8)
+# Total Items: 233 条
 # 用途: 功能性白名单例外。请在主拦截规则之前引用:
 #   rules:
 #     - RULE-SET,adblock-allow,DIRECT
@@ -67,7 +67,6 @@ payload:
 - DOMAIN-SUFFIX,chat.z.ai
 - DOMAIN-SUFFIX,chaturbate.com
 - DOMAIN-SUFFIX,click.discord.com
-- DOMAIN-SUFFIX,click.simba.taobao.com
 - DOMAIN-SUFFIX,click.yhd.com
 - DOMAIN-SUFFIX,client-uc.heytapmobi.com
 - DOMAIN-SUFFIX,cmts.iqiyi.com
