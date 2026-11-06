@@ -1,6 +1,6 @@
 # Title: AdBlock_Rule_For_Mihomo (Allowlist)
-# Generated: 2026-11-06 07:39:38 (UTC+8)
-# Total Items: 237 条
+# Generated: 2026-11-06 17:26:51 (UTC+8)
+# Total Items: 238 条
 # 用途: 功能性白名单例外。请在主拦截规则之前引用:
 #   rules:
 #     - RULE-SET,adblock-allow,DIRECT
@@ -105,6 +105,7 @@
 +.go.sohu.com
 +.gtimg.com
 +.h5.mse.360.cn
++.i.snssdk.com
 +.i.xiaomi.com
 +.i6.weather.oppomobile.com
 +.images2.minutemediacdn.com
