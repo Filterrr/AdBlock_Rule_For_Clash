@@ -1,6 +1,6 @@
 # Title: AdBlock_Rule_For_Mihomo (Allowlist)
-# Generated: 2026-11-20 08:37:40 (UTC+8)
-# Total Items: 238 条
+# Generated: 2026-11-20 18:03:26 (UTC+8)
+# Total Items: 240 条
 # 用途: 功能性白名单例外。请在主拦截规则之前引用:
 #   rules:
 #     - RULE-SET,adblock-allow,DIRECT
@@ -142,6 +142,7 @@ payload:
 - DOMAIN-SUFFIX,nimiq.com
 - DOMAIN-SUFFIX,nisportal.10010.com
 - DOMAIN-SUFFIX,nj.t.bcsp2p.baidu.com
+- DOMAIN-SUFFIX,notifications.googleapis.com
 - DOMAIN-SUFFIX,nsclick.baidu.com
 - DOMAIN-SUFFIX,nstool.netease.com
 - DOMAIN-SUFFIX,oauth-login-drcn.platform.dbankcloud.com
@@ -232,6 +233,7 @@ payload:
 - DOMAIN-SUFFIX,wan.douyu.com
 - DOMAIN-SUFFIX,webstatic.nero.com
 - DOMAIN-SUFFIX,wl.jd.com
+- DOMAIN-SUFFIX,wl.spotify.com
 - DOMAIN-SUFFIX,wtradv.market.xiaomi.com
 - DOMAIN-SUFFIX,www.360.cn
 - DOMAIN-SUFFIX,www.googleadservices.com

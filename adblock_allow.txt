@@ -1,6 +1,6 @@
 # Title: AdBlock_Rule_For_Mihomo (Allowlist)
-# Generated: 2026-11-20 08:37:43 (UTC+8)
-# Total Items: 238 条
+# Generated: 2026-11-20 18:03:28 (UTC+8)
+# Total Items: 240 条
 # 用途: 功能性白名单例外。请在主拦截规则之前引用:
 #   rules:
 #     - RULE-SET,adblock-allow,DIRECT
@@ -141,6 +141,7 @@
 +.nimiq.com
 +.nisportal.10010.com
 +.nj.t.bcsp2p.baidu.com
++.notifications.googleapis.com
 +.nsclick.baidu.com
 +.nstool.netease.com
 +.oauth-login-drcn.platform.dbankcloud.com
@@ -231,6 +232,7 @@
 +.wan.douyu.com
 +.webstatic.nero.com
 +.wl.jd.com
++.wl.spotify.com
 +.wtradv.market.xiaomi.com
 +.www.360.cn
 +.www.googleadservices.com
